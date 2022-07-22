@@ -1,14 +1,18 @@
+/* Mobile version. */
 .app-header {
     position: fixed;
     top: 0;
     left: 0;
-    height: 5.8rem;
+    height: 4.6rem;
     width: 100vw;
+    background: var(--color-green-lighter-header);
+    transition-property: background;
+    transition-duration: 0.8s;
 }
 
 .app-header-background {
     background: var(--color-green-header);
-    height: 3.45rem;
+    height: 2.85rem;
     position: absolute;
     width: 100vw;
     box-shadow: 0 0 1.5rem var(--color-black-medium-shadow);
@@ -19,16 +23,17 @@
     height: auto;
     min-height: 3.45rem;
     width: 100vw;
-    min-width: 80rem;
+    min-width: 65rem;
 }
 
 .app-header-content {
     display: grid;
     grid-template-areas:
-        "logo name nav settings-button help-button"
-        "logo empty empty empty empty";
-    grid-template-rows: 3.3rem 2.5rem;
-    grid-template-columns: fit-content(0) auto repeat(3, fit-content(0));
+        "logo name settings-button help-button pad"
+        "logo empty empty burger pad"
+        "expanded-menu expanded-menu expanded-menu expanded-menu expanded-menu";
+    grid-template-rows: 2.7rem 1.9rem fit-content(0);
+    grid-template-columns: fit-content(0) auto repeat(2, fit-content(0)) 0.5rem;
     align-items: center;
     position: absolute;
     width: 100vw;
@@ -54,34 +59,76 @@
     grid-area: name;
     height: 54%;
     width: fit-content;
-    margin: 1.3rem 2rem 0 0;
+    margin: 1.2rem 1.5rem 0 0;
     opacity: 90%;
 }
 
+.burger-icon {
+    all: unset;
+    grid-area: burger;
+    display: block;
+    align-self: center;
+    cursor: pointer;
+    margin-top: 0.06rem;
+}
+
+.burger-icon div {
+    height: 0.215rem;
+    width: 1.6rem;
+    background: var(--color-white-soft-background);
+    border-radius: 0.3rem;
+    margin: 0.22rem 0;
+    box-shadow: 0 0 0.8rem var(--color-black-shadow);
+}
+
+.selected-burger-icon div{
+    background: white;
+}
+
+.header-nav-container {
+    grid-area: expanded-menu;
+    width: 100%;
+    height: 0;
+    transition-property: all;
+    transition: 1s;
+    background: var(--color-green-dark-gradient);
+    overflow: hidden;
+}
+
+.expanded-mobile-menu {
+    height: calc(100vh - 4.6rem);
+}
+
 .header-nav {
-    display: flex;
-    width: fit-content;
-    height: 100%;
-    align-items: center;
-    margin: 0 3rem;
+    width: 100%;
+    height: fit-content;
+    margin: 1.5rem 0;
 }
 
 .header-nav-link {
     all: unset;
+    display: block;
     white-space: nowrap;
-    margin: 0.5rem 4rem 0 4rem;
-    padding: 0.2rem 0.5rem;
+    width: calc(100% - 5rem);
     cursor: pointer;
     color: var(--color-white-text);
     text-shadow: 0 0 0.3rem var(--color-black-darker-shadow);
-    font-size: 1.15rem;
+    background: var(--color-green-dark);
+    box-shadow: 0 0 2rem var(--color-black-shadow);
+    margin: 0.5rem 2.5rem 0 0;
+    padding: 0.8rem 0 0.8rem 2.5rem;
+    font-size: 1rem;
+}
+
+.mobile-menu-option {
+    display: block;
 }
 
 .header-option-container {
     all: unset;
     height: calc(100% - 1.4rem);
     aspect-ratio: 1 / 1;
-    margin: 0.85rem 2rem auto 0;
+    margin: 1.1rem 0.3rem auto 0.3rem;
     border-radius: 50%;
     box-shadow: 0 0 1rem var(--color-black-shadow);
     cursor: pointer;
@@ -95,9 +142,76 @@
 
 .settings-logo {
     grid-area: settings-button;
-
 }
 
 .help-logo {
     grid-area: help-button;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .app-header {
+        background: transparent;
+        height: 5.8rem;
+    }
+
+    .app-header-background {
+        height: 3.45rem;
+    }
+
+    #header-lottie {
+        min-width: 80rem;
+    }
+
+    .app-header-content {
+        grid-template-areas:
+        "logo name nav settings-button help-button"
+        "logo empty empty empty empty";
+        grid-template-rows: 3.3rem 2.5rem;
+        grid-template-columns: fit-content(0) auto repeat(3, fit-content(0));
+    }
+
+    .app-name-container {
+        margin: 1.3rem 2rem 0 0;
+    }
+
+    .burger-icon {
+        display: none;
+    }
+
+    .header-nav-container {
+        all: unset;
+        grid-area: nav;
+    }
+
+    .header-nav {
+        display: flex;
+        width: fit-content;
+        height: 100%;
+        align-items: center;
+        margin: 0 3rem;
+    }
+
+    .header-nav-link {
+        background: none;
+        box-shadow: none;
+        margin: 0.5rem 4rem 0 4rem;
+        padding: 0.2rem 0.5rem;
+        font-size: 1.15rem;
+        width: auto;
+    }
+
+    .mobile-menu-option {
+        display: none;
+    }
+
+    .header-option-container {
+        height: calc(100% - 1.4rem);
+        margin: 0.85rem 2rem auto 0;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
 }
