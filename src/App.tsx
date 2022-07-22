@@ -1,15 +1,20 @@
 import React from 'react';
-import logo from './assets/logo.svg';
 import './App.css';
+import Home from "./Home";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-function App() {
+export interface IAppProps {}
+
+const App: React.FunctionComponent<IAppProps> = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
