@@ -1,5 +1,4 @@
 .app-header {
-    border: 2px solid red;
     position: fixed;
     top: 0;
     left: 0;
@@ -16,12 +15,11 @@
 }
 
 .app-header-content {
-    border: 1px solid blue;
     display: grid;
     grid-template-areas:
-        "logo name nav settings help"
+        "logo name nav settings-button help-button"
         "logo empty empty empty empty";
-    grid-template-rows: 2.75rem 3rem;
+    grid-template-rows: 3.3rem 2.5rem;
     grid-template-columns: fit-content(0) auto repeat(3, fit-content(0));
     align-items: center;
     position: absolute;
@@ -40,12 +38,57 @@
 
 .logo, .app-name {
     height: 100%;
-    width: 100%;
+    width: auto;
     pointer-events: none;
 }
 
 .app-name-container {
     grid-area: name;
-    height: 50%;
-    background: navy;
+    height: 58%;
+    width: fit-content;
+    margin: 1.3rem 2rem 0 0;
+}
+
+.header-nav {
+    display: flex;
+    width: fit-content;
+    height: 100%;
+    align-items: center;
+    margin: 0 3rem;
+}
+
+.header-nav-link {
+    all: unset;
+    white-space: nowrap;
+    margin: 0.4rem 4rem 0 4rem;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    color: var(--color-white-text);
+    text-shadow: 0 0 0.3rem var(--color-black-darker-shadow);
+    font-size: 1.15rem;
+}
+
+.header-option-container {
+    all: unset;
+    height: calc(100% - 1.4rem);
+    aspect-ratio: 1 / 1;
+    margin: 0.85rem 2rem auto 0;
+    border-radius: 50%;
+    box-shadow: 0 0 1rem var(--color-black-shadow);
+    cursor: pointer;
+}
+
+.header-option-container img {
+    height: 100%;
+    aspect-ratio: 1/1;
+    opacity: 70%;
+}
+
+.settings-logo {
+    grid-area: settings-button;
+
+}
+
+.help-logo {
+    grid-area: help-button;
 }

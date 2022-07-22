@@ -1,14 +1,13 @@
 import React from 'react';
 import './Home.css';
-import Header from "./Header";
 
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <main className="home">
+      <h2>Home Page</h2>
+    </main>
   );
 }
 

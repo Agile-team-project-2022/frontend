@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './assets/logo.svg';
 import appName from './assets/app-name.svg';
+import settingsImg from './assets/settings.png';
+import helpImg from './assets/help.png';
 import { Link } from "react-router-dom";
 import './Header.css';
 
@@ -25,14 +27,21 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
             <span>Home</span>
           </Link>
 
-          <Link to={'/services'} className='header-nav-link'>
-            <span>Services</span>
+          <Link to={'/collection'} className='header-nav-link'>
+            <span>Collection</span>
           </Link>
 
-          <Link to={'/contact-us'} className='header-nav-link'>
-            <span>Contact us</span>
+          <Link to={'/log-out'} className='header-nav-link'>
+            <span>Log out</span>
           </Link>
         </nav>
+
+        <button className='header-option-container settings-logo'>
+          <img src={settingsImg} alt="settings button" />
+        </button>
+        <button className='header-option-container help-logo'>
+          <img src={helpImg} alt="help button" />
+        </button>
 
       </div>
     </header>
