@@ -3,7 +3,9 @@ import logo from './assets/logo.svg';
 import appName from './assets/app-name.svg';
 import settingsImg from './assets/settings.png';
 import helpImg from './assets/help.png';
+import animatedHeader from './assets/header-1.json';
 import { Link } from "react-router-dom";
+import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
 
 export interface IHeaderProps {}
@@ -12,6 +14,11 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
     <header className="app-header">
       <div className="app-header-background">
+        <Player id="header-lottie"
+                autoplay
+                loop
+                src={animatedHeader}
+        />
       </div>
 
       <div className="app-header-content">
@@ -23,15 +30,15 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         </div>
 
         <nav className='header-nav'>
-          <Link to={'/home'} className='header-nav-link'>
+          <Link to={'home'} className='header-nav-link'>
             <span>Home</span>
           </Link>
 
-          <Link to={'/collection'} className='header-nav-link'>
+          <Link to={'collection'} className='header-nav-link'>
             <span>Collection</span>
           </Link>
 
-          <Link to={'/log-out'} className='header-nav-link'>
+          <Link to={'log-out'} className='header-nav-link'>
             <span>Log out</span>
           </Link>
         </nav>

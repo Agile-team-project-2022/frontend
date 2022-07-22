@@ -2,6 +2,7 @@
   --color-white-text: rgba(255, 255, 255, 0.8);
   --color-black-text: rgba(0, 0, 0, 0.8);
   --color-black-shadow: rgba(0, 0, 0, 0.25);
+  --color-black-medium-shadow: rgba(0, 0, 0, 0.33);
   --color-black-darker-shadow: rgba(0, 0, 0, 0.4);
   --color-green-header: #6c877f;
 }
@@ -11,5 +12,5 @@ main {
   min-height: calc(100vh - 5.8rem);
   width: 100vw;
   padding-top: 5.8rem;
-  background: whitesmoke;
+  background: white;
 }
