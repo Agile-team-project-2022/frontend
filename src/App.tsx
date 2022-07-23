@@ -1,8 +1,10 @@
 import React, {lazy, Suspense} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Header from "./Header";
-const Home = lazy(() => import('./Home'));
+import Header from "./layouts/Header";
+const Home = lazy(() => import('./pages/Home'));
+const Collection = lazy(() => import('./pages/Collection'));
+const Login = lazy(() => import('./pages/Login'));
 
 export interface IAppProps {}
 
@@ -16,10 +18,8 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
-
-          {/* TODO: Update the following routes with the correct components. */}
-          <Route path="collection" element={<Home />} />
-          <Route path="log-out" element={<Home />} />
+          <Route path="collection" element={<Collection />} />
+          <Route path="log-in" element={<Login />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

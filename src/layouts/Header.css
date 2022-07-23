@@ -7,7 +7,7 @@
     width: 100vw;
     background: var(--color-green-lighter-header);
     transition-property: background;
-    transition-duration: 0.8s;
+    transition-duration: 0.5s;
 }
 
 .app-header-background {
@@ -118,10 +118,17 @@
     margin: 0.5rem 2.5rem 0 0;
     padding: 0.8rem 0 0.8rem 2.5rem;
     font-size: 1rem;
+    transition-property: background;
+    transition-duration: 0.5s;
 }
 
 .mobile-menu-option {
     display: block;
+}
+
+.header-nav-link:active {
+    background: var(--color-green-darker);
+    transition-duration: 0.1s;
 }
 
 .header-option-container {
@@ -132,12 +139,14 @@
     border-radius: 50%;
     box-shadow: 0 0 1rem var(--color-black-shadow);
     cursor: pointer;
+    opacity: 70%;
+    transition-property: transform, opacity;
+    transition-duration: 1s;
 }
 
 .header-option-container img {
     height: 100%;
     aspect-ratio: 1/1;
-    opacity: 70%;
 }
 
 .settings-logo {
@@ -146,6 +155,16 @@
 
 .help-logo {
     grid-area: help-button;
+}
+
+.header-option-container:hover {
+    opacity: 100%;
+    transition-duration: 0.2s;
+}
+
+.header-option-container:active {
+    transform: scale(1.1);
+    transition-duration: 0.2s;
 }
 
 /* Tablet version. */
@@ -189,29 +208,56 @@
         width: fit-content;
         height: 100%;
         align-items: center;
-        margin: 0 3rem;
+        margin: 0 1rem;
     }
 
     .header-nav-link {
         background: none;
         box-shadow: none;
-        margin: 0.5rem 4rem 0 4rem;
-        padding: 0.2rem 0.5rem;
-        font-size: 1.15rem;
+        margin: 0.6rem 2rem 0 2rem;
+        padding: 0.2rem 0.2rem;
+        font-size: 1.05rem;
         width: auto;
+        transition-property: transform, color;
+        transition-duration: 1s;
     }
 
     .mobile-menu-option {
         display: none;
     }
 
+    .header-nav-link:hover {
+        transform: scale(1.05);
+        transition-duration: 0.2s;
+    }
+
+    .header-nav-link:active {
+        background: none;
+        transform: scale(1.1);
+        color: white;
+        transition-duration: 0.2s;
+    }
+
     .header-option-container {
-        height: calc(100% - 1.4rem);
-        margin: 0.85rem 2rem auto 0;
+        height: calc(100% - 1.65rem);
+        margin: 1rem 1rem auto 0;
     }
 }
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
+    .header-nav {
+        margin: 0 3rem;
+    }
 
+    .header-nav-link {
+        margin: 0.5rem 4rem 0 4rem;
+        padding: 0.2rem 0.5rem;
+        font-size: 1.15rem;
+    }
+
+    .header-option-container {
+        height: calc(100% - 1.4rem);
+        margin: 0.85rem 2rem auto 0;
+    }
 }

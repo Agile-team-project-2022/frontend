@@ -10,7 +10,7 @@
   --color-green-lighter-header: #84A4A2;
   --color-green-dark-gradient: linear-gradient(to bottom, rgba(24, 46, 47, 0.9), black);
   --color-green-dark: #28494B;
-
+  --color-green-darker: #152829;
 }
 
 /* Mobile version. */
@@ -20,6 +20,10 @@ main {
   width: 100vw;
   padding-top: 5.8rem;
   background: white;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 /* Tablet version. */

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import logo from './assets/logo.svg';
-import appName from './assets/app-name.svg';
-import settingsImg from './assets/settings.png';
-import helpImg from './assets/help.png';
-import animatedHeader from './assets/header-1.json';
+import logo from '../assets/logo.svg';
+import appName from '../assets/app-name.svg';
+import settingsImg from '../assets/settings.png';
+import helpImg from '../assets/help.png';
+import animatedHeader from '../assets/header-1.json';
 import { Link } from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
@@ -55,7 +55,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               Friends
             </button>
 
-            <Link to={'log-out'} className='header-nav-link'>
+            <Link to={'log-in'} className='header-nav-link'>
               <span>Log out</span>
             </Link>
           </nav>
