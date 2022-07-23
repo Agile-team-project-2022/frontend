@@ -1,0 +1,145 @@
+/* Mobile version. */
+.home {
+    display: grid;
+    grid-template-areas:
+            "title title empty"
+            "current-filters current-filters filters"
+            "publications publications publications";
+    grid-template-columns: 33% auto 33%;
+    grid-template-rows: 2rem 2rem fit-content(0);
+}
+
+.home > *:not(.home-background) {
+    z-index: 1;
+}
+
+.home-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--color-gray-light);
+    background-image: url("../assets/geometric-background.jpeg");
+    background-size: cover;
+    background-position: top center;
+    height: 100vh;
+    width: 100%;
+    opacity: 15%;
+}
+
+.welcome-message {
+    grid-area: title;
+    text-align: left;
+    margin: 0 1.2rem;
+    font-weight: 500;
+    align-self: center;
+    color: var(--color-black-lighter-text);
+    height: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.publications-container {
+    grid-area: publications;
+    background: white;
+    height: fit-content;
+    box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
+}
+
+.section-title {
+    text-align: center;
+    margin: 2rem 1.2rem;
+    font-weight: 500;
+    align-self: center;
+    font-size: 1rem;
+    color: var(--color-black-lighter-text);
+}
+
+.home-buttons-container {
+    grid-area: buttons;
+    display: none;
+}
+
+{/* TODO: Update the styles of filters based on the real Filters component. */}
+.filters-section-container {
+    grid-area: filters;
+    display: none
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .home {
+        grid-template-areas:
+            "title empty empty"
+            "filters publications buttons";
+        grid-template-columns: minmax(15rem, 21%) auto minmax(13rem, 21%);
+        grid-template-rows: 5rem fit-content(0);
+    }
+
+    .home-background {
+        width: 21%;
+        min-width: 15rem;
+        opacity: 20%;
+    }
+
+    .welcome-message {
+        text-align: center;
+        margin: 0;
+    }
+
+    {/* TODO: Update the styles of filters based on the real Filters component. */}
+    .filters-section-container {
+        display: block;
+    }
+
+    .filter-div-container {
+        background: white;
+        height: fit-content;
+        width: 12rem;
+        border-radius: 0.15rem;
+        box-shadow: 0 0 1rem var(--color-black-shadow);
+        margin: 0.8rem auto;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    {/* TODO: End of Filters style. */}
+
+    .button-open-section {
+        background: var(--color-green-button);
+        color: var(--color-white-text);
+        font-weight: normal;
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+        text-align: center;
+        margin: 0;
+        width: calc(100% - 2rem);
+        cursor: pointer;
+    }
+
+    .publications-container {
+        box-shadow: none;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .home-buttons-container {
+        margin: 0.8rem auto;
+        display: block;
+    }
+
+    .home-buttons-container .button-open-section {
+        border-radius: 0.2rem;
+        margin: 0 0 0.8rem 0;
+        width: 10rem;
+        display: block;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
+}

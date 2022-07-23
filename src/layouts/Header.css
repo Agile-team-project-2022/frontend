@@ -8,6 +8,7 @@
     background: var(--color-green-lighter-header);
     transition-property: background;
     transition-duration: 0.5s;
+    z-index: 2;
 }
 
 .app-header-background {

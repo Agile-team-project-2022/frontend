@@ -3,7 +3,9 @@
   --color-white-text: rgba(255, 255, 255, 0.8);
   --color-white-soft-background: rgba(255, 255, 255, 0.6);
   --color-black-text: rgba(0, 0, 0, 0.8);
+  --color-black-lighter-text: rgba(0, 0, 0, 0.55);
   --color-black-shadow: rgba(0, 0, 0, 0.25);
+  --color-black-lighter-shadow: rgba(0, 0, 0, 0.17);
   --color-black-medium-shadow: rgba(0, 0, 0, 0.33);
   --color-black-darker-shadow: rgba(0, 0, 0, 0.4);
   --color-green-header: #5B7B72;
@@ -11,6 +13,8 @@
   --color-green-dark-gradient: linear-gradient(to bottom, rgba(24, 46, 47, 0.9), black);
   --color-green-dark: #28494B;
   --color-green-darker: #152829;
+  --color-green-button: #245967;
+  --color-gray-light: #F5F7F9;
 }
 
 /* Mobile version. */
@@ -23,7 +27,16 @@ main {
 }
 
 button, a {
+  all: unset;
   -webkit-tap-highlight-color: transparent !important;
+}
+
+.copyright-footer {
+  color: var(--color-black-lighter-text);
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: 0;
+  margin: 0.9rem 4.8rem;
 }
 
 /* Tablet version. */
