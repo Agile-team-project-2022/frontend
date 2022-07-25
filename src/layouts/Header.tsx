@@ -13,8 +13,7 @@ export interface IHeaderProps {}
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const [expanded, setExpanded] = useState(false);
 
-  const expandMobileMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const expandMobileMenu = () => {
     setExpanded(prevState => !prevState);
   };
 
@@ -38,24 +37,24 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
         <div className={`header-nav-container ${expanded? 'expanded-mobile-menu' : ''}`}>
           <nav className='header-nav'>
-            <Link to={'home'} className='header-nav-link'>
+            <Link to={'home'} className='header-nav-link' onClick={() => expandMobileMenu()} >
               <span>Home</span>
             </Link>
 
-            <Link to={'collection'} className='header-nav-link'>
+            <Link to={'collection'} className='header-nav-link' onClick={() => expandMobileMenu()} >
               <span>Collection</span>
             </Link>
 
             {/* TODO: Create the event listeners for Following plants/Friends. */}
-            <button className='header-nav-link mobile-menu-option'>
+            <button className='header-nav-link mobile-menu-option' onClick={() => expandMobileMenu()} >
               Following plants
             </button>
 
-            <button className='header-nav-link mobile-menu-option'>
+            <button className='header-nav-link mobile-menu-option' onClick={() => expandMobileMenu()} >
               Friends
             </button>
 
-            <Link to={'log-in'} className='header-nav-link'>
+            <Link to={'log-in'} className='header-nav-link' onClick={() => expandMobileMenu()} >
               <span>Log out</span>
             </Link>
           </nav>
@@ -69,7 +68,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         </button>
 
         <button className={`burger-icon ${expanded? 'selected-burger-icon' : ''}`}
-                onClick={(e) => expandMobileMenu(e)}
+                onClick={() => expandMobileMenu()}
         >
           <div> </div>
           <div> </div>

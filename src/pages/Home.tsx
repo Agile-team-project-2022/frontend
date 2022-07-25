@@ -20,10 +20,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         </div>
       </div>
 
-      <section className='publications-container'>
-        <h2 className='section-title'>Publications</h2>
-        {/* TODO: Posts component goes here. */}
-      </section>
+      <div className='page-content-container'>
+        <section className='publications-container'>
+          <h2 className='section-title'>Write new post</h2>
+          {/* TODO: Posts component goes here - Status: Write new Post. */}
+        </section>
+
+        <section className='publications-container'>
+          <h2 className='section-title'>Publications</h2>
+          {/* TODO: Posts component goes here - Status: Published Post. */}
+        </section>
+      </div>
 
       <div className='home-buttons-container'>
         <button className='button-open-section'>Plants you Follow: 20</button>
