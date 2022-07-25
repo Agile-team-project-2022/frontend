@@ -3,7 +3,7 @@
     display: grid;
     grid-template-areas:
             "title title empty"
-            "current-filters current-filters filters"
+            "filters filters filters"
             "content content content";
     grid-template-columns: 33% auto 33%;
     grid-template-rows: 2rem 2rem fit-content(0);
@@ -67,12 +67,6 @@
     display: none;
 }
 
-{/* TODO: Update the styles of filters based on the real Filters component. */}
-.filters-section-container {
-    grid-area: filters;
-    display: none
-}
-
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .home {
@@ -92,36 +86,6 @@
     .welcome-message {
         text-align: center;
         margin: 0;
-    }
-
-    {/* TODO: Update the styles of filters based on the real Filters component. */}
-    .filters-section-container {
-        display: block;
-    }
-
-    .filter-div-container {
-        background: white;
-        height: fit-content;
-        width: 12rem;
-        border-radius: 0.15rem;
-        box-shadow: 0 0 1rem var(--color-black-shadow);
-        margin: 0.8rem auto;
-        cursor: pointer;
-        overflow: hidden;
-    }
-
-    {/* TODO: End of Filters style. */}
-
-    .button-open-section {
-        background: var(--color-green-button);
-        color: var(--color-white-text);
-        font-weight: normal;
-        font-size: 1rem;
-        padding: 0.8rem 1rem;
-        text-align: center;
-        margin: 0;
-        width: calc(100% - 2rem);
-        cursor: pointer;
     }
 
     .publications-container {
