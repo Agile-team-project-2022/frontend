@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import './Home.css';
+const Filters = lazy(() => import('../components/Filters'));
 
 export interface IHomeProps {}
 
@@ -11,14 +12,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       <h2 className='welcome-message section-title'>Welcome "User"!</h2>
 
       {/* TODO: Create the real filters sections. */}
-      <div className='filters-section-container'>
-        <div className='filter-div-container'>
-          <h3 className='button-open-section'>Filter by category</h3>
-        </div>
-        <div className='filter-div-container'>
-          <h3 className='button-open-section'>Currently filtering by</h3>
-        </div>
-      </div>
+      <Suspense> <Filters /> </Suspense>
 
       <div className='page-content-container'>
         <section className='publications-container'>

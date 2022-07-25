@@ -31,6 +31,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         <div className='logo-container'>
           <img src={logo} className="logo" alt="InterPlant logo" />
         </div>
+
         <div className='app-name-container'>
           <img src={appName} className="app-name" alt="InterPlant" />
         </div>
@@ -74,7 +75,6 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           <div> </div>
           <div> </div>
         </button>
-
       </div>
     </header>
   );
