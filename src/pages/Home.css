@@ -26,6 +26,15 @@
     opacity: 15%;
 }
 
+.section-title {
+    text-align: center;
+    margin: 2rem 1.2rem;
+    font-weight: 500;
+    align-self: center;
+    font-size: 1rem;
+    color: var(--color-black-lighter-text);
+}
+
 .welcome-message {
     grid-area: title;
     text-align: left;
@@ -45,15 +54,6 @@
     background: white;
     height: fit-content;
     box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
-}
-
-.section-title {
-    text-align: center;
-    margin: 2rem 1.2rem;
-    font-weight: 500;
-    align-self: center;
-    font-size: 1rem;
-    color: var(--color-black-lighter-text);
 }
 
 .home-buttons-container {
