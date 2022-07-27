@@ -26,11 +26,13 @@ const filterImagesArr = {
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [openFilters, setOpenFilters] = useState(false);
   const [filters, setFilters] = useState<ValidFilters[]>([]);
+  const [preselectedFilters, setPreselectedFilters] = useState<ValidFilters[]>([]);
   const {deviceType} = useWindowSize();
 
   /** Expands the section containing the options to select from. */
   const expandFilters = () => {
     setOpenFilters(prevState => !prevState);
+    setPreselectedFilters(filters);
   };
 
   /** Returns the option filters to select from. */
@@ -38,8 +40,9 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     return (
       Object.keys(ValidFilters).map((filter, index) => {
         return (
-          <div className='filter-item-container'
+          <div className={`filter-item-container ${filters.includes(filter as ValidFilters)? 'selected-filter-item' : ''}`}
                key={`filter-item-${filter.toLowerCase()}`}
+               id={`filter-item-${filter.toLowerCase()}`}
                onClick={(e) => selectFilter(e, filter as ValidFilters)}
           >
             <div className='filter-img-container'>
@@ -47,6 +50,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
               <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
                              alt={`Category ${filter.toLowerCase()}`}
               />
+              <div> </div>
             </div>
             <p> {filter.charAt(0) + filter.substring(1).toLowerCase()} </p>
           </div>
@@ -55,14 +59,27 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     );
   };
 
-  /** Applies or removes a filter based on its previous state. */
+  /** Returns the control buttons 'Clear' and 'Apply'. */
+  const getControlButtons = () => {
+    return (
+      <div className='filter-buttons'>
+        <button className='button-action' onClick={() => clearFilters()}> Clear </button>
+        <button className='button-action' onClick={() => applyFilters()}> Apply </button>
+      </div>
+    );
+  };
+
+  /** Selects or removes a filter based on its previous state. They are effective only once 'apply' button is clicked. */
   const selectFilter = (event: React.MouseEvent<HTMLDivElement>, filter: ValidFilters) => {
-    event.stopPropagation();
+    event.preventDefault();
+    const elem = document.getElementById(`filter-item-${filter.toLowerCase()}`);
 
     // Deselects the filter if it is already marked.
-    if(filters.includes(filter)) {
-      const index = filters.indexOf(filter);
-      setFilters(prevState => {
+    if(preselectedFilters.includes(filter)) {
+      if(elem && elem.classList.contains('selected-filter-item')) elem.classList.remove('selected-filter-item');
+
+      const index = preselectedFilters.indexOf(filter);
+      setPreselectedFilters(prevState => {
         return [
           ...prevState.slice(0, index),
           ...prevState.slice(index + 1)
@@ -70,13 +87,27 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
       });
     } else {
       // Selects the filter.
-      setFilters(prevState => {
+      if(elem) elem.classList.add('selected-filter-item');
+
+      setPreselectedFilters(prevState => {
         return [
           ...prevState,
           filter
         ]
       });
     }
+  };
+
+  /** Clears all the previously selected filters. */
+  const clearFilters = () => {
+    setOpenFilters(false);
+    setFilters([]);
+  };
+
+  /** Applies all the selected filters. */
+  const applyFilters = () => {
+    setOpenFilters(false);
+    setFilters(preselectedFilters);
   };
 
   return (
@@ -86,9 +117,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
           /** Tablet and Desktop views. */
           deviceType !== DeviceTypes.MOBILE?
             <>
-              <h3 className='button-open-section'
-                  onClick={() => expandFilters()}
-              >
+              <h3 className='button-open-section' onClick={() => expandFilters()}>
                 Filter by category
               </h3>
 
@@ -96,11 +125,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                 openFilters?
                   <div className='expanded-filters'>
                     { getExpandedFilters() }
-
-                    <div className='filter-buttons'>
-                      <button className='button-action'> Clear </button>
-                      <button className='button-action'> Apply </button>
-                    </div>
+                    { getControlButtons() }
                   </div>
                   :
                   ''
@@ -109,9 +134,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
             :
             /** Mobile view. */
             <>
-              <div className='mobile-filters'
-                   onClick={() => expandFilters()}
-              >
+              <div className='mobile-filters' onClick={() => expandFilters()}>
                 Filter
                 {/* TODO: Add the correct search img asset. */}
                 <img src={searchImg} className="search-img" alt="Search." />
@@ -122,11 +145,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                   <Modal onClose={expandFilters}>
                     <>
                       <div className='expanded-filters'> {getExpandedFilters()} </div>
-
-                      <div className='filter-buttons'>
-                        <button className='button-action'> Clear </button>
-                        <button className='button-action'> Apply </button>
-                      </div>
+                      { getControlButtons() }
                     </>
                   </Modal>
                   :
