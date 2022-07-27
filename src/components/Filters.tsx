@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import './Filters.css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import searchImg from "../assets/logo.svg";
+import sunImg from '../assets/settings.png';
+import evergreenImg from '../assets/help.png';
+import treeImg from '../assets/logo.svg';
 
 export interface IFiltersProps {}
 
@@ -11,6 +15,12 @@ enum ValidFilters {
   TREE = 'TREE',
 }
 
+const filterImagesArr = {
+  [ValidFilters.SUN] : sunImg,
+  [ValidFilters.EVERGREEN] :  evergreenImg,
+  [ValidFilters.TREE] :  treeImg
+};
+
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [openFilters, setOpenFilters] = useState(false);
   const [filters, setFilters] = useState<ValidFilters[]>([]);
@@ -19,7 +29,9 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     setOpenFilters(prevState => !prevState);
   };
 
-  const selectFilter = (filter: ValidFilters) => {
+  const selectFilter = (event: React.MouseEvent<HTMLDivElement>, filter: ValidFilters) => {
+    event.stopPropagation();
+
     // Deselects the filter if it is already marked.
     if(filters.includes(filter)) {
       const index = filters.indexOf(filter);
@@ -61,11 +73,13 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                   return (
                     <div className='filter-item-container'
                          key={`filter-item-${filter.toLowerCase()}`}
-                         onClick={() => selectFilter(filter as ValidFilters)}
+                         onClick={(e) => selectFilter(e, filter as ValidFilters)}
                     >
                       <div className='filter-img-container'>
                         {/* TODO: Add the correct categories img assets. */}
-                        <img src={searchImg} alt={`Category ${filter.toLowerCase()}`} />
+                        <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
+                                       alt={`Category ${filter.toLowerCase()}`}
+                        />
                       </div>
                       <p> {filter.charAt(0) + filter.substring(1).toLowerCase()} </p>
                     </div>
@@ -94,7 +108,9 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                      key={`current-filter-${filter.toLowerCase()}`}
                 >
                   {/* TODO: Use correct images. */}
-                  <img src={searchImg} alt="Applied filter." />
+                  <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
+                                 alt={`Applied filter ${filter.toLowerCase()}`}
+                  />
                 </div>
               );
             })

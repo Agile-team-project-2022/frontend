@@ -157,7 +157,12 @@
         grid-column-gap: 6.6%;
         height: fit-content;
         width: calc(100% - 2rem);
-        padding: 0.5rem 1rem;
+        padding: 0 1rem;
+    }
+
+    .current-filter-container {
+        height: calc(100% - 1rem);
+        margin: 0.5rem 0;
     }
 
 }
