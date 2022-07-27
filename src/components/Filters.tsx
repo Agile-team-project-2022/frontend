@@ -93,7 +93,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
         </div>
 
         {
-          openFilters?
+          // Tablet and Desktop views.
+          openFilters && deviceType !== DeviceTypes.MOBILE?
             <div className='expanded-filters'>
               { getExpandedFilters() }
 
@@ -130,9 +131,9 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
 
       {
         deviceType === DeviceTypes.MOBILE && openFilters?
-          <Modal>
+          <Modal onClose={expandFilters}>
             <>
-              { getExpandedFilters() }
+              <div className='expanded-filters'> {getExpandedFilters()} </div>
 
               <div className='filter-buttons'>
                 <button className='button-action'> Clear </button>

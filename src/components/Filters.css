@@ -50,11 +50,9 @@
 }
 
 .expanded-filters {
-    display: none;
-}
-
-.expanded-filters {
-    padding: 0.8rem 0 0 0;
+    padding: 0.8rem 0;
+    background: white;
+    margin: 1.5rem 0;
 }
 
 .filter-item-container {
@@ -87,16 +85,11 @@
     filter: brightness(70%);
 }
 
-.expanded-filters .filter-buttons {
+.filter-buttons {
     display: flex;
     column-gap: 0.3rem;
-    margin: 1rem 0.3rem 0.3rem 0.3rem;
-    padding-top: 0.3rem;
-    border-top: 1px solid var(--color-black-lighter-shadow);
+    margin: 0 0.5rem;
 }
-
-
-
 
 .current-filters {
     display: flex;
@@ -143,7 +136,9 @@
     }
 
     .expanded-filters {
-        display: block;
+        padding: 0.8rem 0 0 0;
+        background: none;
+        margin: 0;
     }
 
     .mobile-expanded-filters {
@@ -152,6 +147,12 @@
 
     .current-applied-filters {
         height: fit-content;
+    }
+
+    .filter-buttons {
+        margin: 1rem 0.3rem 0.3rem 0.3rem;
+        padding-top: 0.3rem;
+        border-top: 1px solid var(--color-black-lighter-shadow);
     }
 
     .current-filters {
@@ -168,7 +169,6 @@
         height: calc(100% - 1rem);
         margin: 0.5rem 0;
     }
-
 }
 
 /* Desktop version. */
