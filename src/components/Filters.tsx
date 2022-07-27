@@ -81,30 +81,58 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
 
   return (
     <div className='filters-section-container'>
-      <div className='filter-div-container filters'
-           onClick={() => expandFilters()}
-      >
-        <h3 className='button-open-section'>Filter by category</h3>
-
-        <div className='mobile-filters'>
-          Filter
-          {/* TODO: Add the correct search img asset. */}
-          <img src={searchImg} className="search-img" alt="Search." />
-        </div>
-
+      <div className='filter-div-container filters'>
         {
-          // Tablet and Desktop views.
-          openFilters && deviceType !== DeviceTypes.MOBILE?
-            <div className='expanded-filters'>
-              { getExpandedFilters() }
+          /** Tablet and Desktop views. */
+          deviceType !== DeviceTypes.MOBILE?
+            <>
+              <h3 className='button-open-section'
+                  onClick={() => expandFilters()}
+              >
+                Filter by category
+              </h3>
 
-              <div className='filter-buttons'>
-                <button className='button-action'> Clear </button>
-                <button className='button-action'> Apply </button>
-              </div>
-            </div>
+              {
+                openFilters?
+                  <div className='expanded-filters'>
+                    { getExpandedFilters() }
+
+                    <div className='filter-buttons'>
+                      <button className='button-action'> Clear </button>
+                      <button className='button-action'> Apply </button>
+                    </div>
+                  </div>
+                  :
+                  ''
+              }
+            </>
             :
-            ''
+            /** Mobile view. */
+            <>
+              <div className='mobile-filters'
+                   onClick={() => expandFilters()}
+              >
+                Filter
+                {/* TODO: Add the correct search img asset. */}
+                <img src={searchImg} className="search-img" alt="Search." />
+              </div>
+
+              {
+                openFilters?
+                  <Modal onClose={expandFilters}>
+                    <>
+                      <div className='expanded-filters'> {getExpandedFilters()} </div>
+
+                      <div className='filter-buttons'>
+                        <button className='button-action'> Clear </button>
+                        <button className='button-action'> Apply </button>
+                      </div>
+                    </>
+                  </Modal>
+                  :
+                  ''
+              }
+            </>
         }
       </div>
 
@@ -128,22 +156,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
           }
         </div>
       </div>
-
-      {
-        deviceType === DeviceTypes.MOBILE && openFilters?
-          <Modal onClose={expandFilters}>
-            <>
-              <div className='expanded-filters'> {getExpandedFilters()} </div>
-
-              <div className='filter-buttons'>
-                <button className='button-action'> Clear </button>
-                <button className='button-action'> Apply </button>
-              </div>
-            </>
-          </Modal>
-          :
-          ''
-      }
     </div>
   );
 }

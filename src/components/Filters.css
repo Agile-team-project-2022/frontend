@@ -12,14 +12,14 @@
     grid-area: select-filters;
 }
 
+.button-open-section {
+    display: none;
+}
+
 .current-applied-filters {
     grid-area: current-filters;
     height: 100%;
     pointer-events: none;
-}
-
-.filter-div-container .button-open-section {
-    display: none;
 }
 
 .mobile-filters, .current-filters {
@@ -128,21 +128,14 @@
     }
 
     .filter-div-container .button-open-section {
+        display: block;
         box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
-    }
-
-    .mobile-filters {
-        display: none;
     }
 
     .expanded-filters {
         padding: 0.8rem 0 0 0;
         background: none;
         margin: 0;
-    }
-
-    .mobile-expanded-filters {
-        display: none;
     }
 
     .current-applied-filters {
