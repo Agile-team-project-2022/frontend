@@ -4,7 +4,7 @@ import searchImg from "../assets/logo.svg";
 
 export interface IFiltersProps {}
 
-{/* TODO: Set all the filters (categories). */}
+// TODO: Set all the filters (categories).
 enum ValidFilters {
   SUN = 'SUN',
   EVERGREEN = 'EVERGREEN',
@@ -13,10 +13,31 @@ enum ValidFilters {
 
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [openFilters, setOpenFilters] = useState(false);
-  const [filters, setFilters] = useState([ValidFilters.SUN]);
+  const [filters, setFilters] = useState<ValidFilters[]>([]);
 
   const expandFilters = () => {
     setOpenFilters(prevState => !prevState);
+  };
+
+  const selectFilter = (filter: ValidFilters) => {
+    // Deselects the filter if it is already marked.
+    if(filters.includes(filter)) {
+      const index = filters.indexOf(filter);
+      setFilters(prevState => {
+        return [
+          ...prevState.slice(0, index),
+          ...prevState.slice(index + 1)
+        ]
+      });
+    } else {
+      // Selects the filter.
+      setFilters(prevState => {
+        return [
+          ...prevState,
+          filter
+        ]
+      });
+    }
   };
 
   return (
@@ -29,7 +50,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
         <div className='mobile-filters'>
           Filter
           {/* TODO: Add the correct search img asset. */}
-          <img src={searchImg} className="search-img" alt="Search image." />
+          <img src={searchImg} className="search-img" alt="Search." />
         </div>
 
         {
@@ -38,10 +59,13 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
               {
                 Object.keys(ValidFilters).map((filter, index) => {
                   return (
-                    <div className='filter-item-container' key={`filter-item-${filter.toLowerCase()}`}>
+                    <div className='filter-item-container'
+                         key={`filter-item-${filter.toLowerCase()}`}
+                         onClick={() => selectFilter(filter as ValidFilters)}
+                    >
                       <div className='filter-img-container'>
                         {/* TODO: Add the correct categories img assets. */}
-                        <img src={searchImg} alt="Category image." />
+                        <img src={searchImg} alt={`Category ${filter.toLowerCase()}`} />
                       </div>
                       <p> {filter.charAt(0) + filter.substring(1).toLowerCase()} </p>
                     </div>
@@ -70,7 +94,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                      key={`current-filter-${filter.toLowerCase()}`}
                 >
                   {/* TODO: Use correct images. */}
-                  <img src={searchImg} alt="Applied filter image." />
+                  <img src={searchImg} alt="Applied filter." />
                 </div>
               );
             })
