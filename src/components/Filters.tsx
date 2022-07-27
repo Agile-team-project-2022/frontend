@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import './Filters.css';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 import searchImg from "../assets/logo.svg";
+import treeImg from "../assets/logo.svg";
 import sunImg from '../assets/settings.png';
 import evergreenImg from '../assets/help.png';
-import treeImg from '../assets/logo.svg';
+import Modal from "./Modal";
+import useWindowSize, {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IFiltersProps {}
 
@@ -24,11 +26,36 @@ const filterImagesArr = {
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [openFilters, setOpenFilters] = useState(false);
   const [filters, setFilters] = useState<ValidFilters[]>([]);
+  const {deviceType} = useWindowSize();
 
+  /** Expands the section containing the options to select from. */
   const expandFilters = () => {
     setOpenFilters(prevState => !prevState);
   };
 
+  /** Returns the option filters to select from. */
+  const getExpandedFilters = () => {
+    return (
+      Object.keys(ValidFilters).map((filter, index) => {
+        return (
+          <div className='filter-item-container'
+               key={`filter-item-${filter.toLowerCase()}`}
+               onClick={(e) => selectFilter(e, filter as ValidFilters)}
+          >
+            <div className='filter-img-container'>
+              {/* TODO: Add the correct categories img assets. */}
+              <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
+                             alt={`Category ${filter.toLowerCase()}`}
+              />
+            </div>
+            <p> {filter.charAt(0) + filter.substring(1).toLowerCase()} </p>
+          </div>
+        );
+      })
+    );
+  };
+
+  /** Applies or removes a filter based on its previous state. */
   const selectFilter = (event: React.MouseEvent<HTMLDivElement>, filter: ValidFilters) => {
     event.stopPropagation();
 
@@ -68,24 +95,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
         {
           openFilters?
             <div className='expanded-filters'>
-              {
-                Object.keys(ValidFilters).map((filter, index) => {
-                  return (
-                    <div className='filter-item-container'
-                         key={`filter-item-${filter.toLowerCase()}`}
-                         onClick={(e) => selectFilter(e, filter as ValidFilters)}
-                    >
-                      <div className='filter-img-container'>
-                        {/* TODO: Add the correct categories img assets. */}
-                        <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
-                                       alt={`Category ${filter.toLowerCase()}`}
-                        />
-                      </div>
-                      <p> {filter.charAt(0) + filter.substring(1).toLowerCase()} </p>
-                    </div>
-                  );
-                })
-              }
+              { getExpandedFilters() }
 
               <div className='filter-buttons'>
                 <button className='button-action'> Clear </button>
@@ -117,6 +127,22 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
           }
         </div>
       </div>
+
+      {
+        deviceType === DeviceTypes.MOBILE && openFilters?
+          <Modal>
+            <>
+              { getExpandedFilters() }
+
+              <div className='filter-buttons'>
+                <button className='button-action'> Clear </button>
+                <button className='button-action'> Apply </button>
+              </div>
+            </>
+          </Modal>
+          :
+          ''
+      }
     </div>
   );
 }

@@ -1,13 +1,16 @@
 /* Global variables. */
 :root {
   --color-white-text: rgba(255, 255, 255, 0.8);
+  --color-white-light-border: rgba(255, 255, 255, 0.3);
   --color-white-soft-background: rgba(255, 255, 255, 0.6);
+  --color-white-background: rgba(255, 255, 255, 0.95);
   --color-black-text: rgba(0, 0, 0, 0.8);
   --color-black-lighter-text: rgba(0, 0, 0, 0.55);
   --color-black-shadow: rgba(0, 0, 0, 0.25);
   --color-black-lighter-shadow: rgba(0, 0, 0, 0.17);
   --color-black-medium-shadow: rgba(0, 0, 0, 0.33);
   --color-black-darker-shadow: rgba(0, 0, 0, 0.4);
+  --color-black-background: rgba(0, 0, 0, 0.78);
   --color-green-header: #5B7B72;
   --color-green-lighter-header: #84A4A2;
   --color-green-lighter-header-low-transparency: rgba(132, 164, 162, 0.8);
