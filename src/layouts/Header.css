@@ -43,6 +43,7 @@
 .logo-container {
     grid-area: logo;
     height: calc(100% - 0.8rem - 2px);
+    min-width: 3.45rem;
     aspect-ratio: 1 / 1;
     margin: 0.75rem 1.1rem 0 1.1rem;
     border-radius: 50%;
@@ -62,6 +63,7 @@
     width: fit-content;
     margin: 1.2rem 1.5rem 0 0;
     opacity: 90%;
+    min-width: 6rem;
 }
 
 .burger-icon {
@@ -135,6 +137,7 @@
 .header-option-container {
     all: unset;
     height: calc(100% - 1.4rem);
+    min-width: 1.15rem;
     aspect-ratio: 1 / 1;
     margin: 1.1rem 0.3rem auto 0.3rem;
     border-radius: 50%;
@@ -191,8 +194,13 @@
         grid-template-columns: fit-content(0) auto repeat(3, fit-content(0));
     }
 
+    .logo-container {
+        min-width: 4.6rem;
+    }
+
     .app-name-container {
         margin: 1.3rem 2rem 0 0;
+        min-width: 7rem;
     }
 
     .burger-icon {
@@ -242,6 +250,7 @@
     .header-option-container {
         height: calc(100% - 1.65rem);
         margin: 1rem 1rem auto 0;
+        min-width: 1.7rem;
     }
 }
 
@@ -260,5 +269,6 @@
     .header-option-container {
         height: calc(100% - 1.4rem);
         margin: 0.85rem 2rem auto 0;
+        min-width: 1.9rem;
     }
 }
