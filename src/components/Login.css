@@ -2,17 +2,21 @@
     display: grid;
     grid-template-areas:
             "title title"
-"input-label img";
+            "input-label img"
+            "input-field img"
+            "log-in-button img";
     width: 25rem;
 }
 
 .login-container h2 {
+    grid-area: title;
     width: fit-content;
     margin: 1rem auto;
     font-size: 1.2rem;
 }
 
 .login-container label {
+    grid-area: input-label;
     width: fit-content;
     margin: 1.6rem 0 0 0;
     font-size: 0.9rem;
@@ -20,6 +24,7 @@
 
 .login-container input {
     all: unset;
+    grid-area: input-field;
     background: white;
     box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
     margin: 1rem 0;
@@ -28,6 +33,26 @@
     border-radius: 0.15rem;
     font-size: 0.9rem;
     padding: 0 1.01rem;
+}
+
+.login-button {
+    grid-area: log-in-button;
+    width: 100%;
+}
+
+.login-button p {
+    display: none;
+}
+
+.disabled-login {
+    pointer-events: none;
+    opacity: 70%;
+    filter: brightness(85%);
+}
+
+.disabled-login p {
+    display: block;
+    font-size: 0.8rem;
 }
 
 

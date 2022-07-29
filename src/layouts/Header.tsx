@@ -8,11 +8,12 @@ import { Link } from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
 import {AppContext, AppValidActions} from "../context";
+import { googleLogout } from '@react-oauth/google';
 
 export interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
-  const {dispatch} = useContext(AppContext);
+  const {state, dispatch} = useContext(AppContext);
   const [expanded, setExpanded] = useState(false);
 
   const expandMobileMenu = () => {
@@ -22,6 +23,13 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {
     dispatch({type: AppValidActions.SHOW_LOG_IN});
+    expandMobileMenu();
+  };
+
+  /** Handles log out action. */
+  const logOut = () => {
+    dispatch({type: AppValidActions.LOG_OUT});
+    googleLogout();
     expandMobileMenu();
   };
 
@@ -63,8 +71,11 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               Friends
             </button>
 
-            <Link to={'home'} className='header-nav-link' onClick={() => showLogIn()} >
-              <span>Log out</span>
+            <Link to={'home'}
+                  className='header-nav-link'
+                  onClick={state.loggedIn? () => logOut() : () => showLogIn()}
+            >
+              <span> {state.loggedIn? 'Log out' : 'Log in'} </span>
             </Link>
           </nav>
         </div>
