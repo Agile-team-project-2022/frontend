@@ -1,25 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Filters.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import searchImg from "../assets/logo.svg";
+import searchImg from "../assets/search.png";
 import treeImg from "../assets/logo.svg";
-import sunImg from '../assets/settings.png';
-import evergreenImg from '../assets/help.png';
+import sunImg from '../assets/category-sun.png';
+import shadowImg from '../assets/category-shadow.png';
 import Modal from "./Modal";
 import useWindowSize, {DeviceTypes} from "../hooks/useWindowSize";
+// import axios from "axios";
 
 export interface IFiltersProps {}
 
 // TODO: Set all the filters (categories).
 enum ValidFilters {
   SUN = 'SUN',
-  EVERGREEN = 'EVERGREEN',
+  SHADOW = 'SHADOW',
   TREE = 'TREE',
 }
 
 const filterImagesArr = {
   [ValidFilters.SUN] : sunImg,
-  [ValidFilters.EVERGREEN] :  evergreenImg,
+  [ValidFilters.SHADOW] :  shadowImg,
   [ValidFilters.TREE] :  treeImg
 };
 
@@ -28,6 +29,10 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [filters, setFilters] = useState<ValidFilters[]>([]);
   const [preselectedFilters, setPreselectedFilters] = useState<ValidFilters[]>([]);
   const {deviceType} = useWindowSize();
+
+  useEffect(() => {
+    fetchFilters();
+  }, []);
 
   /** Expands the section containing the options to select from. */
   const expandFilters = () => {
@@ -108,6 +113,11 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const applyFilters = () => {
     setOpenFilters(false);
     setFilters(preselectedFilters);
+  };
+
+  /** TODO: Queries the database. */
+  const fetchFilters = () => {
+
   };
 
   return (
