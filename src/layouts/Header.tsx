@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import logo from '../assets/logo.svg';
 import appName from '../assets/app-name.svg';
 import settingsImg from '../assets/settings.png';
@@ -7,14 +7,22 @@ import animatedHeader from '../assets/header-1.json';
 import { Link } from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
+import {AppContext, AppValidActions} from "../context";
 
 export interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
+  const {dispatch} = useContext(AppContext);
   const [expanded, setExpanded] = useState(false);
 
   const expandMobileMenu = () => {
     setExpanded(prevState => !prevState);
+  };
+
+  /** Displays the pop up asking for log in. */
+  const showLogIn = () => {
+    dispatch({type: AppValidActions.SHOW_LOG_IN});
+    expandMobileMenu();
   };
 
   return (
@@ -55,7 +63,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               Friends
             </button>
 
-            <Link to={'log-in'} className='header-nav-link' onClick={() => expandMobileMenu()} >
+            <Link to={'home'} className='header-nav-link' onClick={() => showLogIn()} >
               <span>Log out</span>
             </Link>
           </nav>

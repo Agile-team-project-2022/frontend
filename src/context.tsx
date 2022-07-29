@@ -7,7 +7,9 @@ enum AppValidActions {
   LOG_IN = 'LOG_IN',
   LOG_OUT = 'LOG_OUT',
   CHANGE_LANGUAGE = 'CHANGE_LANGUAGE',
-  CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE'
+  CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE',
+  SHOW_LOG_IN = 'SHOW_LOG_IN',
+  CLOSE_LOG_IN = 'CLOSE_LOG_IN'
 }
 
 // Interfaces and Types definition.
@@ -17,10 +19,11 @@ interface AppContextInterface {
 }
 
 interface AppState {
-  user?: string,
+  user: string,
   language: string,
   fontSize: string,
-  loggedIn: boolean
+  loggedIn: boolean,
+  showLogIn: boolean
 }
 
 type Props = {
@@ -50,10 +53,11 @@ interface ChangeFontSizeAction {
 
 // Defines the default values to initialize the app.
 const appInitialState = {
-  user: undefined,
+  user: 'guest',
   language: 'en',
   fontSize: 'normal',
-  loggedIn: false
+  loggedIn: false,
+  showLogIn: true
 };
 
 // Creates the reducer.
@@ -69,7 +73,7 @@ const reducer = (state: AppState, action: AppAction) => {
     case AppValidActions.LOG_OUT:
       return {
         ...state,
-        user: undefined,
+        user: 'guest',
         loggedIn: false
       };
 
@@ -83,6 +87,18 @@ const reducer = (state: AppState, action: AppAction) => {
       return {
         ...state,
         fontSize: (action as ChangeFontSizeAction).payload.fontSize
+      };
+
+    case AppValidActions.SHOW_LOG_IN:
+      return {
+        ...state,
+        showLogIn: true
+      };
+
+    case AppValidActions.CLOSE_LOG_IN:
+      return {
+        ...state,
+        showLogIn: false
       };
 
     default:
