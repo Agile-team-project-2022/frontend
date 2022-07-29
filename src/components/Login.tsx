@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useContext, useState} from 'react';
 import './Login.css';
-import GoogleLogin, {GoogleLoginResponse, GoogleLoginResponseOffline} from "react-google-login";
+import {CredentialResponse, GoogleLogin} from '@react-oauth/google';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
 
@@ -9,8 +9,6 @@ export interface ILoginProps {}
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
   const {dispatch} = useContext(AppContext)
   const [userName, setUserName] = useState('');
-  // TODO: Update with correct CLIENT ID.
-  const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 
   /** Handles the text input field for the userName. Formats the input and Removes invalid characters. */
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,13 +16,17 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
   };
 
   /** Triggered when Google Login confirms the account. */
-  const loginSuccess = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    console.log('Successful login');
+  const loginSuccess = (response: CredentialResponse) => {
+    // TODO: Build a confirmation pop up.
+    alert('Successful login');
+    dispatch({type: AppValidActions.LOG_IN, payload: {user: userName}});
+    closeLogIn();
   };
 
   /** Handles problems to log in with Google account. */
-  const loginFailure = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    console.log('Problem with login');
+  const loginFailure = () => {
+    // TODO: Build a confirmation pop up.
+    alert('Problem with login');
   };
 
   /** Cancels the log in attempt and closes the pop up window. */
@@ -46,14 +48,14 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
                onChange={(e) => handleOnChange(e)}
         />
 
-        <GoogleLogin
-          disabled={userName.length === 0}
-          clientId={clientId}
-          buttonText="Log in with Google"
-          onSuccess={loginSuccess}
-          onFailure={loginFailure}
-          cookiePolicy={"single_host_origin"}
-        />
+        <div className={`login-button ${userName.length === 0? 'disabled-login' : ''}`} >
+          <GoogleLogin
+            onSuccess={loginSuccess}
+            onError={loginFailure}
+          />
+          {/** TODO: Check if name to display should be put here. */}
+          <p>Please type a name to continue.</p>
+        </div>
       </div>
     </Modal>
 
