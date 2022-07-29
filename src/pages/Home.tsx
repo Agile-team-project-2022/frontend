@@ -1,15 +1,20 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useContext} from 'react';
 import './Home.css';
+import {AppContext} from "../context";
 const Filters = lazy(() => import('../components/Filters'));
 
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+  const {state} = useContext(AppContext);
+
   return (
     <main className="home">
       <div className='home-background'> </div>
 
-      <h2 className='welcome-message section-title'>Welcome "User"!</h2>
+      <h2 className='welcome-message section-title'>
+        Welcome {state.user.charAt(0).toUpperCase() + state.user.substring(1)}!
+      </h2>
 
       {/* TODO: Create the real filters sections. */}
       <Suspense> <Filters /> </Suspense>

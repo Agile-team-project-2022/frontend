@@ -1,0 +1,33 @@
+.login-container {
+    display: grid;
+    grid-template-areas:
+            "title title"
+"input-label img";
+    width: 25rem;
+}
+
+.login-container h2 {
+    width: fit-content;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+}
+
+.login-container label {
+    width: fit-content;
+    margin: 1.6rem 0 0 0;
+    font-size: 0.9rem;
+}
+
+.login-container input {
+    all: unset;
+    background: white;
+    box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
+    margin: 1rem 0;
+    width: calc(100% - 2rem);
+    height: 2rem;
+    border-radius: 0.15rem;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+}
+
+
