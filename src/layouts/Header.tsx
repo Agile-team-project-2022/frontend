@@ -1,4 +1,4 @@
-import React, {lazy, useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import logo from '../assets/logo.svg';
 import appName from '../assets/app-name.svg';
 import settingsImg from '../assets/settings.png';

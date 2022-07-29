@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from 'react';
+import React, {ChangeEvent, useContext, useState} from 'react';
 import './Login.css';
 import GoogleLogin, {GoogleLoginResponse, GoogleLoginResponseOffline} from "react-google-login";
 import Modal from "./Modal";
@@ -11,10 +11,6 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
   const [userName, setUserName] = useState('');
   // TODO: Update with correct CLIENT ID.
   const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
-
-  useEffect(() => {
-    console.log('-Client -> ', clientId)
-  }, []);
 
   /** Handles the text input field for the userName. Formats the input and Removes invalid characters. */
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
