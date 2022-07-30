@@ -57,7 +57,7 @@ const appInitialState = {
   language: 'en',
   fontSize: 'normal',
   loggedIn: false,
-  showLogIn: true
+  showLogIn: false
 };
 
 // Creates the reducer.
