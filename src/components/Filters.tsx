@@ -46,12 +46,12 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     return (
       Object.keys(ValidFilters).map((filter, index) => {
         return (
-          <div className={`filter-item-container ${filters.includes(filter as ValidFilters)? 'selected-filter-item' : ''}`}
+          <div className={`list-item-container ${filters.includes(filter as ValidFilters)? 'selected-filter-item' : ''}`}
                key={`filter-item-${filter.toLowerCase()}`}
                id={`filter-item-${filter.toLowerCase()}`}
                onClick={(e) => selectFilter(e, filter as ValidFilters)}
           >
-            <div className='filter-img-container'>
+            <div className='list-img-container'>
               {/* TODO: Add the correct categories img assets. */}
               <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
                              effect="black-and-white"
