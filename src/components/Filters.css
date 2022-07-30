@@ -89,6 +89,11 @@
     transition-duration: 0.5s;
 }
 
+.lazy-load-image-background, .lazy-load-image-loaded {
+    height: 100%;
+    width: 100%;
+}
+
 .filter-img-container img:hover {
     filter: brightness(70%);
 }
