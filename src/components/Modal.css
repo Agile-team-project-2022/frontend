@@ -38,6 +38,14 @@
     cursor: pointer;
 }
 
+.section-title-modal {
+    grid-area: title;
+    width: fit-content;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
 .modal-header div {
     margin: 0;
     width: 0.35rem;
