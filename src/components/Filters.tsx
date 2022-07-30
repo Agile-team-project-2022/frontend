@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './Filters.css';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import searchImg from "../assets/search.png";
 import treeImg from "../assets/logo.svg";
@@ -7,7 +8,7 @@ import sunImg from '../assets/category-sun.png';
 import shadowImg from '../assets/category-shadow.png';
 import Modal from "./Modal";
 import useWindowSize, {DeviceTypes} from "../hooks/useWindowSize";
-// import axios from "axios";
+import axios from "axios";
 
 export interface IFiltersProps {}
 
@@ -53,6 +54,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
             <div className='filter-img-container'>
               {/* TODO: Add the correct categories img assets. */}
               <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
+                             effect="black-and-white"
                              alt={`Category ${filter.toLowerCase()}`}
               />
               <div> </div>
@@ -117,7 +119,16 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
 
   /** TODO: Queries the database. */
   const fetchFilters = () => {
-
+    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category?page=1&count=10`;
+    const headers = {
+      'Access-Control-Allow-Origin': 'https://localhost:5000'
+    };
+    axios.defaults.withCredentials = true
+    axios.get(url, {headers: headers})
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -185,6 +196,9 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
           }
         </div>
       </div>
+
+      {/** TODO: Connect endpoint */}
+      <button onClick={fetchFilters}>FETCH</button>
     </div>
   );
 }
