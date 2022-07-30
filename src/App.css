@@ -83,6 +83,43 @@ button, a {
   margin: 0.9rem 4.8rem;
 }
 
+.list-item-container {
+  all: unset;
+  display: flex;
+  column-gap: 0.5rem;
+  width: calc(100% - 3rem);
+  margin: 0.5rem 1.5rem;
+  font-size: 0.85rem;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+}
+
+.list-item-container > *:active {
+  pointer-events: none;
+}
+
+.list-img-container {
+  width: 3.7rem;
+  height: 3.7rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-white-soft-background);
+  box-shadow: 0 0 0.8rem var(--color-black-lighter-shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.list-img-container img {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  transition-property: filter;
+  transition-duration: 0.5s;
+}
+
+.list-img-container img:hover {
+  filter: brightness(70%);
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   main {
