@@ -23,6 +23,7 @@ const Modal: React.FunctionComponent<IModalProps> = ({children, onClose, classNa
           { children }
         </div>
       </div>
+      <div className='modal-shadow-bottom'> </div>
     </div>,
     document.getElementById("portal")!
   );

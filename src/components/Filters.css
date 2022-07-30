@@ -20,6 +20,8 @@
     grid-area: current-filters;
     height: 100%;
     pointer-events: none;
+    width: fit-content;
+    margin: 0 0 0 auto;
 }
 
 .mobile-filters, .current-filters {
@@ -53,6 +55,11 @@
     padding: 0.8rem 0;
     background: white;
     margin: 1.5rem 0;
+}
+
+.expanded-filters .list-item-container {
+    padding-top: 0.3rem;
+    padding-bottom: 0.1rem;
 }
 
 .list-img-container {
@@ -94,7 +101,45 @@
 .current-filters {
     display: flex;
     column-gap: 0.2rem;
-    justify-content: flex-end;
+    justify-content: flex-start;
+}
+
+.current-filters {
+    padding: 0.3rem 0.4rem 0.3rem 0.3rem;
+    width: fit-content;
+    column-gap: 0.1rem;
+    height: 1.1rem;
+    max-width: 12.8rem;
+    flex-direction: row-reverse;
+    margin: 0 0 0 auto;
+}
+
+.current-filters .current-filter-container:nth-child(5) {
+    opacity: 80%;
+}
+
+.current-filters .current-filter-container:nth-child(6) {
+    opacity: 60%;
+    height: 1.05rem;
+}
+
+.current-filters .current-filter-container:nth-child(7) {
+    opacity: 40%;
+    height: 1rem;
+}
+
+.current-filters .current-filter-container:nth-child(8) {
+    opacity: 20%;
+    height: 0.95rem;
+}
+
+.current-filters .current-filter-container:nth-child(9) {
+    opacity: 10%;
+    height: 0.9rem;
+}
+
+.current-filters .current-filter-container:nth-child(n + 10) {
+    display: none;
 }
 
 .current-filter-container {
@@ -159,9 +204,14 @@
         padding: 0 1rem;
     }
 
-    .current-filter-container {
-        height: calc(100% - 1rem);
-        margin: 0.5rem 0;
+    .filled-current-filters {
+        padding: 0.5rem 1rem;
+    }
+
+    .current-filters .current-filter-container:nth-child(n) {
+        opacity: 100%;
+        height: calc(100% - 0.6rem);
+        margin: 0.3rem 0;
     }
 }
 

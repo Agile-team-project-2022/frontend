@@ -4,7 +4,8 @@
     grid-template-areas:
             "title title empty"
             "filters filters filters"
-            "content content content";
+            "content content content"
+            "footer footer footer";
     grid-template-columns: 33% auto 33%;
     grid-template-rows: 2rem 2rem fit-content(0);
 }
@@ -72,9 +73,10 @@
     .home {
         grid-template-areas:
             "title empty empty"
-            "filters content buttons";
+            "filters content buttons"
+            "footer none none";
         grid-template-columns: minmax(15rem, 21%) auto minmax(13rem, 21%);
-        grid-template-rows: 5rem fit-content(0);
+        grid-template-rows: 5rem minmax(60vh, auto) 5rem;
     }
 
     .home-background {
