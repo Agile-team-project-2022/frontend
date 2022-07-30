@@ -120,11 +120,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   /** TODO: Queries the database. */
   const fetchFilters = () => {
     const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category?page=1&count=10`;
-    const headers = {
-      'Access-Control-Allow-Origin': 'https://localhost:5000'
-    };
-    axios.defaults.withCredentials = true
-    axios.get(url, {headers: headers})
+
+    axios.get(url)
       .then((response) => {
         console.log(response.data);
       })
