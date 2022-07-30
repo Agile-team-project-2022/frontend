@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './FollowedPlants.css';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -8,14 +8,19 @@ export interface IFollowedPlantsProps {}
 
 const FollowedPlants: React.FunctionComponent<IFollowedPlantsProps> = (props) => {
   const [showSection, setShowSection] = useState(false);
-  {/* TODO: Fetch the plant data and add images. */}
-  const [followedPlants, setFollowedPlants] = useState([
-    {name: 'Plant 1'},
-    {name: 'Plant 2'},
-    {name: 'Plant 3'},
-    {name: 'Plant 4'},
-    {name: 'Plant 5'}
-  ]);
+  // TODO: Fetch the plant data and add images.
+  const [followedPlants, setFollowedPlants] = useState<{name: string}[]>([]);
+
+  useEffect(() => {
+    // TODO: Fetch the plant data and add images.
+    setFollowedPlants([
+      {name: 'Plant 1'},
+      {name: 'Plant 2'},
+      {name: 'Plant 3'},
+      {name: 'Plant 4'},
+      {name: 'Plant 5'}
+    ]);
+  }, []);
 
   /** Expands the modal containing the list of followed plants. */
   const openSection = () => {
