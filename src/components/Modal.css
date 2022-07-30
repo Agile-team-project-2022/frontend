@@ -1,3 +1,4 @@
+/* Mobile version. */
 .modal-background {
     position: absolute;
     top: 0;
@@ -41,9 +42,9 @@
 .section-title-modal {
     grid-area: title;
     width: fit-content;
-    margin: 1rem auto;
-    font-size: 1.2rem;
-    font-weight: 500;
+    margin: 0.5rem auto 1rem auto;
+    font-size: 1.1rem;
+    font-weight: 400;
 }
 
 .modal-header div {
@@ -58,4 +59,99 @@
 .modal-content {
     margin: 2rem 1.5rem 1.5rem 1.5rem;
     width: calc(100% - 3rem);
+}
+
+.modal-list-container {
+    display: grid;
+    grid-template-areas:
+            "title"
+            "list"
+            "buttons";
+    grid-template-columns: 100%;
+    min-width: 11rem;
+    width: fit-content;
+}
+
+.list-content {
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 1rem 0;
+}
+
+.list-content .list-item-container:nth-child(1) {
+    padding-top: 1.5rem;
+}
+
+.list-content .list-item-container:last-child {
+    padding-bottom: 1.5rem;
+}
+
+.list-item-container p {
+    width: fit-content;
+    max-width: 5.2rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-item-container {
+    background: white;
+    margin: 0 0.5rem;
+    padding: 0.35rem 2rem;
+    width: calc(100% - 5rem);
+}
+
+.modal-list-buttons {
+    grid-area: buttons;
+    display: flex;
+    height: fit-content;
+    padding: 0;
+    column-gap: 0.6rem;
+    margin: 0.5rem auto 0 auto;
+    width: 100%;
+}
+
+.modal-list-buttons .button-action {
+    padding: 0.5rem;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .modal-list-container {
+        min-width: 38rem;
+    }
+
+    .section-title-modal {
+        font-size: 1.2rem;
+    }
+
+    .list-content {
+        display: grid;
+        grid-template-columns: 33% auto auto;
+    }
+
+    .list-item-container {
+        padding: 0.5rem 2rem;
+    }
+
+    .list-item-container p {
+        max-width: 3.3rem;
+    }
+
+    .list-content .list-item-container:nth-child(1),
+    .list-content .list-item-container:last-child {
+        padding: 0.5rem 2rem;
+    }
+
+    .modal-list-buttons {
+        width: 31.5%;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+    .modal-list-container {
+        min-width: 48rem;
+    }
 }

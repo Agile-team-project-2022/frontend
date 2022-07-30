@@ -32,7 +32,6 @@
 }
 
 .mobile-filters {
-    unset: all;
     display: flex;
     column-gap: 0.4rem;
     justify-content: center;
@@ -70,7 +69,7 @@
     filter: brightness(35%);
 }
 
-.selected-filter-item .filter-img-container div {
+.selected-filter-item .list-img-container div {
     position: absolute;
     top: 36%;
     left: 24%;
