@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import './FollowedPlants.css';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import sunImg from '../assets/category-sun.png';

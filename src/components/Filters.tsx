@@ -193,9 +193,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
           }
         </div>
       </div>
-
-      {/** TODO: Connect endpoint */}
-      <button onClick={fetchFilters}>FETCH</button>
     </div>
   );
 }
