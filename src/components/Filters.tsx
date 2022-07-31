@@ -3,9 +3,15 @@ import './Filters.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import searchImg from "../assets/search.png";
-import treeImg from "../assets/logo.svg";
-import sunImg from '../assets/category-sun.png';
-import shadowImg from '../assets/category-shadow.png';
+import sunImg from '../assets/category-sun.jpg';
+import shadowImg from '../assets/category-shadow.jpeg';
+import flowerImg from '../assets/category-flower.jpg';
+import treeImg from "../assets/category-tree.jpeg";
+import foodImg from '../assets/category-food.jpg';
+import evergreenImg from '../assets/category-evergreen.jpeg';
+import aquaticImg from '../assets/category-aquatic.jpg';
+import plantImg from '../assets/category-plant.jpg';
+import otherImg from '../assets/category-other.jpeg';
 import Modal from "./Modal";
 import useWindowSize, {DeviceTypes} from "../hooks/useWindowSize";
 import axios from "axios";
@@ -20,21 +26,20 @@ enum ValidFilters {
   FOOD = 'FOOD',
   EVERGREEN = 'EVERGREEN',
   AQUATIC = 'AQUATIC',
-  PLANT = 'PLANT',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
+  PLANT = 'PLANT'
 }
 
-// TODO: Set all the filters (categories) correct images.
 const filterImagesArr = {
   [ValidFilters.SUN] : sunImg,
   [ValidFilters.SHADOW] :  shadowImg,
-  [ValidFilters.FLOWER] :  treeImg,
+  [ValidFilters.FLOWER] :  flowerImg,
   [ValidFilters.TREE] :  treeImg,
-  [ValidFilters.FOOD] :  treeImg,
-  [ValidFilters.EVERGREEN] :  treeImg,
-  [ValidFilters.AQUATIC] :  treeImg,
-  [ValidFilters.PLANT] :  treeImg,
-  [ValidFilters.OTHER] :  treeImg
+  [ValidFilters.FOOD] :  foodImg,
+  [ValidFilters.EVERGREEN] :  evergreenImg,
+  [ValidFilters.AQUATIC] :  aquaticImg,
+  [ValidFilters.OTHER] :  otherImg,
+  [ValidFilters.PLANT] :  plantImg
 };
 
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
@@ -60,7 +65,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                onClick={(e) => selectFilter(e, filter as ValidFilters)}
           >
             <div className='list-img-container'>
-              {/* TODO: Add the correct categories img assets. */}
               <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
                              effect="black-and-white"
                              alt={`Category ${filter.toLowerCase()}`}
@@ -185,7 +189,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
             <>
               <div className='mobile-filters' onClick={() => expandFilters()}>
                 Filter
-                {/* TODO: Add the correct search img asset. */}
                 <img src={searchImg} className="search-img" alt="Search." />
               </div>
 
@@ -214,7 +217,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                 <div className='current-filter-container'
                      key={`current-filter-${filter.toLowerCase()}`}
                 >
-                  {/* TODO: Use correct images. */}
                   <img src={filterImagesArr[filter as ValidFilters]}
                        alt={`Applied filter ${filter.toLowerCase()}`}
                   />

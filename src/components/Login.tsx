@@ -4,7 +4,7 @@ import {CredentialResponse, GoogleLogin} from '@react-oauth/google';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
 import axios from "axios";
-import loginImg from '../assets/category-sun.png';
+import loginImg from '../assets/login-img-1.jpg';
 
 export interface ILoginProps {}
 
