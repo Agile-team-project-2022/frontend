@@ -62,7 +62,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               <span>Collection</span>
             </Link>
 
-            {/* TODO: Create the event listeners for Following plants/Friends. */}
+            {/* TODO: Create the event listeners for Following plants/ExpandedList. */}
             <button className='header-nav-link mobile-menu-option' onClick={() => expandMobileMenu()} >
               Following plants
             </button>
