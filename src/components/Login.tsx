@@ -4,21 +4,30 @@ import {CredentialResponse, GoogleLogin} from '@react-oauth/google';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
 import axios from "axios";
-import loginImg from '../assets/login-img-1.jpg';
+import loginImg1 from '../assets/login-img-1.jpg';
+import loginImg2 from '../assets/login-img-2.jpg';
+import loginImg3 from '../assets/login-img-3.jpg';
+import loginImg4 from '../assets/login-img-4.jpg';
+import loginImg5 from '../assets/login-img-5.jpg';
+import loginImg6 from '../assets/login-img-6.jpg';
+import loginImg7 from '../assets/login-img-7.jpg';
+import loginImg8 from '../assets/login-img-8.jpg';
+import loginImg9 from '../assets/login-img-9.jpg';
+import loginImg10 from '../assets/login-img-10.jpg';
 
 export interface ILoginProps {}
 
 const decorativeImages = [
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg,
-  loginImg
+  loginImg1,
+  loginImg2,
+  loginImg3,
+  loginImg4,
+  loginImg5,
+  loginImg6,
+  loginImg7,
+  loginImg8,
+  loginImg9,
+  loginImg10
 ];
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
@@ -98,7 +107,6 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
           </div>
         </div>
 
-        {/* TODO: Use correct images. */}
         <div className='login-img-container'>
           {
             decorativeImages.map((image, index) => {
