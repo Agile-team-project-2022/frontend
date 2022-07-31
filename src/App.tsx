@@ -12,6 +12,10 @@ export interface IAppProps {}
 const App: React.FunctionComponent<IAppProps> = (props) => {
   const {state} = useContext(AppContext);
 
+  const scrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <BrowserRouter>
       <Header />
@@ -26,6 +30,11 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           <Route path="collection" element={<Collection />} />
         </Routes>
       </Suspense>
+
+      <button className='arrow-button' onClick={scrollTop} >
+        <div> </div>
+        <div> </div>
+      </button>
     </BrowserRouter>
   );
 }
