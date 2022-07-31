@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Filters.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
@@ -42,10 +42,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [filters, setFilters] = useState<ValidFilters[]>([]);
   const [preselectedFilters, setPreselectedFilters] = useState<ValidFilters[]>([]);
   const {deviceType} = useWindowSize();
-
-  useEffect(() => {
-    fetchFilters();
-  }, []);
 
   /** Expands the section containing the options to select from. */
   const expandFilters = () => {
@@ -127,11 +123,17 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const applyFilters = () => {
     setOpenFilters(false);
     setFilters(preselectedFilters);
+    console.log('fetching...')
+    // Query for each selected filter.
+    preselectedFilters.forEach((filter, index) => {
+      fetchFilter(filter);
+    });
   };
 
-  /** TODO: Queries the database. */
-  const fetchFilters = () => {
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category?page=1&count=10`;
+  /** TODO: Queries the selected filter to database. */
+  const fetchFilter = (filter: ValidFilters) => {
+    // TODO: Proposal for DB -> query category by name.
+    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category/${ 1 }`;
 
     axios.get(url)
       .then((response) => {
@@ -141,11 +143,11 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   };
 
   /** Creates new filters. NOTE: By now, only used to initialize the 8 valid filters in the DB. */
+  /*
+  TODO: Uncomment and use only if the 'create new filters' functionality must be implemented for users.
   const createFilters = () => {
     const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category`;
 
-    /*
-    TODO: Uncomment and use only if the 'create new filters' functionality must be implemented for users.
     Object.keys(ValidFilters).forEach((filter, index) => {
       const data = {name: filter.toLowerCase()};
       axios.post(url, data)
@@ -154,8 +156,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
         })
         .catch((e) => console.log(e));
     });
-    */
-  }
+  };
+  */
 
   return (
     <div className='filters-section-container'>
