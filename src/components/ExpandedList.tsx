@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import sunImg from '../assets/category-sun.png';
+import sunImg from '../assets/category-sun.jpg';
 
 export enum ListType {
   FOLLOWED_PLANTS = 'FOLLOWED_PLANTS',

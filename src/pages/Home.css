@@ -68,6 +68,10 @@
     display: none;
 }
 
+.login-home-button {
+    background: var(--color-blue-button);
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .home {
