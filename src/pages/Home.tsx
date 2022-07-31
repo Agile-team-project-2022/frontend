@@ -1,8 +1,9 @@
 import React, {lazy, Suspense, useContext} from 'react';
 import './Home.css';
 import {AppContext} from "../context";
-import FollowedPlants from "../components/FollowedPlants";
+import {ListType} from "../components/ExpandedList";
 const Filters = lazy(() => import('../components/Filters'));
+const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
 export interface IHomeProps {}
 
@@ -33,8 +34,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       </div>
 
       <div className='home-buttons-container'>
-        <FollowedPlants />
-        <button className='button-open-section'>Your Friends: 15</button>
+        <Suspense>
+          <ExpandedList title='Plants you Follow' type={ListType.FOLLOWED_PLANTS} />
+          <ExpandedList title='Your friends' type={ListType.FRIENDS} />
+        </Suspense>
       </div>
 
       <p className='copyright-footer'>InterPlant system 2022</p>
