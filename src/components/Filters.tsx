@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Filters.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
@@ -12,17 +12,29 @@ import axios from "axios";
 
 export interface IFiltersProps {}
 
-// TODO: Set all the filters (categories).
 enum ValidFilters {
   SUN = 'SUN',
   SHADOW = 'SHADOW',
+  FLOWER = 'FLOWER',
   TREE = 'TREE',
+  FOOD = 'FOOD',
+  EVERGREEN = 'EVERGREEN',
+  AQUATIC = 'AQUATIC',
+  PLANT = 'PLANT',
+  OTHER = 'OTHER'
 }
 
+// TODO: Set all the filters (categories) correct images.
 const filterImagesArr = {
   [ValidFilters.SUN] : sunImg,
   [ValidFilters.SHADOW] :  shadowImg,
-  [ValidFilters.TREE] :  treeImg
+  [ValidFilters.FLOWER] :  treeImg,
+  [ValidFilters.TREE] :  treeImg,
+  [ValidFilters.FOOD] :  treeImg,
+  [ValidFilters.EVERGREEN] :  treeImg,
+  [ValidFilters.AQUATIC] :  treeImg,
+  [ValidFilters.PLANT] :  treeImg,
+  [ValidFilters.OTHER] :  treeImg
 };
 
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
@@ -30,10 +42,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [filters, setFilters] = useState<ValidFilters[]>([]);
   const [preselectedFilters, setPreselectedFilters] = useState<ValidFilters[]>([]);
   const {deviceType} = useWindowSize();
-
-  useEffect(() => {
-    fetchFilters();
-  }, []);
 
   /** Expands the section containing the options to select from. */
   const expandFilters = () => {
@@ -115,11 +123,17 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const applyFilters = () => {
     setOpenFilters(false);
     setFilters(preselectedFilters);
+    console.log('fetching...')
+    // Query for each selected filter.
+    preselectedFilters.forEach((filter, index) => {
+      fetchFilter(filter);
+    });
   };
 
-  /** TODO: Queries the database. */
-  const fetchFilters = () => {
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category?page=1&count=10`;
+  /** TODO: Queries the selected filter to database. */
+  const fetchFilter = (filter: ValidFilters) => {
+    // TODO: Proposal for DB -> query category by name.
+    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category/${ 1 }`;
 
     axios.get(url)
       .then((response) => {
@@ -127,6 +141,23 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
       })
       .catch((e) => console.log(e));
   };
+
+  /** Creates new filters. NOTE: By now, only used to initialize the 8 valid filters in the DB. */
+  /*
+  TODO: Uncomment and use only if the 'create new filters' functionality must be implemented for users.
+  const createFilters = () => {
+    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category`;
+
+    Object.keys(ValidFilters).forEach((filter, index) => {
+      const data = {name: filter.toLowerCase()};
+      axios.post(url, data)
+        .then((response) => {
+          console.log(`Successfully created filter category in Database: ${data.name}`);
+        })
+        .catch((e) => console.log(e));
+    });
+  };
+  */
 
   return (
     <div className='filters-section-container'>
@@ -176,7 +207,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
       <div className='filter-div-container current-applied-filters'>
         <h3 className='button-open-section'>Currently filtering by</h3>
 
-        <div className='current-filters'>
+        <div className={`current-filters ${filters.length > 0? 'filled-current-filters' : ''}`}>
           {
             filters.map((filter, index) => {
               return (
@@ -184,8 +215,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
                      key={`current-filter-${filter.toLowerCase()}`}
                 >
                   {/* TODO: Use correct images. */}
-                  <LazyLoadImage src={filterImagesArr[filter as ValidFilters]}
-                                 alt={`Applied filter ${filter.toLowerCase()}`}
+                  <img src={filterImagesArr[filter as ValidFilters]}
+                       alt={`Applied filter ${filter.toLowerCase()}`}
                   />
                 </div>
               );

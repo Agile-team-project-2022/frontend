@@ -180,6 +180,7 @@
 
     .app-header-background {
         height: 3.45rem;
+        border-bottom: 0.01rem solid var(--color-white-lighter-border);
     }
 
     #header-lottie {

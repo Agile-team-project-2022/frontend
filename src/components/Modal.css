@@ -6,6 +6,7 @@
     background: var(--color-black-background);
     height: 100vh;
     width: 100vw;
+    overflow: scroll;
     z-index: 3;
 }
 
@@ -14,7 +15,7 @@
     height: fit-content;
     width: fit-content;
     min-width: 15rem;
-    margin: 7.2rem auto auto auto;
+    margin: 7.2rem auto;
     padding: 0;
     border-radius: 0.3rem;
     box-shadow:
@@ -22,6 +23,16 @@
             0 0 1.5rem var(--color-black-darker-shadow);
     vertical-align: center;
     overflow: hidden;
+}
+
+.modal-shadow-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: var(--color-black-gradient);
+    height: 7rem;
+    width: 100vw;
+    pointer-events: none;
 }
 
 .modal-header {
