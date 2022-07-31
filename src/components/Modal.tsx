@@ -10,8 +10,8 @@ export interface IModalProps {
 
 const Modal: React.FunctionComponent<IModalProps> = ({children, onClose, className = ''}) => {
   return createPortal(
-    <div className={`modal-background ${className}`}>
-      <div className='modal-container'>
+    <div className='modal-background'>
+      <div className={`modal-container ${className}`} >
         <header className='modal-header'
                 onClick={() => onClose()}
         >

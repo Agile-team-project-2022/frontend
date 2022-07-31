@@ -78,6 +78,14 @@ button, a {
   margin: 0;
   width: calc(100% - 2rem);
   cursor: pointer;
+  transition-property: color, filter;
+  transition-duration: 0.5s;
+}
+
+.button-open-section:hover {
+  color: white;
+  filter: brightness(80%);
+  transition-duration: 0.15s;
 }
 
 .copyright-footer {

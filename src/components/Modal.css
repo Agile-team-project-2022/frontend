@@ -16,13 +16,14 @@
     width: fit-content;
     min-width: 15rem;
     margin: 7.2rem auto;
-    padding: 0;
+    padding: 2rem 0 0 0;
     border-radius: 0.3rem;
     box-shadow:
             0 0 2.5rem var(--color-black-darker-shadow),
             0 0 1.5rem var(--color-black-darker-shadow);
     vertical-align: center;
     overflow: hidden;
+    position: relative;
 }
 
 .modal-shadow-bottom {
@@ -45,8 +46,12 @@
     font-size: 0.8rem;
     padding: 0.4rem 1rem;
     width: calc(100% - 2rem);
-    height: fit-content;
+    height: 1.2rem;
     box-shadow: 0 0 2rem var(--color-black-lighter-shadow);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
     cursor: pointer;
 }
 

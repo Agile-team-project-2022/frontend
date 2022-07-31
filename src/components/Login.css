@@ -1,18 +1,12 @@
+/* Mobile version. */
 .login-container {
     display: grid;
     grid-template-areas:
-            "title title"
-            "input-label img"
-            "input-field img"
-            "log-in-button img";
-    width: 25rem;
-}
-
-.login-container h2 {
-    grid-area: title;
-    width: fit-content;
-    margin: 1rem auto;
-    font-size: 1.2rem;
+            "title"
+            "input-label"
+            "input-field"
+            "log-in-button";
+    width: 13rem;
 }
 
 .login-container label {
@@ -29,19 +23,20 @@
     box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
     margin: 1rem 0;
     width: calc(100% - 2rem);
-    height: 2rem;
+    height: 1.8rem;
     border-radius: 0.15rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     padding: 0 1.01rem;
 }
 
 .login-button {
     grid-area: log-in-button;
-    width: 100%;
+    width: 11rem;
 }
 
 .login-button p {
-    display: none;
+    opacity: 0%;
+    font-size: 0.8rem;
 }
 
 .disabled-login {
@@ -51,8 +46,79 @@
 }
 
 .disabled-login p {
-    display: block;
-    font-size: 0.8rem;
+    opacity: 100%;
 }
 
+.login-container {
+    width: calc(100% - 2rem);
+    margin: 2rem 1rem 1.5rem 1rem;
+}
 
+.login-button {
+    width: 100%;
+    overflow: hidden;
+}
+
+.login-modal .modal-content {
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 0;
+    width: 16rem;
+}
+
+.login-img-container {
+    display: grid;
+    grid-template-columns: repeat(5, 3.2rem);
+    grid-template-rows: repeat(2, 3.2rem);
+    width: 16rem;
+}
+
+.login-img-container img {
+    height: 100%;
+    width: 100%;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .login-container {
+        width: calc(100% - 3rem);
+        margin: 2rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .login-container input {
+        width: calc(100% - 2rem);
+        height: 2rem;
+        font-size: 0.9rem;
+    }
+
+    .login-modal .modal-content {
+        grid-template-columns: auto 8rem;
+        min-width: 26.7rem;
+        width: fit-content;
+    }
+
+    .login-img-container {
+        grid-template-columns: 4rem 4rem;
+        grid-template-rows: repeat(5, 4rem);
+        width: 8rem;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+    .login-container {
+        width: calc(100% - 8rem);
+        margin: 2rem 4rem 1.5rem 4rem;
+    }
+
+    .login-modal .modal-content {
+        grid-template-columns: auto 9rem;
+        width: fit-content;
+    }
+
+    .login-img-container {
+        grid-template-columns: 4.5rem 4.5rem;
+        grid-template-rows: repeat(5, 4.5rem);
+        width: 9rem;
+    }
+}

@@ -1,6 +1,6 @@
 import React, {lazy, Suspense, useContext} from 'react';
 import './Home.css';
-import {AppContext} from "../context";
+import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 const Filters = lazy(() => import('../components/Filters'));
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
@@ -8,7 +8,12 @@ const ExpandedList = lazy(() => import('../components/ExpandedList'));
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const {state} = useContext(AppContext);
+  const {state, dispatch} = useContext(AppContext);
+
+  /** Displays the pop up asking for log in. */
+  const showLogIn = () => {
+    dispatch({type: AppValidActions.SHOW_LOG_IN});
+  };
 
   return (
     <main className="home">
@@ -34,10 +39,19 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       </div>
 
       <div className='home-buttons-container'>
-        <Suspense>
-          <ExpandedList title='Plants you Follow' type={ListType.FOLLOWED_PLANTS} />
-          <ExpandedList title='Your friends' type={ListType.FRIENDS} />
-        </Suspense>
+        {
+          state.loggedIn?
+            <Suspense>
+              <ExpandedList title='Plants you Follow' type={ListType.FOLLOWED_PLANTS} />
+              <ExpandedList title='Your friends' type={ListType.FRIENDS} />
+            </Suspense>
+            :
+            <button className='button-open-section login-home-button'
+                    onClick={showLogIn}
+            >
+              Log In
+            </button>
+        }
       </div>
 
       <p className='copyright-footer'>InterPlant system 2022</p>
