@@ -142,10 +142,7 @@ button, a {
 }
 
 .arrow-button {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 1rem;
+  margin: 0;
   width: 2.4rem;
   height: 2.4rem;
   background: var(--color-gray-medium);
@@ -157,6 +154,15 @@ button, a {
   transition-duration: 0.4s;
   transform: scale(0.85);
   z-index: 1;
+}
+
+.top-arrow {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .arrow-button div {

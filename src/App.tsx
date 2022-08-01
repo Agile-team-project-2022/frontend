@@ -31,7 +31,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         </Routes>
       </Suspense>
 
-      <button className='arrow-button' onClick={scrollTop} >
+      <button className='arrow-button top-arrow' onClick={scrollTop} >
         <div> </div>
         <div> </div>
       </button>
