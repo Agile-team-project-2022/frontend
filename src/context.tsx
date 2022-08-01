@@ -9,7 +9,8 @@ enum AppValidActions {
   CHANGE_LANGUAGE = 'CHANGE_LANGUAGE',
   CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE',
   SHOW_LOG_IN = 'SHOW_LOG_IN',
-  CLOSE_LOG_IN = 'CLOSE_LOG_IN'
+  CLOSE_LOG_IN = 'CLOSE_LOG_IN',
+  MAP_CATEGORIES = 'MAP_CATEGORIES'
 }
 
 // Interfaces and Types definition.
@@ -23,14 +24,15 @@ interface AppState {
   language: string,
   fontSize: string,
   loggedIn: boolean,
-  showLogIn: boolean
+  showLogIn: boolean,
+  categoryIdMap: {[name: string]: number}
 }
 
 type Props = {
   children?: React.ReactNode
 };
 
-type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction;
+type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction | MapCategoryAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -51,13 +53,19 @@ interface ChangeFontSizeAction {
   payload: {fontSize: string}
 }
 
+interface MapCategoryAction {
+  type: AppValidActions,
+  payload: {categoryIdMap: {[name: string]: number}}
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   user: 'guest',
   language: 'en',
   fontSize: 'normal',
   loggedIn: false,
-  showLogIn: false
+  showLogIn: false,
+  categoryIdMap: {}
 };
 
 // Creates the reducer.
@@ -99,6 +107,12 @@ const reducer = (state: AppState, action: AppAction) => {
       return {
         ...state,
         showLogIn: false
+      };
+
+    case AppValidActions.MAP_CATEGORIES:
+      return {
+        ...state,
+        categoryIdMap: (action as MapCategoryAction).payload.categoryIdMap
       };
 
     default:
