@@ -1,0 +1,9 @@
+.collection-header {
+    grid-area: header;
+    border: 1px solid salmon;
+}
+
+/* TODO: Move to app.css */
+.collection-profile-header {
+
+}

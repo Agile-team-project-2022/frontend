@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import './Modal.css';
 import {createPortal} from "react-dom";
 
 export interface IModalProps {
-  children: any,
+  children: ReactNode,
   onClose: () => void,
   className?: string
 }

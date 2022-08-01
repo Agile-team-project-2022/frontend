@@ -1,0 +1,15 @@
+.collection-page {
+    display: grid;
+    grid-template-areas:
+            "header header header"
+            "badges collection-plants interactions";
+    grid-template-columns: 20% auto 20%;
+}
+
+.collection-interactions {
+    grid-area: badges;
+}
+
+.collection-interactions {
+    grid-area: interactions;
+}
