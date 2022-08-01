@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from "react";
-import {IPosts} from './iPost'
+import { useState } from "react";
+
 import "./Posts.css"
 import '../pages/Home.css';
 
@@ -12,8 +12,6 @@ const Post: React.FunctionComponent<IPost> = (props) => {
     const [PostImage, setPostImage] = useState<string>("");
     const [Post, setPost] = useState<IPost[]>([]);
 
-    {/* 2nd: make sure the posts are appended to the list successfully */}
-    {/* 3rd: find a way to send the array to another component */}
 
     const handleChange = (event: any) => {
         const name = event.target.name;
