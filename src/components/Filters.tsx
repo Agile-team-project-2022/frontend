@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Filters.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
@@ -15,6 +15,7 @@ import otherImg from '../assets/category-other.jpeg';
 import Modal from "./Modal";
 import useWindowSize, {DeviceTypes} from "../hooks/useWindowSize";
 import axios from "axios";
+import {AppContext, AppValidActions} from "../context";
 
 export interface IFiltersProps {}
 
@@ -30,6 +31,14 @@ enum ValidFilters {
   PLANT = 'PLANT'
 }
 
+interface CategoryData {
+  id: number,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
+  plants: {}[]
+}
+
 const filterImagesArr = {
   [ValidFilters.SUN] : sunImg,
   [ValidFilters.SHADOW] :  shadowImg,
@@ -43,10 +52,23 @@ const filterImagesArr = {
 };
 
 const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
+  const {state, dispatch} = useContext(AppContext);
   const [openFilters, setOpenFilters] = useState(false);
   const [filters, setFilters] = useState<ValidFilters[]>([]);
   const [preselectedFilters, setPreselectedFilters] = useState<ValidFilters[]>([]);
+  const [filtersResponse, setFiltersResponse] = useState<{}[]>([]);
   const {deviceType} = useWindowSize();
+
+  /** Gets all the data associated to all the filters once the component is rendered. */
+  useEffect(() => {
+    fetchAllFilters();
+  }, []);
+
+  /** Maps the categories and IDs only if not done yet. */
+  useEffect(() => {
+    setMappedIds();
+    // eslint-disable-next-line
+  }, [filtersResponse]);
 
   /** Expands the section containing the options to select from. */
   const expandFilters = () => {
@@ -130,17 +152,45 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     console.log('fetching...')
     // Query for each selected filter.
     preselectedFilters.forEach((filter, index) => {
-      fetchFilter(filter);
+      fetchFilter(state.categoryIdMap[filter.toLowerCase()]);
     });
   };
 
-  /** TODO: Queries the selected filter to database. */
-  const fetchFilter = (filter: ValidFilters) => {
-    // TODO: Proposal for DB -> query category by name.
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category/${ 1 }`;
+  /** Queries all the filters if no filter is selected yet. */
+  const fetchAllFilters = () => {
+    // TODO: Use page and count in the query.
+    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category?page=1&count=10`;
 
     axios.get(url)
       .then((response) => {
+        setFiltersResponse(response.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  /** Initializes the mapping between category name and ID from database. */
+  const setMappedIds = () => {
+    if(Object.keys(state.categoryIdMap).length === 0) {
+      console.log('Setting the IDs for categories...')
+      const mappedIds: {[name: string]: number} = {};
+      filtersResponse.forEach((item, index) => {
+        mappedIds[(item as CategoryData).name] = (item as CategoryData).id
+      });
+
+      dispatch({
+        type: AppValidActions.MAP_CATEGORIES,
+        payload: {categoryIdMap: mappedIds}
+      });
+    }
+  };
+
+  /** Queries the selected filter to database. */
+  const fetchFilter = (id: number) => {
+    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category/${id}`;
+
+    axios.get(url)
+      .then((response) => {
+        // TODO: Save the data.
         console.log(response.data);
       })
       .catch((e) => console.log(e));
