@@ -46,8 +46,8 @@
 .post-controls{
     grid-area: 5 / 3 / 6 / 7;
     display: flex;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .post-controls .button-post-form{

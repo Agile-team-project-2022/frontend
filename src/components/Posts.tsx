@@ -1,8 +1,6 @@
 import { useState } from "react";
-
 import "./Posts.css"
 import '../pages/Home.css';
-
 export interface IPost {}
 
 
