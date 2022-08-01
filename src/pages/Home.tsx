@@ -2,6 +2,7 @@ import React, {lazy, Suspense, useContext} from 'react';
 import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
+import Post from '../components/Posts';
 const Filters = lazy(() => import('../components/Filters'));
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
@@ -30,6 +31,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <section className='publications-container'>
           <h2 className='section-title'>Write new post</h2>
           {/* TODO: Posts component goes here - Status: Write new Post. */}
+          <Post />
         </section>
 
         <section className='publications-container'>
