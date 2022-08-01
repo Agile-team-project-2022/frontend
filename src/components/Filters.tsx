@@ -173,9 +173,11 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     if(Object.keys(state.categoryIdMap).length === 0) {
       console.log('Setting the IDs for categories...')
       const mappedIds: {[name: string]: number} = {};
-      filtersResponse.forEach((item, index) => {
+      Array(...filtersResponse).forEach((item, index) => {
         mappedIds[(item as CategoryData).name] = (item as CategoryData).id
       });
+
+      console.log(mappedIds);
 
       dispatch({
         type: AppValidActions.MAP_CATEGORIES,
