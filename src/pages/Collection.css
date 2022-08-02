@@ -4,8 +4,11 @@
             "header header header"
             "badges collection-plants interactions";
     grid-template-columns: 20% auto 20%;
-    width: 90rem;
+    grid-template-rows: 20rem auto;
+    width: 90%;
+    max-width: 90rem;
     margin: 0 auto;
+    background: aliceblue;
 }
 
 .collection-badges {

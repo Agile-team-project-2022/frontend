@@ -12,6 +12,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = (props
     <header className="collection-header collection-profile-header">
       <div className='first-background'> </div>
       <div className='second-background'> </div>
+      <div className='third-background'> </div>
 
       <div className='list-img-container'>
         <img src={personImg} alt={'Profile owner'} />

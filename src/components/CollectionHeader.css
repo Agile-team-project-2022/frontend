@@ -4,29 +4,41 @@
     grid-template-areas:
             "img name overview"
             "empty empty controls";
-    grid-template-columns: 15% auto 33%;
+    grid-template-columns: fit-content(0) auto 33%;
     grid-template-rows: auto 2rem;
-    width: 90rem;
+    width: 100%;
+    min-width: 40rem;
     height: 14rem;
     margin: 0 auto;
     position: relative;
 }
 
-.collection-header .first-background, .collection-header .second-background {
+.collection-header .first-background,
+.collection-header .second-background,
+.collection-header .third-background {
     position: absolute;
     top: 0;
     left: 0;
-    width: 60rem;
+    width: 66%;
     height: 12rem;
-    background: var(--color-black-lightest-shadow);
+    background: var(--color-green-collection-header);
+    opacity: 90%;
     z-index: 0;
 }
 
+.collection-header .second-background {
+    width: 34.1%;
+    background: var(--color-gray-light);
+    opacity: 80%;
+    right: 0;
+    left: auto;
+}
+
 .collection-header .first-background {
-    width: 90rem;
+    width: 100%;
     background-image: url("../assets/geometric-background.jpeg");
-    background-position-y: 33%;
-    opacity: 20%;
+    background-position-y: 34%;
+    opacity: 40%;
 }
 
 /* TODO: Move to app.css */
@@ -44,18 +56,20 @@
 
 .collection-profile-header h2 {
     grid-area: name;
-    font-size: 2rem;
+    font-size: 2.1rem;
     align-self: center;
     margin: 0;
     padding: 1rem;
     color: var(--color-white-text);
+    text-shadow: 0 0 1rem var(--color-black-medium-shadow);
     z-index: 1;
 }
 
 .collection-overview {
     grid-area: overview;
     height: 11rem;
-    width: 22rem;
+    width: 85%;
+    max-width: 22rem;
     align-self: center;
     margin: 0 auto;
     z-index: 1;
