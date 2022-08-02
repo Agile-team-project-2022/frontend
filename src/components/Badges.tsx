@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import DataSection from "../components/DataSection";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import treeImg from "../assets/category-tree.jpeg";
 import Modal from "./Modal";
+import {AppContext} from "../context";
 
-export interface IBadgesProps {
-  totalBadges: number,
-  badgePreviewIds: number[]
-}
+export interface IBadgesProps {}
 
-const Badges: React.FunctionComponent<IBadgesProps> = ({totalBadges, badgePreviewIds}) => {
+const Badges: React.FunctionComponent<IBadgesProps> = () => {
+  const {state} = useContext(AppContext);
   const [badgesData, setBadgesData] = useState<{name: string, id: number}[]>([]);
   const [expanded, setExpanded] = useState(false);
 
@@ -42,10 +41,10 @@ const Badges: React.FunctionComponent<IBadgesProps> = ({totalBadges, badgePrevie
 
   return (
     <div className='collection-badges'>
-      <DataSection title='Badges' totalItems={totalBadges} onClickSection={openSection}>
+      <DataSection title='Badges' totalItems={state.userData.totalBadges} onClickSection={openSection}>
         {
           // TODO: Add the correct img assets.
-          badgePreviewIds.map((item, index) => {
+          state.userData.badgesPreviewIds.map((item, index) => {
             return (
               <div className='list-img-container' key={`item-badges-${item}`}>
                 <LazyLoadImage src={treeImg} alt={`Badge`} />
@@ -57,7 +56,7 @@ const Badges: React.FunctionComponent<IBadgesProps> = ({totalBadges, badgePrevie
         {
           expanded?
             <Modal onClose={closeSection}>
-              <h2 className='section-title-modal'>Badges ({totalBadges})</h2>
+              <h2 className='section-title-modal'>Badges ({state.userData.totalBadges})</h2>
               {
                 // TODO: Add the correct img assets.
                 badgesData.map((item, index) => {
