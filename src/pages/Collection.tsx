@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import './Collection.css';
-import CollectionHeader from "../components/CollectionHeader";
+import CollectionHeader, {CollectionView} from "../components/CollectionHeader";
 import CollectionPlants from "../components/CollectionPlants";
 import Badges from "../components/Badges";
 import {AppContext, AppValidActions} from "../context";
@@ -34,7 +34,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
 
   return (
     <main className="collection-page">
-      <CollectionHeader />
+      <CollectionHeader view={CollectionView.OTHERS} />
       <Badges />
 
       <CollectionPlants />

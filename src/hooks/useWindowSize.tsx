@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 
 export enum DeviceTypes {
-  MOBILE,
-  TABLET,
-  DESKTOP
+  MOBILE = "MOBILE",
+  TABLET = "TABLET",
+  DESKTOP = "DESKTOP"
 }
 
 const useWindowSize = () => {

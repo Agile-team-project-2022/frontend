@@ -13,9 +13,9 @@ import aquaticImg from '../assets/category-aquatic.jpg';
 import plantImg from '../assets/category-plant.jpg';
 import otherImg from '../assets/category-other.jpeg';
 import Modal from "./Modal";
-import useWindowSize, {DeviceTypes} from "../hooks/useWindowSize";
 import axios from "axios";
 import {AppContext, AppValidActions} from "../context";
+import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IFiltersProps {}
 

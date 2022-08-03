@@ -2,10 +2,16 @@ import React, {useContext} from 'react';
 import './CollectionHeader.css';
 import personImg from '../assets/example-people-1.jpeg';
 import {AppContext} from "../context";
+import {DeviceTypes} from "../hooks/useWindowSize";
 
-export interface ICollectionHeaderProps {}
+export interface ICollectionHeaderProps {view: CollectionView}
 
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = (props) => {
+export enum CollectionView {
+  OWNER = 'OWNER',
+  OTHERS = 'OTHERS'
+}
+
+const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view}) => {
   const {state} = useContext(AppContext);
 
   return (
@@ -20,8 +26,13 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = (props
 
       <h2>{state.user.charAt(0).toUpperCase() + state.user.substring(1)}</h2>
 
-      <button className='button-open-section'>Friend request</button>
-
+      {
+        // Shows the friend request button in the header in mobile devices.
+        state.deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS?
+          <button className='button-open-section collection-header-button'>Friend request</button>
+          :
+          <>{state.deviceType}</>
+      }
 
       <div className='collection-overview'>
         <h4>Overview</h4>
@@ -42,7 +53,13 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = (props
         <p>Badges: <span>{state.userData.totalBadges}</span></p>
       </div>
 
-      <div className='controls'> Delete </div>
+      {
+        // Sets the correct options to show for owner/others viewing the collection.
+        view === CollectionView.OTHERS?
+          <div className='controls'>! Report</div>
+          :
+          <div className='controls'>Delete</div>
+      }
     </header>
   );
 }
