@@ -1,8 +1,10 @@
-import React, {lazy, Suspense, useContext} from 'react';
+import React, {lazy, Suspense, useContext, useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./layouts/Header";
-import {AppContext} from "./context";
+import {AppContext, AppValidActions} from "./context";
+import useWindowSize, {DeviceTypes} from "./hooks/useWindowSize";
+
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
 const Login = lazy(() => import('./components/Login'));
@@ -10,7 +12,16 @@ const Login = lazy(() => import('./components/Login'));
 export interface IAppProps {}
 
 const App: React.FunctionComponent<IAppProps> = (props) => {
-  const {state} = useContext(AppContext);
+  const {state, dispatch} = useContext(AppContext);
+  const {deviceType} = useWindowSize();
+
+  useEffect(() => {
+    // Updates the context only if the device type changed.
+    if(state.deviceType !== deviceType) {
+      dispatch({type: AppValidActions.SET_DEVICE_TYPE, payload: {deviceType: deviceType || DeviceTypes.DESKTOP}});
+    }
+    // eslint-disable-next-line
+  }, [deviceType]);
 
   const scrollTop = () => {
     window.scrollTo(0, 0);

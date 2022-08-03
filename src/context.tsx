@@ -1,4 +1,5 @@
 import React, {useReducer} from "react";
+import {DeviceTypes} from "./hooks/useWindowSize";
 
 // ================================ Global app storage ================================ //
 
@@ -11,7 +12,8 @@ enum AppValidActions {
   SHOW_LOG_IN = 'SHOW_LOG_IN',
   CLOSE_LOG_IN = 'CLOSE_LOG_IN',
   MAP_CATEGORIES = 'MAP_CATEGORIES',
-  GET_USER_DATA = 'GET_USER_DATA'
+  GET_USER_DATA = 'GET_USER_DATA',
+  SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
 }
 
 // Interfaces and Types definition.
@@ -27,7 +29,8 @@ interface AppState {
   loggedIn: boolean,
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
-  userData: UserData
+  userData: UserData,
+  deviceType?: DeviceTypes
 }
 
 interface UserData {
@@ -40,7 +43,7 @@ interface UserData {
 }
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
-                | MapCategoryAction | GetUserDataAction;
+                | MapCategoryAction | GetUserDataAction |SetDeviceTypeAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -71,6 +74,11 @@ interface GetUserDataAction {
   payload: {userData: UserData}
 }
 
+interface SetDeviceTypeAction {
+  type: AppValidActions,
+  payload: {deviceType: DeviceTypes}
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   user: 'guest',
@@ -86,7 +94,8 @@ const appInitialState = {
     typePlanter: '-',
     badgesPreviewIds: [],
     totalBadges: 0
-  }
+  },
+  deviceType: undefined
 };
 
 // Creates the reducer.
@@ -140,6 +149,12 @@ const reducer = (state: AppState, action: AppAction) => {
       return {
         ...state,
         userData: (action as GetUserDataAction).payload.userData
+      };
+
+    case AppValidActions.SET_DEVICE_TYPE:
+      return {
+        ...state,
+        deviceType: (action as SetDeviceTypeAction).payload.deviceType
       };
 
     default:

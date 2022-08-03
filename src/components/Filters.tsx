@@ -57,7 +57,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   const [filters, setFilters] = useState<ValidFilters[]>([]);
   const [preselectedFilters, setPreselectedFilters] = useState<ValidFilters[]>([]);
   const [filtersResponse, setFiltersResponse] = useState<{}[]>([]);
-  const {deviceType} = useWindowSize();
 
   /** Gets all the data associated to all the filters once the component is rendered. */
   useEffect(() => {
@@ -220,7 +219,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
       <div className='filter-div-container filters'>
         {
           /** Tablet and Desktop views. */
-          deviceType !== DeviceTypes.MOBILE?
+          state.deviceType !== DeviceTypes.MOBILE?
             <>
               <h3 className='button-open-section' onClick={() => expandFilters()}>
                 Filter by category

@@ -1,3 +1,4 @@
+/* Mobile version. */
 .data-section-container {
     border: 1px solid var(--color-gray-border);
     width: 12rem;
@@ -40,4 +41,15 @@
 .data-section-content .arrow-button {
     transform: scale(0.8) rotate(90deg);
     margin: 0.5rem auto;
+}
+
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
 }

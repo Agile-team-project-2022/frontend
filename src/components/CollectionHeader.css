@@ -1,3 +1,4 @@
+/* Mobile version. */
 .collection-header {
     grid-area: header;
     display: grid;
@@ -5,10 +6,9 @@
             "img name overview"
             "empty empty controls";
     grid-template-columns: fit-content(0) auto 33%;
-    grid-template-rows: auto 2rem;
+    grid-template-rows: auto 1.5rem;
     width: 100%;
-    min-width: 40rem;
-    height: 14rem;
+    height: 9rem;
     margin: 0 auto;
     position: relative;
 }
@@ -20,7 +20,7 @@
     top: 0;
     left: 0;
     width: 66%;
-    height: 12rem;
+    height: 7.5rem;
     background: var(--color-green-collection-header);
     opacity: 90%;
     z-index: 0;
@@ -48,18 +48,19 @@
 
 .collection-profile-header .list-img-container {
     grid-area: img;
-    width: 9rem;
-    height: 9rem;
-    margin: 1.5rem 2rem;
+    width: 4rem;
+    height: 4rem;
+    margin: 1.7rem 1rem;
     z-index: 1;
 }
 
 .collection-profile-header h2 {
     grid-area: name;
-    font-size: 2.1rem;
+    font-size: 1.1rem;
     align-self: center;
+    max-width: 80%;
     margin: 0;
-    padding: 1rem;
+    padding: 0;
     color: var(--color-white-text);
     text-shadow: 0 0 1rem var(--color-black-medium-shadow);
     z-index: 1;
@@ -67,9 +68,12 @@
 
 .collection-overview {
     grid-area: overview;
-    height: 11rem;
+    display: grid;
+    grid-template-rows: 30% repeat(4, auto);
+    grid-gap: 0.2rem;
+    height: 6rem;
     width: 85%;
-    max-width: 22rem;
+    min-width: 5.2rem;
     align-self: center;
     margin: 0 auto;
     z-index: 1;
@@ -77,14 +81,14 @@
 
 .collection-overview h4 {
     width: fit-content;
-    margin: 1rem auto;
-    font-size: 1.2rem;
-    font-weight: 600;
+    margin: 0.4rem auto;
+    font-size: 0.78rem;
+    font-weight: 500;
 }
 
 .collection-overview p {
-    margin: 0.8rem 0;
-    font-size: 0.85rem;
+    margin: 0;
+    font-size: 0.5rem;
     font-weight: 500;
 }
 
@@ -92,16 +96,22 @@
     font-weight: 300;
 }
 
+.star-container {
+    position: absolute;
+    margin-top: -0.15rem;
+}
+
 .star {
     position: relative;
     display: inline-block;
     width: 0;
     height: 0;
-    margin: 0 0.25rem 0.25rem 0.25rem;
+    margin: 0 -0.17rem -0.065rem 0;
     border-right: 0.3rem solid transparent;
     border-bottom: 0.7rem solid var(--color-gray-border);
     border-left: 0.3rem solid transparent;
-    transform: scale(0.5);
+    transform-origin: center;
+    transform: scale(0.2);
 }
 
 .star:before,.star:after {
@@ -125,5 +135,69 @@
 }
 
 .collection-overview p .star:nth-child(1) {
-    margin-left: 0.8rem;
+    margin-left: 0;
+}
+
+.controls {
+    grid-area: controls;
+    font-size: 0.55rem;
+    text-align: right;
+    padding: 0.2rem 0.8rem;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .collection-header {
+        grid-template-rows: auto 2rem;
+        width: 100%;
+        height: 14rem;
+    }
+
+    .collection-header .first-background,
+    .collection-header .second-background,
+    .collection-header .third-background {
+        height: 12rem;
+    }
+
+    .collection-profile-header .list-img-container {
+        width: 9rem;
+        height: 9rem;
+        margin: 1.5rem 2rem;
+    }
+
+    .collection-profile-header h2 {
+        font-size: 2.1rem;
+        padding: 1rem;
+    }
+
+    .collection-overview {
+        display: block;
+        height: 11rem;
+        max-width: 22rem;
+    }
+
+    .collection-overview h4 {
+        margin: 1rem auto;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .collection-overview p {
+        margin: 0.8rem 0;
+        font-size: 0.85rem;
+    }
+
+    .star {
+        margin: 0 0.25rem 0.25rem 0.25rem;
+        transform: scale(0.5);
+    }
+
+    .collection-overview p .star:nth-child(1) {
+        margin-left: 0.8rem;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
 }
