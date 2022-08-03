@@ -156,6 +156,16 @@
     z-index: 1;
 }
 
+.collection-header-button:hover {
+    background: var(--color-green-lighter-header-medium-transparency);
+    filter: unset;
+}
+
+.collection-header-button:active {
+    background: var(--color-green-dark);
+    filter: unset;
+}
+
 .button-open-section.collection-header-button {
     display: block;
 }

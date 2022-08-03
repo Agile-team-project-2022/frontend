@@ -3,25 +3,58 @@
     display: grid;
     grid-template-areas:
             "header header header"
-            "badges collection-plants interactions"
+            "options options options"
             "content content content"
             "footer footer footer";
     grid-template-columns: 20% auto 20%;
-    grid-template-rows: 20rem auto;
+    grid-template-rows: 9.3rem auto;
     width: 100vw;
-    min-width: 17.2rem;
     margin: 0;
-    background: aliceblue;
+}
+
+.mobile-section-container {
+    grid-area: content;
 }
 
 .collection-badges {
-    grid-area: badges;
-    margin: 0 auto 1rem 0;
+}
+
+.collection-plants {
 }
 
 .collection-interactions {
-    grid-area: interactions;
-    margin: 0 0 1rem auto;
+}
+
+.collection-option-container {
+    grid-area: options;
+    display: grid;
+    grid-column-gap: 0.25rem;
+    grid-template-columns: repeat(3, 32%);
+    width: calc(100% - 1rem);
+    margin: 0.5rem;
+    height: fit-content;
+}
+
+.button-open-section.collection-option {
+    display: block;
+    font-size: 0.7rem;
+    width: calc(100%);
+    height: fit-content;
+    white-space: nowrap;
+    padding: 0.45rem 0;
+    border: 1px solid var(--color-white-light-border);
+    background: var(--color-green-collection-option);
+    text-shadow: 0 0 1rem var(--color-black-lightest-shadow);
+}
+
+.button-open-section.collection-option:hover {
+    background: var(--color-green-collection-option-active);
+    filter: unset;
+}
+
+.selected-collection-option {
+    background: var(--color-green-collection-option-active);
+    color: white;
 }
 
 /* Tablet version. */
@@ -38,6 +71,20 @@
         max-width: 90rem;
         margin: 0 auto;
         background: aliceblue;
+    }
+
+    .collection-badges {
+        grid-area: badges;
+        margin: 0 auto 1rem 0;
+    }
+
+    .collection-plants {
+        grid-area: collection-plants;
+    }
+
+    .collection-interactions {
+        grid-area: interactions;
+        margin: 0 0 1rem auto;
     }
 }
 
