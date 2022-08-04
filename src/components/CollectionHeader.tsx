@@ -31,7 +31,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
         state.deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS?
           <button className='button-open-section collection-header-button'>Friend request</button>
           :
-          <>{state.deviceType}</>
+          ''
       }
 
       <div className='collection-overview'>

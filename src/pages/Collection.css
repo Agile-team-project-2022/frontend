@@ -7,7 +7,7 @@
             "content content content"
             "footer footer footer";
     grid-template-columns: 20% auto 20%;
-    grid-template-rows: 9.3rem auto;
+    grid-template-rows: 9.3rem 4rem auto 5rem;
     width: 100vw;
     margin: 0;
 }
@@ -70,7 +70,6 @@
         min-width: 44rem;
         max-width: 90rem;
         margin: 0 auto;
-        background: aliceblue;
     }
 
     .collection-badges {

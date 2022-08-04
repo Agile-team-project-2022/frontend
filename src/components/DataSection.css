@@ -2,7 +2,7 @@
 .data-section-container {
     border: 1px solid var(--color-gray-border);
     width: calc(100% - 1rem);
-    margin: 0 auto 1rem auto;
+    margin: 0.5rem auto;
     padding: 0;
     background: white;
     border-radius: 0.1rem;

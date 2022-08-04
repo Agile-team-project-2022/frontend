@@ -63,9 +63,13 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
     if(showBadges) {
       return <div className='mobile-section-container'><Badges/></div>;
     } else if(showCollection) {
-      return <CollectionPlants/>;
+      return <div className='mobile-section-container'><CollectionPlants/></div>;
     } else if(showInteractions) {
-      return <div className='collection-interactions'> Interactions </div>;
+      return (
+        <div className='mobile-section-container'>
+          <div className='collection-interactions'> Interactions </div>
+        </div>
+      );
     }
   };
 

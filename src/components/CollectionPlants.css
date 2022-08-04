@@ -1,6 +1,8 @@
 /* Mobile version. */
 .collection-plants {
-    border: 1px solid salmon;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
 }
 
 
