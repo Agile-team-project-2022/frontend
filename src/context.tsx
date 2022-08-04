@@ -82,10 +82,10 @@ interface SetDeviceTypeAction {
 
 // Defines the default values to initialize the app.
 const appInitialState = {
-  user: 'guest',
+  user: 'owner example',
   language: 'en',
   fontSize: 'normal',
-  loggedIn: false,
+  loggedIn: true,
   showLogIn: false,
   categoryIdMap: {},
   userData: {

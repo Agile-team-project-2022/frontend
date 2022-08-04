@@ -44,15 +44,15 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     console.log('authenticating....')
     const url = `${ BASE_URL }auth/login/success`;
     const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Credentials": 'true',
+      "Access-Control-Allow-Origin": '*'
     };
 
     axios.defaults.withCredentials = true;
     axios.get(url, {headers: headers})
       .then((response) => {
         console.log(response.data);
+        console.log('success')
       })
       .catch((e) => console.log(e));
   };
@@ -82,28 +82,8 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
         <div className="login-container">
           <h2 className='section-title-modal'>Please Log In</h2>
 
-          <label htmlFor='name'>Name to display</label>
-          <input type='text'
-                 name='name'
-                 autoFocus={true}
-                 autoComplete={'off'}
-            // Note: The 1st name limit length 35 is based on the UK Government Data Standards Catalogue.
-                 maxLength={35}
-                 value={userName}
-                 onChange={(e) => handleOnChange(e)}
-          />
-
           <div>
-            <button onClick={authUser}> Test Auth </button>
-          </div>
-
-          <div className={`login-button ${userName.length === 0? 'disabled-login' : ''}`} >
-            <GoogleLogin
-              onSuccess={loginSuccess}
-              onError={loginFailure}
-            />
-            {/** TODO: Check if name to display should be put here. */}
-            <p>Please type a name to continue.</p>
+            <button onClick={authUser} className='button-action'> Test Auth LogIn </button>
           </div>
         </div>
 
