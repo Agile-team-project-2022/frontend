@@ -1,6 +1,5 @@
-import React, {ChangeEvent, useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import './Login.css';
-import {CredentialResponse, GoogleLogin} from '@react-oauth/google';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
 import axios from "axios";
@@ -32,12 +31,6 @@ const decorativeImages = [
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
   const {state: {BASE_URL}, dispatch} = useContext(AppContext);
-  const [userName, setUserName] = useState('');
-
-  /** Handles the text input field for the userName. Formats the input and Removes invalid characters. */
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value.replace(/[^a-zA-Z 0-9]/gi, ''));
-  };
 
   /** Fetch the login data to check if the user is authorized/registered. */
   const authUser = () => {
@@ -55,20 +48,6 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
         console.log('success')
       })
       .catch((e) => console.log(e));
-  };
-
-  /** Triggered when Google Login confirms the account. */
-  const loginSuccess = (response: CredentialResponse) => {
-    // TODO: Build a confirmation pop up.
-    alert('Successful login');
-    dispatch({type: AppValidActions.LOG_IN, payload: {user: userName}});
-    closeLogIn();
-  };
-
-  /** Handles problems to log in with Google account. */
-  const loginFailure = () => {
-    // TODO: Build a confirmation pop up.
-    alert('Problem with login');
   };
 
   /** Cancels the log in attempt and closes the pop up window. */
