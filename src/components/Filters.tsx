@@ -61,6 +61,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   /** Gets all the data associated to all the filters once the component is rendered. */
   useEffect(() => {
     fetchAllFilters();
+    // eslint-disable-next-line
   }, []);
 
   /** Maps the categories and IDs only if not done yet. */
