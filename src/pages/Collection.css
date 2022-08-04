@@ -1,0 +1,93 @@
+/* Mobile version. */
+.collection-page {
+    display: grid;
+    grid-template-areas:
+            "header header header"
+            "options options options"
+            "content content content"
+            "footer footer footer";
+    grid-template-columns: 20% auto 20%;
+    grid-template-rows: 9.3rem 4rem auto 5rem;
+    width: 100vw;
+    margin: 0;
+}
+
+.mobile-section-container {
+    grid-area: content;
+}
+
+.collection-badges {
+}
+
+.collection-plants {
+}
+
+.collection-interactions {
+}
+
+.collection-option-container {
+    grid-area: options;
+    display: grid;
+    grid-column-gap: 0.25rem;
+    grid-template-columns: repeat(3, 32%);
+    width: calc(100% - 1rem);
+    margin: 0.5rem;
+    height: fit-content;
+}
+
+.button-open-section.collection-option {
+    display: block;
+    font-size: 0.7rem;
+    width: calc(100%);
+    height: fit-content;
+    white-space: nowrap;
+    padding: 0.45rem 0;
+    border: 1px solid var(--color-white-light-border);
+    background: var(--color-green-collection-option);
+    text-shadow: 0 0 1rem var(--color-black-lightest-shadow);
+}
+
+.button-open-section.collection-option:hover {
+    background: var(--color-green-collection-option-active);
+    filter: unset;
+}
+
+.selected-collection-option {
+    background: var(--color-green-collection-option-active);
+    color: white;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .collection-page {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "badges collection-plants interactions";
+        grid-template-columns: 20% auto 20%;
+        grid-template-rows: 20rem auto;
+        width: 80%;
+        min-width: 44rem;
+        max-width: 90rem;
+        margin: 0 auto;
+    }
+
+    .collection-badges {
+        grid-area: badges;
+        margin: 0 auto 1rem 0;
+    }
+
+    .collection-plants {
+        grid-area: collection-plants;
+    }
+
+    .collection-interactions {
+        grid-area: interactions;
+        margin: 0 0 1rem auto;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
+}

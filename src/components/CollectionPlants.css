@@ -1,0 +1,17 @@
+/* Mobile version. */
+.collection-plants {
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
+}

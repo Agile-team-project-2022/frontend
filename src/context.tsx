@@ -1,4 +1,5 @@
 import React, {useReducer} from "react";
+import {DeviceTypes} from "./hooks/useWindowSize";
 
 // ================================ Global app storage ================================ //
 
@@ -10,7 +11,9 @@ enum AppValidActions {
   CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE',
   SHOW_LOG_IN = 'SHOW_LOG_IN',
   CLOSE_LOG_IN = 'CLOSE_LOG_IN',
-  MAP_CATEGORIES = 'MAP_CATEGORIES'
+  MAP_CATEGORIES = 'MAP_CATEGORIES',
+  GET_USER_DATA = 'GET_USER_DATA',
+  SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
 }
 
 // Interfaces and Types definition.
@@ -25,14 +28,22 @@ interface AppState {
   fontSize: string,
   loggedIn: boolean,
   showLogIn: boolean,
-  categoryIdMap: {[name: string]: number}
+  categoryIdMap: {[name: string]: number},
+  userData: UserData,
+  deviceType?: DeviceTypes
 }
 
-type Props = {
-  children?: React.ReactNode
-};
+interface UserData {
+  updated: boolean,
+  totalPlants: number,
+  experience: number,
+  typePlanter: string,
+  badgesPreviewIds: number[],
+  totalBadges: number
+}
 
-type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction | MapCategoryAction;
+type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
+                | MapCategoryAction | GetUserDataAction |SetDeviceTypeAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -58,6 +69,16 @@ interface MapCategoryAction {
   payload: {categoryIdMap: {[name: string]: number}}
 }
 
+interface GetUserDataAction {
+  type: AppValidActions,
+  payload: {userData: UserData}
+}
+
+interface SetDeviceTypeAction {
+  type: AppValidActions,
+  payload: {deviceType: DeviceTypes}
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   user: 'guest',
@@ -65,7 +86,16 @@ const appInitialState = {
   fontSize: 'normal',
   loggedIn: false,
   showLogIn: false,
-  categoryIdMap: {}
+  categoryIdMap: {},
+  userData: {
+    updated: false,
+    totalPlants: 0,
+    experience: 0,
+    typePlanter: '-',
+    badgesPreviewIds: [],
+    totalBadges: 0
+  },
+  deviceType: undefined
 };
 
 // Creates the reducer.
@@ -115,6 +145,18 @@ const reducer = (state: AppState, action: AppAction) => {
         categoryIdMap: (action as MapCategoryAction).payload.categoryIdMap
       };
 
+    case AppValidActions.GET_USER_DATA:
+      return {
+        ...state,
+        userData: (action as GetUserDataAction).payload.userData
+      };
+
+    case AppValidActions.SET_DEVICE_TYPE:
+      return {
+        ...state,
+        deviceType: (action as SetDeviceTypeAction).payload.deviceType
+      };
+
     default:
       return state;
   }
@@ -123,7 +165,7 @@ const reducer = (state: AppState, action: AppAction) => {
 // Sets the context.
 const AppContext = React.createContext<AppContextInterface>({state: appInitialState, dispatch: () => null});
 
-const AppProvider: React.FC<Props> = ({children}) => {
+const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
   const [state, dispatch] = useReducer(reducer, appInitialState);
 
   return(

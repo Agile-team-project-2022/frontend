@@ -8,6 +8,7 @@
   --color-black-text: rgba(0, 0, 0, 0.8);
   --color-black-lighter-text: rgba(0, 0, 0, 0.55);
   --color-black-shadow: rgba(0, 0, 0, 0.25);
+  --color-black-lightest-shadow: rgba(0, 0, 0, 0.1);
   --color-black-lighter-shadow: rgba(0, 0, 0, 0.17);
   --color-black-medium-shadow: rgba(0, 0, 0, 0.33);
   --color-black-darker-shadow: rgba(0, 0, 0, 0.4);
@@ -17,11 +18,16 @@
   --color-green-lighter-header: #84A4A2;
   --color-green-lighter-header-low-transparency: rgba(132, 164, 162, 0.8);
   --color-green-lighter-header-medium-transparency: rgba(80, 135, 148, 0.55);
+  --color-green-collection-option: #80A6AC;
+  --color-green-collection-option-active: #507F7C;
   --color-green-dark-gradient: linear-gradient(to bottom, rgba(24, 46, 47, 0.9), black);
   --color-green-dark: #28494B;
   --color-green-darker: #152829;
+  --color-green-collection-header: #102c36;
   --color-green-button: #245967;
+  --color-green-section: #70A6A4;
   --color-gray-light: #F5F7F9;
+  --color-gray-border: #e6e9eb;
   --color-gray-medium: #dce0e3;
   --color-gray-dark: #babfbf;
   --color-blue-button: #002F6D;
@@ -29,7 +35,7 @@
 
 /* Mobile version. */
 html, main {
-  min-width: 290px;
+  min-width: 280px;
   color: var(--color-black-text);
   scroll-behavior: smooth;
 }
@@ -83,7 +89,7 @@ button, a {
   margin: 0;
   width: calc(100% - 2rem);
   cursor: pointer;
-  transition-property: color, filter;
+  transition-property: color, filter, background;
   transition-duration: 0.5s;
 }
 
@@ -130,7 +136,6 @@ button, a {
 
 .list-img-container img {
   height: 100%;
-  aspect-ratio: 1 / 1;
   transition-property: filter;
   transition-duration: 0.5s;
 }
@@ -140,10 +145,7 @@ button, a {
 }
 
 .arrow-button {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 1rem;
+  margin: 0;
   width: 2.4rem;
   height: 2.4rem;
   background: var(--color-gray-medium);
@@ -155,6 +157,15 @@ button, a {
   transition-duration: 0.4s;
   transform: scale(0.85);
   z-index: 1;
+}
+
+.top-arrow {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .arrow-button div {
@@ -183,6 +194,11 @@ button, a {
   box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
 }
 
+.mobile-section-container {
+  width: 100%;
+  box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {
@@ -192,6 +208,10 @@ button, a {
 
   .arrow-button {
     transform: scale(1);
+  }
+
+  .mobile-section-container {
+    display: none;
   }
 }
 
