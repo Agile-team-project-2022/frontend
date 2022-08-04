@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import sunImg from '../assets/category-sun.jpg';
+import {AppContext} from "../context";
+import axios from "axios";
 
 export enum ListType {
   FOLLOWED_PLANTS = 'FOLLOWED_PLANTS',
@@ -14,6 +16,7 @@ export interface IExpandedListProps {
 }
 
 const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}) => {
+  const {state: {BASE_URL, userId}} = useContext(AppContext);
   const [showSection, setShowSection] = useState(false);
   // TODO: Fetch the data and add images.
   const [data, setData] = useState<{name: string}[]>([]);
@@ -35,16 +38,17 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
     setShowSection(false);
   };
 
-  /** TODO: Gets the Followed plants data. */
+  /** TODO: Fill the DB with some followed plants to test. */
   const getFollowedPlants = () => {
     console.log('Fetching followed plants data...');
-    setData([
-      {name: 'Plant 1'},
-      {name: 'Plant 2'},
-      {name: 'Plant 3'},
-      {name: 'Plant 4'},
-      {name: 'Plant 5'}
-    ]);
+    const url = `${ BASE_URL }user/${ userId }`;
+
+    axios.get(url)
+      .then((response) => {
+        setData(Array(...response.data.follower));
+        console.log('followed plants: ', Array(...response.data.follower));
+      })
+      .catch((e) => console.log(e));
   };
 
   /** TODO: Gets the Friends data. */
@@ -84,6 +88,13 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
                       </div>
                     );
                   })
+                }
+
+                {
+                  data.length === 0?
+                    <div>Nothing to show yet!</div>
+                    :
+                    ''
                 }
               </div>
 

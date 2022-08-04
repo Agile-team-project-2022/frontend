@@ -24,6 +24,7 @@ interface AppContextInterface {
 
 interface AppState {
   user: string,
+  userId?: number,
   language: string,
   fontSize: string,
   loggedIn: boolean,
@@ -82,10 +83,11 @@ interface SetDeviceTypeAction {
 
 // Defines the default values to initialize the app.
 const appInitialState = {
-  user: 'owner example',
+  user: 'owner example', // TODO set to 'guest' for initial state
+  userId: 1, // TODO set to undefined for initial state
   language: 'en',
   fontSize: 'normal',
-  loggedIn: true,
+  loggedIn: true, // TODO set to false
   showLogIn: false,
   categoryIdMap: {},
   userData: {
