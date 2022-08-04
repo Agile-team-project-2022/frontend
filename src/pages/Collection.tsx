@@ -22,19 +22,17 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  /** Fetched the user data and marks it as already 'updated' to avoid future unnecessary queries. */
+  /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
   const fetchUserData = () => {
     // TODO: Fetch the full associated data.
     const data = {
       updated: true,
       totalPlants: 10,
       experience: 2,
-      typePlanter: 'floral',
-      badgesPreviewIds: [1, 2, 3, 4, 5], // TODO: Only fetch id of first 5 to show.
-      totalBadges: 8
+      typePlanter: 'floral'
     };
 
-    dispatch({type: AppValidActions.GET_USER_DATA, payload: {userData: data}});
+    dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
   };
 
   /** Manages the badges section if the user expands it on mobile devices. */

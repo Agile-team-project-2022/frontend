@@ -12,7 +12,8 @@ enum AppValidActions {
   SHOW_LOG_IN = 'SHOW_LOG_IN',
   CLOSE_LOG_IN = 'CLOSE_LOG_IN',
   MAP_CATEGORIES = 'MAP_CATEGORIES',
-  GET_USER_DATA = 'GET_USER_DATA',
+  SET_USER_DATA = 'SET_USER_DATA',
+  SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
 }
 
@@ -39,12 +40,13 @@ interface UserData {
   totalPlants: number,
   experience: number,
   typePlanter: string,
-  badgesPreviewIds: number[],
-  totalBadges: number
+  badgesPreviewIds: string[],
+  totalBadges: number,
+  badges: {name: string, id: number}[]
 }
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
-                | MapCategoryAction | GetUserDataAction |SetDeviceTypeAction;
+                | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -70,9 +72,23 @@ interface MapCategoryAction {
   payload: {categoryIdMap: {[name: string]: number}}
 }
 
-interface GetUserDataAction {
+interface SetUserDataAction {
   type: AppValidActions,
-  payload: {userData: UserData}
+  payload: {userData: {
+      updated: boolean,
+      totalPlants: number,
+      experience: number,
+      typePlanter: string
+  }}
+}
+
+interface SetBadgesAction {
+  type: AppValidActions,
+  payload: {userData: {
+      badgesPreviewIds?: string[],
+      totalBadges?: number,
+      badges?: {name: string, id: number}[]
+    }}
 }
 
 interface SetDeviceTypeAction {
@@ -94,7 +110,8 @@ const appInitialState = {
     experience: 0,
     typePlanter: '-',
     badgesPreviewIds: [],
-    totalBadges: 0
+    totalBadges: 0,
+    badges: []
   },
   deviceType: undefined,
   BASE_URL: 'https://interplant-b.herokuapp.com/'
@@ -147,10 +164,22 @@ const reducer = (state: AppState, action: AppAction) => {
         categoryIdMap: (action as MapCategoryAction).payload.categoryIdMap
       };
 
-    case AppValidActions.GET_USER_DATA:
+    case AppValidActions.SET_USER_DATA:
       return {
         ...state,
-        userData: (action as GetUserDataAction).payload.userData
+        userData: {
+          ...state.userData,
+          ...(action as SetUserDataAction).payload.userData
+        }
+      };
+
+    case AppValidActions.SET_USER_BADGES_DATA:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          ...(action as SetBadgesAction).payload.userData
+        }
       };
 
     case AppValidActions.SET_DEVICE_TYPE:
