@@ -158,7 +158,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   /** Queries all the filters if no filter is selected yet. */
   const fetchAllFilters = () => {
     // TODO: Use page and count in the query.
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category?page=1&count=10`;
+    const url = `${ state.BASE_URL }plant-category?page=1&count=10`;
 
     axios.get(url)
       .then((response) => {
@@ -187,7 +187,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
 
   /** Queries the selected filter to database. */
   const fetchFilter = (id: number) => {
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category/${id}`;
+    const url = `${ state.BASE_URL }plant-category/${id}`;
 
     axios.get(url)
       .then((response) => {
@@ -201,7 +201,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   /*
   TODO: Uncomment and use only if the 'create new filters' functionality must be implemented for users.
   const createFilters = () => {
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }plant-category`;
+    const url = `${ state.BASE_URL }plant-category`;
 
     Object.keys(ValidFilters).forEach((filter, index) => {
       const data = {name: filter.toLowerCase()};

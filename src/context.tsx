@@ -30,7 +30,8 @@ interface AppState {
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
   userData: UserData,
-  deviceType?: DeviceTypes
+  deviceType?: DeviceTypes,
+  BASE_URL: string
 }
 
 interface UserData {
@@ -95,7 +96,8 @@ const appInitialState = {
     badgesPreviewIds: [],
     totalBadges: 0
   },
-  deviceType: undefined
+  deviceType: undefined,
+  BASE_URL: 'https://interplant-b.herokuapp.com/'
 };
 
 // Creates the reducer.
