@@ -1,5 +1,7 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useContext} from 'react';
 import './DataSection.css';
+import {AppContext} from "../context";
+import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IDataSectionProps {
   children: ReactNode,
@@ -14,13 +16,16 @@ const DataSection: React.FunctionComponent<IDataSectionProps> = ({
     totalItems,
     onClickSection
 }) => {
+  const {state: {deviceType}} = useContext(AppContext);
+  const threshold = deviceType === DeviceTypes.MOBILE? 20 : 5;
+
   return (
     <div className="data-section-container">
       <h4 className="data-section-title"> {title} {totalItems !== undefined? `(${totalItems})` : ''} </h4>
       <div className="data-section-content">
         {children}
         {
-          totalItems !== undefined && totalItems > 5?
+          totalItems !== undefined && totalItems > threshold?
             <button className='arrow-button' onClick={onClickSection} >
               <div> </div>
               <div> </div>
