@@ -31,7 +31,7 @@ const decorativeImages = [
 ];
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
-  const {dispatch} = useContext(AppContext)
+  const {state: {BASE_URL}, dispatch} = useContext(AppContext);
   const [userName, setUserName] = useState('');
 
   /** Handles the text input field for the userName. Formats the input and Removes invalid characters. */
@@ -42,7 +42,7 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
   /** Fetch the login data to check if the user is authorized/registered. */
   const authUser = () => {
     console.log('authenticating....')
-    const url = `${ process.env.REACT_APP_BASE_URL || '' }auth/login/success`;
+    const url = `${ BASE_URL }auth/login/success`;
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
