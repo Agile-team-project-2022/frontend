@@ -25,7 +25,7 @@ interface AppContextInterface {
 
 interface AppState {
   user: string,
-  userId?: number,
+  userId: number,
   language: string,
   fontSize: string,
   loggedIn: boolean,
@@ -38,16 +38,26 @@ interface AppState {
 
 interface UserData {
   updated: boolean,
-  totalPlants: number,
   experience: number,
   typePlanter: string,
-  badgesPreviewIds: string[],
+  badgesPreview: string[],
+  badges: {name: string, id: number}[],
   totalBadges: number,
-  badges: {name: string, id: number}[]
+  plants: PlantCollectionData[],
+  totalPlants: number
+}
+
+interface PlantCollectionData {
+  name: string,
+  species: string,
+  age: string,
+  imageFile: string,
+  id: number
 }
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
-                | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction;
+                | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
+                ;
 
 interface LogInAction {
   type: AppValidActions,
@@ -77,16 +87,18 @@ interface SetUserDataAction {
   type: AppValidActions,
   payload: {userData: {
       updated: boolean,
-      totalPlants: number,
       experience: number,
-      typePlanter: string
+      typePlanter: string,
+      plantsPreview: PlantCollectionData[],
+      plants: PlantCollectionData[],
+      totalPlants: number
   }}
 }
 
 interface SetBadgesAction {
   type: AppValidActions,
   payload: {userData: {
-      badgesPreviewIds?: string[],
+      badgesPreview?: string[],
       totalBadges?: number,
       badges?: {name: string, id: number}[]
     }}
@@ -99,8 +111,8 @@ interface SetDeviceTypeAction {
 
 // Defines the default values to initialize the app.
 const appInitialState = {
-  user: 'owner example', // TODO set to 'guest' for initial state
-  userId: 1, // TODO set to undefined for initial state
+  user: 'guest',
+  userId: 1, // TODO: use correct user id
   language: 'en',
   fontSize: 'normal',
   loggedIn: true, // TODO set to false
@@ -108,12 +120,13 @@ const appInitialState = {
   categoryIdMap: {},
   userData: {
     updated: false,
-    totalPlants: 0,
     experience: 0,
     typePlanter: '-',
-    badgesPreviewIds: [],
+    badgesPreview: [],
+    badges: [],
     totalBadges: 0,
-    badges: []
+    plants: [],
+    totalPlants: 0
   },
   deviceType: undefined,
   BASE_URL: 'https://interplant-b.herokuapp.com/'

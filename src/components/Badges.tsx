@@ -53,7 +53,7 @@ const Badges: React.FunctionComponent<IBadgesProps> = () => {
 
     dispatch({type: AppValidActions.SET_USER_BADGES_DATA, payload: {userData: {
       badges: badges,
-      badgesPreviewIds: previewBadges,
+      badgesPreview: previewBadges,
       totalBadges: totalBadges
     }}});
   };
@@ -63,7 +63,7 @@ const Badges: React.FunctionComponent<IBadgesProps> = () => {
       <DataSection title='Badges' totalItems={state.userData.totalBadges} onClickSection={openSection}>
         {
           // TODO: Add the correct img assets.
-          state.userData.badgesPreviewIds.map((item, index) => {
+          state.userData.badgesPreview.map((item, index) => {
             return (
               <div className='list-img-container' key={`item-badges-${item}`}>
                 <LazyLoadImage src={treeImg} alt={`Badge`} />

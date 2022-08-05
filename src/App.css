@@ -196,6 +196,7 @@ button, a {
 
 .mobile-section-container {
   width: 100%;
+  height: fit-content;
   box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
 }
 

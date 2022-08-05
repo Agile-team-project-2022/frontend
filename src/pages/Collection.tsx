@@ -5,6 +5,7 @@ import CollectionPlants from "../components/CollectionPlants";
 import Badges from "../components/Badges";
 import {AppContext, AppValidActions} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
+import axios from "axios";
 
 export interface ICollectionProps {}
 
@@ -25,14 +26,22 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
   /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
   const fetchUserData = () => {
     // TODO: Fetch the full associated data.
-    const data = {
-      updated: true,
-      totalPlants: 10,
-      experience: 2,
-      typePlanter: 'floral'
-    };
+    const url = `${ state.BASE_URL }user/${state.userId}`;
 
-    dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
+    axios.get(url)
+      .then((response) => {
+        const totalPlants = response.data.plants.length; // TODO: get total plants from endpoint
+
+        const data = {
+          ...response.data,
+          totalPlants: totalPlants
+        };
+
+        console.log(data);
+
+        dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
+      })
+      .catch((e) => console.log(e));
   };
 
   /** Manages the badges section if the user expands it on mobile devices. */
@@ -74,6 +83,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
   return (
     <main className="collection-page">
       <CollectionHeader view={CollectionView.OTHERS} />
+
       {
         state.deviceType === DeviceTypes.MOBILE?
           <>
@@ -92,7 +102,6 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
             <div className='collection-interactions'> Interactions </div>
           </>
       }
-
     </main>
   );
 }
