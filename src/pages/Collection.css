@@ -53,7 +53,7 @@
 }
 
 .selected-collection-option {
-    background: var(--color-green-collection-option-active);
+    background: var(--color-green-collection-option-active) !important;
     color: white;
 }
 

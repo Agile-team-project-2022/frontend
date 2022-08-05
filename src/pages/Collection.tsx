@@ -6,6 +6,7 @@ import Badges from "../components/Badges";
 import {AppContext, AppValidActions} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import axios from "axios";
+import CollectionInteractions from "../components/CollectionInteractions";
 
 export interface ICollectionProps {}
 
@@ -67,17 +68,9 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
 
   /** Renders the section selected on mobile devices. */
   const getExpandedSection = () => {
-    if(showBadges) {
-      return <div className='mobile-section-container'><Badges/></div>;
-    } else if(showCollection) {
-      return <div className='mobile-section-container'><CollectionPlants/></div>;
-    } else if(showInteractions) {
-      return (
-        <div className='mobile-section-container'>
-          <div className='collection-interactions'> Interactions </div>
-        </div>
-      );
-    }
+    if(showBadges) return <div className='mobile-section-container'><Badges/></div>;
+    else if(showCollection) return <div className='mobile-section-container'><CollectionPlants/></div>;
+    else if(showInteractions) return <CollectionInteractions />;
   };
 
   return (
@@ -88,9 +81,21 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
         state.deviceType === DeviceTypes.MOBILE?
           <>
             <div className='collection-option-container'>
-              <button className='button-open-section collection-option' onClick={expandBadges}> Badges </button>
-              <button className='button-open-section collection-option' onClick={expandCollection}> Collection </button>
-              <button className='button-open-section collection-option' onClick={expandInteractions}> Interactions </button>
+              <button className={`button-open-section collection-option ${showBadges? 'selected-collection-option' : ''}`}
+                      onClick={expandBadges}
+              >
+                Badges
+              </button>
+              <button className={`button-open-section collection-option ${showCollection? 'selected-collection-option' : ''}`}
+                      onClick={expandCollection}
+              >
+                Collection
+              </button>
+              <button className={`button-open-section collection-option ${showInteractions? 'selected-collection-option' : ''}`}
+                      onClick={expandInteractions}
+              >
+                Interactions
+              </button>
             </div>
 
             { getExpandedSection() }
