@@ -115,7 +115,7 @@ const appInitialState = {
   userId: 1, // TODO: use correct user id
   language: 'en',
   fontSize: 'normal',
-  loggedIn: false,
+  loggedIn: true, // TODO set to false
   showLogIn: false,
   categoryIdMap: {},
   userData: {
