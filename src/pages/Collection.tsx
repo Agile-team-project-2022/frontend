@@ -104,7 +104,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
           <>
             <Badges />
             <CollectionPlants />
-            <div className='collection-interactions'> Interactions </div>
+            <CollectionInteractions />
           </>
       }
     </main>
