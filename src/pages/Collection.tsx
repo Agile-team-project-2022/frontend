@@ -38,11 +38,11 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
           totalPlants: totalPlants
         };
 
-        console.log(data);
+        console.log('data', data);
 
         dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log('err', e));
   };
 
   /** Manages the badges section if the user expands it on mobile devices. */

@@ -44,9 +44,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       {id: 7, name: 'plant 4', imageFile: ''},
       {id: 8, name: 'plant 5', imageFile: ''},
       {id: 9, name: 'plant 6', imageFile: ''},
-      {id: 10, name: 'plant 7', imageFile: ''},
-      {id: 11, name: 'plant 8', imageFile: ''},
-      {id: 12, name: 'plant 9', imageFile: ''}
+      {id: 10, name: 'plant 7', imageFile: ''}
     ]);
 
     setFriends([
@@ -147,7 +145,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       <div className={`${state.deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
         {
           getSection(
-            'Pending requests for taking care',
+            'Requests for taking care',
             SectionType.PLANT,
             carePlantsPending,
             expandedCarePlantsPending,
@@ -158,7 +156,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
 
         {
           getSection(
-            'Pending friend requests',
+            'Friend requests',
             SectionType.FRIEND,
             friendsPending,
             expandedFriendsPending,

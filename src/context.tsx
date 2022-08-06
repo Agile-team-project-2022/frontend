@@ -129,7 +129,7 @@ const appInitialState = {
     totalPlants: 0
   },
   deviceType: undefined,
-  BASE_URL: 'https://interplant-b.herokuapp.com/'
+  BASE_URL: 'http://localhost:5000/'
 };
 
 // Creates the reducer.
