@@ -67,12 +67,16 @@ export interface PlantData {
 }
 
 export interface FollowedPlantData {
-  plantId: number
+  id: number,
+  imageFile: string, // TODO: Add img property.
+  name: string // TODO: Add name property in endpoint to avoid fetching all the plant's data.
 }
 
 // TODO: define structure of friends data.
 export interface FriendData {
-  friendId: number
+  id: number,
+  imageFile: string, // TODO: Add img property.
+  name: string // TODO: Add name property in endpoint to avoid fetching all the friend's data.
 }
 
 export interface PostData {
