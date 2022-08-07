@@ -1,49 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './Collection.css';
 import CollectionHeader, {CollectionView} from "../components/CollectionHeader";
 import CollectionPlants from "../components/CollectionPlants";
 import Badges from "../components/Badges";
-import {AppContext, AppValidActions} from "../context";
+import {AppContext} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
-import axios from "axios";
 import CollectionInteractions from "../components/CollectionInteractions";
 
 export interface ICollectionProps {}
 
 const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
-  const {state, dispatch} = useContext(AppContext);
+  const {state: {deviceType}} = useContext(AppContext);
   // Manages the sections to expand on mobile devices.
   const [showBadges, setShowBadges] = useState(true);
   const [showCollection, setShowCollection] = useState(false);
   const [showInteractions, setShowInteractions] = useState(false);
-
-  /** Gets and saves the user data only if it is not already saved. */
-  // TODO: Fetch correct user data.
-  useEffect(() => {
-    if(!state.userData.updated) fetchUserData();
-    // eslint-disable-next-line
-  }, []);
-
-  /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
-  const fetchUserData = () => {
-    // TODO: Fetch the full associated data.
-    const url = `${ state.BASE_URL }user/${state.userId}`;
-
-    axios.get(url)
-      .then((response) => {
-        const totalPlants = response.data.plants.length; // TODO: get total plants from endpoint
-
-        const data = {
-          ...response.data,
-          totalPlants: totalPlants
-        };
-
-        console.log('data', data);
-
-        dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
-      })
-      .catch((e) => console.log('err', e));
-  };
 
   /** Manages the badges section if the user expands it on mobile devices. */
   const expandBadges = () => {
@@ -78,7 +49,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
       <CollectionHeader view={CollectionView.OTHERS} />
 
       {
-        state.deviceType === DeviceTypes.MOBILE?
+        deviceType === DeviceTypes.MOBILE?
           <>
             <div className='collection-option-container'>
               <button className={`button-open-section collection-option ${showBadges? 'selected-collection-option' : ''}`}

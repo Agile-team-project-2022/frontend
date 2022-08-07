@@ -16,7 +16,7 @@ export interface IExpandedListProps {
 }
 
 const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}) => {
-  const {state: {BASE_URL, userId}} = useContext(AppContext);
+  const {state: {BASE_URL, userData: {userId}}} = useContext(AppContext);
   const [showSection, setShowSection] = useState(false);
   // TODO: Fetch the data and add images.
   const [data, setData] = useState<{name: string}[]>([]);

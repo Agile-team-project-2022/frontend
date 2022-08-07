@@ -9,7 +9,7 @@ const ExpandedList = lazy(() => import('../components/ExpandedList'));
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const {state, dispatch} = useContext(AppContext);
+  const {state: {loggedIn, userData:{user}}, dispatch} = useContext(AppContext);
 
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {
@@ -21,7 +21,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       <div className='home-background'> </div>
 
       <h2 className='welcome-message section-title'>
-        Welcome {state.user.charAt(0).toUpperCase() + state.user.substring(1)}!
+        Welcome {user.charAt(0).toUpperCase() + user.substring(1)}!
       </h2>
 
       {/* TODO: Create the real filters sections. */}
@@ -42,7 +42,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
       <div className='home-buttons-container'>
         {
-          state.loggedIn?
+          loggedIn?
             <Suspense>
               <ExpandedList title='Plants you Follow' type={ListType.FOLLOWED_PLANTS} />
               <ExpandedList title='Your friends' type={ListType.FRIENDS} />
