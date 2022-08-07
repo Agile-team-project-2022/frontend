@@ -1,8 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './CollectionHeader.css';
-import personImg from '../assets/example-people-1.jpeg';
+import defaultPersonImg from '../assets/example-people-1.jpeg';
 import {AppContext} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
+import Modal from "./Modal";
+import ChangeProfilePicture from "./ChangeProfilePicture";
 
 export interface ICollectionHeaderProps {view: CollectionView}
 
@@ -13,6 +15,29 @@ export enum CollectionView {
 
 const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view}) => {
   const {state: {userData, deviceType}} = useContext(AppContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  /** Returns the content that allows the owner to change their image. */
+  const onImgClickOwner = () => {
+    return (
+      <ChangeProfilePicture />
+    );
+  };
+
+  /** Expands the image. */
+  const onImgClickOthers = () => {
+    return (
+      <div>Others</div>
+    );
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <header className="collection-header collection-profile-header">
@@ -21,7 +46,10 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       <div className='third-background'> </div>
 
       <div className='list-img-container'>
-        <img src={personImg} alt={'Profile owner'} />
+        <img src={userData.imageFile !== ''? userData.imageFile : defaultPersonImg}
+             alt={'Profile owner'}
+             onClick={openModal}
+        />
       </div>
 
       <h2>{userData.user.charAt(0).toUpperCase() + userData.user.substring(1)}</h2>
@@ -59,6 +87,15 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
           <div className='controls'>! Report</div>
           :
           <div className='controls'>Delete</div>
+      }
+
+      {
+        modalIsOpen?
+          <Modal onClose={closeModal}>
+            {view === CollectionView.OWNER? onImgClickOwner() : onImgClickOthers()}
+          </Modal>
+          :
+          ''
       }
     </header>
   );

@@ -1,0 +1,30 @@
+.change-profile-picture-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 4rem auto auto;
+    grid-template-areas:
+            "title"
+            "content"
+            "buttons";
+}
+
+.change-profile-picture-content {
+    grid-area: content;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 28rem 3rem;
+    padding: 0 2rem;
+}
+
+.list-img-container.change-profile-picture {
+    width: 25rem;
+    height: 25rem;
+    justify-self: center;
+}
+
+.change-profile-picture-container .button-action {
+    grid-area: buttons;
+    width: 10rem;
+    justify-self: center;
+    margin: 1rem 0 0.5rem 0;
+}

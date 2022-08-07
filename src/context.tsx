@@ -45,8 +45,8 @@ export interface UserData {
   badges: {name: string, id: number}[],
   totalBadges: number,
   plants: PlantData[],
-  followedPlants: FollowedPlantData[],
-  friends: FriendData[],
+  followedPlants: ThumbnailData[],
+  friends: ThumbnailData[],
   posts: PostData[],
   count: CountData,
   createdAt: string
@@ -66,17 +66,11 @@ export interface PlantData {
   categoryId: 1
 }
 
-export interface FollowedPlantData {
+// Applies for Friends, Followed plants, Requests to take care of, Requests for being friends.
+export interface ThumbnailData {
   id: number,
   imageFile: string, // TODO: Add img property.
   name: string // TODO: Add name property in endpoint to avoid fetching all the plant's data.
-}
-
-// TODO: define structure of friends data.
-export interface FriendData {
-  id: number,
-  imageFile: string, // TODO: Add img property.
-  name: string // TODO: Add name property in endpoint to avoid fetching all the friend's data.
 }
 
 export interface PostData {
@@ -136,8 +130,8 @@ interface SetUserDataAction {
       experience: number,
       typePlanter: string,
       plants: PlantData[],
-      followedPlants: FollowedPlantData[],
-      friends: FriendData[],
+      followedPlants: ThumbnailData[],
+      friends: ThumbnailData[],
       posts: PostData[],
       count: CountData,
       createdAt: string
@@ -168,7 +162,7 @@ const appInitialState = {
   userData: {
     updated: false,
     user: 'guest',
-    userId: 1, // TODO: use correct user id
+    userId: 4, // TODO: use correct user id
     imageFile: '',
     experience: 0,
     typePlanter: '-',

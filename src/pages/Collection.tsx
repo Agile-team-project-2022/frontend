@@ -46,7 +46,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
 
   return (
     <main className="collection-page">
-      <CollectionHeader view={CollectionView.OTHERS} />
+      <CollectionHeader view={CollectionView.OWNER} />
 
       {
         deviceType === DeviceTypes.MOBILE?

@@ -5,7 +5,7 @@ import treeImg from "../assets/category-tree.jpeg";
 import DataSection from './DataSection';
 import Modal from "./Modal";
 import {DeviceTypes} from "../hooks/useWindowSize";
-import {AppContext} from "../context";
+import {AppContext, ThumbnailData} from "../context";
 
 export interface ICollectionInteractionsProps {}
 
@@ -15,7 +15,7 @@ enum SectionType {
 }
 
 const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = (props) => {
-  const {state} = useContext(AppContext);
+  const {state: {deviceType, userData}} = useContext(AppContext);
 
   // TODO: Hardcoded. Must be replaced with the endpoint. Check if it will be implemented in backend or will be pending.
   const [carePlants, setCarePlants] = useState<{id: number, name: string, imageFile: string}[]>([]);
@@ -37,15 +37,9 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       {id: 3, name: 'plant C', imageFile: ''}
     ]);
 
-    setCarePlantsPending([
-      {id: 4, name: 'plant 1', imageFile: ''},
-      {id: 5, name: 'plant 2', imageFile: ''},
-      {id: 6, name: 'plant 3', imageFile: ''},
-      {id: 7, name: 'plant 4', imageFile: ''},
-      {id: 8, name: 'plant 5', imageFile: ''},
-      {id: 9, name: 'plant 6', imageFile: ''},
-      {id: 10, name: 'plant 7', imageFile: ''}
-    ]);
+    setCarePlantsPending(
+      userData.followedPlants // TODO: use correct data.
+    );
 
     setFriends([
       {id: 1, name: 'person 1', imageFile: ''},
@@ -58,7 +52,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       {id: 4, name: 'person A', imageFile: ''},
       {id: 5, name: 'person B', imageFile: ''}
     ]);
-  }, []);
+  }, [userData.followedPlants]);
 
   /** Opens the respective modal. */
   const openSectionCarePlants = () => {
@@ -98,7 +92,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   const getSection = (
     title: string,
     sectionType: SectionType,
-    array: {id: number, name: string, imageFile: string}[],
+    array: ThumbnailData[],
     modalIsOpen: boolean,
     onOpenSection: () => void,
     onCloseSection: () => void
@@ -142,12 +136,12 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
 
   return (
     <div className="collection-interactions">
-      <div className={`${state.deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
+      <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
         {
           getSection(
             'Requests for taking care',
             SectionType.PLANT,
-            carePlantsPending,
+            carePlantsPending, // TODO: fetch from endpoint the correct data.
             expandedCarePlantsPending,
             openSectionCarePlantsPending,
             closeSectionCarePlantsPending
@@ -158,7 +152,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
           getSection(
             'Friend requests',
             SectionType.FRIEND,
-            friendsPending,
+            friendsPending, // TODO: fetch from endpoint
             expandedFriendsPending,
             openSectionFriendsPending,
             closeSectionFriendsPending
@@ -166,12 +160,12 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
         }
       </div>
 
-      <div className={`${state.deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
+      <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
         {
           getSection(
             'Currently taking care for',
             SectionType.PLANT,
-            carePlants,
+            carePlants, // TODO: fetch from endpoint
             expandedCarePlants,
             openSectionCarePlants,
             closeSectionCarePlants
@@ -182,7 +176,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
           getSection(
             'Friends',
             SectionType.FRIEND,
-            friends,
+            friends, // TODO: fetch from endpoint
             expandedFriends,
             openSectionFriends,
             closeSectionFriends
