@@ -2,9 +2,10 @@ import React from 'react';
 import './CollectionCard.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import plantImg from "../assets/example-plant-2.jpeg";
+import {PlantData} from "../context";
 
 export interface ICollectionCardProps {
-  plant: {name: string, species: string, age: string, imageFile: string, id: number},
+  plant: PlantData,
 }
 
 const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant}) => {

@@ -6,7 +6,7 @@ import {AppContext} from "../context";
 export interface ICollectionPlantsProps {}
 
 const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = (props) => {
-  const {state: {userData: {plants, totalPlants}}} = useContext(AppContext);
+  const {state: {userData: {plants, count: {totalPlants}}}} = useContext(AppContext);
 
   return (
     <div className="collection-plants">

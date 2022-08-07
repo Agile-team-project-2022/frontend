@@ -144,6 +144,10 @@ button, a {
   filter: brightness(70%);
 }
 
+.squared-img {
+  border-radius: 0.15rem;
+}
+
 .arrow-button {
   margin: 0;
   width: 2.4rem;
@@ -198,6 +202,7 @@ button, a {
   width: 100%;
   height: fit-content;
   box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
+  padding: 0.001rem 0;
 }
 
 /* Tablet version. */

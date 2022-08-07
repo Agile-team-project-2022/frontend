@@ -24,8 +24,6 @@ interface AppContextInterface {
 }
 
 interface AppState {
-  user: string,
-  userId: number,
   language: string,
   fontSize: string,
   loggedIn: boolean,
@@ -36,23 +34,69 @@ interface AppState {
   BASE_URL: string
 }
 
-interface UserData {
+export interface UserData {
   updated: boolean,
+  user: string,
+  userId: number, // TODO: use correct user id
+  imageFile: string,
   experience: number,
   typePlanter: string,
   badgesPreview: string[],
   badges: {name: string, id: number}[],
   totalBadges: number,
-  plants: PlantCollectionData[],
-  totalPlants: number
+  plants: PlantData[],
+  followedPlants: FollowedPlantData[],
+  friends: FriendData[],
+  posts: PostData[],
+  count: CountData,
+  createdAt: string
 }
 
-interface PlantCollectionData {
+export interface PlantData {
+  plantId: number,
+  ownerId: number,
   name: string,
   species: string,
   age: string,
   imageFile: string,
-  id: number
+  schedule: string,
+  caringInfo: string,
+  location: string,
+  createdAt: string,
+  categoryId: 1
+}
+
+export interface FollowedPlantData {
+  id: number,
+  imageFile: string, // TODO: Add img property.
+  name: string // TODO: Add name property in endpoint to avoid fetching all the plant's data.
+}
+
+// TODO: define structure of friends data.
+export interface FriendData {
+  id: number,
+  imageFile: string, // TODO: Add img property.
+  name: string // TODO: Add name property in endpoint to avoid fetching all the friend's data.
+}
+
+export interface PostData {
+  postId: number,
+  title: string,
+  content: string,
+  flag: boolean,
+  published: boolean,
+  imageFile: string,
+  createdAt: string,
+  updatedAt: string,
+  authorId: number,
+  plantId: number
+}
+
+export interface CountData {
+  totalPosts: number,
+  totalPlants: number,
+  totalFriends: number,
+  totalFollowedPlants: number
 }
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
@@ -61,7 +105,7 @@ type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontS
 
 interface LogInAction {
   type: AppValidActions,
-  payload: {user: string}
+  payload: {user: string, userId: number}
 }
 
 interface LogOutAction {
@@ -87,11 +131,16 @@ interface SetUserDataAction {
   type: AppValidActions,
   payload: {userData: {
       updated: boolean,
+      user: string,
+      imageFile: string,
       experience: number,
       typePlanter: string,
-      plantsPreview: PlantCollectionData[],
-      plants: PlantCollectionData[],
-      totalPlants: number
+      plants: PlantData[],
+      followedPlants: FollowedPlantData[],
+      friends: FriendData[],
+      posts: PostData[],
+      count: CountData,
+      createdAt: string
   }}
 }
 
@@ -111,8 +160,6 @@ interface SetDeviceTypeAction {
 
 // Defines the default values to initialize the app.
 const appInitialState = {
-  user: 'guest',
-  userId: 1, // TODO: use correct user id
   language: 'en',
   fontSize: 'normal',
   loggedIn: true, // TODO set to false
@@ -120,16 +167,28 @@ const appInitialState = {
   categoryIdMap: {},
   userData: {
     updated: false,
+    user: 'guest',
+    userId: 1, // TODO: use correct user id
+    imageFile: '',
     experience: 0,
     typePlanter: '-',
     badgesPreview: [],
     badges: [],
     totalBadges: 0,
     plants: [],
-    totalPlants: 0
+    followedPlants: [],
+    friends: [],
+    posts: [],
+    count: {
+      totalPlants: 0,
+      totalFriends: 0,
+      totalFollowedPlants: 0,
+      totalPosts: 0
+    },
+    createdAt: ''
   },
   deviceType: undefined,
-  BASE_URL: 'https://interplant-b.herokuapp.com/'
+  BASE_URL: 'http://localhost:5000/'
 };
 
 // Creates the reducer.
@@ -138,14 +197,20 @@ const reducer = (state: AppState, action: AppAction) => {
     case AppValidActions.LOG_IN:
       return {
         ...state,
-        user: (action as LogInAction).payload.user,
+        userData: {
+          ...state.userData,
+          user: (action as LogInAction).payload.user
+        },
         loggedIn: true
       };
 
     case AppValidActions.LOG_OUT:
       return {
         ...state,
-        user: 'guest',
+        userData: {
+          ...state.userData,
+          user: 'guest'
+        },
         loggedIn: false
       };
 

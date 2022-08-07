@@ -1,9 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import sunImg from '../assets/category-sun.jpg';
-import {AppContext} from "../context";
-import axios from "axios";
+import {AppContext, FollowedPlantData, FriendData} from "../context";
 
 export enum ListType {
   FOLLOWED_PLANTS = 'FOLLOWED_PLANTS',
@@ -16,18 +15,29 @@ export interface IExpandedListProps {
 }
 
 const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}) => {
-  const {state: {BASE_URL, userId}} = useContext(AppContext);
+  const {state: {userData: {followedPlants, friends, count}}} = useContext(AppContext);
   const [showSection, setShowSection] = useState(false);
   // TODO: Fetch the data and add images.
-  const [data, setData] = useState<{name: string}[]>([]);
+  const [data, setData] = useState<(FollowedPlantData | FriendData)[]>([]);
+  const [totalData, setTotalData] = useState(0);
+
+  useEffect(() => {
+    if(type === ListType.FOLLOWED_PLANTS) setTotalData(count.totalFollowedPlants);
+    else setTotalData(count.totalFriends);
+  }, [count.totalFollowedPlants, count.totalFriends, type]);
 
   /** Expands the modal containing the list with the data. */
   const openSection = () => {
     // Only queries the content if it is not loaded yet.
     if(data.length === 0) {
-      // TODO: Fetch the correct data and add images.
-      if(type === ListType.FOLLOWED_PLANTS) getFollowedPlants();
-      else getFriends();
+      // TODO: Add images.
+      if(type === ListType.FOLLOWED_PLANTS) {
+        console.log('Using already stored following plants data...');
+        setData(followedPlants);
+      } else {
+        console.log('Using already stored friends data...');
+        setData(friends);
+      }
     }
 
     setShowSection(true);
@@ -38,53 +48,28 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
     setShowSection(false);
   };
 
-  /** TODO: Fill the DB with some followed plants to test. */
-  const getFollowedPlants = () => {
-    console.log('Fetching followed plants data...');
-    const url = `${ BASE_URL }user/${ userId }`;
-
-    axios.get(url)
-      .then((response) => {
-        setData(Array(...response.data.follower));
-        console.log('followed plants: ', Array(...response.data.follower));
-      })
-      .catch((e) => console.log(e));
-  };
-
-  /** TODO: Gets the Friends data. */
-  const getFriends = () => {
-    console.log('Fetching friends data...');
-    setData([
-      {name: 'Person 1'},
-      {name: 'Person 2'},
-      {name: 'Person 3'},
-      {name: 'Person 4'},
-      {name: 'Person 5'}
-    ]);
-  };
-
   return (
     <>
       {
         showSection?
           <Modal onClose={closeSection}>
             <div className='modal-list-container'>
-              <h2 className='section-title-modal'> {title} ({data.length}) </h2>
+              <h2 className='section-title-modal'> {title} ({totalData}) </h2>
 
               <div className='list-content'>
                 {
                   data.map((item, index) => {
                     return (
                       <div className='list-item-container'
-                           key={`list-item-${item.name.toLowerCase()}`}
+                           key={`list-item-${item.id}`}
                       >
                         <div className='list-img-container'>
                           {/* TODO: Add the correct plant name and img assets. */}
                           <LazyLoadImage src={sunImg}
-                                         alt={`Item from list: ${item.name.toLowerCase()}`}
+                                         alt={`Item from list: ${item.id} use name here`}
                           />
                         </div>
-                        <p> {item.name.charAt(0).toUpperCase() + item.name.substring(1)} </p>
+                        <p> {item.id} Use name here </p>
                       </div>
                     );
                   })
@@ -108,7 +93,7 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
           <button className='button-open-section'
                   onClick={openSection}
           >
-            {title}: {data.length}
+            {title}: {totalData}
           </button>
       }
     </>

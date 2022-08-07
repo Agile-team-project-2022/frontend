@@ -1,0 +1,15 @@
+/* Mobile version. */
+.collection-interactions {
+    grid-area: content;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .collection-interactions {
+        grid-area: interactions;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+}

@@ -21,20 +21,27 @@
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
+    .collection-plants {
+        width: 19.5rem;
+    }
+
     .collection-cards-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+        grid-template-columns: repeat(2, 9.5rem);
         grid-row-gap: 0.9rem;
     }
 }
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
+    .collection-plants {
+        width: calc(100% - 2rem);
+    }
+
     .collection-cards-container {
         display: grid;
         grid-row-gap: 1.2rem;
         grid-column-gap: 0.6rem;
-        grid-template-columns: repeat(auto-fit, minmax(9.8rem, 1fr));
+        grid-template-columns: repeat(auto-fit, 9.8rem);
     }
-
 }
