@@ -55,7 +55,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className='pub-content'>
                 <span className='pub-date'>12 july 2021</span>
                 <div className='pub-img'>
-                    <img src={dummyImage}/>
+                    <img aria-hidden alt='post' src={dummyImage}/>
                 </div>
                 <h2 className='pub-title'>Post Title</h2>
                 <p className='pub-body'>Plant
@@ -71,21 +71,21 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className='pub-info-controls'>
               <div className='pub-info'>
                 <span>By Ahmed </span>
-                <img src={dummyImage}/>
+                <img aria-hidden src={dummyImage} alt="profile"/>
               </div>
               <div className='pub-controls'>
 
                 <button className='pub-report-button'>
-                  <img src={reportIcon}/>
+                  <img aria-hidden alt="report" src={reportIcon}/>
                 </button>
 
                 <button className='pub-like-button'>
-                  <img src={likeIcon}/>
+                  <img aaria-hidden alt="like" src={likeIcon}/>
                   <span>like (510)</span>
                 </button>
 
                 <button className='pub-comment-button'>
-                  <img src={commentIcon}/>
+                  <img aria-hidden alt="comment" src={commentIcon}/>
                   <span>Comments (21)</span>
                 </button>
 
