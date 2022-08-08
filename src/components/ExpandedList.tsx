@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import sunImg from '../assets/category-sun.jpg';
-import {AppContext, FollowedPlantData, FriendData} from "../context";
+import {AppContext, ThumbnailData} from "../context";
 
 export enum ListType {
   FOLLOWED_PLANTS = 'FOLLOWED_PLANTS',
@@ -18,7 +18,7 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
   const {state: {userData: {followedPlants, friends, count}}} = useContext(AppContext);
   const [showSection, setShowSection] = useState(false);
   // TODO: Fetch the data and add images.
-  const [data, setData] = useState<(FollowedPlantData | FriendData)[]>([]);
+  const [data, setData] = useState<ThumbnailData[]>([]);
   const [totalData, setTotalData] = useState(0);
 
   useEffect(() => {

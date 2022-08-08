@@ -14,6 +14,7 @@ enum AppValidActions {
   MAP_CATEGORIES = 'MAP_CATEGORIES',
   SET_USER_DATA = 'SET_USER_DATA',
   SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
+  UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
 }
 
@@ -37,7 +38,8 @@ interface AppState {
 export interface UserData {
   updated: boolean,
   user: string,
-  userId: number, // TODO: use correct user id
+  userId: number,
+  email: string,
   imageFile: string,
   experience: number,
   typePlanter: string,
@@ -45,8 +47,8 @@ export interface UserData {
   badges: {name: string, id: number}[],
   totalBadges: number,
   plants: PlantData[],
-  followedPlants: FollowedPlantData[],
-  friends: FriendData[],
+  followedPlants: ThumbnailData[],
+  friends: ThumbnailData[],
   posts: PostData[],
   count: CountData,
   createdAt: string
@@ -66,17 +68,11 @@ export interface PlantData {
   categoryId: 1
 }
 
-export interface FollowedPlantData {
+// Applies for Friends, Followed plants, Requests to take care of, Requests for being friends.
+export interface ThumbnailData {
   id: number,
   imageFile: string, // TODO: Add img property.
   name: string // TODO: Add name property in endpoint to avoid fetching all the plant's data.
-}
-
-// TODO: define structure of friends data.
-export interface FriendData {
-  id: number,
-  imageFile: string, // TODO: Add img property.
-  name: string // TODO: Add name property in endpoint to avoid fetching all the friend's data.
 }
 
 export interface PostData {
@@ -101,7 +97,7 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                ;
+                | UpdateOwnerPictureAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -132,12 +128,13 @@ interface SetUserDataAction {
   payload: {userData: {
       updated: boolean,
       user: string,
+      email: string,
       imageFile: string,
       experience: number,
       typePlanter: string,
       plants: PlantData[],
-      followedPlants: FollowedPlantData[],
-      friends: FriendData[],
+      followedPlants: ThumbnailData[],
+      friends: ThumbnailData[],
       posts: PostData[],
       count: CountData,
       createdAt: string
@@ -150,7 +147,12 @@ interface SetBadgesAction {
       badgesPreview?: string[],
       totalBadges?: number,
       badges?: {name: string, id: number}[]
-    }}
+  }}
+}
+
+interface UpdateOwnerPictureAction {
+  type: AppValidActions,
+  payload: {userData: {imageFile: string}}
 }
 
 interface SetDeviceTypeAction {
@@ -169,6 +171,7 @@ const appInitialState = {
     updated: false,
     user: 'guest',
     userId: 1, // TODO: use correct user id
+    email: '',
     imageFile: '',
     experience: 0,
     typePlanter: '-',
@@ -259,6 +262,15 @@ const reducer = (state: AppState, action: AppAction) => {
         userData: {
           ...state.userData,
           ...(action as SetBadgesAction).payload.userData
+        }
+      };
+
+    case AppValidActions.UPDATE_OWNER_PICTURE:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          imageFile: (action as UpdateOwnerPictureAction).payload.userData.imageFile
         }
       };
 

@@ -33,6 +33,10 @@
     height: fit-content;
 }
 
+.collection-badges .data-section-content {
+    justify-content: center;
+}
+
 .data-section-content .list-img-container {
     margin: 0;
     width: 4.7rem;

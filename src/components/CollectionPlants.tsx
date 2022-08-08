@@ -20,15 +20,6 @@ const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = (props
             );
           })
         }
-
-        { // TODO: Remove this block. It's used only to preview how the collection looks with more plants.
-          Array(...[...plants, ...plants, ...plants]).map((item, index) => {
-            return (
-              <CollectionCard plant={item} key={`collection-card-${index}+1`} />
-            );
-          })
-        }
-
       </div>
     </div>
   );
