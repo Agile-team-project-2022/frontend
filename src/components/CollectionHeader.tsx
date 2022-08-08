@@ -6,6 +6,7 @@ import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";
 import ChangeProfilePicture from "./ChangeProfilePicture";
 import {CheckEncodedImage} from '../helpers';
+import GalleryExpanded from "./GalleryExpanded";
 
 export interface ICollectionHeaderProps {view: CollectionView}
 
@@ -22,14 +23,17 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   /** Returns the content that allows the owner to change their image. */
   const onImgClickOwner = () => {
     return (
-      <ChangeProfilePicture onClose={closeModal} />
+      <Modal onClose={closeModal} className='change-profile-picture-modal'>
+        <ChangeProfilePicture onClose={closeModal} />
+      </Modal>
     );
   };
 
   /** TODO: Expands the image. */
   const onImgClickOthers = () => {
     return (
-      <div>Others</div>
+      // TODO: Configure to use OTHERS pictures instead of 'userData.imageFile'.
+      <GalleryExpanded imageFile={userData.imageFile} onClose={closeModal} />
     );
   };
 
@@ -93,9 +97,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
       {
         modalIsOpen?
-          <Modal onClose={closeModal} className='change-profile-picture-modal'>
-            {view === CollectionView.OWNER? onImgClickOwner() : onImgClickOthers()}
-          </Modal>
+          <>{view === CollectionView.OWNER? onImgClickOwner() : onImgClickOthers()}</>
           :
           ''
       }
