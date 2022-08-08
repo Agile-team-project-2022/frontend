@@ -2,7 +2,7 @@
 .change-profile-picture-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 4rem 25rem 2rem 3rem;
+    grid-template-rows: 2rem 15rem 2rem 3rem;
     grid-template-areas:
             "title"
             "content"
@@ -16,8 +16,30 @@
     grid-area: content;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 25rem 3rem;
+    grid-template-rows: 10rem 3rem;
     padding: 0 2rem;
+}
+
+.change-profile-picture-modal {
+    background: none;
+    box-shadow: unset;
+}
+
+.change-profile-picture-modal .modal-content {
+    width: 15rem;
+}
+
+.change-profile-picture-modal .modal-header {
+    display: none;
+}
+
+.change-profile-picture-modal text {
+    fill: var(--color-white-text);
+}
+
+.change-profile-picture-modal textPath {
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 .change-profile-picture-content .input-image {
@@ -27,30 +49,30 @@
 }
 
 .list-img-container.change-profile-picture {
-    width: 25rem;
-    height: 25rem;
+    width: 10rem;
+    height: 10rem;
     justify-self: center;
 }
 
 .change-profile-picture-buttons-container {
     grid-area: buttons;
     position: absolute;
-    bottom: 8.4rem;
-    left: 2.7rem;
+    bottom: 11.4rem;
+    left: 0.8rem;
     display: flex;
     width: 3rem;
-    height: 8rem;
+    height: 4rem;
     margin: 0 auto 0.5rem auto;
     justify-content: space-between;
     align-items: flex-end;
     flex-direction: column;
     transform-origin: right top;
-    transform: rotate(-24.3deg);
+    transform: rotate(-28.4deg);
 }
 
 .change-profile-picture-buttons-container button {
-    width: 3rem;
-    height: 3rem;
+    width: 1.6rem;
+    height: 1.6rem;
     justify-self: center;
     margin: 0 0.5rem;
     border-radius: 50%;
@@ -59,12 +81,12 @@
     transition-property: opacity;
     transition-duration: 0.5s;
     transform-origin: center;
-    transform: rotate(24.3deg);
+    transform: rotate(28.4deg);
 }
 
 .change-profile-picture-buttons-container button img {
-    width: 3rem;
-    height: 3rem;
+    width: 1.6rem;
+    height: 1.6rem;
     justify-self: center;
     margin: 0 0 0.5rem 0;
 }
@@ -76,10 +98,106 @@
 
 .curved-text-container {
     grid-area: curved-text;
-    width: 35rem;
-    height: 33rem;
+    width: 30rem;
+    height: 30rem;
     position: absolute;
     top: calc(50% - 15.7rem);
     left: calc(50% - 17.85rem);
     pointer-events: none;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .change-profile-picture-container {
+        grid-template-rows: 2rem 18rem 4rem 3rem;
+    }
+
+    .change-profile-picture-content {
+        grid-template-rows: 18rem 3rem;
+    }
+
+    .change-profile-picture-modal .modal-content {
+        width: 28rem;
+    }
+
+    .change-profile-picture-modal textPath {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .list-img-container.change-profile-picture {
+        width: 18rem;
+        height: 18rem;
+        justify-self: center;
+    }
+
+    .change-profile-picture-buttons-container {
+        bottom: 9.2rem;
+        left: 2.85rem;
+        height: 6.3rem;
+        transform: rotate(-26.6deg);
+    }
+
+    .change-profile-picture-buttons-container button {
+        width: 2.2rem;
+        height: 2.2rem;
+        transform: rotate(26.6deg);
+    }
+
+    .change-profile-picture-buttons-container button img {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .curved-text-container {
+        width: 35rem;
+        height: 33rem;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+    .change-profile-picture-container {
+        grid-template-rows: 4rem 25rem 2rem 3rem;
+    }
+
+    .change-profile-picture-content {
+        grid-template-rows: 25rem 3rem;
+    }
+
+    .change-profile-picture-modal .modal-content {
+        width: 35rem;
+    }
+
+    .change-profile-picture-modal path {
+        transform: translate(48, 19.5) scale(2.2);
+    }
+
+    .change-profile-picture-modal textPath {
+        font-size: 1.35rem;
+    }
+
+    .list-img-container.change-profile-picture {
+        width: 25rem;
+        height: 25rem;
+    }
+
+    .change-profile-picture-buttons-container {
+        bottom: 8.4rem;
+        left: 2.7rem;
+        width: 3rem;
+        height: 8rem;
+        transform: rotate(-24.3deg);
+    }
+
+    .change-profile-picture-buttons-container button {
+        width: 3rem;
+        height: 3rem;
+        transform: rotate(24.3deg);
+    }
+
+    .change-profile-picture-buttons-container button img {
+        width: 3rem;
+        height: 3rem;
+    }
 }

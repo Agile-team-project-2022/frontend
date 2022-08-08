@@ -132,24 +132,6 @@
     padding: 0.5rem;
 }
 
-.change-profile-picture-modal {
-    background: none;
-    box-shadow: unset;
-}
-
-.change-profile-picture-modal .modal-content {
-    /* TODO */
-    width: 35rem;
-}
-
-.change-profile-picture-modal .modal-header {
-    display: none;
-}
-
-.change-profile-picture-modal text {
-    fill: var(--color-white-text);
-}
-
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .modal-list-container {
