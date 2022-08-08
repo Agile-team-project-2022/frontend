@@ -12,7 +12,7 @@
     grid-area: content;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 28rem 3rem;
+    grid-template-rows: 25rem 3rem;
     padding: 0 2rem;
 }
 
@@ -26,5 +26,5 @@
     grid-area: buttons;
     width: 10rem;
     justify-self: center;
-    margin: 1rem 0 0.5rem 0;
+    margin: 0 0 0.5rem 0;
 }

@@ -40,6 +40,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         const data = {
           updated: true,
           user: response.data.name,
+          email: response.data.email,
           imageFile: response.data.imageFile,
           experience: 0, // TODO: Calculate
           typePlanter: '-', // TODO: add to endpoint and ask user to type it.

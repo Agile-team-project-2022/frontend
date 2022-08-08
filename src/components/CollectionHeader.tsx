@@ -20,7 +20,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   /** Returns the content that allows the owner to change their image. */
   const onImgClickOwner = () => {
     return (
-      <ChangeProfilePicture />
+      <ChangeProfilePicture onClose={closeModal} />
     );
   };
 

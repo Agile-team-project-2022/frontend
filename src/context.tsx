@@ -38,6 +38,7 @@ export interface UserData {
   updated: boolean,
   user: string,
   userId: number, // TODO: use correct user id
+  email: string,
   imageFile: string,
   experience: number,
   typePlanter: string,
@@ -126,6 +127,7 @@ interface SetUserDataAction {
   payload: {userData: {
       updated: boolean,
       user: string,
+      email: string,
       imageFile: string,
       experience: number,
       typePlanter: string,
@@ -163,6 +165,7 @@ const appInitialState = {
     updated: false,
     user: 'guest',
     userId: 4, // TODO: use correct user id
+    email: '',
     imageFile: '',
     experience: 0,
     typePlanter: '-',

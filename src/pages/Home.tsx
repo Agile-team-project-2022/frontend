@@ -3,7 +3,6 @@ import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 import Post from '../components/Posts';
-import InputImage from "../components/InputImage";
 const Filters = lazy(() => import('../components/Filters'));
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
