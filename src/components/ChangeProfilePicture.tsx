@@ -5,6 +5,8 @@ import InputImage from "./InputImage";
 import {AppContext, AppValidActions} from "../context";
 import axios from "axios";
 import {CheckEncodedImage} from '../helpers';
+import saveImg from '../assets/save.png';
+import cancelImg from '../assets/cancel.png';
 
 export interface IChangeProfilePictureProps {
   onClose: () => void
@@ -47,17 +49,19 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
   return (
     <div className='change-profile-picture-container'>
 
-      <svg viewBox="0 0 500 500">
-        <path id="curve" d="M 0 100 A 100 100 0 0 1 200 100 L 0 100 Z"
-              fill="transparent"
-              transform='translate(10, 57) scale(2.2)'
-        />
-        <text width="500">
-          <textPath xlinkHref="#curve" fontSize='1.35rem' fontWeight='500'>
-            Change profile picture
-          </textPath>
-        </text>
-      </svg>
+      <div className='curved-text-container'>
+        <svg viewBox="0 0 500 500">
+          <path id="curve" d="M 0 100 A 100 100 0 0 1 200 100 L 0 100 Z"
+                fill="transparent"
+                transform='translate(48, 19.5) scale(2.2)'
+          />
+          <text>
+            <textPath xlinkHref="#curve" fontSize='1.35rem' fontWeight='500'>
+              Change profile picture
+            </textPath>
+          </text>
+        </svg>
+      </div>
 
       <div className='change-profile-picture-content'>
         <InputImage onUploadImage={uploadNewImage}>
@@ -67,7 +71,10 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
         </InputImage>
       </div>
 
-      <button className='button-action' onClick={saveImage}> Save new image </button>
+      <div className='change-profile-picture-buttons-container'>
+        <button onClick={onClose}><img src={cancelImg} alt='Cancel'/></button>
+        <button onClick={saveImage}><img src={saveImg} alt='Save'/></button>
+      </div>
     </div>
   );
 }

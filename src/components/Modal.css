@@ -139,6 +139,7 @@
 
 .change-profile-picture-modal .modal-content {
     /* TODO */
+    width: 35rem;
 }
 
 .change-profile-picture-modal .modal-header {

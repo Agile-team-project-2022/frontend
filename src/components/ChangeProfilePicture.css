@@ -1,11 +1,15 @@
+/* Mobile version. */
 .change-profile-picture-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 4rem auto auto;
+    grid-template-rows: 4rem 25rem 2rem 3rem;
     grid-template-areas:
             "title"
             "content"
+            "curved-text"
             "buttons";
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .change-profile-picture-content {
@@ -16,15 +20,66 @@
     padding: 0 2rem;
 }
 
+.change-profile-picture-content .input-image {
+    box-shadow:
+            0 0 8rem var(--color-black-darker-shadow),
+            0 0 4rem black;
+}
+
 .list-img-container.change-profile-picture {
     width: 25rem;
     height: 25rem;
     justify-self: center;
 }
 
-.change-profile-picture-container .button-action {
+.change-profile-picture-buttons-container {
     grid-area: buttons;
-    width: 10rem;
+    position: absolute;
+    bottom: 8.4rem;
+    left: 2.7rem;
+    display: flex;
+    width: 3rem;
+    height: 8rem;
+    margin: 0 auto 0.5rem auto;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+    transform-origin: right top;
+    transform: rotate(-24.3deg);
+}
+
+.change-profile-picture-buttons-container button {
+    width: 3rem;
+    height: 3rem;
+    justify-self: center;
+    margin: 0 0.5rem;
+    border-radius: 50%;
+    opacity: 70%;
+    cursor: pointer;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transform-origin: center;
+    transform: rotate(24.3deg);
+}
+
+.change-profile-picture-buttons-container button img {
+    width: 3rem;
+    height: 3rem;
     justify-self: center;
     margin: 0 0 0.5rem 0;
+}
+
+.change-profile-picture-buttons-container button:hover {
+    opacity: 100%;
+    transition-duration: 0.2s;
+}
+
+.curved-text-container {
+    grid-area: curved-text;
+    width: 35rem;
+    height: 33rem;
+    position: absolute;
+    top: calc(50% - 15.7rem);
+    left: calc(50% - 17.85rem);
+    pointer-events: none;
 }
