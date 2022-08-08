@@ -7,13 +7,14 @@ import axios from "axios";
 import {CheckEncodedImage} from '../helpers';
 import saveImg from '../assets/save.png';
 import cancelImg from '../assets/cancel.png';
+import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IChangeProfilePictureProps {
   onClose: () => void
 }
 
 const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> = ({onClose}) => {
-  const {state: {userData, BASE_URL}, dispatch} = useContext(AppContext);
+  const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [newImage, setNewImage] = useState(userData.imageFile);
   const [isValid, setIsValid] = useState(false);
 
@@ -46,6 +47,13 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
       .catch((e) => console.log(e));
   };
 
+  /** Determines the style of the curved text. */
+  const getTextPathStyle = () => {
+    if(deviceType === DeviceTypes.MOBILE) return 'translate(199, 118.5) scale(1)';
+    else if(deviceType === DeviceTypes.TABLET) return 'translate(105.8, 57) scale(1.5)';
+    else return 'translate(48, 19.5) scale(2.2)';
+  };
+
   return (
     <div className='change-profile-picture-container'>
 
@@ -53,7 +61,7 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
         <svg viewBox="0 0 500 500">
           <path id="curve" d="M 0 100 A 100 100 0 0 1 200 100 L 0 100 Z"
                 fill="transparent"
-                transform='translate(48, 19.5) scale(2.2)'
+                transform={getTextPathStyle()}
           />
           <text>
             <textPath xlinkHref="#curve" fontSize='1.35rem' fontWeight='500'>
