@@ -41,7 +41,7 @@
     opacity: 40%;
 }
 
-/* TODO: Move to app.css */
+/* TODO: Move to app.css to use with plants profiles too. */
 .collection-profile-header {
 
 }
@@ -51,6 +51,7 @@
     width: 4rem;
     height: 4rem;
     margin: 1.7rem 1rem;
+    cursor: pointer;
     z-index: 1;
 }
 

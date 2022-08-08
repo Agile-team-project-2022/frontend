@@ -14,6 +14,7 @@ enum AppValidActions {
   MAP_CATEGORIES = 'MAP_CATEGORIES',
   SET_USER_DATA = 'SET_USER_DATA',
   SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
+  UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
 }
 
@@ -37,7 +38,7 @@ interface AppState {
 export interface UserData {
   updated: boolean,
   user: string,
-  userId: number, // TODO: use correct user id
+  userId: number,
   email: string,
   imageFile: string,
   experience: number,
@@ -96,7 +97,7 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                ;
+                | UpdateOwnerPictureAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -146,7 +147,12 @@ interface SetBadgesAction {
       badgesPreview?: string[],
       totalBadges?: number,
       badges?: {name: string, id: number}[]
-    }}
+  }}
+}
+
+interface UpdateOwnerPictureAction {
+  type: AppValidActions,
+  payload: {userData: {imageFile: string}}
 }
 
 interface SetDeviceTypeAction {
@@ -164,7 +170,7 @@ const appInitialState = {
   userData: {
     updated: false,
     user: 'guest',
-    userId: 4, // TODO: use correct user id
+    userId: 1, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,
@@ -256,6 +262,15 @@ const reducer = (state: AppState, action: AppAction) => {
         userData: {
           ...state.userData,
           ...(action as SetBadgesAction).payload.userData
+        }
+      };
+
+    case AppValidActions.UPDATE_OWNER_PICTURE:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          imageFile: (action as UpdateOwnerPictureAction).payload.userData.imageFile
         }
       };
 

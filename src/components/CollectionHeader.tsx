@@ -5,6 +5,7 @@ import {AppContext} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";
 import ChangeProfilePicture from "./ChangeProfilePicture";
+import {CheckEncodedImage} from '../helpers';
 
 export interface ICollectionHeaderProps {view: CollectionView}
 
@@ -16,6 +17,7 @@ export enum CollectionView {
 const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view}) => {
   const {state: {userData, deviceType}} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const isValid = CheckEncodedImage(userData.imageFile);
 
   /** Returns the content that allows the owner to change their image. */
   const onImgClickOwner = () => {
@@ -24,7 +26,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
     );
   };
 
-  /** Expands the image. */
+  /** TODO: Expands the image. */
   const onImgClickOthers = () => {
     return (
       <div>Others</div>
@@ -46,7 +48,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       <div className='third-background'> </div>
 
       <div className='list-img-container'>
-        <img src={userData.imageFile !== ''? userData.imageFile : defaultPersonImg}
+        <img src={isValid? userData.imageFile : defaultPersonImg}
              alt={'Profile owner'}
              onClick={openModal}
         />
@@ -91,7 +93,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
       {
         modalIsOpen?
-          <Modal onClose={closeModal}>
+          <Modal onClose={closeModal} className='change-profile-picture-modal'>
             {view === CollectionView.OWNER? onImgClickOwner() : onImgClickOthers()}
           </Modal>
           :
