@@ -1,15 +1,17 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Post.css';
 import {AppContext} from "../context";
 import InputImage from "./InputImage";
+import {CheckEncodedImage} from "../helpers";
 
 export interface IPostProps {}
 
 const Post: React.FunctionComponent<IPostProps> = (props) => {
   const {state: {userData: {plants, count: {totalPlants}}}} = useContext(AppContext);
+  const [image, setImage] = useState('');
 
   const uploadNewImage = (encodedImg: string) => {
-
+    if(CheckEncodedImage(encodedImg)) setImage(encodedImg);
   };
 
   return (
@@ -23,11 +25,13 @@ const Post: React.FunctionComponent<IPostProps> = (props) => {
             <option value='profile 1'>Profile 1</option>
           </select>
         </label>
-
-        <InputImage onUploadImage={uploadNewImage}> <span>Upload image</span> </InputImage>
+        <InputImage onUploadImage={uploadNewImage} className={image === ''? 'hidden-message' : ''}>
+          { image === ''? <span>Upload image</span> : <img src={image} alt='Post plant'/> }
+        </InputImage>
         <input className='input-section' type='text' placeholder='Type the title of the Post here...' />
         <textarea className='input-section' placeholder='Write your Post here...' />
       </div>
+
       <div className='new-post-buttons'>
         <button className='button-action'> Cancel </button>
         <button className='button-action'> Publish </button>

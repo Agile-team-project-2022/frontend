@@ -170,7 +170,7 @@ const appInitialState = {
   userData: {
     updated: false,
     user: 'guest',
-    userId: 2, // TODO: use correct user id
+    userId: 1, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,
