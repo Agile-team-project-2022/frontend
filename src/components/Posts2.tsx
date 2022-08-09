@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "./Posts.css"
+import React, { useState } from "react";
+import "./Posts2.css"
 import '../pages/Home.css';
 export interface IPost {}
 

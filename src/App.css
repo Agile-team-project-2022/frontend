@@ -30,6 +30,7 @@
   --color-gray-border: #e6e9eb;
   --color-gray-medium: #dce0e3;
   --color-gray-dark: #babfbf;
+  --color-gray-background: #F1F3F3;
   --color-blue-button: #002F6D;
 }
 
@@ -76,7 +77,8 @@ button, a {
 
 .button-action:hover {
   color: white;
-  opacity: 85%;
+  opacity: 70%;
+  transition-duration: 0.2s;
 }
 
 .button-open-section {
@@ -205,6 +207,19 @@ button, a {
   height: fit-content;
   box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
   padding: 0.001rem 0;
+}
+
+.input-section {
+  all: unset;
+  grid-area: input-field;
+  background: white;
+  box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
+  margin: 1rem 0;
+  width: calc(100% - 2rem);
+  height: 1.8rem;
+  border-radius: 0.15rem;
+  font-size: 0.85rem;
+  padding: 0 1.01rem;
 }
 
 /* Tablet version. */
