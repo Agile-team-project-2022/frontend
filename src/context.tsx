@@ -15,7 +15,8 @@ enum AppValidActions {
   SET_USER_DATA = 'SET_USER_DATA',
   SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
-  SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
+  SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
+  UPDATE_POSTS = 'UPDATE_POSTS'
 }
 
 // Interfaces and Types definition.
@@ -56,6 +57,7 @@ export interface UserData {
 
 export interface PlantData {
   plantId: number,
+  id: number, // TODO: fix duplicated plant id. Used to maintain frontend code clean.
   ownerId: number,
   name: string,
   species: string,
@@ -76,14 +78,14 @@ export interface ThumbnailData {
 }
 
 export interface PostData {
-  postId: number,
+  postId?: number,
   title: string,
   content: string,
   flag: boolean,
   published: boolean,
   imageFile: string,
-  createdAt: string,
-  updatedAt: string,
+  createdAt?: string,
+  updatedAt?: string,
   authorId: number,
   plantId: number
 }
@@ -97,7 +99,7 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                | UpdateOwnerPictureAction;
+                | UpdateOwnerPictureAction | UpdatePostsAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -158,6 +160,11 @@ interface UpdateOwnerPictureAction {
 interface SetDeviceTypeAction {
   type: AppValidActions,
   payload: {deviceType: DeviceTypes}
+}
+
+interface UpdatePostsAction {
+  type: AppValidActions,
+  payload: {userData: {posts: PostData[]}}
 }
 
 // Defines the default values to initialize the app.
@@ -275,6 +282,12 @@ const reducer = (state: AppState, action: AppAction) => {
       };
 
     case AppValidActions.SET_DEVICE_TYPE:
+      return {
+        ...state,
+        deviceType: (action as SetDeviceTypeAction).payload.deviceType
+      };
+
+    case AppValidActions.UPDATE_POSTS:
       return {
         ...state,
         deviceType: (action as SetDeviceTypeAction).payload.deviceType

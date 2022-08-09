@@ -3,7 +3,8 @@ import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 
-import Post from '../components/Post';
+import NewPost from '../components/NewPost';
+import PublishedPost from "../components/PublishedPost";
 
 const Filters = lazy(() => import('../components/Filters'));
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
@@ -33,14 +34,16 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       <div className='page-content-container'>
         <section className='publications-container'>
           {/* <h2 className='section-title'>Write new post</h2> */}
-          {/* TODO: Posts component goes here - Status: Write new Post. */}
-          <Post />
+          {/* TODO: Posts component goes here - Status: Write new NewPost. */}
+          <NewPost />
         </section>
+
+        <div className='section-divisor'> </div>
 
         <section className='publications-container'>
           <h2 className='section-title'>Publications</h2>
-          {/* TODO: Posts component goes here - Status: Published Post. */}
-
+          {/* TODO: Posts component goes here - Status: Published NewPost. */}
+          <PublishedPost />
         </section>
       </div>
 

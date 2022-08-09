@@ -222,6 +222,14 @@ button, a {
   padding: 0 1.01rem;
 }
 
+.section-divisor {
+  border-top: 1px solid var(--color-gray-border);
+  border-bottom: 1px solid var(--color-gray-border);
+  height: 0.3rem;
+  width: 95%;
+  margin: 2.5rem auto;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {
