@@ -84,6 +84,8 @@ export interface PostData {
   flag: boolean,
   published: boolean,
   imageFile: string,
+  postlikes: {id: number, userId: number}[],
+  comments: {}[],
   createdAt: string,
   updatedAt: string,
   authorId: number,

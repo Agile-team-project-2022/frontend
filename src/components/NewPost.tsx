@@ -60,7 +60,6 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   };
 
   const savePost = () => {
-    console.log(userData);
     const url = `${ BASE_URL }post`;
     const data: CreatePostData = {
       title: title,

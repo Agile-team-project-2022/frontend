@@ -1,31 +1,81 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useContext, useEffect, useState} from 'react';
 import './PublishedPost.css';
-import {PostData} from "../context";
+import {AppContext, PostData} from "../context";
 import {CheckEncodedImage, parseDate} from "../helpers";
 import defaultPostImg from '../assets/example-plant-2.jpeg';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import flagImg from '../assets/report.png';
 import likeImg from '../assets/like-empty.png';
+import likedImg from '../assets/like-filled.png';
 import commentImg from '../assets/comment.png';
+import axios from "axios";
 
 export interface IPublishedPostProps {
   post: PostData
 }
 
 const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => {
+  const {state: {userData: {userId}, BASE_URL}} = useContext(AppContext);
   const [readMore, setReadMore] = useState(false);
   const [expandedPost, setExpandedPost] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [likePostId, setLikePostId] = useState(-1);
 
   useEffect(() => {
+    // Trims the post.
     if(post.content.length > 250) {setReadMore(true);}
+
+    // Detects if the current user has already liked the post.
+    post.postlikes.forEach((item, index) => {
+      if(userId === item.userId) {
+        setLiked(true);
+        setLikePostId(item.id);
+      }
+    });
+
+    // Initializes the number of posts to keep track as the user changes it.
+    setLikeCount(post.postlikes.length);
   }, [post]);
 
+  /** Read more or less for extensive posts. */
   const expandPost = () => {
     setExpandedPost(true);
   };
 
   const collapsePost = () => {
     setExpandedPost(false);
+  };
+
+  /** Sets or removes the like status. */
+  const like = () => {
+    if(!liked) {
+      // Creates new like relationship.
+      const url = `${ BASE_URL }postlike`;
+      const data = {
+        userId: userId,
+        postId: post.id
+      };
+
+      axios.post(url, data)
+        .then((response) => {
+          setLikePostId(response.data.id);
+          setLiked(true);
+          setLikeCount(prevState => prevState + 1);
+        })
+        .catch((e) => console.log(e));
+    } else {
+      // Removes the Like.
+      const url = `${ BASE_URL }postlike/${likePostId}`;
+
+      axios.delete(url)
+        .then((response) => {
+          setLikePostId(-1);
+          setLiked(false);
+          setLikeCount(prevState => prevState - 1);
+        })
+        .catch((e) => console.log(e));
+    }
   };
 
   return (
@@ -50,9 +100,18 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       </div>
 
       <div className='published-post-buttons'>
-        <button> <img alt='Report content' src={flagImg}/> Report content </button>
-        <button> <img alt='Like' src={likeImg}/> Like (+1K) </button>
-        <button> <img alt='Comments' src={commentImg}/> Comments (10) </button>
+        <button>
+          <img alt='Report content' src={flagImg}/>
+          Report content
+        </button>
+        <button onClick={like}>
+          <img alt='Like' src={liked? likedImg : likeImg}/>
+          Like ({likeCount})
+        </button>
+        <button>
+          <img alt='Comments' src={commentImg}/>
+          Comments ({post.comments.length})
+        </button>
       </div>
     </div>
   );
