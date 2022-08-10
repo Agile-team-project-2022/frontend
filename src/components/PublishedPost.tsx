@@ -4,6 +4,9 @@ import {PostData} from "../context";
 import {CheckEncodedImage, parseDate} from "../helpers";
 import defaultPostImg from '../assets/example-plant-2.jpeg';
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import flagImg from '../assets/report.png';
+import likeImg from '../assets/like-empty.png';
+import commentImg from '../assets/comment.png';
 
 export interface IPublishedPostProps {
   post: PostData
@@ -11,13 +14,22 @@ export interface IPublishedPostProps {
 
 const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => {
   const [readMore, setReadMore] = useState(false);
+  const [expandedPost, setExpandedPost] = useState(false);
 
   useEffect(() => {
     if(post.content.length > 250) {setReadMore(true);}
   }, [post]);
 
+  const expandPost = () => {
+    setExpandedPost(true);
+  };
+
+  const collapsePost = () => {
+    setExpandedPost(false);
+  };
+
   return (
-    <div className='post-container-published'>
+    <div className={`post-container-published ${expandedPost? 'expanded-post' : ''}`}>
       <div className='post-content-published'>
         <h2 className='section-title'> {post.title.charAt(0).toUpperCase() + post.title.substring(1)} </h2>
         <span className='post-date'> {parseDate(post.createdAt)} </span>
@@ -33,14 +45,14 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
             }
           </p>
         </div>
-        {
-          readMore? <span className='read-more'>Read more <div> </div></span> : ''
-        }
+        { readMore && !expandedPost? <span className='read-more' onClick={expandPost}>Read more <div> </div></span> : '' }
+        { readMore && expandedPost? <span className='read-more show-less' onClick={collapsePost}> Show less <div> </div></span> : '' }
       </div>
 
       <div className='new-post-buttons'>
-        <button className='button-action'> Cancel </button>
-        <button className='button-action'> Publish </button>
+        <button> <img src={flagImg}/> Report content </button>
+        <button> <img src={likeImg}/> Like (+1K) </button>
+        <button> <img src={commentImg}/> Comments (10) </button>
       </div>
     </div>
   );
