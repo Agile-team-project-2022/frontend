@@ -13,7 +13,7 @@ const ExpandedList = lazy(() => import('../components/ExpandedList'));
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const {state: {loggedIn, userData:{user}}, dispatch} = useContext(AppContext);
+  const {state: {loggedIn, userData:{user, posts}}, dispatch} = useContext(AppContext);
 
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {
@@ -33,7 +33,6 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
       <div className='page-content-container'>
         <section className='publications-container'>
-          {/* <h2 className='section-title'>Write new post</h2> */}
           {/* TODO: Posts component goes here - Status: Write new NewPost. */}
           <NewPost />
         </section>
@@ -43,7 +42,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <section className='publications-container'>
           <h2 className='section-title'>Publications</h2>
           {/* TODO: Posts component goes here - Status: Published NewPost. */}
-          <PublishedPost />
+          {
+            posts.map((item, index) => {
+              return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
+            })
+          }
         </section>
       </div>
 

@@ -60,7 +60,7 @@
 .expanded-gallery-img-container {
     grid-area: img;
     width: 95%;
-    height: 90%;
+    height: 85%;
     overflow: hidden;
     justify-self: center;
     border-radius: 0.2rem;

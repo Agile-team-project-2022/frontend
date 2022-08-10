@@ -1,6 +1,6 @@
-import React, {ChangeEvent, SyntheticEvent, useContext, useEffect, useState} from 'react';
+import React, {ChangeEvent, useContext, useState} from 'react';
 import './NewPost.css';
-import {AppContext, PostData} from "../context";
+import {AppContext, CreatePostData} from "../context";
 import InputImage from "./InputImage";
 import {CheckEncodedImage} from "../helpers";
 import axios from "axios";
@@ -44,14 +44,12 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   const savePost = () => {
     console.log(userData);
     const url = `${ BASE_URL }post`;
-    const data: PostData = {
+    const data: CreatePostData = {
       title: title,
       content: content,
       authorId: userData.userId,
       plantId: 1,
-      imageFile: image,
-      published: true,
-      flag: false
+      imageFile: image
     };
 
     axios.post(url, data)
@@ -69,12 +67,12 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
 
         <label className='post-select-profile'>
           <span>Select profile to publish from <div> </div></span>
-          <select onChange={(e) => selectPlantProfile(e)}>
-            <option selected disabled>Select plant profile</option>
+          <select defaultValue={-1} onChange={(e) => selectPlantProfile(e)}>
+            <option value={-1} disabled>Select plant profile</option>
             {
               userData.plants.map((item, index) => {
                 return (
-                  <option value={`${item.id}`} key={`plant-profile-option-${item.plantId}`}>
+                  <option value={`${item.id}`} key={`plant-profile-option-${item.id}`}>
                     {item.name.charAt(0).toUpperCase() + item.name.substring(1)}
                   </option>
                 );

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './ChangeProfilePicture.css';
-import defaultPersonImg from "../assets/example-people-1.jpeg";
+import defaultPersonImg from "../assets/default-person.jpeg";
 import InputImage from "./InputImage";
 import {AppContext, AppValidActions} from "../context";
 import axios from "axios";

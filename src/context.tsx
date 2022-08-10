@@ -16,7 +16,7 @@ enum AppValidActions {
   SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
-  UPDATE_POSTS = 'UPDATE_POSTS'
+  UPDATE_POSTS = 'UPDATE_POSTS',
 }
 
 // Interfaces and Types definition.
@@ -56,8 +56,7 @@ export interface UserData {
 }
 
 export interface PlantData {
-  plantId: number,
-  id: number, // TODO: fix duplicated plant id. Used to maintain frontend code clean.
+  id: number,
   ownerId: number,
   name: string,
   species: string,
@@ -78,14 +77,22 @@ export interface ThumbnailData {
 }
 
 export interface PostData {
-  postId?: number,
+  id: number,
   title: string,
   content: string,
   flag: boolean,
   published: boolean,
   imageFile: string,
-  createdAt?: string,
-  updatedAt?: string,
+  createdAt: string,
+  updatedAt: string,
+  authorId: number,
+  plantId: number
+}
+
+export interface CreatePostData {
+  title: string,
+  content: string,
+  imageFile: string,
   authorId: number,
   plantId: number
 }
