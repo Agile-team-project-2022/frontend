@@ -1,10 +1,46 @@
 .comments-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
     padding: 0.3rem 1rem 1rem 1rem;
     width: calc(100% - 2rem);
     height: fit-content;
 }
 
 .comment-item {
-    background: aliceblue;
+    display: grid;
+    grid-template-areas:
+            "metadata metadata"
+            "content empty";
+    grid-row-gap: 0.8rem;
+    grid-template-columns: 80% 20%;
+    background: var(--color-gray-light);
+    padding: 0.7rem 1rem 1.2rem 2.5rem;
+    border-radius: 0.2rem;
+    height: fit-content;
+    width: calc(100% - 3.5rem);
+}
 
+.metadata {
+    grid-area: metadata;
+    color: var(--color-black-lighter-text);
+    justify-self: right;
+    width: fit-content;
+    font-size: 0.6rem;
+}
+
+.comment-item p, .metadata {
+    margin: 0;
+    height: fit-content;
+    padding: 0;
+    font-weight: 300;
+}
+
+.comment-item p {
+    grid-area: content;
+    font-size: 0.82rem;
+}
+
+.comment-item p br:last-child {
+    display: none;
 }
