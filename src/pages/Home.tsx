@@ -1,11 +1,10 @@
-import React, {lazy, Suspense, useContext} from 'react';
+import React, {lazy, Suspense, useContext, useEffect} from 'react';
 import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
-
-import NewPost from '../components/NewPost';
-import PublishedPost from "../components/PublishedPost";
-
+import axios from "axios";
+const NewPost = lazy(() => import('../components/NewPost'));
+const PublishedPost = lazy(() => import('../components/PublishedPost'));
 const Filters = lazy(() => import('../components/Filters'));
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
@@ -13,7 +12,22 @@ const ExpandedList = lazy(() => import('../components/ExpandedList'));
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const {state: {loggedIn, userData:{user, posts}}, dispatch} = useContext(AppContext);
+  const {state: {loggedIn, userData:{user}, homePosts, BASE_URL}, dispatch} = useContext(AppContext);
+
+  /** Gets all the Posts data only for the first time. */
+  useEffect(() => {
+    const fetchAllPosts = () => {
+      const url = `${ BASE_URL }post?page=1&count=10`;
+      axios.get(url)
+        .then((response) => {
+          dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
+        })
+        .catch((e) => console.log(e));
+    };
+
+    fetchAllPosts();
+    // eslint-disable-next-line
+  }, []);
 
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {
@@ -33,20 +47,20 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
       <div className='page-content-container'>
         <section className='publications-container'>
-          {/* TODO: Posts component goes here - Status: Write new NewPost. */}
-          <NewPost />
+          <Suspense> <NewPost />  </Suspense>
         </section>
 
         <div className='section-divisor'> </div>
 
         <section className='publications-container'>
-          <h2 className='section-title'>Publications</h2>
-          {/* TODO: Posts component goes here - Status: Published NewPost. */}
-          {
-            posts.map((item, index) => {
-              return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
-            })
-          }
+          <Suspense>
+            {
+              homePosts.map((item, index) => {
+                return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
+              })
+            }
+          </Suspense>
+          <h2 className='section-title publications-section-title'>Publications</h2>
         </section>
       </div>
 

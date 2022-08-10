@@ -63,7 +63,8 @@
     color: var(--color-black-lighter-text);
     transition-property: background;
     transition-duration: 0.4s;
-    width: fit-content;
+    width: 97%;
+    justify-content: right;
 }
 
 .post-select-profile span div {
@@ -76,12 +77,26 @@
     margin: -0.1rem 0 0 0.5rem;
 }
 
+.post-select-profile span.invalid-post-select {
+    color: var(--color-red-warning);
+}
+
+.post-select-profile span.invalid-post-select div {
+    border-color: transparent var(--color-red-warning) var(--color-red-warning) transparent;
+    opacity: 55%;
+}
+
 .post-content .input-section {
     box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.03);
     font-size: 0.78rem;
     border-radius: 0.2rem;
     margin: 0;
     width: calc(100% - 3rem);
+}
+
+.post-content .input-section.invalid-post-input {
+    outline: 0.08rem solid var(--color-red-warning-shadow);
+    outline-offset: -0.2rem;
 }
 
 .post-content input {

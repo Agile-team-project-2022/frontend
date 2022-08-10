@@ -32,6 +32,8 @@
   --color-gray-dark: #babfbf;
   --color-gray-background: #F1F3F3;
   --color-blue-button: #002F6D;
+  --color-red-warning: #bf3715;
+  --color-red-warning-shadow: rgba(191, 55, 21, 0.2);
 }
 
 /* Mobile version. */
@@ -78,6 +80,12 @@ button, a {
 .button-action:hover {
   color: white;
   opacity: 70%;
+  transition-duration: 0.2s;
+}
+
+.button-action.disabled-button {
+  opacity: 25%;
+  filter: grayscale(50%);
   transition-duration: 0.2s;
 }
 

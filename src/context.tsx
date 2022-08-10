@@ -16,7 +16,7 @@ enum AppValidActions {
   SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
-  UPDATE_POSTS = 'UPDATE_POSTS',
+  UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
 }
 
 // Interfaces and Types definition.
@@ -32,6 +32,7 @@ interface AppState {
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
   userData: UserData,
+  homePosts: PostData[],
   deviceType?: DeviceTypes,
   BASE_URL: string
 }
@@ -106,7 +107,7 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                | UpdateOwnerPictureAction | UpdatePostsAction;
+                | UpdateOwnerPictureAction | UpdateHomePostsAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -169,9 +170,9 @@ interface SetDeviceTypeAction {
   payload: {deviceType: DeviceTypes}
 }
 
-interface UpdatePostsAction {
+interface UpdateHomePostsAction {
   type: AppValidActions,
-  payload: {userData: {posts: PostData[]}}
+  payload: {homePosts: PostData[]}
 }
 
 // Defines the default values to initialize the app.
@@ -204,6 +205,7 @@ const appInitialState = {
     },
     createdAt: ''
   },
+  homePosts: [],
   deviceType: undefined,
   BASE_URL: 'http://localhost:5000/'
 };
@@ -294,10 +296,10 @@ const reducer = (state: AppState, action: AppAction) => {
         deviceType: (action as SetDeviceTypeAction).payload.deviceType
       };
 
-    case AppValidActions.UPDATE_POSTS:
+    case AppValidActions.UPDATE_HOME_POSTS:
       return {
         ...state,
-        deviceType: (action as SetDeviceTypeAction).payload.deviceType
+        homePosts: (action as UpdateHomePostsAction).payload.homePosts
       };
 
     default:

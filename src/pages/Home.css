@@ -61,6 +61,13 @@
     background: white;
     height: fit-content;
     box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
+    display: flex;
+    flex-direction: column;
+    flex-flow: column-reverse;
+}
+
+.publications-section-title {
+    padding: 0.1rem 0 2.5rem 0;
 }
 
 .home-buttons-container {

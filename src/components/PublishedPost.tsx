@@ -49,10 +49,10 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         { readMore && expandedPost? <span className='read-more show-less' onClick={collapsePost}> Show less <div> </div></span> : '' }
       </div>
 
-      <div className='new-post-buttons'>
-        <button> <img src={flagImg}/> Report content </button>
-        <button> <img src={likeImg}/> Like (+1K) </button>
-        <button> <img src={commentImg}/> Comments (10) </button>
+      <div className='published-post-buttons'>
+        <button> <img alt='Report content' src={flagImg}/> Report content </button>
+        <button> <img alt='Like' src={likeImg}/> Like (+1K) </button>
+        <button> <img alt='Comments' src={commentImg}/> Comments (10) </button>
       </div>
     </div>
   );

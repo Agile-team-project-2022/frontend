@@ -135,7 +135,7 @@
     font-weight: 400;
 }
 
-.new-post-buttons {
+.published-post-buttons {
     display: flex;
     column-gap: 2.5rem;
     font-size: 0.6rem;
@@ -145,18 +145,18 @@
     margin-right: 1.45rem;
 }
 
-.new-post-buttons button {
+.published-post-buttons button {
     cursor: pointer;
     transition-property: filter;
     transition-duration: 0.5s;
 }
 
-.new-post-buttons button:hover {
+.published-post-buttons button:hover {
     filter: brightness(40%);
     transition-duration: 0.2s;
 }
 
-.new-post-buttons img {
+.published-post-buttons img {
     height: 0.7rem;
     margin: 0 0.15rem -0.12rem 0;
 }
