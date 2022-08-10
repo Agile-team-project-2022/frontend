@@ -11,9 +11,10 @@
     grid-template-areas:
             "img post-title date"
             "img post-text post-text"
-            "img empty read-more";
+            "img empty read-more"
+            "comments comments comments";
     grid-template-columns: 11rem auto 5rem;
-    grid-template-rows: 3.3rem 6.5rem auto;
+    grid-template-rows: 3.3rem 6.5rem auto auto;
     grid-column-gap: 2.5rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.062);
     width: calc(100% - 2.3rem);

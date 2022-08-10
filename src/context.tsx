@@ -85,7 +85,7 @@ export interface PostData {
   published: boolean,
   imageFile: string,
   postlikes: {id: number, userId: number}[],
-  comments: {}[],
+  comments: CommentData[],
   createdAt: string,
   updatedAt: string,
   authorId: number,
@@ -98,6 +98,15 @@ export interface CreatePostData {
   imageFile: string,
   authorId: number,
   plantId: number
+}
+
+export interface CommentData {
+  id: number,
+  content: string,
+  createdAt: string,
+  updatedAt: string,
+  authorId: number,
+  postId: number
 }
 
 export interface CountData {

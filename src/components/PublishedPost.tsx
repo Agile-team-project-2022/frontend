@@ -1,6 +1,6 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react';
 import './PublishedPost.css';
-import {AppContext, PostData} from "../context";
+import {AppContext, CommentData, PostData} from "../context";
 import {CheckEncodedImage, parseDate} from "../helpers";
 import defaultPostImg from '../assets/example-plant-2.jpeg';
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -9,6 +9,7 @@ import likeImg from '../assets/like-empty.png';
 import likedImg from '../assets/like-filled.png';
 import commentImg from '../assets/comment.png';
 import axios from "axios";
+import Comments from "./Comments";
 
 export interface IPublishedPostProps {
   post: PostData
@@ -21,6 +22,8 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [likePostId, setLikePostId] = useState(-1);
+  const [commentCount, setCommentCount] = useState(0);
+  const [expandComments, setExpandComments] = useState(false);
 
   useEffect(() => {
     // Trims the post.
@@ -34,8 +37,9 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       }
     });
 
-    // Initializes the number of posts to keep track as the user changes it.
+    // Initializes the number of posts and comments to keep track as the user changes them.
     setLikeCount(post.postlikes.length);
+    setCommentCount(post.comments.length);
   }, [post]);
 
   /** Read more or less for extensive posts. */
@@ -78,6 +82,16 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     }
   };
 
+  /** Receives the updated number of comments to display in the buttons. */
+  const onUpdateComments = (count: number) => {
+    setCommentCount(count);
+  };
+
+  /** Expands or hides the comments section. */
+  const handleClickComments = () => {
+    setExpandComments(prevState => !prevState);
+  };
+
   return (
     <div className={`post-container-published ${expandedPost? 'expanded-post' : ''}`}>
       <div className='post-content-published'>
@@ -108,11 +122,13 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           <img alt='Like' src={liked? likedImg : likeImg}/>
           Like ({likeCount})
         </button>
-        <button>
+        <button onClick={handleClickComments}>
           <img alt='Comments' src={commentImg}/>
-          Comments ({post.comments.length})
+          Comments ({commentCount})
         </button>
       </div>
+
+      {expandComments? <Comments onUpdateComments={onUpdateComments} inputComments={post.comments} /> : ''}
     </div>
   );
 }
