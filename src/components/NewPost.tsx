@@ -81,7 +81,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
 
   /** Queries all the stored posts to show. */
   const fetchAllPosts = () => {
-    const url = `${ BASE_URL }post?page=1&count=10`;
+    const url = `${ BASE_URL }post?page=1&count=100`; // TODO: use count and page parameters
     axios.get(url)
       .then((response) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
