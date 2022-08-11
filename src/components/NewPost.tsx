@@ -8,7 +8,7 @@ import axios from "axios";
 export interface IPostProps {}
 
 const NewPost: React.FunctionComponent<IPostProps> = () => {
-  const {state: {userData, BASE_URL}, dispatch} = useContext(AppContext);
+  const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -96,7 +96,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
 
         <label className='post-select-profile'>
           <span className={`${highlightSelect? 'invalid-post-select' : ''}`}>
-            {plantProfileName}
+            <label>{plantProfileName}</label>
             <div> </div>
           </span>
           <select defaultValue={-1} onChange={(e) => selectPlantProfile(e)}>

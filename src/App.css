@@ -261,11 +261,19 @@ textarea::-webkit-resizer {
   .mobile-section-container {
     display: none;
   }
+
+  .button-open-section {
+    font-size: 0.84rem;
+  }
 }
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
   .arrow-button {
     margin: 1rem 1.8rem;
+  }
+
+  .button-open-section {
+    font-size: 0.98rem;
   }
 }

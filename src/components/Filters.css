@@ -60,6 +60,7 @@
 .expanded-filters .list-item-container {
     padding-top: 0.3rem;
     padding-bottom: 0.1rem;
+    margin: 0 auto;
 }
 
 .list-img-container {
@@ -165,7 +166,7 @@
         display: block;
         background: white;
         height: fit-content;
-        width: 12rem;
+        width: 10rem;
         border-radius: 0.15rem;
         box-shadow: 0 0 1rem var(--color-black-shadow);
         margin: 0.8rem auto;
@@ -176,6 +177,15 @@
     .filter-div-container .button-open-section {
         display: block;
         box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
+    }
+
+    .expanded-filters .list-item-container {
+        width: calc(100% - 2rem);
+    }
+
+    .expanded-filters .list-img-container {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
     .expanded-filters {
@@ -192,6 +202,10 @@
         margin: 1rem 0.3rem 0.3rem 0.3rem;
         padding-top: 0.3rem;
         border-top: 1px solid var(--color-black-lighter-shadow);
+    }
+
+    .filter-buttons .button-action {
+        padding: 0.5rem;
     }
 
     .current-filters {
@@ -217,5 +231,18 @@
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
+    .filter-div-container {
+        width: 12rem;
+    }
+
+    .expanded-filters .list-item-container {
+        width: calc(100% - 5rem);
+    }
+
+    .expanded-filters .list-img-container {
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+
 
 }

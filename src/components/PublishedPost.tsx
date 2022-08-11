@@ -95,6 +95,11 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     setExpandComments(prevState => !prevState);
   };
 
+  /** In case of having inappropriate posts content, flags/reports it to be deleted. */
+  const flagPost = () => {
+    // TODO: Decide what do to after being reported. Add flags property in PUT request to update it.
+  };
+
   return (
     <div className={`post-container-published ${expandedPost? 'expanded-post' : ''}`}>
       <div className='post-content-published'>
@@ -123,7 +128,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       </div>
 
       <div className='published-post-buttons'>
-        <button>
+        <button onClick={flagPost}>
           <img alt='Report content' src={flagImg}/>
           Report content
         </button>
