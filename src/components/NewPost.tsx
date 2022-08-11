@@ -8,7 +8,7 @@ import axios from "axios";
 export interface IPostProps {}
 
 const NewPost: React.FunctionComponent<IPostProps> = () => {
-  const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
+  const {state: {userData, BASE_URL}, dispatch} = useContext(AppContext);
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
