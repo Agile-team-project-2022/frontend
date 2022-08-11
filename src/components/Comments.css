@@ -3,8 +3,9 @@
     flex-direction: column;
     row-gap: 0.5rem;
     padding: 0.3rem 1rem 1rem 1rem;
-    width: calc(100% - 2rem);
+    width: calc(100% - 3rem);
     height: fit-content;
+    justify-self: center;
 }
 
 .comment-item {
@@ -12,18 +13,20 @@
     grid-template-areas:
             "metadata metadata"
             "content empty";
-    grid-row-gap: 0.8rem;
-    grid-template-columns: 80% 20%;
+    grid-row-gap: 1rem;
+    grid-template-columns: auto 1.8rem;
     background: var(--color-gray-light);
     padding: 0.7rem 1rem 1.2rem 2.5rem;
     border-radius: 0.2rem;
     height: fit-content;
     width: calc(100% - 3.5rem);
+    opacity: 60%;
+    color: black;
 }
 
 .metadata {
     grid-area: metadata;
-    color: var(--color-black-lighter-text);
+    color: var(--color-black-text);
     justify-self: right;
     width: fit-content;
     font-size: 0.6rem;
@@ -39,8 +42,51 @@
 .comment-item p {
     grid-area: content;
     font-size: 0.82rem;
+    text-align: justify;
 }
 
 .comment-item p br:last-child {
     display: none;
+}
+
+.new-comment {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.45rem;
+    border: 1px solid var(--color-gray-border);
+    padding: 0.33rem;
+    border-radius: 0.1rem;
+    height: fit-content;
+    width: calc(100% - 0.66rem - 2px);
+}
+
+.new-comment-content {
+    background: var(--color-gray-light);
+    padding: 0.7rem 2.5rem 0 2.5rem;
+    border-radius: 0.2rem;
+    height: fit-content;
+    width: calc(100% - 5rem);
+}
+
+.new-comment-content .section-title {
+    width: fit-content;
+    margin: 0;
+    padding: 1rem 0 0.3rem 0;
+    font-size: 0.9rem;
+    color: var(--color-black-lighter-text);
+    opacity: 85%;
+}
+
+.new-comment-content textarea {
+    padding: 0.8rem 1.5rem 0.5rem 1.5rem;
+    height: fit-content;
+    min-height: 3.3rem;
+    resize: vertical;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.015);
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+.new-comment .new-post-buttons {
+    margin-top: 0;
 }

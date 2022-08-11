@@ -238,6 +238,15 @@ button, a {
   margin: 2.5rem auto;
 }
 
+textarea {
+  font-weight: 300;
+}
+
+textarea::-webkit-resizer {
+  background-image: url("../src/assets/resize.png");
+  background-size: cover;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {

@@ -23,6 +23,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const [likeCount, setLikeCount] = useState(0);
   const [likePostId, setLikePostId] = useState(-1);
   const [commentCount, setCommentCount] = useState(0);
+  const [updatedComments, setUpdatedComments] = useState<CommentData[]>([]);
   const [expandComments, setExpandComments] = useState(false);
 
   useEffect(() => {
@@ -40,7 +41,8 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     // Initializes the number of posts and comments to keep track as the user changes them.
     setLikeCount(post.postlikes.length);
     setCommentCount(post.comments.length);
-  }, [post]);
+    setUpdatedComments(post.comments);
+  }, [post, userId]);
 
   /** Read more or less for extensive posts. */
   const expandPost = () => {
@@ -83,8 +85,9 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   };
 
   /** Receives the updated number of comments to display in the buttons. */
-  const onUpdateComments = (count: number) => {
+  const onUpdateComments = (count: number, newComment: CommentData) => {
     setCommentCount(count);
+    setUpdatedComments(prevState => [...prevState, newComment]);
   };
 
   /** Expands or hides the comments section. */
@@ -104,7 +107,13 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           <p>
             {
               post.content.split('\n').map((item, index) => {
-                return item !== ''? <Fragment key={`paragraph-item-published-post-${index}`}>{item}<br/><br/></Fragment> : '';
+                return item !== ''?
+                  <Fragment key={`paragraph-item-published-post-${index}`}>
+                    {item.charAt(0).toUpperCase() + item.substring(1)}
+                    <br/><br/>
+                  </Fragment>
+                  :
+                  '';
               })
             }
           </p>
@@ -128,7 +137,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         </button>
       </div>
 
-      {expandComments? <Comments onUpdateComments={onUpdateComments} inputComments={post.comments} /> : ''}
+      {expandComments? <Comments onUpdateComments={onUpdateComments} comments={updatedComments} postId={post.id}/> : ''}
     </div>
   );
 }

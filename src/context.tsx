@@ -109,6 +109,12 @@ export interface CommentData {
   postId: number
 }
 
+export interface CreateCommentData {
+  content: string,
+  authorId: number,
+  postId: number
+}
+
 export interface CountData {
   totalPosts: number,
   totalPlants: number,

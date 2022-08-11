@@ -92,6 +92,7 @@
     border-radius: 0.2rem;
     margin: 0;
     width: calc(100% - 3rem);
+    font-weight: 300;
 }
 
 .post-content .input-section.invalid-post-input {
@@ -110,11 +111,6 @@
     height: fit-content;
     min-height: 3.3rem;
     resize: vertical;
-}
-
-textarea::-webkit-resizer {
-    background-image: url("../../src/assets/resize.png");
-    background-size: cover;
 }
 
 .new-post-buttons {
