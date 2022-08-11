@@ -17,7 +17,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   /** Gets all the Posts data only for the first time. */
   useEffect(() => {
     const fetchAllPosts = () => { // TODO: adjust count and page limits
-      const url = `${ BASE_URL }post?page=1&count=20`;
+      const url = `${ BASE_URL }post?page=1&count=100`;
       axios.get(url)
         .then((response) => {
           dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
