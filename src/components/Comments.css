@@ -1,3 +1,4 @@
+/* Mobile version. */
 .comments-container {
     display: flex;
     flex-direction: column;
@@ -41,7 +42,7 @@
 
 .comment-item p {
     grid-area: content;
-    font-size: 0.82rem;
+    font-size: 0.75rem;
     text-align: justify;
 }
 
@@ -72,7 +73,7 @@
     width: fit-content;
     margin: 0;
     padding: 1rem 0 0.3rem 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-black-lighter-text);
     opacity: 85%;
 }
@@ -85,8 +86,26 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.015);
     margin-bottom: 0.5rem;
     font-weight: 300;
+    font-size: 0.78rem;
 }
 
 .new-comment .new-post-buttons {
     margin-top: 0;
+}
+
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+    .new-comment-content .section-title {
+        font-size: 0.9rem;
+    }
+
+    .comment-item p {
+        font-size: 0.82rem;
+    }
 }
