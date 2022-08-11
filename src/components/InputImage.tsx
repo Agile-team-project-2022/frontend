@@ -3,10 +3,11 @@ import './InputImage.css';
 
 export interface IInputImageProps {
   onUploadImage: (encodedImg: string) => void,
-  children?: ReactNode
+  children?: ReactNode,
+  className?: string
 }
 
-const InputImage: React.FunctionComponent<IInputImageProps> = ({onUploadImage, children}) => {
+const InputImage: React.FunctionComponent<IInputImageProps> = ({onUploadImage, children, className=''}) => {
   const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if(e.target.files) {
       const file = e.target.files[0];
@@ -32,7 +33,7 @@ const InputImage: React.FunctionComponent<IInputImageProps> = ({onUploadImage, c
              accept=".jpeg, .png, .jpg"
              onChange={(e) => handleFileUpload(e)}
       />
-      <p>Select a file</p>
+      <p className={className}>Select a file</p>
     </label>
   );
 }

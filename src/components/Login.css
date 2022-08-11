@@ -16,26 +16,13 @@
     font-size: 0.9rem;
 }
 
-.login-container input {
-    all: unset;
-    grid-area: input-field;
-    background: white;
-    box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
-    margin: 1rem 0;
-    width: calc(100% - 2rem);
-    height: 1.8rem;
-    border-radius: 0.15rem;
-    font-size: 0.85rem;
-    padding: 0 1.01rem;
-}
-
 .login-button {
     grid-area: log-in-button;
     width: 11rem;
 }
 
 .login-button p {
-    opacity: 0%;
+    opacity: 0;
     font-size: 0.8rem;
 }
 

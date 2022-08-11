@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import './CollectionHeader.css';
-import defaultPersonImg from '../assets/example-people-1.jpeg';
+import defaultPersonImg from '../assets/default-person.jpeg';
 import {AppContext} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";

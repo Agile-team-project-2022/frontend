@@ -15,7 +15,8 @@ enum AppValidActions {
   SET_USER_DATA = 'SET_USER_DATA',
   SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
-  SET_DEVICE_TYPE = 'SET_DEVICE_TYPE'
+  SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
+  UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
 }
 
 // Interfaces and Types definition.
@@ -31,6 +32,7 @@ interface AppState {
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
   userData: UserData,
+  homePosts: PostData[],
   deviceType?: DeviceTypes,
   BASE_URL: string
 }
@@ -55,7 +57,7 @@ export interface UserData {
 }
 
 export interface PlantData {
-  plantId: number,
+  id: number,
   ownerId: number,
   name: string,
   species: string,
@@ -76,16 +78,41 @@ export interface ThumbnailData {
 }
 
 export interface PostData {
-  postId: number,
+  id: number,
   title: string,
   content: string,
   flag: boolean,
   published: boolean,
   imageFile: string,
+  postlikes: {id: number, userId: number}[],
+  comments: CommentData[],
   createdAt: string,
   updatedAt: string,
   authorId: number,
   plantId: number
+}
+
+export interface CreatePostData {
+  title: string,
+  content: string,
+  imageFile: string,
+  authorId: number,
+  plantId: number
+}
+
+export interface CommentData {
+  id: number,
+  content: string,
+  createdAt: string,
+  updatedAt: string,
+  authorId: number,
+  postId: number
+}
+
+export interface CreateCommentData {
+  content: string,
+  authorId: number,
+  postId: number
 }
 
 export interface CountData {
@@ -97,7 +124,7 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                | UpdateOwnerPictureAction;
+                | UpdateOwnerPictureAction | UpdateHomePostsAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -160,6 +187,11 @@ interface SetDeviceTypeAction {
   payload: {deviceType: DeviceTypes}
 }
 
+interface UpdateHomePostsAction {
+  type: AppValidActions,
+  payload: {homePosts: PostData[]}
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   language: 'en',
@@ -170,7 +202,7 @@ const appInitialState = {
   userData: {
     updated: false,
     user: 'guest',
-    userId: 2, // TODO: use correct user id
+    userId: 1, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,
@@ -190,6 +222,7 @@ const appInitialState = {
     },
     createdAt: ''
   },
+  homePosts: [],
   deviceType: undefined,
   BASE_URL: 'http://localhost:5000/'
 };
@@ -278,6 +311,12 @@ const reducer = (state: AppState, action: AppAction) => {
       return {
         ...state,
         deviceType: (action as SetDeviceTypeAction).payload.deviceType
+      };
+
+    case AppValidActions.UPDATE_HOME_POSTS:
+      return {
+        ...state,
+        homePosts: (action as UpdateHomePostsAction).payload.homePosts
       };
 
     default:

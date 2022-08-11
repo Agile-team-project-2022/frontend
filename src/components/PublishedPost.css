@@ -1,0 +1,206 @@
+/* Mobile version. */
+.post-container-published  {
+    display: grid;
+    grid-row-gap: 0.5rem;
+    margin: 0 auto 3rem auto;
+    width: calc(100% - 1.4rem);
+    height: fit-content;
+}
+
+.post-content-published {
+    display: grid;
+    grid-template-areas:
+            "img post-title date"
+            "img post-text post-text"
+            "img empty read-more";
+    grid-template-columns: 5.3rem auto 5rem;
+    grid-template-rows: 3.3rem 6.5rem auto;
+    grid-column-gap: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.062);
+    width: calc(100% - 0.5rem);
+    height: 11rem;
+    padding: 0 0.5rem 0 0;
+    border-radius: 0.1rem;
+}
+
+.expanded-post .post-content-published {
+    grid-template-rows: 3.3rem auto 1.2rem;
+    min-height: 11rem;
+    height: fit-content;
+}
+
+.post-image-container-published {
+    grid-area: img;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.post-image-container-published img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.post-date {
+    grid-area: date;
+    font-size: 0.6rem;
+    color: var(--color-black-lighter-text);
+    height: fit-content;
+    width: fit-content;
+    white-space: nowrap;
+    justify-self: right;
+    margin: 0.8rem 0.2rem 0 0;
+    max-width: 8rem;
+    overflow: hidden;
+}
+
+.post-content-published .section-title {
+    grid-area: post-title;
+    font-size: 0.9rem;
+    font-weight: 400;
+    width: fit-content;
+    margin: 0;
+    align-self: flex-end;
+    padding: 0.75rem 0;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-text-container-published {
+    grid-area: post-text;
+    font-size: 0.7rem;
+    padding: 0;
+    height: 6.5rem;
+    margin-top: -0.45rem;
+    text-align: justify;
+    overflow: hidden;
+    font-weight: 300;
+}
+
+.expanded-post .post-text-container-published {
+    min-height: 6.5rem;
+    height: fit-content;
+}
+
+.post-text-container-published p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    height: fit-content;
+    -webkit-line-clamp: 5;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-box-orient: vertical;
+}
+
+.expanded-post .post-text-container-published p {
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+}
+
+.read-more {
+    grid-area: read-more;
+    display: flex;
+    column-gap: 0.12rem;
+    font-size: 0.65rem;
+    width: fit-content;
+    height: fit-content;
+    color: #0EABA8;
+    align-self: flex-start;
+    justify-self: right;
+    cursor: pointer;
+    margin: -0.1rem -0.75rem 0 0;
+    letter-spacing: 0;
+    opacity: 80%;
+    transition-property: letter-spacing, opacity;
+    transition-duration: 0.2s;
+}
+
+.read-more div {
+    border-right: 1px solid #0EABA8;
+    border-top: 1px solid #0EABA8;
+    width: 0.3rem;
+    height: 0.3rem;
+    margin-top: 0.1rem;
+    align-self: center;
+    transform: rotate(45deg);
+}
+
+.read-more.show-less div {
+    transform: rotate(-135deg);
+    margin-left: 0.25rem;
+}
+
+.read-more:hover {
+    letter-spacing: 0.015rem;
+    opacity: 100%;
+    font-weight: 400;
+}
+
+.published-post-buttons {
+    display: flex;
+    column-gap: 2.5rem;
+    font-size: 0.6rem;
+    color: var(--color-black-lighter-text);
+    width: fit-content;
+    justify-self: right;
+    margin-right: 1.45rem;
+}
+
+.published-post-buttons button {
+    cursor: pointer;
+    transition-property: filter;
+    transition-duration: 0.5s;
+}
+
+.published-post-buttons button:hover {
+    filter: brightness(40%);
+    transition-duration: 0.2s;
+}
+
+.published-post-buttons img {
+    height: 0.7rem;
+    margin: 0 0.15rem -0.12rem 0;
+}
+
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .post-content-published {
+        grid-template-columns: 7.5rem auto 5rem;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+    .post-container-published  {
+        margin: 0 auto 3rem auto;
+        width: calc(100% - 5rem);
+    }
+
+    .post-content-published {
+        grid-template-columns: 11rem auto 5rem;
+        grid-template-rows: 3.3rem 6.5rem auto;
+        grid-column-gap: 2.5rem;
+        width: calc(100% - 2.3rem);
+        height: 11rem;
+        padding: 0 2.3rem 0 0;
+    }
+
+    .post-content-published .section-title {
+        font-size: 1rem;
+    }
+
+    .post-text-container-published {
+        font-size: 0.85rem;
+    }
+
+    .post-date {
+        margin: 1.2rem -0.9rem 0 0;
+    }
+}
