@@ -10,13 +10,14 @@ import likedImg from '../assets/like-filled.png';
 import commentImg from '../assets/comment.png';
 import axios from "axios";
 import Comments from "./Comments";
+import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IPublishedPostProps {
   post: PostData
 }
 
 const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => {
-  const {state: {userData: {userId}, BASE_URL}} = useContext(AppContext);
+  const {state: {userData: {userId}, BASE_URL, deviceType}} = useContext(AppContext);
   const [readMore, setReadMore] = useState(false);
   const [expandedPost, setExpandedPost] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -130,15 +131,15 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       <div className='published-post-buttons'>
         <button onClick={flagPost}>
           <img alt='Report content' src={flagImg}/>
-          Report content
+          {deviceType === DeviceTypes.DESKTOP? 'Report content' : ''}
         </button>
         <button onClick={like}>
           <img alt='Like' src={liked? likedImg : likeImg}/>
-          Like ({likeCount})
+          {deviceType === DeviceTypes.DESKTOP? 'Like' : ''} ({likeCount})
         </button>
         <button onClick={handleClickComments}>
           <img alt='Comments' src={commentImg}/>
-          Comments ({commentCount})
+          {deviceType === DeviceTypes.DESKTOP? 'Comments' : ''} ({commentCount})
         </button>
       </div>
 

@@ -6,8 +6,9 @@
             "filters filters filters"
             "content content content"
             "footer footer footer";
-    grid-template-columns: 33% auto 33%;
-    grid-template-rows: 2rem 2rem fit-content(0);
+    grid-template-columns: 33% minmax(5rem, auto) 33%;
+    grid-template-rows: 2rem 3rem auto 4.5rem;
+    width: calc(100vw - 3px);
 }
 
 .home > *:not(.home-background) {
@@ -55,6 +56,9 @@
     grid-area: content;
     width: 100%;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
 }
 
 .publications-container {
@@ -67,7 +71,7 @@
 }
 
 .publications-section-title {
-    padding: 0.1rem 0 2.5rem 0;
+    padding: 0;
 }
 
 .home-buttons-container {
@@ -86,7 +90,7 @@
             "title empty empty"
             "filters content buttons"
             "footer none none";
-        grid-template-columns: minmax(13rem, 21%) auto minmax(11rem, 21%);
+        grid-template-columns: minmax(13rem, 21%) minmax(23rem, auto) minmax(11rem, 21%);
         grid-template-rows: 5rem minmax(60vh, auto) 5rem;
     }
 
@@ -101,6 +105,10 @@
         margin: 0;
     }
 
+    .page-content-container {
+        row-gap: 0;
+    }
+
     .publications-container {
         box-shadow: none;
     }
@@ -108,6 +116,10 @@
     .section-title {
         font-size: 1.1rem;
         margin: 0 auto;
+    }
+
+    .publications-section-title {
+        padding: 0.1rem 0 2.5rem 0;
     }
 
     .home-buttons-container {
