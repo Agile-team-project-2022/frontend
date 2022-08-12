@@ -10,6 +10,7 @@ export interface ICollectionPlantsProps {
 }
 
 const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view, ownerId}) => {
+  /** TODO: Fetch plants from others instead of userData. */
   const {state: {userData: {plants, count: {totalPlants}}}} = useContext(AppContext);
 
   return (

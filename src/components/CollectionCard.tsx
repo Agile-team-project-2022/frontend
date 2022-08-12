@@ -1,9 +1,10 @@
 import React from 'react';
 import './CollectionCard.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import plantImg from "../assets/example-plant-2.jpeg";
+import defaultPlantImg from "../assets/example-plant-2.jpeg";
 import {PlantData} from "../context";
 import {useNavigate} from "react-router-dom";
+import {CheckEncodedImage} from "../helpers";
 
 export interface ICollectionCardProps {
   plant: PlantData,
@@ -21,7 +22,7 @@ const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant, o
   return (
     <div className="collection-single-card-container" onClick={handleOnClick}>
       <div className='card-img-container' >
-        <LazyLoadImage src={plantImg} alt={`Badge`} />
+        <LazyLoadImage src={CheckEncodedImage(plant.imageFile)? plant.imageFile : defaultPlantImg} alt={`Badge`} />
       </div>
 
       <div className='card-data-container'>

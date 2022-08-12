@@ -8,14 +8,18 @@ import {CheckEncodedImage} from '../helpers';
 import saveImg from '../assets/save.png';
 import cancelImg from '../assets/cancel.png';
 import {DeviceTypes} from "../hooks/useWindowSize";
+import {SectionType} from "./CollectionInteractions";
 
 export interface IChangeProfilePictureProps {
-  onClose: () => void
+  onClose: () => void,
+  view: SectionType,
+  prevImg: string,
+  id: number
 }
 
-const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> = ({onClose}) => {
+const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> = ({onClose, view, prevImg, id}) => {
   const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
-  const [newImage, setNewImage] = useState(userData.imageFile);
+  const [newImage, setNewImage] = useState('');
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -27,21 +31,52 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
   };
 
   /** Updates the database with the new uploaded owner image only if the images differ. */
-  const saveImage = () => {
-    if(userData.imageFile === newImage || !isValid) {
+  const saveOwnerImage = () => {
+    if(prevImg === newImage || !isValid) {
       onClose();
       return;
     }
 
-    const url = `${ BASE_URL }user/${ userData.userId }`;
+    const url = `${ BASE_URL }user/${ id }`;
     const data = {
-      imageFile: newImage, // TODO: Confirm changes done in backend to accept new image data. Check size constraint.
+      imageFile: newImage, // TODO: Confirm changes done in backend to accept new image data.
     };
 
     axios.put(url, data)
       .then((response) => {
-        console.log(`Successfully updated user image in database: ${userData.user}`);
+        console.log(`Successfully updated user image in database`);
         dispatch({type: AppValidActions.UPDATE_OWNER_PICTURE, payload: {userData: {imageFile: newImage}}});
+        onClose();
+      })
+      .catch((e) => console.log(e));
+  };
+
+  /** Updates the database with the new Plant image only if the images differ. */
+  const savePlantImage = () => {
+    if(prevImg === newImage || !isValid) {
+      onClose();
+      return;
+    }
+
+    const url = `${ BASE_URL }plant/${ id }`;
+    const data = {
+      ownerId: userData.userId,
+      plantsCategoryId: 1, // TODO: ask to remove this in updating the plant.
+      imageFile: newImage,
+    };
+
+    axios.put(url, data)
+      .then((response) => {
+        console.log(`Successfully updated user Plant image in database`);
+        let plantIndex = 0;
+        for(let i = 0; i < userData.plants.length; i++) {
+          if(userData.plants[i].id === id) {
+            plantIndex = i;
+            break;
+          }
+        }
+
+        dispatch({type: AppValidActions.UPDATE_PLANT_PICTURE, payload: {plantData: {imageFile: '', plantIndex: plantIndex}}});
         onClose();
       })
       .catch((e) => console.log(e));
@@ -74,14 +109,14 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
       <div className='change-profile-picture-content'>
         <InputImage onUploadImage={uploadNewImage}>
           <div className='list-img-container change-profile-picture'>
-            <img src={isValid? newImage : defaultPersonImg} alt={'Profile owner'} />
+            <img src={isValid? newImage : CheckEncodedImage(prevImg)? prevImg : defaultPersonImg} alt={'Profile'} />
           </div>
         </InputImage>
       </div>
 
       <div className='change-profile-picture-buttons-container'>
-        <button onClick={onClose}><img src={cancelImg} alt='Cancel'/></button>
-        <button onClick={saveImage}><img src={saveImg} alt='Save'/></button>
+        <button onClick={onClose}> <img src={cancelImg} alt='Cancel'/> </button>
+        <button onClick={view === SectionType.PLANT? savePlantImage : saveOwnerImage}> <img src={saveImg} alt='Save'/> </button>
       </div>
     </div>
   );

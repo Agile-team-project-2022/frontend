@@ -7,18 +7,14 @@ import Modal from "./Modal";
 import ChangeProfilePicture from "./ChangeProfilePicture";
 import {CheckEncodedImage} from '../helpers';
 import GalleryExpanded from "./GalleryExpanded";
+import {CollectionView} from "./CollectionHeader";
 import {SectionType} from "./CollectionInteractions";
 
-export interface ICollectionHeaderProps {
+export interface IProfileHeaderProps {
   view: CollectionView
 }
 
-export enum CollectionView {
-  OWNER = 'OWNER',
-  OTHERS = 'OTHERS'
-}
-
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view}) => {
+const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view}) => {
   const {state: {userData, deviceType}} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const isValid = CheckEncodedImage(userData.imageFile);
@@ -27,7 +23,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   const onImgClickOwner = () => {
     return (
       <Modal onClose={closeModal} className='change-profile-picture-modal'>
-        <ChangeProfilePicture id={userData.userId} view={SectionType.PERSON} onClose={closeModal} prevImg={userData.imageFile} />
+        <ChangeProfilePicture id={1} view={SectionType.PLANT} onClose={closeModal} prevImg={''} />
       </Modal>
     );
   };
@@ -108,4 +104,4 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   );
 }
 
-export default CollectionHeader;
+export default ProfileHeader;

@@ -1,6 +1,8 @@
 import React from 'react';
 import './PlantProfile.css';
 import {useParams} from "react-router-dom";
+import {CollectionView} from "../components/CollectionHeader";
+import ProfileHeader from "../components/ProfileHeader";
 
 export interface IPlantProfileProps {}
 
@@ -9,8 +11,9 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
   return (
     <main className="plant-profile-page">
-      Plants!
+      <ProfileHeader view={CollectionView.OWNER} />
       {plantId}
+      {ownerId}
     </main>
   );
 }

@@ -17,6 +17,7 @@ enum AppValidActions {
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
   UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
+  UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE'
 }
 
 // Interfaces and Types definition.
@@ -124,7 +125,7 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                | UpdateOwnerPictureAction | UpdateHomePostsAction;
+                | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -190,6 +191,11 @@ interface SetDeviceTypeAction {
 interface UpdateHomePostsAction {
   type: AppValidActions,
   payload: {homePosts: PostData[]}
+}
+
+interface UpdatePlantPictureAction {
+  type: AppValidActions,
+  payload: {plantData: {imageFile: string, plantIndex: number}}
 }
 
 // Defines the default values to initialize the app.
@@ -317,6 +323,21 @@ const reducer = (state: AppState, action: AppAction) => {
       return {
         ...state,
         homePosts: (action as UpdateHomePostsAction).payload.homePosts
+      };
+
+    case AppValidActions.UPDATE_PLANT_PICTURE:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          plants: [
+            ...state.userData.plants,
+            {
+              ...state.userData.plants[(action as UpdatePlantPictureAction).payload.plantData.plantIndex],
+              imageFile: (action as UpdatePlantPictureAction).payload.plantData.imageFile
+            }
+          ]
+        }
       };
 
     default:
