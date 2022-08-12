@@ -4,16 +4,17 @@ import {AppContext, AppValidActions, CreatePostData} from "../context";
 import InputImage from "./InputImage";
 import {CheckEncodedImage} from "../helpers";
 import axios from "axios";
+import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IPostProps {}
 
 const NewPost: React.FunctionComponent<IPostProps> = () => {
-  const {state: {userData, BASE_URL}, dispatch} = useContext(AppContext);
+  const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [plantProfile, setPlantProfile] = useState<number | undefined>(undefined);
-  const [plantProfileName, setPlantProfileName] = useState('Select profile to publish from');
+  const [plantProfileName, setPlantProfileName] = useState(`${deviceType === DeviceTypes.DESKTOP? 'Select profile to publish from' : 'Select profile'}`);
   const [highlightSelect, setHighlightSelect] = useState(false);
   const [highlightTitle, setHighlightTitle] = useState(false);
   const [highlightContent, setHighlightContent] = useState(false);
@@ -81,7 +82,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
 
   /** Queries all the stored posts to show. */
   const fetchAllPosts = () => {
-    const url = `${ BASE_URL }post?page=1&count=10`;
+    const url = `${ BASE_URL }post?page=1&count=100`; // TODO: use count and page parameters
     axios.get(url)
       .then((response) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});

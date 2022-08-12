@@ -56,6 +56,17 @@ main {
   background: white;
 }
 
+body::-webkit-scrollbar {
+  width: 0.2rem;
+  background: rgba(0, 0, 0, 0.05);
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-dark);
+}
+
+
 button, a {
   all: unset;
   -webkit-tap-highlight-color: transparent !important;
@@ -231,6 +242,7 @@ button, a {
 }
 
 .section-divisor {
+  display: none;
   border-top: 1px solid var(--color-gray-border);
   border-bottom: 1px solid var(--color-gray-border);
   height: 0.3rem;
@@ -246,6 +258,7 @@ textarea::-webkit-resizer {
   background-image: url("../src/assets/resize.png");
   background-size: cover;
 }
+
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
@@ -263,7 +276,11 @@ textarea::-webkit-resizer {
   }
 
   .button-open-section {
-    font-size: 0.84rem;
+    font-size: 0.83rem;
+  }
+
+  .section-divisor {
+    display: block;
   }
 }
 

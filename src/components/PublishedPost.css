@@ -13,7 +13,7 @@
             "img post-title date"
             "img post-text post-text"
             "img empty read-more";
-    grid-template-columns: 5.3rem auto 5rem;
+    grid-template-columns: 5.3rem minmax(3rem, auto) 5rem;
     grid-template-rows: 3.3rem 6.5rem auto;
     grid-column-gap: 1rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.062);
@@ -114,7 +114,7 @@
     align-self: flex-start;
     justify-self: right;
     cursor: pointer;
-    margin: -0.1rem -0.75rem 0 0;
+    margin: -0.2rem 0.2rem 0 0;
     letter-spacing: 0;
     opacity: 80%;
     transition-property: letter-spacing, opacity;
@@ -144,18 +144,21 @@
 
 .published-post-buttons {
     display: flex;
-    column-gap: 2.5rem;
+    column-gap: 1rem;
     font-size: 0.6rem;
     color: var(--color-black-lighter-text);
     width: fit-content;
     justify-self: right;
-    margin-right: 1.45rem;
+    margin-right: 0.5rem;
 }
 
 .published-post-buttons button {
     cursor: pointer;
     transition-property: filter;
     transition-duration: 0.5s;
+    display: flex;
+    flex-flow: nowrap;
+    white-space: nowrap;
 }
 
 .published-post-buttons button:hover {
@@ -202,5 +205,14 @@
 
     .post-date {
         margin: 1.2rem -0.9rem 0 0;
+    }
+
+    .published-post-buttons {
+        column-gap: 2.5rem;
+        margin-right: 1.45rem;
+    }
+
+    .read-more {
+        margin: -0.1rem -0.75rem 0 0;
     }
 }
