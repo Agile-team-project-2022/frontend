@@ -3,14 +3,23 @@ import './CollectionCard.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import plantImg from "../assets/example-plant-2.jpeg";
 import {PlantData} from "../context";
+import {useNavigate} from "react-router-dom";
 
 export interface ICollectionCardProps {
   plant: PlantData,
+  ownerId: number
 }
 
-const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant}) => {
+const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant, ownerId}) => {
+  const navigate = useNavigate();
+
+  /** Redirects to the plant's profile. */
+  const handleOnClick = () => {
+    navigate(`/plant-profile/${plant.id}/${ownerId}`, {replace: false});
+  };
+
   return (
-    <div className="collection-single-card-container">
+    <div className="collection-single-card-container" onClick={handleOnClick}>
       <div className='card-img-container' >
         <LazyLoadImage src={plantImg} alt={`Badge`} />
       </div>

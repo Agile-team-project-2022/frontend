@@ -8,7 +8,9 @@ import ChangeProfilePicture from "./ChangeProfilePicture";
 import {CheckEncodedImage} from '../helpers';
 import GalleryExpanded from "./GalleryExpanded";
 
-export interface ICollectionHeaderProps {view: CollectionView}
+export interface ICollectionHeaderProps {
+  view: CollectionView
+}
 
 export enum CollectionView {
   OWNER = 'OWNER',

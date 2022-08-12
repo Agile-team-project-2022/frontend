@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Collection.css';
 import CollectionHeader, {CollectionView} from "../components/CollectionHeader";
 import CollectionPlants from "../components/CollectionPlants";
@@ -10,11 +10,17 @@ import CollectionInteractions from "../components/CollectionInteractions";
 export interface ICollectionProps {}
 
 const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
-  const {state: {deviceType}} = useContext(AppContext);
+  const {state: {deviceType, userData}} = useContext(AppContext);
+  const [ownerId, setOwnerId] = useState(-1);
   // Manages the sections to expand on mobile devices.
   const [showBadges, setShowBadges] = useState(true);
   const [showCollection, setShowCollection] = useState(false);
   const [showInteractions, setShowInteractions] = useState(false);
+
+  /** TODO: Remove. sets the owner data, must be replaced with correct user. */
+  useEffect(() => {
+    setOwnerId(userData.userId);
+  }, [userData]);
 
   /** Manages the badges section if the user expands it on mobile devices. */
   const expandBadges = () => {
@@ -40,7 +46,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
   /** Renders the section selected on mobile devices. */
   const getExpandedSection = () => {
     if(showBadges) return <div className='mobile-section-container'><Badges/></div>;
-    else if(showCollection) return <div className='mobile-section-container'><CollectionPlants/></div>;
+    else if(showCollection) return <div className='mobile-section-container'><CollectionPlants ownerId={ownerId} view={CollectionView.OWNER}/></div>;
     else if(showInteractions) return <CollectionInteractions />;
   };
 
@@ -74,7 +80,8 @@ const Collection: React.FunctionComponent<ICollectionProps> = (props) => {
           :
           <>
             <Badges />
-            <CollectionPlants />
+            {/** TODO: Replace with correct owner Data. */}
+            <CollectionPlants ownerId={ownerId} view={CollectionView.OWNER}/>
             <CollectionInteractions />
           </>
       }
