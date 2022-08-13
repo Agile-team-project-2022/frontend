@@ -8,6 +8,7 @@ import {AppContext, PlantData} from "../context";
 import axios from "axios";
 import PublishedPost from "../components/PublishedPost";
 import NewPost from "../components/NewPost";
+import GalleryPreview from "../components/GalleryPreview";
 
 export interface IPlantProfileProps {}
 
@@ -15,7 +16,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
   const {state: {userData: {plants}, BASE_URL}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
-  const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({name: '', imageFile: '', species: '', followers: 0});
+  const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
 
   /** Gets the full plant data. */
   useEffect(() => {
@@ -25,6 +26,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
         .then((response) => {
           setPlantData(response.data);
           setPlantHeaderData({
+            id: plantId? parseInt(plantId) : -1,
             name: response.data.name,
             imageFile: response.data.imageFile,
             species: response.data.species,
@@ -46,7 +48,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
       <div className='page-content-container'>
         <section className='publications-container'>
-          <div> Photo gallery </div>
+          <GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}
         </section>
 
         <section className='publications-container'>
@@ -63,14 +65,14 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
                   return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
                 })
                 :
-                <p> No Posts to show yet </p>
+                <p> No Posts to show yet for owner Id: {ownerId} </p>
             }
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
         </section>
       </div>
 
-      <div> {ownerId} </div>
+      <div> </div>
     </main>
   );
 }

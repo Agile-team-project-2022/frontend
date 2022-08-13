@@ -73,6 +73,14 @@
         padding-top: 10rem;
     }
 
+    .plant-profile-page .post-container {
+        width: calc(100% - 2rem);
+    }
+
+    .plant-profile-page .post-container-published {
+        width: calc(100% - 1.4rem);
+    }
+
     .plant-profile-page .post-content {
         grid-template-columns: 9rem minmax(3rem, auto) 5rem;
     }

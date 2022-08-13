@@ -196,7 +196,7 @@ interface UpdateHomePostsAction {
 
 interface UpdatePlantPictureAction {
   type: AppValidActions,
-  payload: {plantData: {imageFile: string, plantIndex: number}}
+  payload: {userData: {plants: PlantData[]} }
 }
 
 // Defines the default values to initialize the app.
@@ -332,16 +332,10 @@ const reducer = (state: AppState, action: AppAction) => {
         userData: {
           ...state.userData,
           plants: [
-            ...state.userData.plants.splice(0, (action as UpdatePlantPictureAction).payload.plantData.plantIndex),
-            {
-              ...state.userData.plants[(action as UpdatePlantPictureAction).payload.plantData.plantIndex],
-              imageFile: (action as UpdatePlantPictureAction).payload.plantData.imageFile
-            },
-            ...state.userData.plants.splice((action as UpdatePlantPictureAction).payload.plantData.plantIndex, state.userData.plants.length),
+            ...(action as UpdatePlantPictureAction).payload.userData.plants
           ]
         }
       };
-
 
     default:
       return state;

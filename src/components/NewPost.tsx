@@ -26,7 +26,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   };
 
   const selectPlantProfile = (e: ChangeEvent<HTMLSelectElement>) => {
-    const plantId = parseInt(e.target.id);
+    const plantId = parseInt(e.target.selectedOptions[0].id);
     setPlantProfile(plantId);
     let plantName = e.target.value;
     plantName = plantName.length > 20? `${plantName.substring(0, 20)}...` : plantName;
@@ -68,7 +68,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
       title: title,
       content: content,
       authorId: userData.userId,
-      plantId: 1,
+      plantId: plantProfile || -1,
       imageFile: image
     };
 
