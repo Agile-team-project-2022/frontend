@@ -44,7 +44,7 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
 
     axios.put(url, data)
       .then((response) => {
-        console.log(`Successfully updated user image in database`);
+        console.log(`Successfully updated user image in database: ${id}`);
         dispatch({type: AppValidActions.UPDATE_OWNER_PICTURE, payload: {userData: {imageFile: newImage}}});
         onClose();
       })
@@ -67,18 +67,17 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
 
     axios.put(url, data)
       .then((response) => {
-        console.log(`Successfully updated user Plant image in database`);
-        let plantIndex = 0;
-        for(let i = 0; i < userData.plants.length; i++) {
-          if(userData.plants[i].id === id) {
-            plantIndex = i;
+        console.log(`Successfully updated user Plant image in database: ${id}`);
+        const newPlants = userData.plants;
+        for(let i = 0; i < newPlants.length; i++) {
+          if(newPlants[i].id === id) {
+            newPlants[i].imageFile = data.imageFile
             break;
           }
         }
 
         // Updates the plant's collection without need for fetching the whole data or refreshing.
-
-        dispatch({type: AppValidActions.UPDATE_PLANT_PICTURE, payload: {plantData: {imageFile: '', plantIndex: plantIndex}}});
+        dispatch({type: AppValidActions.UPDATE_PLANT_PICTURE, payload: {userData: {plants: newPlants}}});
         onClose();
       })
       .catch((e) => console.log(e));

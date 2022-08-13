@@ -17,6 +17,7 @@ export interface IProfileHeaderProps {
 }
 
 export interface PlantHeaderData {
+  id: number,
   imageFile: string,
   name: string,
   species: string,
@@ -32,7 +33,7 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
   const onImgClickOwner = () => {
     return (
       <Modal onClose={closeModal} className='change-profile-picture-modal'>
-        <ChangeProfilePicture id={1} view={SectionType.PLANT} onClose={closeModal} prevImg={plantData.imageFile} />
+        <ChangeProfilePicture id={plantData.id} view={SectionType.PLANT} onClose={closeModal} prevImg={plantData.imageFile} />
       </Modal>
     );
   };
