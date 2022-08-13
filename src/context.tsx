@@ -68,7 +68,8 @@ export interface PlantData {
   caringInfo: string,
   location: string,
   createdAt: string,
-  categoryId: 1
+  categoryId: 1,
+  posts: PostData[]
 }
 
 // Applies for Friends, Followed plants, Requests to take care of, Requests for being friends.
@@ -331,14 +332,16 @@ const reducer = (state: AppState, action: AppAction) => {
         userData: {
           ...state.userData,
           plants: [
-            ...state.userData.plants,
+            ...state.userData.plants.splice(0, (action as UpdatePlantPictureAction).payload.plantData.plantIndex),
             {
               ...state.userData.plants[(action as UpdatePlantPictureAction).payload.plantData.plantIndex],
               imageFile: (action as UpdatePlantPictureAction).payload.plantData.imageFile
-            }
+            },
+            ...state.userData.plants.splice((action as UpdatePlantPictureAction).payload.plantData.plantIndex, state.userData.plants.length),
           ]
         }
       };
+
 
     default:
       return state;

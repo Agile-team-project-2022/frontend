@@ -8,7 +8,7 @@
             "footer footer footer";
     grid-template-columns: 33% minmax(5rem, auto) 33%;
     grid-template-rows: 2rem 3rem auto 4.5rem;
-    width: calc(100vw - 3px);
+    width: 100vw;
 }
 
 .home > *:not(.home-background) {

@@ -72,4 +72,23 @@
         grid-template-columns: 20% auto 20%;
         padding-top: 10rem;
     }
+
+    .plant-profile-page .post-content {
+        grid-template-columns: 9rem minmax(3rem, auto) 5rem;
+    }
+
+    .plant-profile-page .section-title {
+        min-width: 3rem;
+    }
+
+    .plant-profile-page .post-select-profile {
+        width: 6rem;
+        margin-right: 0.25rem;
+        justify-self: right;
+    }
+
+    .plant-profile-page textarea {
+        padding: 0.8rem 1.3rem 0.5rem 1.5rem !important;
+        width: calc(100% - 2.8rem) !important;
+    }
 }

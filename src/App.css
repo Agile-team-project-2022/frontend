@@ -57,15 +57,14 @@ main {
 }
 
 body::-webkit-scrollbar {
-  width: 0.2rem;
-  background: rgba(0, 0, 0, 0.05);
-  overflow-x: hidden;
+  width: 0.15rem;
+  height: 0;
+  background: transparent;
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: var(--color-gray-dark);
 }
-
 
 button, a {
   all: unset;

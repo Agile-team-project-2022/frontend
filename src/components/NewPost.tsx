@@ -14,7 +14,9 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [plantProfile, setPlantProfile] = useState<number | undefined>(undefined);
-  const [plantProfileName, setPlantProfileName] = useState(`${deviceType === DeviceTypes.DESKTOP? 'Select profile to publish from' : 'Select profile'}`);
+  const [plantProfileName, setPlantProfileName] = useState(
+    `${deviceType === DeviceTypes.DESKTOP && !window.location.href.includes('plant-profile')? 'Select profile to publish from' : 'Select profile'}`
+  );
   const [highlightSelect, setHighlightSelect] = useState(false);
   const [highlightTitle, setHighlightTitle] = useState(false);
   const [highlightContent, setHighlightContent] = useState(false);

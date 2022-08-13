@@ -76,6 +76,8 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
           }
         }
 
+        // Updates the plant's collection without need for fetching the whole data or refreshing.
+
         dispatch({type: AppValidActions.UPDATE_PLANT_PICTURE, payload: {plantData: {imageFile: '', plantIndex: plantIndex}}});
         onClose();
       })
