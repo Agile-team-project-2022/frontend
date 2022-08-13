@@ -208,7 +208,7 @@
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .post-content-published {
-        grid-template-columns: 7.5rem auto 5rem;
+        grid-template-columns: 7.5rem minmax(1rem, auto) 5rem;
     }
 }
 
@@ -220,7 +220,7 @@
     }
 
     .post-content-published {
-        grid-template-columns: 11rem auto 5rem;
+        grid-template-columns: 11rem minmax(1rem, auto) 5rem;
         grid-template-rows: 3.3rem 6.5rem auto;
         grid-column-gap: 2.5rem;
         width: calc(100% - 2.3rem);
