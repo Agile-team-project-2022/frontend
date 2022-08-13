@@ -16,7 +16,7 @@ const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFil
         {
           imageFiles.map((item, index) => {
             return (
-              <div className='gallery-img-container list-img-container' key={`gallery-preview-item-${index}`}>
+              <div className='gallery-img-container' key={`gallery-preview-item-${index}`}>
                 {/* TODO: change index by an unique image ID. */}
                 <LazyLoadImage src={CheckEncodedImage(item)? item : defaultPlantImg} alt='Plant gallery item' />
               </div>
