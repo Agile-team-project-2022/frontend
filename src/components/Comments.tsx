@@ -11,7 +11,7 @@ export interface ICommentsProps {
 }
 
 const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateComments, postId}) => {
-  const {state: {userData: {userId}, BASE_URL}} = useContext(AppContext);
+  const {state: {userData: {userId, user}, BASE_URL}} = useContext(AppContext);
   const [newComment, setNewComment] = useState('');
 
   /** Prepares the formatting of the content as an array before rendering. */
@@ -55,7 +55,7 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
         comments.map((item, index) => {
           return (
             <div className='comment-item' key={`comment-item-${item.id}`}>
-              <span className='metadata'>{parseDate(item.createdAt)} by {item.authorId} --- TODO: replace with name</span>
+              <span className='metadata'>{parseDate(item.createdAt)} by "{user}"</span> {/*TODO: Replace 'user' by name of author of comment*/}
               <p>
                 {formatComment(item.content).split('\n').map((itemParagraph, indexParagraph) => {
                   return itemParagraph !== ''?

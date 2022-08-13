@@ -241,6 +241,7 @@
 
     .expanded-filters .list-img-container {
         width: 3.2rem;
+        min-width: 3.2rem;
         height: 3.2rem;
     }
 

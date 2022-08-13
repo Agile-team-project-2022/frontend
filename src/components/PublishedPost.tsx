@@ -1,6 +1,6 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react';
 import './PublishedPost.css';
-import {AppContext, CommentData, PostData} from "../context";
+import {AppContext, CommentData, PostData, ThumbnailData} from "../context";
 import {CheckEncodedImage, parseDate} from "../helpers";
 import defaultPostImg from '../assets/example-plant-2.jpeg';
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -20,6 +20,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const {state: {userData: {userId}, BASE_URL, deviceType}} = useContext(AppContext);
   const [readMore, setReadMore] = useState(false);
   const [expandedPost, setExpandedPost] = useState(false);
+  const [authorPlantData, setAuthorPlantData] = useState<ThumbnailData>({id: -1, name: '', imageFile: ''});
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [likePostId, setLikePostId] = useState(-1);
@@ -46,6 +47,21 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       setUpdatedComments(post.comments);
     }
   }, [post, userId]);
+
+  /** TODO: Gets the full plant data, replace to get only Thumbnail plant data. */
+  useEffect(() => {
+    const fetchPlant = () => {
+      const url = `${ BASE_URL }plant/${ post.plantId }`;
+      axios.get(url)
+        .then((response) => {
+          setAuthorPlantData(response.data);
+        })
+        .catch((e) => console.log(e));
+    };
+
+    fetchPlant();
+    // eslint-disable-next-line
+  }, [post]);
 
   /** Read more or less for extensive posts. */
   const expandPost = () => {
@@ -131,6 +147,13 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       </div>
 
       <div className='published-post-buttons'>
+        <div className='published-post-signature'>
+          <span>By "{authorPlantData.name.charAt(0).toUpperCase() + authorPlantData.name.substring(1)}"</span>
+          <div className='signature-img-container'>
+            <img src={authorPlantData.imageFile} alt='Author post plant'/>
+          </div>
+        </div>
+
         <button onClick={flagPost}>
           <img alt='Report content' src={flagImg}/>
           {deviceType === DeviceTypes.DESKTOP? 'Report content' : ''}
