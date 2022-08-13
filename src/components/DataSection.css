@@ -50,7 +50,6 @@
     margin: 0.5rem auto;
 }
 
-
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .data-section-container {

@@ -48,7 +48,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
       <div className='page-content-container'>
         <section className='publications-container'>
-          <GalleryPreview imageFiles={['']} /> {/* TODO: Pass the correct array of plant images. */}
+          <GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}
         </section>
 
         <section className='publications-container'>
@@ -65,14 +65,14 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
                   return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
                 })
                 :
-                <p> No Posts to show yet </p>
+                <p> No Posts to show yet for owner Id: {ownerId} </p>
             }
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
         </section>
       </div>
 
-      <div> {ownerId} </div>
+      <div> </div>
     </main>
   );
 }

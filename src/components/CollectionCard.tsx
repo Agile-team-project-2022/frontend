@@ -22,7 +22,7 @@ const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant, o
   return (
     <div className="collection-single-card-container" onClick={handleOnClick}>
       <div className='card-img-container' >
-        <LazyLoadImage src={CheckEncodedImage(plant.imageFile)? plant.imageFile : defaultPlantImg} alt={`Badge`} />
+        <LazyLoadImage src={CheckEncodedImage(plant.imageFile)? plant.imageFile : defaultPlantImg} alt='Collection plant item' />
       </div>
 
       <div className='card-data-container'>
