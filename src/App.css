@@ -57,15 +57,14 @@ main {
 }
 
 body::-webkit-scrollbar {
-  width: 0.2rem;
-  background: rgba(0, 0, 0, 0.05);
-  overflow-x: hidden;
+  width: 0.15rem;
+  height: 0;
+  background: transparent;
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: var(--color-gray-dark);
 }
-
 
 button, a {
   all: unset;
@@ -171,7 +170,7 @@ button, a {
   border-radius: 0.15rem;
 }
 
-.arrow-button {
+.arrow-button, .add-button {
   margin: 0;
   width: 2.4rem;
   height: 2.4rem;
@@ -216,9 +215,35 @@ button, a {
   top: 0.95rem
 }
 
-.arrow-button:hover {
+.arrow-button:hover, .add-button:hover {
   background: var(--color-gray-dark);
   box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
+}
+
+.add-button {
+ justify-self: center;
+  align-self: center;
+  margin: 0;
+}
+
+.add-button div {
+  position: absolute;
+  width: 1.3rem;
+  height: 0.28rem;
+  background: white;
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.add-button div:nth-child(1) {
+  left: 0.55rem;
+  top: 1rem
+}
+
+.add-button div:nth-child(2) {
+  transform: rotate(90deg);
+  right: 0.55rem;
+  top: 1rem
 }
 
 .mobile-section-container {
@@ -267,7 +292,7 @@ textarea::-webkit-resizer {
     margin: 1.5rem auto 1rem auto;
   }
 
-  .arrow-button {
+  .arrow-button, .add-button {
     transform: scale(1);
   }
 
@@ -286,7 +311,7 @@ textarea::-webkit-resizer {
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
-  .arrow-button {
+  .arrow-button, .add-button {
     margin: 1rem 1.8rem;
   }
 

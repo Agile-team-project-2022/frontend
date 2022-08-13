@@ -1,0 +1,94 @@
+/* Mobile version. */
+.plant-profile-page {
+    display: grid;
+    grid-template-areas:
+            "header header header"
+            "options options options"
+            "content content content"
+            "footer footer footer";
+    grid-template-columns: 20% auto 20%;
+    grid-template-rows: 9.3rem 4rem auto 5rem;
+    width: 100vw;
+    margin: 0;
+}
+
+.mobile-section-container {
+    grid-area: content;
+    margin: 0 0 2rem 0;
+}
+
+.collection-option-container {
+    grid-area: options;
+    display: grid;
+    grid-column-gap: 0.25rem;
+    grid-template-columns: repeat(3, 33.3%);
+    width: calc(100% - 1.55rem);
+    margin: 0.5rem;
+    height: fit-content;
+}
+
+.button-open-section.collection-option {
+    display: block;
+    font-size: 0.7rem;
+    width: calc(100%);
+    height: fit-content;
+    white-space: nowrap;
+    padding: 0.45rem 0;
+    border: 1px solid var(--color-white-light-border);
+    background: var(--color-green-collection-option);
+    text-shadow: 0 0 1rem var(--color-black-lightest-shadow);
+}
+
+.button-open-section.collection-option:hover {
+    background: var(--color-green-collection-option-active);
+    filter: unset;
+}
+
+.selected-collection-option {
+    background: var(--color-green-collection-option-active) !important;
+    color: white;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .plant-profile-page {
+        grid-template-areas:
+            "header header header"
+            "data content metadata";
+        grid-template-columns: 18% auto 18%;
+        grid-template-rows: 14rem auto;
+        width: 80%;
+        min-width: 44rem;
+        max-width: 90rem;
+        margin: 0 auto;
+        padding-top: 8rem;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+    .plant-profile-page {
+        grid-template-rows: 16rem auto;
+        grid-template-columns: 20% auto 20%;
+        padding-top: 10rem;
+    }
+
+    .plant-profile-page .post-content {
+        grid-template-columns: 9rem minmax(3rem, auto) 5rem;
+    }
+
+    .plant-profile-page .section-title {
+        min-width: 3rem;
+    }
+
+    .plant-profile-page .post-select-profile {
+        width: 6rem;
+        margin-right: 0.25rem;
+        justify-self: right;
+    }
+
+    .plant-profile-page textarea {
+        padding: 0.8rem 1.3rem 0.5rem 1.5rem !important;
+        width: calc(100% - 2.8rem) !important;
+    }
+}

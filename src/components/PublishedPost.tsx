@@ -31,18 +31,20 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     // Trims the post.
     if(post.content.length > 250) {setReadMore(true);}
 
-    // Detects if the current user has already liked the post.
-    post.postlikes.forEach((item, index) => {
-      if(userId === item.userId) {
-        setLiked(true);
-        setLikePostId(item.id);
-      }
-    });
+    // Detects if the current user has already liked the post. // TODO: Add postlikes and comments in the returned array of Posts from get a single plant.
+    if(post.postlikes && post.comments) {
+      post.postlikes.forEach((item, index) => {
+        if(userId === item.userId) {
+          setLiked(true);
+          setLikePostId(item.id);
+        }
+      });
 
-    // Initializes the number of posts and comments to keep track as the user changes them.
-    setLikeCount(post.postlikes.length);
-    setCommentCount(post.comments.length);
-    setUpdatedComments(post.comments);
+      // Initializes the number of posts and comments to keep track as the user changes them.
+      setLikeCount(post.postlikes.length);
+      setCommentCount(post.comments.length);
+      setUpdatedComments(post.comments);
+    }
   }, [post, userId]);
 
   /** Read more or less for extensive posts. */

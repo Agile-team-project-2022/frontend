@@ -2,10 +2,15 @@ import React, {useContext} from 'react';
 import './CollectionPlants.css';
 import CollectionCard from "./CollectionCard";
 import {AppContext} from "../context";
+import {CollectionView} from "./CollectionHeader";
 
-export interface ICollectionPlantsProps {}
+export interface ICollectionPlantsProps {
+  view: CollectionView,
+  ownerId: number
+}
 
-const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = (props) => {
+const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view, ownerId}) => {
+  /** TODO: Fetch plants from others instead of userData. */
   const {state: {userData: {plants, count: {totalPlants}}}} = useContext(AppContext);
 
   return (
@@ -16,10 +21,12 @@ const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = (props
         {
           plants.map((item, index) => {
             return (
-              <CollectionCard plant={item} key={`collection-card-${index}`} />
+              <CollectionCard ownerId={ownerId} plant={item} key={`collection-card-${index}`} />
             );
           })
         }
+
+        {view === CollectionView.OWNER? <div className='add-button'><div> </div><div> </div></div> : ''}
       </div>
     </div>
   );

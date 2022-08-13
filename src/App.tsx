@@ -5,6 +5,7 @@ import Header from "./layouts/Header";
 import {AppContext, AppValidActions} from "./context";
 import useWindowSize, {DeviceTypes} from "./hooks/useWindowSize";
 import axios from "axios";
+import PlantProfile from "./pages/PlantProfile";
 
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
@@ -78,6 +79,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="collection" element={<Collection />} />
+          <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />
         </Routes>
       </Suspense>
 

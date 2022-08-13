@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import './CollectionHeader.css';
+import './ProfileHeader.css';
 import defaultPersonImg from '../assets/default-person.jpeg';
 import {AppContext} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
@@ -7,27 +8,31 @@ import Modal from "./Modal";
 import ChangeProfilePicture from "./ChangeProfilePicture";
 import {CheckEncodedImage} from '../helpers';
 import GalleryExpanded from "./GalleryExpanded";
+import {CollectionView} from "./CollectionHeader";
 import {SectionType} from "./CollectionInteractions";
 
-export interface ICollectionHeaderProps {
-  view: CollectionView
+export interface IProfileHeaderProps {
+  view: CollectionView,
+  plantData: PlantHeaderData
 }
 
-export enum CollectionView {
-  OWNER = 'OWNER',
-  OTHERS = 'OTHERS'
+export interface PlantHeaderData {
+  imageFile: string,
+  name: string,
+  species: string,
+  followers: number
 }
 
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view}) => {
-  const {state: {userData, deviceType}} = useContext(AppContext);
+const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plantData}) => {
+  const {state: {deviceType}} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const isValid = CheckEncodedImage(userData.imageFile);
+  const isValid = CheckEncodedImage(plantData.imageFile);
 
   /** Returns the content that allows the owner to change their image. */
   const onImgClickOwner = () => {
     return (
       <Modal onClose={closeModal} className='change-profile-picture-modal'>
-        <ChangeProfilePicture id={userData.userId} view={SectionType.PERSON} onClose={closeModal} prevImg={userData.imageFile} />
+        <ChangeProfilePicture id={1} view={SectionType.PLANT} onClose={closeModal} prevImg={plantData.imageFile} />
       </Modal>
     );
   };
@@ -36,7 +41,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   const onImgClickOthers = () => {
     return (
       // TODO: Configure to use OTHERS pictures instead of 'userData.imageFile'.
-      <GalleryExpanded imageFile={userData.imageFile} onClose={closeModal} />
+      <GalleryExpanded imageFile={plantData.imageFile} onClose={closeModal} />
     );
   };
 
@@ -49,53 +54,35 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   };
 
   return (
-    <header className="collection-header collection-profile-header">
+    <header className="collection-header collection-profile-header plant-profile-header">
       <div className='first-background'> </div>
       <div className='second-background'> </div>
       <div className='third-background'> </div>
 
       <div className='list-img-container'>
-        <img src={isValid? userData.imageFile : defaultPersonImg}
-             alt={'Profile owner'}
+        <img src={isValid? plantData.imageFile : defaultPersonImg}
+             alt={'Plant'}
              onClick={openModal}
         />
       </div>
 
-      <h2>{userData.user.charAt(0).toUpperCase() + userData.user.substring(1)}</h2>
+      <h2>{plantData.name.charAt(0).toUpperCase() + plantData.name.substring(1)}</h2>
+      <p className='species'>Species: {plantData.species.charAt(0).toUpperCase() + plantData.species.substring(1)}</p>
 
       {
         // Shows the friend request button in the header in mobile devices.
         deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS?
-          <button className='button-open-section collection-header-button'>Friend request</button>
+          <button className='button-open-section collection-header-button'>Follow</button>
           :
           ''
       }
 
-      <div className='collection-overview'>
-        <h4>Overview</h4>
-        <p>Total: <span>{userData.count.totalPlants} Plants</span></p>
-        <p>
-          Experience:
-          <span className='star-container'>
-            {
-              [...Array(5)].map((item, index) => {
-                return (
-                  <span className={`star ${index < userData.experience? 'filled' : ''}`} key={`star-rating-${index}`} />
-                );
-              })
-            }
-          </span>
-        </p>
-        <p>Planter: <span>{userData.typePlanter.charAt(0).toUpperCase() + userData.typePlanter.substring(1)}</span></p>
-        <p>Badges: <span>{userData.totalBadges}</span></p>
-      </div>
-
       {
         // Sets the correct options to show for owner/others viewing the collection.
         view === CollectionView.OTHERS?
-          <div className='controls'>! Report</div>
+          <div className='controls'><span>Report</span> <span>Followers: ({plantData.followers})</span></div>
           :
-          <div className='controls'>Delete</div>
+          <div className='controls'><span>Delete</span> <span>Followers: ({plantData.followers})</span></div>
       }
 
       {
@@ -108,4 +95,4 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   );
 }
 
-export default CollectionHeader;
+export default ProfileHeader;

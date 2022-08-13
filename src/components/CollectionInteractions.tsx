@@ -9,9 +9,9 @@ import {AppContext, ThumbnailData} from "../context";
 
 export interface ICollectionInteractionsProps {}
 
-enum SectionType {
+export enum SectionType {
   PLANT = 'PLANT',
-  FRIEND = 'FRIEND'
+  PERSON = 'PERSON'
 }
 
 const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = (props) => {
@@ -151,7 +151,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
         {
           getSection(
             'Friend requests',
-            SectionType.FRIEND,
+            SectionType.PERSON,
             friendsPending, // TODO: fetch from endpoint
             expandedFriendsPending,
             openSectionFriendsPending,
@@ -175,7 +175,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
         {
           getSection(
             'Friends',
-            SectionType.FRIEND,
+            SectionType.PERSON,
             friends, // TODO: fetch from endpoint
             expandedFriends,
             openSectionFriends,
