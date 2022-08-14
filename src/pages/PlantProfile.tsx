@@ -9,6 +9,7 @@ import axios from "axios";
 import PublishedPost from "../components/PublishedPost";
 import NewPost from "../components/NewPost";
 import GalleryPreview from "../components/GalleryPreview";
+import WaterSchedule from "../components/WaterSchedule";
 
 export interface IPlantProfileProps {}
 
@@ -44,7 +45,9 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     <main className="plant-profile-page">
       <ProfileHeader plantData={plantHeaderData} view={CollectionView.OWNER} />
 
-      <div> </div>
+      <div className='plant-profile-data-container'>
+        <WaterSchedule />
+      </div>
 
       <div className='page-content-container'>
         <section className='publications-container'>
