@@ -4,12 +4,14 @@
     display: block;
 }
 
-.react-calendar__month-view__weekdays abbr {
-    all: unset;
+.react-calendar__month-view__weekdays abbr, .react-calendar__navigation {
+    display: none;
 }
 
 .react-calendar__month-view__days {
     text-align: center;
+    color: white;
+    font-weight: 700;
 }
 
 .react-calendar__month-view__days button {
@@ -22,4 +24,40 @@
     margin: 0.1rem;
     border: 1px solid var(--color-gray-medium);
     justify-self: center;
+}
+
+.react-calendar__month-view__days button.selected-day, .react-calendar__month-view__days button:hover {
+    background: #B0DCE2;
+}
+
+.react-calendar__month-view__days button:nth-child(7n + 2),
+.react-calendar__month-view__days button:nth-child(9n) {
+    background: #B0DCE2;
+}
+
+.date-out-range {
+    background: var(--color-gray-medium) !important;
+    border-color: transparent !important;
+    opacity: 30% !important;
+    color: var(--color-black-lighter-text) !important;
+    pointer-events: none;
+}
+
+.schedule-month-year {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--color-black-lighter-text);
+    font-weight: 300;
+    margin: 0.4rem 0.25rem 0.8rem 0.25rem;
+}
+
+.schedule-days {
+    display: grid;
+    grid-template-columns: repeat(7, calc(100% / 7));
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: 300;
+    margin: 0.3rem 0.1rem 0.1rem 0;
+    color: var(--color-black-lighter-text);
 }
