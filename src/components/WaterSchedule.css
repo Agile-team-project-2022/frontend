@@ -1,0 +1,25 @@
+.react-calendar {
+    font-size: 0.65rem;
+    width: 100%;
+    display: block;
+}
+
+.react-calendar__month-view__weekdays abbr {
+    all: unset;
+}
+
+.react-calendar__month-view__days {
+    text-align: center;
+}
+
+.react-calendar__month-view__days button {
+    all: unset;
+    flex: 0 0 11% !important;
+    display: block;
+    width: calc(100% - 0.1rem);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0.1rem;
+    border: 1px solid var(--color-gray-medium);
+    justify-self: center;
+}

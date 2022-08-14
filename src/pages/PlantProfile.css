@@ -49,6 +49,10 @@
     color: white;
 }
 
+.plant-profile-page .data-section-content {
+    display: block;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .plant-profile-page {
