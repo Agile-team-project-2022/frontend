@@ -14,6 +14,9 @@
 }
 
 .mobile-section-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
     grid-area: content;
     margin: 0 0 2rem 0;
 }
@@ -90,7 +93,7 @@
     }
 
     .plant-profile-data-container .data-section-container {
-        margin: 0;
+        margin: 0 0 1rem 0;
         width: 9.3rem;
     }
 
@@ -139,7 +142,7 @@
     }
 
     .plant-profile-data-container .data-section-container {
-        margin: 0;
+        margin: 0 0 1.5rem 0;
         width: 12rem;
     }
 }

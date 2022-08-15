@@ -1,0 +1,36 @@
+.location-container {
+    display: flex;
+    align-items: flex-end;
+    height: 10rem;
+    position: relative;
+}
+
+.location-container-background {
+    width: 100%;
+    height: 8.7rem;
+    position: absolute;
+    top: 0;
+    background: lightgrey;
+    opacity: 20%;
+}
+
+.location-container .location-marker {
+    width: 0.6rem;
+    height: 0.6rem;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 4rem;
+    left: 2rem;
+}
+
+.location-container p {
+    padding: 0 0.5rem;
+    font-size: 0.6rem;
+    margin: 0.2rem 0;
+    opacity: 80%;
+}
+
+.location-container p span {
+    font-weight: 600;
+}

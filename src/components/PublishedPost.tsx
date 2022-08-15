@@ -30,7 +30,8 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
 
   useEffect(() => {
     // Trims the post.
-    if(post.content.length > 250) {setReadMore(true);}
+    const threshold = deviceType === DeviceTypes.MOBILE? 210 : 250;
+    if(post.content.length > threshold) {setReadMore(true);}
 
     // Detects if the current user has already liked the post. // TODO: Add postlikes and comments in the returned array of Posts from get a single plant.
     if(post.postlikes && post.comments) {
@@ -46,7 +47,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       setCommentCount(post.comments.length);
       setUpdatedComments(post.comments);
     }
-  }, [post, userId]);
+  }, [post, userId, deviceType]);
 
   /** TODO: Gets the full plant data, replace to get only Thumbnail plant data. */
   useEffect(() => {
@@ -161,7 +162,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         <div className='published-post-signature'>
           <span>By "{authorPlantData.name.charAt(0).toUpperCase() + authorPlantData.name.substring(1)}"</span>
           <div className='signature-img-container'>
-            <img src={authorPlantData.imageFile} alt='Author post plant'/>
+            <img src={CheckEncodedImage(authorPlantData.imageFile)? authorPlantData.imageFile : defaultPostImg} alt='Author post plant'/>
           </div>
         </div>
 

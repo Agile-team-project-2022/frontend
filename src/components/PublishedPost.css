@@ -90,7 +90,7 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     height: fit-content;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 6;
     -ms-word-break: break-all;
     word-break: break-all;
     word-break: break-word;
@@ -228,12 +228,16 @@
         padding: 0 2.3rem 0 0;
     }
 
+    .post-text-container-published p {
+        -webkit-line-clamp: 5;
+    }
+
     .post-content-published .section-title {
         font-size: 1rem;
     }
 
     .post-text-container-published {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .post-date {

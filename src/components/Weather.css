@@ -1,9 +1,17 @@
 .weather-animation-container {
-    background: aliceblue;
-    width: 10rem;
-    height: 10rem;
+    background: lightgrey;
+    width: 100%;
+    height: 11rem;
     position: absolute;
+    left: 0;
+    opacity: 0%;
     z-index: 0;
+}
+
+.weather-data-outer-container {
+    height: 10rem;
+    width: 100%;
+    margin: 0;
 }
 
 .weather-data-container {
@@ -12,12 +20,14 @@
             "empty white time"
             "empty temperature none"
             "data data none";
-    grid-template-columns: repeat(3, 33.3%);
+    grid-template-columns: repeat(3, 32%);
     font-size: 0.6rem;
     white-space: nowrap;
     width: 100%;
     height: 10rem;
     color: var(--color-black-lighter-text);
+    position: absolute;
+    left: 0;
     z-index: 1;
 }
 
@@ -25,6 +35,9 @@
     display: flex;
     column-gap: 0.2rem;
     grid-area: time;
+    justify-self: right;
+    opacity: 70%;
+    align-items: center;
 }
 
 .clock {
@@ -32,6 +45,19 @@
     height: 0.7rem;
     border: 1px solid lightsteelblue;
     border-radius: 50%;
+    position: relative;
+}
+
+.clock div {
+    width: 0.18rem;
+    height: 0.2rem;
+    border-top: 1px solid lightsteelblue;
+    border-right: 1px solid lightsteelblue;
+    position: absolute;
+    top: 0.26rem;
+    left: 0.18rem;
+    transform-origin: top right;
+    opacity: 90%;
 }
 
 .weather-data-container h6 {
@@ -52,4 +78,8 @@
 
 .data-content p {
     margin: 0.25rem 0;
+}
+
+.data-content p span {
+    font-weight: 600;
 }

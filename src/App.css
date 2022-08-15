@@ -222,7 +222,7 @@ button, a {
 }
 
 .add-button {
- justify-self: center;
+  justify-self: center;
   align-self: center;
   margin: 0;
 }

@@ -13,6 +13,8 @@ import GalleryPreview from "../components/GalleryPreview";
 import WaterSchedule from "../components/WaterSchedule";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Weather from "../components/Weather";
+import Location from "../components/Location";
+import Season from "../components/Season";
 
 export interface IPlantProfileProps {}
 
@@ -82,6 +84,8 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
       <>
         <WaterSchedule />
         <Weather />
+        <Location />
+        <Season />
       </>
     );
   };
@@ -152,7 +156,6 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
               </section>
 
               { getPublications() }
-
             </div>
 
             <div> More data </div>

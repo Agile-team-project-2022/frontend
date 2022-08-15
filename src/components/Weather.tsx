@@ -11,7 +11,7 @@ const Weather: React.FunctionComponent<IWeatherProps> = () => {
   return (
     <DataSection title='Live weather' onClickSection={() => {}}>
       <div className='weather-animation-container'> </div>
-      <div>
+      <div className='weather-data-outer-container'>
         <div className='weather-data-container'>
           {/* TODO: Fill with the fetched data. */}
           <label><div className='clock'><div> </div></div> {time}</label>
@@ -23,7 +23,6 @@ const Weather: React.FunctionComponent<IWeatherProps> = () => {
           </div>
         </div>
       </div>
-
     </DataSection>
   );
 }
