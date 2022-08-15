@@ -1,6 +1,10 @@
 import React from 'react';
 import './Weather.css';
 import DataSection from "./DataSection";
+import {Player} from "@lottiefiles/react-lottie-player";
+import animatedSun from "../assets/sun.json";
+import animatedPlant from "../assets/plant.json";
+import animatedCloud from "../assets/cloud.json";
 
 export interface IWeatherProps {}
 
@@ -10,7 +14,31 @@ const Weather: React.FunctionComponent<IWeatherProps> = () => {
 
   return (
     <DataSection title='Live weather' onClickSection={() => {}}>
-      <div className='weather-animation-container'> </div>
+      <div className='weather-animation-container'>
+        <div className="cloud-animation">
+          <Player id="cloud-lottie"
+                  autoplay
+                  loop
+                  src={animatedCloud}
+          />
+        </div>
+        <div className="sun-animation">
+          <Player id="sun-lottie"
+                  autoplay
+                  loop
+                  src={animatedSun}
+          />
+        </div>
+        <div className="plant-animation">
+          <Player id="plant-lottie"
+                  autoplay
+                  loop
+                  src={animatedPlant}
+          />
+        </div>
+        <div className='ground'> </div>
+      </div>
+
       <div className='weather-data-outer-container'>
         <div className='weather-data-container'>
           {/* TODO: Fill with the fetched data. */}

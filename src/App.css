@@ -287,17 +287,18 @@ textarea::-webkit-resizer {
 }
 
 .not-found-container {
-  width: min(15rem, 70%);
+  width: min(14rem, 60%);
   height: auto;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .not-found-container img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  opacity: 90%;
 }
 
 /* Tablet version. */
@@ -324,7 +325,7 @@ textarea::-webkit-resizer {
   }
 
   .not-found-container {
-    width: min(13rem, 90%);
+    width: min(12rem, 90%);
   }
 }
 
@@ -339,6 +340,6 @@ textarea::-webkit-resizer {
   }
 
   .not-found-container {
-    width: min(18rem, 90%);
+    width: min(15rem, 90%);
   }
 }

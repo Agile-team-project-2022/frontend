@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './ChangeProfilePicture.css';
 import defaultPersonImg from "../assets/default-person.jpeg";
+import defaultPlantImg from "../assets/default-plant.jpg";
 import InputImage from "./InputImage";
 import {AppContext, AppValidActions} from "../context";
 import axios from "axios";
@@ -14,10 +15,11 @@ export interface IChangeProfilePictureProps {
   onClose: () => void,
   view: SectionType,
   prevImg: string,
-  id: number
+  id: number,
+  categoryId? : number
 }
 
-const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> = ({onClose, view, prevImg, id}) => {
+const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> = ({onClose, view, prevImg, id, categoryId}) => {
   const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [newImage, setNewImage] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -39,7 +41,7 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
 
     const url = `${ BASE_URL }user/${ id }`;
     const data = {
-      imageFile: newImage, // TODO: Confirm changes done in backend to accept new image data.
+      imageFile: newImage,
     };
 
     axios.put(url, data)
@@ -61,7 +63,7 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
     const url = `${ BASE_URL }plant/${ id }`;
     const data = {
       ownerId: userData.userId,
-      plantsCategoryId: 1, // TODO: ask to remove this in updating the plant.
+      plantsCategoryId: categoryId,
       imageFile: newImage,
     };
 
@@ -110,7 +112,7 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
       <div className='change-profile-picture-content'>
         <InputImage onUploadImage={uploadNewImage}>
           <div className='list-img-container change-profile-picture'>
-            <img src={isValid? newImage : CheckEncodedImage(prevImg)? prevImg : defaultPersonImg} alt={'Profile'} />
+            <img src={isValid? newImage : CheckEncodedImage(prevImg)? prevImg : view === SectionType.PLANT? defaultPlantImg : defaultPersonImg} alt={'Profile'} />
           </div>
         </InputImage>
       </div>
