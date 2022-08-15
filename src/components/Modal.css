@@ -132,6 +132,12 @@
     padding: 0.5rem;
 }
 
+.modal-list-container .not-found-container {
+    justify-self: center;
+    width: 10rem;
+    margin: 1rem 1.2rem;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .modal-list-container {
@@ -144,7 +150,8 @@
 
     .list-content {
         display: grid;
-        grid-template-columns: 33% auto auto;
+        grid-template-columns: repeat(3, 33.3%);
+        grid-template-areas: "content not-found content2";
     }
 
     .list-item-container {
@@ -163,11 +170,19 @@
     .modal-list-buttons {
         width: 31.5%;
     }
+
+    .modal-list-container .not-found-container {
+        grid-area: not-found;
+    }
 }
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
     .modal-list-container {
         min-width: 48rem;
+    }
+
+    .modal-list-container .not-found-container {
+        width: 12rem;
     }
 }

@@ -1,20 +1,25 @@
-import React, {useContext, useState} from 'react';
+import React, {lazy, Suspense, useContext, useState} from 'react';
 import logo from '../assets/logo.svg';
 import appName from '../assets/app-name.svg';
 import settingsImg from '../assets/settings.png';
 import helpImg from '../assets/help.png';
 import animatedHeader from '../assets/header-1.json';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
 import {AppContext, AppValidActions} from "../context";
-import { googleLogout } from '@react-oauth/google';
+import {googleLogout} from '@react-oauth/google';
+import {ListType} from "../components/ExpandedList";
+
+const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
 export interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const {state, dispatch} = useContext(AppContext);
   const [expanded, setExpanded] = useState(false);
+  const [expandedFollowType, setExpandedFollowType] = useState(ListType.FOLLOWED_PLANTS);
+  const [expandedFollowSection, setExpandedFollowSection] = useState(false);
 
   const expandMobileMenu = () => {
     setExpanded(prevState => !prevState);
@@ -32,6 +37,25 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     googleLogout();
     expandMobileMenu();
   };
+
+  /** Expands the followed plants section on mobile devices. */
+  const expandFollowedPlants = () => {
+    setExpandedFollowType(ListType.FOLLOWED_PLANTS);
+    setExpandedFollowSection(true);
+    expandMobileMenu();
+  }
+
+  /** Expands the friends section on mobile devices. */
+  const expandFriends = () => {
+    setExpandedFollowType(ListType.FRIENDS);
+    setExpandedFollowSection(true);
+    expandMobileMenu();
+  }
+
+  /** Handles closing the follow section on mobile devices. */
+  const onCloseFollow = () => {
+    setExpandedFollowSection(false);
+  }
 
   return (
     <header className="app-header">
@@ -54,26 +78,25 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
         <div className={`header-nav-container ${expanded? 'expanded-mobile-menu' : ''}`}>
           <nav className='header-nav'>
-            <Link to={'home'} className='header-nav-link' onClick={() => expandMobileMenu()} >
+            <Link to={'home'} className='header-nav-link' onClick={expandMobileMenu} >
               <span>Home</span>
             </Link>
 
-            <Link to={'collection'} className='header-nav-link' onClick={() => expandMobileMenu()} >
+            <Link to={'collection'} className='header-nav-link' onClick={expandMobileMenu} >
               <span>Collection</span>
             </Link>
 
-            {/* TODO: Create the event listeners for Following plants/ExpandedList. */}
-            <button className='header-nav-link mobile-menu-option' onClick={() => expandMobileMenu()} >
+            <button className='header-nav-link mobile-menu-option' onClick={expandFollowedPlants} >
               Following plants
             </button>
 
-            <button className='header-nav-link mobile-menu-option' onClick={() => expandMobileMenu()} >
+            <button className='header-nav-link mobile-menu-option' onClick={expandFriends} >
               Friends
             </button>
 
             <Link to={'home'}
                   className='header-nav-link'
-                  onClick={state.loggedIn? () => logOut() : () => showLogIn()}
+                  onClick={state.loggedIn? logOut : showLogIn}
             >
               <span> {state.loggedIn? 'Log out' : 'Log in'} </span>
             </Link>
@@ -95,6 +118,19 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           <div> </div>
         </button>
       </div>
+
+      {
+        expandedFollowSection?
+          <Suspense>
+            <ExpandedList title={expandedFollowType === ListType.FOLLOWED_PLANTS? 'Plants you Follow' : 'Your friends' }
+                          type={expandedFollowType}
+                          show={true}
+                          onClose={onCloseFollow}
+            />
+          </Suspense>
+          :
+          ''
+      }
     </header>
   );
 }

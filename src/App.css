@@ -286,6 +286,21 @@ textarea::-webkit-resizer {
   background-size: cover;
 }
 
+.not-found-container {
+  width: min(14rem, 60%);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: 1rem auto;
+}
+
+.not-found-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 90%;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {
@@ -308,6 +323,10 @@ textarea::-webkit-resizer {
   .section-divisor {
     display: block;
   }
+
+  .not-found-container {
+    width: min(12rem, 90%);
+  }
 }
 
 /* Desktop version. */
@@ -318,5 +337,9 @@ textarea::-webkit-resizer {
 
   .button-open-section {
     font-size: 0.98rem;
+  }
+
+  .not-found-container {
+    width: min(15rem, 90%);
   }
 }

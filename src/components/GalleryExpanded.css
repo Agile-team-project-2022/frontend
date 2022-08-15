@@ -21,7 +21,7 @@
     grid-template-areas:
             "empty empty close"
             "left img right";
-    grid-template-rows: 1.5rem auto;
+    grid-template-rows: 3.5rem auto;
     padding: 0;
     margin: 0;
     background: none;
@@ -44,7 +44,7 @@
     opacity: 80%;
     transition-property: opacity;
     transition-duration: 0.5s;
-    margin: 0 0 -1rem -1.65rem;
+    margin: 0 0 1rem -1.65rem;
 }
 
 .close-gallery-button:hover {
@@ -59,8 +59,8 @@
 
 .expanded-gallery-img-container {
     grid-area: img;
-    width: 95%;
-    height: 85%;
+    width: min(95%, 75rem);
+    height: min(85%, 45rem);
     overflow: hidden;
     justify-self: center;
     border-radius: 0.2rem;
@@ -69,6 +69,8 @@
             0 0 2rem var(--color-black-medium-shadow),
             0 0 1rem var(--color-black-darker-shadow),
             0 0 0.01rem white;
+    align-self: flex-start;
+    margin-top: 0.2rem;
 }
 
 .expanded-gallery-img-container img {
@@ -86,9 +88,16 @@
     .close-gallery-button {
         margin: 0;
     }
+
+    .expanded-gallery-img-container {
+        margin-top: 1.5rem;
+        height: min(80%, 55rem);
+    }
 }
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
-
+    .expanded-gallery-img-container {
+        margin-top: 2.5rem;
+    }
 }

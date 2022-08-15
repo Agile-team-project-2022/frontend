@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import sunImg from '../assets/category-sun.jpg';
 import {AppContext, ThumbnailData} from "../context";
+import noContent from "../assets/no-content-yet.png";
 
 export enum ListType {
   FOLLOWED_PLANTS = 'FOLLOWED_PLANTS',
@@ -11,15 +12,22 @@ export enum ListType {
 
 export interface IExpandedListProps {
   title: string,
-  type: ListType
+  type: ListType,
+  show?: boolean,
+  onClose?: () => void
 }
 
-const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}) => {
+const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type, show=false, onClose}) => {
   const {state: {userData: {followedPlants, friends, count}}} = useContext(AppContext);
   const [showSection, setShowSection] = useState(false);
   // TODO: Fetch the data and add images.
   const [data, setData] = useState<ThumbnailData[]>([]);
   const [totalData, setTotalData] = useState(0);
+
+  /** Initializes the flag telling if the list should appear expanded at first or not. */
+  useEffect(() => {
+    setShowSection(show);
+  }, [show]);
 
   useEffect(() => {
     if(type === ListType.FOLLOWED_PLANTS) setTotalData(count.totalFollowedPlants);
@@ -46,6 +54,7 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
   /** Closes the modal. */
   const closeSection = () => {
     setShowSection(false);
+    if(onClose) onClose();
   };
 
   return (
@@ -75,12 +84,7 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type}
                   })
                 }
 
-                {
-                  data.length === 0?
-                    <div>Nothing to show yet!</div>
-                    :
-                    ''
-                }
+                { data.length === 0? <div className='not-found-container'> <img src={noContent} alt='No content to show'/> </div> : ''}
               </div>
 
               <div className='modal-list-buttons'>
