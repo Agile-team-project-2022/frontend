@@ -3,6 +3,7 @@ import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 import axios from "axios";
+import noContent from "../assets/no-content-yet.png";
 const NewPost = lazy(() => import('../components/NewPost'));
 const PublishedPost = lazy(() => import('../components/PublishedPost'));
 const Filters = lazy(() => import('../components/Filters'));
@@ -59,6 +60,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
               })
             }
+            { homePosts.length === 0? <div className='not-found-container'> <img src={noContent} alt='No content to show'/> </div> : '' }
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
         </section>

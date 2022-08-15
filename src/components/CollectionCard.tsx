@@ -1,7 +1,7 @@
 import React from 'react';
 import './CollectionCard.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import defaultPlantImg from "../assets/example-plant-2.jpeg";
+import defaultPlantImg from "../assets/default-plant.jpg";
 import {PlantData} from "../context";
 import {useNavigate} from "react-router-dom";
 import {CheckEncodedImage} from "../helpers";

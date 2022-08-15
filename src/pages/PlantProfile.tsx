@@ -2,6 +2,7 @@ import React, {Suspense, useContext, useEffect, useState} from 'react';
 import './PlantProfile.css';
 import './Collection.css';
 import './Home.css';
+import noContent from '../assets/no-content-yet.png';
 import {useParams} from "react-router-dom";
 import {CollectionView} from "../components/CollectionHeader";
 import ProfileHeader, {PlantHeaderData} from "../components/ProfileHeader";
@@ -108,7 +109,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
                   return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
                 })
                 :
-                <p> No Posts to show yet for owner Id: {ownerId} </p>
+                <div className='not-found-container'> <img src={noContent} alt='No content to show'/> </div>
             }
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
@@ -158,7 +159,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
               { getPublications() }
             </div>
 
-            <div> More data </div>
+            <div> More data {ownerId} </div>
           </>
       }
     </main>
