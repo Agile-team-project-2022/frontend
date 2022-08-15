@@ -1,5 +1,6 @@
 import React, {Suspense, useContext, useEffect, useState} from 'react';
 import './PlantProfile.css';
+import './Collection.css';
 import './Home.css';
 import {useParams} from "react-router-dom";
 import {CollectionView} from "../components/CollectionHeader";
@@ -10,9 +11,6 @@ import PublishedPost from "../components/PublishedPost";
 import NewPost from "../components/NewPost";
 import GalleryPreview from "../components/GalleryPreview";
 import WaterSchedule from "../components/WaterSchedule";
-import Badges from "../components/Badges";
-import CollectionPlants from "../components/CollectionPlants";
-import CollectionInteractions from "../components/CollectionInteractions";
 import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IPlantProfileProps {}
@@ -74,24 +72,32 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const getExpandedSection = () => {
     if(showGallery) return <div className='mobile-section-container'><GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}</div>;
     else if(showData) return <div className='mobile-section-container'><WaterSchedule /></div>;
-    else if(showPublications) return <div className='mobile-section-container'>{ getPublications() }</div>;
+    else if(showPublications) return <div className='mobile-section-container publications'>{ getPublications() }</div>;
   };
 
-  /** Renders the publications and posts. */
+  /** Renders the publications and posts. Includes section to write new posts. */
   const getPublications = () => {
     return (
       <>
-        <Suspense>
-          {
-            plantData !== undefined && plantData.posts.length > 0?
-              plantData.posts.map((item, index) => {
-                return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
-              })
-              :
-              <p> No Posts to show yet for owner Id: {ownerId} </p>
-          }
-        </Suspense>
-        <h2 className='section-title publications-section-title'>Publications</h2>
+        <section className='publications-container'>
+          <Suspense> <NewPost />  </Suspense>
+        </section>
+
+        <div className='section-divisor'> </div>
+
+        <section className='publications-container'>
+          <Suspense>
+            {
+              plantData !== undefined && plantData.posts.length > 0?
+                plantData.posts.map((item, index) => {
+                  return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
+                })
+                :
+                <p> No Posts to show yet for owner Id: {ownerId} </p>
+            }
+          </Suspense>
+          <h2 className='section-title publications-section-title'>Publications</h2>
+        </section>
       </>
     );
   };
@@ -134,15 +140,8 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
                 <GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}
               </section>
 
-              <section className='publications-container'>
-                <Suspense> <NewPost />  </Suspense>
-              </section>
+              { getPublications() }
 
-              <div className='section-divisor'> </div>
-
-              <section className='publications-container'>
-                { getPublications() }
-              </section>
             </div>
 
             <div> More data </div>

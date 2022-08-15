@@ -117,6 +117,17 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   /** In case of having inappropriate posts content, flags/reports it to be deleted. */
   const flagPost = () => {
     // TODO: Decide what do to after being reported. Add flags property in PUT request to update it.
+    const url = `${ BASE_URL }post-flag`;
+    const data = {
+      userId: userId,
+      postId: post.id
+    };
+
+    axios.post(url, data)
+      .then((response) => {
+        console.log('Content flagged successfully.');
+      })
+      .catch((e) => console.log(e));
   };
 
   return (

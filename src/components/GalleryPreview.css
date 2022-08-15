@@ -1,7 +1,7 @@
 /* Mobile version. */
 .gallery-preview-container {
-    margin: 0 auto 3rem auto;
-    width: calc(100% - 1.4rem);
+    margin: 1rem auto 2.5rem auto;
+    width: calc(100% - 1rem);
 }
 
 .gallery-preview-container .section-title {
@@ -51,6 +51,11 @@
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
+    .gallery-preview-container {
+        margin: 0 auto 3rem auto;
+        width: calc(100% - 1.4rem);
+    }
+
     .gallery-preview-content {
         grid-template-columns: repeat(5, 15.8%) 15.8%;
         grid-column-gap: 1%;

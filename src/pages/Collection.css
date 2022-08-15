@@ -7,9 +7,10 @@
             "content content content"
             "footer footer footer";
     grid-template-columns: 20% auto 20%;
-    grid-template-rows: 9.3rem 4rem auto 5rem;
+    grid-template-rows: 9.3rem 4rem auto 3rem;
     width: 100vw;
     margin: 0;
+    background: var(--color-gray-gradient);
 }
 
 .mobile-section-container {
@@ -71,6 +72,7 @@
         max-width: 90rem;
         margin: 0 auto;
         padding-top: 8rem;
+        background: white;
     }
 
     .collection-badges {

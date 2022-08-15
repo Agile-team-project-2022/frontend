@@ -8,6 +8,10 @@
     display: none;
 }
 
+.react-calendar__month-view div {
+    justify-content: center;
+}
+
 .react-calendar__month-view__days {
     text-align: center;
     color: white;
@@ -16,11 +20,11 @@
 
 .react-calendar__month-view__days button {
     all: unset;
-    flex: 0 0 11% !important;
+    flex: 0 0 12.2% !important;
     display: block;
     width: calc(100% - 0.1rem);
     height: auto;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 2 / 1;
     margin: 0.1rem;
     border: 1px solid var(--color-gray-medium);
     justify-self: center;
@@ -80,6 +84,7 @@
 
     .react-calendar__month-view__days button {
         flex: 0 0 10.5% !important;
+        aspect-ratio: 1 / 1;
     }
 }
 
