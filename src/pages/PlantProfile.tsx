@@ -12,6 +12,7 @@ import NewPost from "../components/NewPost";
 import GalleryPreview from "../components/GalleryPreview";
 import WaterSchedule from "../components/WaterSchedule";
 import {DeviceTypes} from "../hooks/useWindowSize";
+import Weather from "../components/Weather";
 
 export interface IPlantProfileProps {}
 
@@ -71,8 +72,18 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   /** Renders the section selected on mobile devices. */
   const getExpandedSection = () => {
     if(showGallery) return <div className='mobile-section-container'><GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}</div>;
-    else if(showData) return <div className='mobile-section-container'><WaterSchedule /></div>;
+    else if(showData) return <div className='mobile-section-container'>{getData()}</div>;
     else if(showPublications) return <div className='mobile-section-container publications'>{ getPublications() }</div>;
+  };
+
+  /** Renders the Data of plant including schedules, weather, location, and season. */
+  const getData = () => {
+    return (
+      <>
+        <WaterSchedule />
+        <Weather />
+      </>
+    );
   };
 
   /** Renders the publications and posts. Includes section to write new posts. */
@@ -132,7 +143,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
           :
           <>
             <div className='plant-profile-data-container'>
-              <WaterSchedule />
+              { getData() }
             </div>
 
             <div className='page-content-container'>

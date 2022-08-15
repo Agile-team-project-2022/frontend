@@ -8,6 +8,8 @@
     background: white;
     border-radius: 0.1rem;
     overflow: hidden;
+    position: relative;
+    z-index: 0;
 }
 
 .data-section-title {

@@ -1,0 +1,55 @@
+.weather-animation-container {
+    background: aliceblue;
+    width: 10rem;
+    height: 10rem;
+    position: absolute;
+    z-index: 0;
+}
+
+.weather-data-container {
+    display: grid;
+    grid-template-areas:
+            "empty white time"
+            "empty temperature none"
+            "data data none";
+    grid-template-columns: repeat(3, 33.3%);
+    font-size: 0.6rem;
+    white-space: nowrap;
+    width: 100%;
+    height: 10rem;
+    color: var(--color-black-lighter-text);
+    z-index: 1;
+}
+
+.weather-data-container label {
+    display: flex;
+    column-gap: 0.2rem;
+    grid-area: time;
+}
+
+.clock {
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 1px solid lightsteelblue;
+    border-radius: 50%;
+}
+
+.weather-data-container h6 {
+    grid-area: temperature;
+    font-size: 0.75rem;
+    width: fit-content;
+    justify-self: center;
+}
+
+.data-content {
+    grid-area: data;
+    display: block;
+    padding-left: 1rem;
+    height: fit-content;
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.data-content p {
+    margin: 0.25rem 0;
+}
