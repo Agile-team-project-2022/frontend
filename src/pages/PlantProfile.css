@@ -7,14 +7,37 @@
             "content content content"
             "footer footer footer";
     grid-template-columns: 20% auto 20%;
-    grid-template-rows: 9.3rem 4rem auto 5rem;
+    grid-template-rows: 9.3rem 4rem auto 3rem;
     width: 100vw;
+    margin: 0;
+    background: var(--color-gray-gradient);
+}
+
+.mobile-section-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    grid-area: content;
+    margin: 0 0 2rem 0;
+}
+
+.publications-container {
+    margin: 0 0 2rem 0;
+}
+
+.mobile-section-container.publications {
+    background: none;
+    box-shadow: none;
+    padding: 0;
     margin: 0;
 }
 
-.mobile-section-container {
-    grid-area: content;
-    margin: 0 0 2rem 0;
+.mobile-section-container.publications .publications-section-title {
+    padding: 0;
+}
+
+.plant-profile-page .section-title {
+    padding: 0 0 1rem 0;
 }
 
 .collection-option-container {
@@ -59,13 +82,27 @@
         grid-template-areas:
             "header header header"
             "data content metadata";
-        grid-template-columns: 18% auto 18%;
+        grid-template-columns: minmax(11rem, 18%) minmax(10rem, auto) minmax(11rem, 18%);
         grid-template-rows: 14rem auto;
         width: 80%;
         min-width: 44rem;
         max-width: 90rem;
         margin: 0 auto;
         padding-top: 8rem;
+        background: white;
+    }
+
+    .plant-profile-data-container .data-section-container {
+        margin: 0 0 1rem 0;
+        width: 9.3rem;
+    }
+
+    .publications-container {
+        margin: 0;
+    }
+
+    .plant-profile-page .section-title {
+        padding: 0 0 1rem 0;
     }
 }
 
@@ -73,7 +110,7 @@
 @media all and (min-width: 1100px) {
     .plant-profile-page {
         grid-template-rows: 16rem auto;
-        grid-template-columns: 20% auto 20%;
+        grid-template-columns: minmax(14rem, 20%) minmax(10rem, auto) minmax(14rem, 20%);
         padding-top: 10rem;
     }
 
@@ -102,5 +139,10 @@
     .plant-profile-page textarea {
         padding: 0.8rem 1.3rem 0.5rem 1.5rem !important;
         width: calc(100% - 2.8rem) !important;
+    }
+
+    .plant-profile-data-container .data-section-container {
+        margin: 0 0 1.5rem 0;
+        width: 12rem;
     }
 }

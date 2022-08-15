@@ -1,5 +1,6 @@
 import React, {Suspense, useContext, useEffect, useState} from 'react';
 import './PlantProfile.css';
+import './Collection.css';
 import './Home.css';
 import {useParams} from "react-router-dom";
 import {CollectionView} from "../components/CollectionHeader";
@@ -10,14 +11,22 @@ import PublishedPost from "../components/PublishedPost";
 import NewPost from "../components/NewPost";
 import GalleryPreview from "../components/GalleryPreview";
 import WaterSchedule from "../components/WaterSchedule";
+import {DeviceTypes} from "../hooks/useWindowSize";
+import Weather from "../components/Weather";
+import Location from "../components/Location";
+import Season from "../components/Season";
 
 export interface IPlantProfileProps {}
 
 const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
-  const {state: {userData: {plants}, BASE_URL}} = useContext(AppContext);
+  const {state: {userData: {plants}, deviceType, BASE_URL}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
+  // Manages the sections to expand on mobile devices.
+  const [showGallery, setShowGallery] = useState(true);
+  const [showData, setShowData] = useState(false);
+  const [showPublications, setShowPublications] = useState(false);
 
   /** Gets the full plant data. */
   useEffect(() => {
@@ -41,19 +50,50 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     // eslint-disable-next-line
   }, [plants]);
 
-  return (
-    <main className="plant-profile-page">
-      <ProfileHeader plantData={plantHeaderData} view={CollectionView.OWNER} />
+  /** Manages the badges section if the user expands it on mobile devices. */
+  const expandGallery = () => {
+    setShowGallery(true);
+    setShowData(false);
+    setShowPublications(false);
+  };
 
-      <div className='plant-profile-data-container'>
+  /** Manages the Collection if the user expands it on mobile devices. */
+  const expandData = () => {
+    setShowGallery(false);
+    setShowData(true);
+    setShowPublications(false);
+  };
+
+  /** Manages the Interactions section if the user expands it on mobile devices. */
+  const expandPublications = () => {
+    setShowGallery(false);
+    setShowData(false);
+    setShowPublications(true);
+  };
+
+  /** Renders the section selected on mobile devices. */
+  const getExpandedSection = () => {
+    if(showGallery) return <div className='mobile-section-container'><GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}</div>;
+    else if(showData) return <div className='mobile-section-container'>{getData()}</div>;
+    else if(showPublications) return <div className='mobile-section-container publications'>{ getPublications() }</div>;
+  };
+
+  /** Renders the Data of plant including schedules, weather, location, and season. */
+  const getData = () => {
+    return (
+      <>
         <WaterSchedule />
-      </div>
+        <Weather />
+        <Location />
+        <Season />
+      </>
+    );
+  };
 
-      <div className='page-content-container'>
-        <section className='publications-container'>
-          <GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}
-        </section>
-
+  /** Renders the publications and posts. Includes section to write new posts. */
+  const getPublications = () => {
+    return (
+      <>
         <section className='publications-container'>
           <Suspense> <NewPost />  </Suspense>
         </section>
@@ -73,9 +113,54 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
         </section>
-      </div>
+      </>
+    );
+  };
 
-      <div> </div>
+  return (
+    <main className="plant-profile-page">
+      <ProfileHeader plantData={plantHeaderData} view={CollectionView.OWNER} />
+
+      {
+        deviceType === DeviceTypes.MOBILE?
+          <>
+            <div className='collection-option-container'>
+              <button className={`button-open-section collection-option ${showGallery? 'selected-collection-option' : ''}`}
+                      onClick={expandGallery}
+              >
+                Gallery
+              </button>
+              <button className={`button-open-section collection-option ${showData? 'selected-collection-option' : ''}`}
+                      onClick={expandData}
+              >
+                Data
+              </button>
+              <button className={`button-open-section collection-option ${showPublications? 'selected-collection-option' : ''}`}
+                      onClick={expandPublications}
+              >
+                Publications
+              </button>
+            </div>
+
+            { getExpandedSection() }
+          </>
+          :
+          <>
+            <div className='plant-profile-data-container'>
+              { getData() }
+            </div>
+
+            <div className='page-content-container'>
+              <section className='publications-container'>
+                <GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}
+              </section>
+
+              { getPublications() }
+            </div>
+
+            <div> More data </div>
+          </>
+      }
     </main>
   );
 }

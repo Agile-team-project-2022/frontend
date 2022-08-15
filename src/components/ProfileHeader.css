@@ -22,7 +22,7 @@
     margin: 0.2rem 0;
     color: var(--color-white-text);
     font-size: 0.72rem;
-    max-width: 100%;
+    max-width: calc(100% - 0.5rem);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

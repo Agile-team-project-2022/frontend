@@ -31,6 +31,7 @@
   --color-gray-medium: #dce0e3;
   --color-gray-dark: #babfbf;
   --color-gray-background: #F1F3F3;
+  --color-gray-gradient: linear-gradient(to bottom, rgba(128, 166, 172, 0.0) 70%, rgba(146, 170, 173, 0.12));
   --color-blue-button: #002F6D;
   --color-red-warning: #bf3715;
   --color-red-warning-shadow: rgba(191, 55, 21, 0.2);
@@ -221,7 +222,7 @@ button, a {
 }
 
 .add-button {
- justify-self: center;
+  justify-self: center;
   align-self: center;
   margin: 0;
 }
@@ -251,6 +252,7 @@ button, a {
   height: fit-content;
   box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);
   padding: 0.001rem 0;
+  background: white;
 }
 
 .input-section {
@@ -283,7 +285,6 @@ textarea::-webkit-resizer {
   background-image: url("../src/assets/resize.png");
   background-size: cover;
 }
-
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
