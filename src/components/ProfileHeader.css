@@ -39,6 +39,22 @@
     justify-content: flex-end;
 }
 
+.plant-profile-header .second-background {
+    width: 34.1%;
+    background: var(--color-gray-light);
+    opacity: 10%;
+    right: 0;
+    left: auto;
+}
+
+.plant-profile-header .first-background {
+    width: 100%;
+    background-image: url("../assets/background-1.jpg");
+    background-position-y: 30%;
+    background-size: 100%;
+    opacity: 90%;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .collection-header.plant-profile-header {
