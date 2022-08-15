@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import './CollectionHeader.css';
 import './ProfileHeader.css';
-import defaultPersonImg from '../assets/default-person.jpeg';
+import defaultPlantImg from '../assets/default-plant.jpg';
 import {AppContext} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";
@@ -61,7 +61,7 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
       <div className='third-background'> </div>
 
       <div className='list-img-container'>
-        <img src={isValid? plantData.imageFile : defaultPersonImg}
+        <img src={isValid? plantData.imageFile : defaultPlantImg}
              alt={'Plant'}
              onClick={openModal}
         />

@@ -1,7 +1,7 @@
 import React from 'react';
 import './GalleryExpanded.css';
 import closeImg from "../assets/close.png";
-import defaultImg from '../assets/login-img-2.jpg'; // TODO: Select correct default image.
+import defaultImg from '../assets/not-found.jpg';
 import {CheckEncodedImage} from '../helpers';
 import Modal from "./Modal";
 
