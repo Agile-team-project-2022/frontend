@@ -3,7 +3,7 @@ import './PlantProfile.css';
 import './Collection.css';
 import './Home.css';
 import noContent from '../assets/no-content-yet.png';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {CollectionView} from "../components/CollectionHeader";
 import ProfileHeader, {PlantHeaderData} from "../components/ProfileHeader";
 import {AppContext, PlantData} from "../context";
@@ -28,6 +28,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const [showGallery, setShowGallery] = useState(true);
   const [showData, setShowData] = useState(false);
   const [showPublications, setShowPublications] = useState(false);
+  const navigate = useNavigate();
 
   /** Gets the full plant data. */
   useEffect(() => {
@@ -44,7 +45,10 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             followers: response.data.followers?.length || 0
           });
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          navigate(`/not-found`, {replace: true});
+        });
     };
 
     fetchPlant();

@@ -1,7 +1,7 @@
 import React from 'react';
 import './GalleryExpanded.css';
 import closeImg from "../assets/close.png";
-import defaultImg from '../assets/not-found.jpg';
+import defaultImg from '../assets/not-found.jpeg';
 import {CheckEncodedImage} from '../helpers';
 import Modal from "./Modal";
 
