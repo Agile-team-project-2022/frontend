@@ -1,0 +1,86 @@
+.new-profile-container {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+}
+
+.new-profile-container .section-title {
+    margin: 0 0 1rem 0;
+}
+
+.new-profile-container label {
+    display: grid;
+    grid-template-areas:
+            "name name"
+            "input mark";
+    grid-template-columns: 18rem 1rem;
+    grid-template-rows: 0.9rem 3.85rem;
+    margin: 0.28rem 0;
+}
+
+.new-profile-container label span {
+    grid-area: name;
+    font-size: 0.9rem;
+}
+
+.new-profile-container input {
+    cursor: text;
+}
+
+.input-mark {
+    grid-area: mark;
+    justify-self: right;
+    align-self: center;
+}
+
+.new-profile-container .input-section {
+    grid-area: input;
+    font-size: 0.78rem;
+    font-weight: 300;
+}
+
+.instruction-marks {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+    column-gap: 0.5rem;
+    color: var(--color-black-lighter-text);
+    transform-origin: right center;
+    transform: scale(0.56);
+}
+
+.instruction-marks:nth-child(n + 3) {
+    margin-bottom: 1rem;
+}
+
+.new-profile-container .modal-list-buttons {
+    width: 15rem;
+    margin: 1.2rem auto 0 auto;
+}
+
+.water-schedule-field {
+    white-space: normal;
+    width: 18rem;
+}
+
+.water-schedule-field h5 {
+    display: flex;
+    column-gap: 0.5rem;
+    font-size: 0.85rem;
+    padding: 0;
+}
+
+.water-schedule-field p {
+    font-size: 0.78rem;
+    text-align: justify;
+}
+
+.section-divisor {
+    display: block;
+    margin: 1rem 0
+}
+
+.water-schedule-field .react-calendar__month-view__days {
+    color: lightgrey;
+    font-weight: 500;
+}

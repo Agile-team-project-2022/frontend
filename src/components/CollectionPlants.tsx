@@ -3,6 +3,8 @@ import './CollectionPlants.css';
 import CollectionCard from "./CollectionCard";
 import {AppContext} from "../context";
 import {CollectionView} from "./CollectionHeader";
+import NewProfile from "./NewProfile";
+import Modal from "./Modal";
 
 export interface ICollectionPlantsProps {
   view: CollectionView,
@@ -28,6 +30,10 @@ const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view
 
         {view === CollectionView.OWNER? <div className='add-button'><div> </div><div> </div></div> : ''}
       </div>
+
+      <Modal onClose={() => {}}>
+        <NewProfile />
+      </Modal>
     </div>
   );
 }
