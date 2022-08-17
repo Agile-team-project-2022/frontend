@@ -1,10 +1,13 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './NewProfile.css';
 import './Location.css';
 import Calendar from "./Calendar";
 import {useGeolocated} from "react-geolocated";
 import mapImg from "../assets/map-gray.png";
-import {mapCoordsToImage} from "../helpers";
+import {CheckEncodedImage, mapCoordsToImage} from "../helpers";
+import InputImage from "./InputImage";
+import {SectionType} from "./CollectionInteractions";
+import defaultPlantImg from "../assets/default-plant.jpg";
 
 export interface INewProfileProps {}
 
@@ -15,12 +18,22 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = () => {
     latitude: {meters: 0.0, updated: false},
     longitude: {meters: 0.0, updated: false}
   });
+  const [newImage, setNewImage] = useState('');
+  const [isValid, setIsValid] = useState(false);
   const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
     },
     userDecisionTimeout: 5000,
   });
+
+  useEffect(() => {
+    setIsValid(CheckEncodedImage(newImage));
+  }, [newImage]);
+
+  const uploadNewImage = (encodedImg: string) => {
+    setNewImage(encodedImg);
+  };
 
   /** TODO: Decide how to manage the water schedule in backend. */
   const selectDay = (day: number) => {
@@ -75,8 +88,22 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = () => {
   return (
     <div className='new-profile-container'>
       <h2 className='section-title'>Create new Plant profile</h2>
-      <span className='instruction-marks'>Required fields are marked with <div className='required-mark input-mark'> </div></span>
-      <span className='instruction-marks'>Optional fields are marked with <div className='optional-mark input-mark'> </div></span>
+
+      <div className='new-profile-field new-picture'>
+        <h5>Plant's picture: <div className='optional-mark input-mark'> </div></h5>
+        <div className='change-profile-picture-content new-profile-image'>
+          <InputImage onUploadImage={uploadNewImage}>
+            <div className='list-img-container change-profile-picture'>
+              <img src={isValid? newImage : defaultPlantImg} alt={'Profile'} />
+            </div>
+          </InputImage>
+        </div>
+
+        <div className='instructions-marks-container'>
+          <span className='instruction-marks'>Required fields are marked with <div className='required-mark input-mark'> </div></span>
+          <span className='instruction-marks'>Optional fields are marked with <div className='optional-mark input-mark'> </div></span>
+        </div>
+      </div>
 
       <label>
         <span>Plant's name:</span> <input className='input-section' type='text' />

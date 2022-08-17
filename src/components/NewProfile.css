@@ -8,7 +8,7 @@
     margin: 0 0 1rem 0;
 }
 
-.new-profile-container label {
+.new-profile-container label:not(.new-profile-image label) {
     display: grid;
     grid-template-areas:
             "name name"
@@ -42,10 +42,13 @@
 .instruction-marks {
     display: flex;
     justify-content: flex-end;
-    font-size: 1rem;
+    font-size: 0.6rem;
     column-gap: 0.5rem;
     color: var(--color-black-lighter-text);
     transform-origin: right center;
+}
+
+.instruction-marks div {
     transform: scale(0.56);
 }
 
@@ -118,4 +121,44 @@
 label.calculate-coords-label-container {
     grid-template-columns: 15% 78% 7%;
     margin-bottom: 1.5rem;
+}
+
+.new-picture {
+    display: grid;
+    grid-template-areas:
+            "title title"
+            "img instructions";
+    grid-template-columns: 35% 70%;
+}
+
+.new-picture h5 {
+    grid-area: title;
+}
+
+.new-profile-image {
+    grid-area: img;
+    grid-template-rows: 6rem 1rem;
+    width: 6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.new-profile-image .input-image {
+    box-shadow: 0 0 1rem var(--color-black-lightest-shadow);
+    min-width: 6rem;
+    margin-left: 0.7rem;
+}
+
+.new-profile-image .list-img-container.change-profile-picture {
+    width: 6rem;
+    height: 6rem;
+}
+
+.instructions-marks-container {
+    grid-area: instructions;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    height: fit-content;
+    margin-top: 4rem;
 }
