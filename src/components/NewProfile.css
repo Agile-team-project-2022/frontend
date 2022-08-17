@@ -58,19 +58,19 @@
     margin: 1.2rem auto 0 auto;
 }
 
-.water-schedule-field {
+.new-profile-field {
     white-space: normal;
     width: 18rem;
 }
 
-.water-schedule-field h5 {
+.new-profile-field h5 {
     display: flex;
     column-gap: 0.5rem;
     font-size: 0.85rem;
     padding: 0;
 }
 
-.water-schedule-field p {
+.new-profile-field p {
     font-size: 0.78rem;
     text-align: justify;
 }
@@ -80,7 +80,42 @@
     margin: 1rem 0
 }
 
-.water-schedule-field .react-calendar__month-view__days {
+.water-field {
+    margin-bottom: 1rem;
+}
+
+.new-profile-field .react-calendar__month-view__days {
     color: lightgrey;
     font-weight: 500;
+}
+
+.location-field label {
+    display: grid;
+    grid-template-areas:
+            "name input mark";
+    grid-template-columns: 35% 58% 7%;
+    grid-template-rows: 3rem;
+    align-items: center;
+}
+
+.location-field label span {
+    font-size: 0.8rem;
+}
+
+.location-field .location-container-background {
+    display: flex;
+}
+
+.location-field .location-container-background .location-marker {
+    width: 0.4rem;
+    height: 0.4rem;
+    border: 3px solid red;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+}
+
+label.calculate-coords-label-container {
+    grid-template-columns: 15% 78% 7%;
+    margin-bottom: 1.5rem;
 }

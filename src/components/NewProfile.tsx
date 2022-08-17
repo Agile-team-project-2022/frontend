@@ -1,11 +1,26 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './NewProfile.css';
+import './Location.css';
 import Calendar from "./Calendar";
+import {useGeolocated} from "react-geolocated";
+import mapImg from "../assets/map-gray.png";
+import {mapCoordsToImage} from "../helpers";
 
 export interface INewProfileProps {}
 
 const NewProfile: React.FunctionComponent<INewProfileProps> = () => {
   const [selectedDates, setSelectedDates] = useState<number[]>([]);
+  const [locationCoords, setLocationCoords] = useState({
+    altitude: {meters: 0.0, updated: false},
+    latitude: {meters: 0.0, updated: false},
+    longitude: {meters: 0.0, updated: false}
+  });
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  });
 
   /** TODO: Decide how to manage the water schedule in backend. */
   const selectDay = (day: number) => {
@@ -13,6 +28,48 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = () => {
       if(prevState.includes(day)) return prevState.filter(item => item !== day);
       else return [...prevState, day]
     });
+  };
+
+  /** Auto fills the available geolocation data. */
+  const calculateLocation = () => {
+    setLocationCoords({
+      altitude: {
+        meters: coords?.altitude || 0,
+        updated: !!coords
+      },
+      latitude: {
+        meters: coords?.latitude || 0,
+        updated: !!coords
+      },
+      longitude: {
+        meters: coords?.longitude || 0,
+        updated: !!coords
+      },
+    });
+
+    console.log(coords, isGeolocationAvailable, isGeolocationEnabled )
+  };
+
+  /** Updates the typed values. */
+  const handleChangeAltitude = (e: ChangeEvent<HTMLInputElement>) => {
+    const meters = parseFloat(e.target.value || '0');
+    setLocationCoords(prevState => {
+      return {...prevState, altitude: {meters: meters, updated: true}}
+    })
+  };
+
+  const handleChangeLatitude = (e: ChangeEvent<HTMLInputElement>) => {
+    const meters = parseFloat(e.target.value || '0');
+    setLocationCoords(prevState => {
+      return {...prevState, latitude: {meters: meters, updated: true}}
+    })
+  };
+
+  const handleChangeLongitude = (e: ChangeEvent<HTMLInputElement>) => {
+    const meters = parseFloat(e.target.value || '0');
+    setLocationCoords(prevState => {
+      return {...prevState, longitude: {meters: meters, updated: true}}
+    })
   };
 
   return (
@@ -36,10 +93,63 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = () => {
 
       <div className='section-divisor'> </div>
 
-      <div className='water-schedule-field'>
+      <div className='new-profile-field water-field'>
         <h5>Water schedule: <div className='required-mark input-mark'> </div></h5>
         <p>Define a rule for watering this plant. The rule will be automatically repeated over the next months. To define it, click on the dates when the plant needs water.</p>
         <Calendar onSelectDay={selectDay} selectedDates={selectedDates} />
+      </div>
+
+      <div className='section-divisor'> </div>
+
+      <div className='new-profile-field location-field'>
+        <h5>Location (approx.): </h5>
+        <p>Tell where the plant is located (in meters). Or give access to calculate it automatically.</p>
+        <label>
+          <span>Altitude (m):</span>
+          <input className='input-section'
+                 type='number'
+                 value={locationCoords.altitude.meters}
+                 onChange={(e) => handleChangeAltitude(e)}
+          />
+          <div className='required-mark input-mark'> </div>
+        </label>
+
+        <label>
+          <span>Latitude (m):</span>
+          <input  className='input-section'
+                  type='number'
+                  value={locationCoords.latitude.meters}
+                  onChange={(e) => handleChangeLatitude(e)}
+          />
+          <div className='required-mark input-mark'> </div>
+        </label>
+
+        <label>
+          <span>Longitude (m):</span>
+          <input className='input-section'
+                 type='number'
+                 value={locationCoords.longitude.meters}
+                 onChange={(e) => handleChangeLongitude(e)}
+          />
+          <div className='optional-mark input-mark'> </div>
+        </label>
+
+        <label className='calculate-coords-label-container'>
+          <span>Or:</span>
+          <button onClick={calculateLocation} className={`button-action ${coords? '' : 'disabled-button'}`}>
+            Calculate automatically
+          </button>
+        </label>
+
+        <p>Preview selected location:</p>
+        <div className='location-container-background'>
+          <img src={mapImg} alt='Global map' />
+          <div className='location-marker' style={{
+            top: `${mapCoordsToImage(locationCoords.latitude.meters, locationCoords.longitude.meters).latitude}%`,
+            left: `${mapCoordsToImage(locationCoords.latitude.meters, locationCoords.longitude.meters).longitude}%`
+          }}>
+          </div>
+        </div>
       </div>
 
       <div className='modal-list-buttons'>
