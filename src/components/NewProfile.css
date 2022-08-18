@@ -20,7 +20,7 @@
 
 .new-profile-container label span {
     grid-area: name;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .new-profile-container input {
@@ -154,6 +154,12 @@ label.calculate-coords-label-container {
     height: 6rem;
 }
 
+.new-profile-image .input-image p {
+    padding: calc(50% - 0.2rem) 0;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
 .instructions-marks-container {
     grid-area: instructions;
     display: flex;
@@ -161,4 +167,42 @@ label.calculate-coords-label-container {
     row-gap: 0.5rem;
     height: fit-content;
     margin-top: 4rem;
+}
+
+.input-section.invalid-input {
+    outline: 0.12rem solid var(--color-red-warning-shadow);
+    outline-offset: -0.3rem;
+}
+
+.location-field .disabled-button {
+    pointer-events: none;
+}
+
+.error-message {
+    text-align: right;
+    font-size: 0.85rem;
+    margin: 2rem 1rem 1rem 0;
+    color: var(--color-red-warning);
+    font-weight: 500;
+}
+
+.hidden-filters {
+    display: none;
+}
+
+.new-profile-field select {
+    padding: 0.1rem 1rem;
+    box-shadow: 0 0 1rem var(--color-black-lightest-shadow);
+    color: var(--color-black-lighter-text);
+    font-size: 0.78rem;
+    outline: unset;
+    cursor: pointer;
+    width: 75%;
+    border: 5px solid white;
+    border-radius: 0.15rem;
+}
+
+.new-profile-field select.invalid-select-input {
+    outline: 0.12rem solid var(--color-red-warning-shadow);
+    outline-offset: -0.3rem;
 }

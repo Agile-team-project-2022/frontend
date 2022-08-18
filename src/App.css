@@ -98,6 +98,7 @@ button, a {
   opacity: 25%;
   filter: grayscale(50%);
   transition-duration: 0.2s;
+  cursor: default;
 }
 
 .button-open-section {

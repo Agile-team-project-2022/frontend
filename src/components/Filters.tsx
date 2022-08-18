@@ -168,7 +168,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
       .catch((e) => console.log(e));
   };
 
-  /** Initializes the mapping between category name and ID from database. */
+  /** Initializes the mapping between category name and ID from database if not done yet. */
   const setMappedIds = () => {
     if(Object.keys(state.categoryIdMap).length === 0) {
       console.log('Setting the IDs for categories...')
