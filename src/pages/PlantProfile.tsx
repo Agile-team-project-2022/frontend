@@ -24,6 +24,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {state: {deviceType, BASE_URL}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [locationData, setLocationData] = useState({altitude: 0, latitude: 0, longitude: 0});
+  const [scheduleData, setScheduleData] = useState<number[]>([]);
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
   // Manages the sections to expand on mobile devices.
   const [showGallery, setShowGallery] = useState(true);
@@ -48,7 +49,6 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
           // Parses the string containing coordinates.
           const coords = response.data.location.split(',');
-          console.log(response.data)
           if(coords.length === 3) {
             setLocationData(prevState => {
               return {
@@ -59,6 +59,11 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
               }
             });
           }
+
+          // Parses the schedule dates for watering the plant.
+          let dates: (string | number)[]  = response.data.schedule.split(',');
+          dates = dates.map((item: (string | number), index: number) => parseInt(item as string));
+          setScheduleData(dates as number[]);
         })
         .catch((e) => {
           console.log(e);
@@ -102,7 +107,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const getData = () => {
     return (
       <>
-        <WaterSchedule />
+        <WaterSchedule selectedDates={scheduleData}/>
         <Weather />
         <Location altitude={locationData.altitude} latitude={locationData.latitude} longitude={locationData.longitude}/>
         <Season />
