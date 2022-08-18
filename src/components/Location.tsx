@@ -24,7 +24,7 @@ const Location: React.FunctionComponent<ILocationProps> = ({altitude, latitude, 
           >
           </div>
         </div>
-        <p><span>Altitude: </span> 2800m</p>
+        <p><span>Altitude: </span> {altitude}m </p>
       </div>
     </DataSection>
   );

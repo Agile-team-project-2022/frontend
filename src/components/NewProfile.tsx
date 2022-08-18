@@ -150,7 +150,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
       species: basicData.species,
       schedule: selectedDates.toString(),
       caringInfo: "plant", // TODO: Confirm what this means
-      location: `${locationCoords.latitude},${locationCoords.longitude},${locationCoords.altitude}`,
+      location: `${locationCoords.latitude.meters},${locationCoords.longitude.meters},${locationCoords.altitude.meters}`,
       ownerId: userId,
       plantsCategoryId: 1,// TODO: Enable select category
       imageFile: CheckEncodedImage(newImage)? newImage : ''

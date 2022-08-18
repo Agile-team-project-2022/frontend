@@ -21,8 +21,9 @@ export interface IPlantProfileProps {}
 
 const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
-  const {state: {userData: {plants}, deviceType, BASE_URL}} = useContext(AppContext);
+  const {state: {deviceType, BASE_URL}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
+  const [locationData, setLocationData] = useState({altitude: 0, latitude: 0, longitude: 0});
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
   // Manages the sections to expand on mobile devices.
   const [showGallery, setShowGallery] = useState(true);
@@ -44,6 +45,20 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             species: response.data.species,
             followers: response.data.followers?.length || 0
           });
+
+          // Parses the string containing coordinates.
+          const coords = response.data.location.split(',');
+          console.log(response.data)
+          if(coords.length === 3) {
+            setLocationData(prevState => {
+              return {
+                ...prevState,
+                latitude: parseFloat(coords[0] || '0'),
+                longitude: parseFloat(coords[1] || '0'),
+                altitude: parseFloat(coords[2] || '0')
+              }
+            });
+          }
         })
         .catch((e) => {
           console.log(e);
@@ -53,7 +68,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
     fetchPlant();
     // eslint-disable-next-line
-  }, [plants]);
+  }, []);
 
   /** Manages the badges section if the user expands it on mobile devices. */
   const expandGallery = () => {
@@ -89,7 +104,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
       <>
         <WaterSchedule />
         <Weather />
-        <Location altitude={0} latitude={0} longitude={0}/>
+        <Location altitude={locationData.altitude} latitude={locationData.latitude} longitude={locationData.longitude}/>
         <Season />
       </>
     );
