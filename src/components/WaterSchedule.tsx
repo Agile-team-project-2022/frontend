@@ -1,49 +1,20 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './WaterSchedule.css';
 import DataSection from "./DataSection";
-import Calendar from 'react-calendar';
-import {months} from "../helpers";
+import Calendar from "./Calendar";
 
 export interface IWaterScheduleProps {}
 
 const WaterSchedule: React.FunctionComponent<IWaterScheduleProps> = () => {
-  const currentDate = new Date();
-  const weekdays = ['M', 'T', 'W', 'Th', 'F', 'S', 'S'];
-
-  useEffect(() => {
-    hideDays();
-  });
-
   /** TODO: Decide how to manage the water schedule in backend. */
-  const selectDay = (date: Date) => {
-    console.log('changed', date);
-  };
-
-  /** Hides the prev and next days from other months. */
-  const hideDays = () => {
-    const allDays = document.querySelectorAll('.react-calendar__month-view__days__day abbr');
-    let lastDay = 0;
-    let currentDay = 0;
-    for(let i = 0; i < allDays.length; i++) {
-      currentDay = parseInt(allDays[i].textContent || '0');
-      if((lastDay === 0 && currentDay > 20) || (currentDay < lastDay)) {
-        const parent = allDays[i].parentElement;
-        parent?.classList.add('date-out-range');
-      } else {
-        lastDay = currentDay;
-      }
-    }
+  const selectDay = (day: number) => {
+    console.log('changed to: ', day)
   };
 
   return (
     <DataSection title='Water schedule' onClickSection={() => {}}>
-      <div className='schedule-month-year'>
-        <span>{months[currentDate.getMonth()]}</span> <span>{currentDate.getFullYear()} </span>
-      </div>
-      <div className='schedule-days'>
-        { weekdays.map((item, index) => <span key={`weekday-${index}`}>{item}</span>) }
-      </div>
-      <Calendar onChange={selectDay} value={new Date()}/>
+      {/* TODO: Pass correct selected days. */}
+      <Calendar onSelectDay={selectDay} selectedDates={[2, 4, 6, 9, 16, 21, 23, 25]} />
     </DataSection>
   );
 }

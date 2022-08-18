@@ -6,6 +6,7 @@ import {AppContext, AppValidActions} from "./context";
 import useWindowSize, {DeviceTypes} from "./hooks/useWindowSize";
 import axios from "axios";
 import PlantProfile from "./pages/PlantProfile";
+import NotFound from "./components/NotFound";
 
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
@@ -47,7 +48,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           typePlanter: '-', // TODO: add to endpoint and ask user to type it.
           plants: response.data.plants,
           followedPlants: response.data.Plantsfollow,
-          friends: response.data.follower, // TODO: Check if 'follower' is 'Friends'.
+          friends: response.data.follower,
           posts: response.data.posts,
           count: {
             totalPlants: response.data._count.plants,
@@ -80,6 +81,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           <Route path="home" element={<Home />} />
           <Route path="collection" element={<Collection />} />
           <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />
+          <Route path="/not-found" element={<NotFound />} />
         </Routes>
       </Suspense>
 

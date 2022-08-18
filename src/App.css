@@ -98,6 +98,7 @@ button, a {
   opacity: 25%;
   filter: grayscale(50%);
   transition-duration: 0.2s;
+  cursor: default;
 }
 
 .button-open-section {
@@ -259,7 +260,7 @@ button, a {
   all: unset;
   grid-area: input-field;
   background: white;
-  box-shadow: 0 0 1rem var(--color-black-lighter-shadow);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.05);
   margin: 1rem 0;
   width: calc(100% - 2rem);
   height: 1.8rem;
@@ -299,6 +300,20 @@ textarea::-webkit-resizer {
   height: 100%;
   object-fit: contain;
   opacity: 90%;
+}
+
+.input-mark {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+}
+
+.required-mark {
+  background: red;
+}
+
+.optional-mark {
+  background: var(--color-green-header);
 }
 
 /* Tablet version. */

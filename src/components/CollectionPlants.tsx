@@ -1,8 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './CollectionPlants.css';
 import CollectionCard from "./CollectionCard";
 import {AppContext} from "../context";
 import {CollectionView} from "./CollectionHeader";
+import NewProfile from "./NewProfile";
+import Modal from "./Modal";
 
 export interface ICollectionPlantsProps {
   view: CollectionView,
@@ -12,6 +14,15 @@ export interface ICollectionPlantsProps {
 const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view, ownerId}) => {
   /** TODO: Fetch plants from others instead of userData. */
   const {state: {userData: {plants, count: {totalPlants}}}} = useContext(AppContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <div className="collection-plants">
@@ -26,8 +37,17 @@ const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view
           })
         }
 
-        {view === CollectionView.OWNER? <div className='add-button'><div> </div><div> </div></div> : ''}
+        {view === CollectionView.OWNER? <div className='add-button' onClick={openModal}><div> </div><div> </div></div> : ''}
       </div>
+
+      {
+        modalIsOpen?
+          <Modal onClose={closeModal}>
+            <NewProfile onClose={closeModal} />
+          </Modal>
+          :
+          ''
+      }
     </div>
   );
 }
