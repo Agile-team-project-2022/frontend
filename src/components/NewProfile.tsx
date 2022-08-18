@@ -7,7 +7,7 @@ import mapImg from "../assets/map-gray.png";
 import {CheckEncodedImage, mapCoordsToImage} from "../helpers";
 import InputImage from "./InputImage";
 import defaultPlantImg from "../assets/default-plant.jpg";
-import {AppContext} from "../context";
+import {AppContext, AppValidActions} from "../context";
 import axios from "axios";
 import Filters from "./Filters";
 
@@ -16,7 +16,7 @@ export interface INewProfileProps {
 }
 
 const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
-  const {state: {userData: {userId}, BASE_URL, categoryIdMap}} = useContext(AppContext);
+  const {state: {userData: {userId}, BASE_URL, categoryIdMap}, dispatch} = useContext(AppContext);
   const [selectedDates, setSelectedDates] = useState<number[]>([]);
   const [basicData, setBasicData] = useState({
     name: '',
@@ -148,17 +148,19 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     const data = {
       name: basicData.name,
       species: basicData.species,
-      schedule: selectedDates.toString(),
+      schedule: selectedDates.join(','),
       caringInfo: "plant", // TODO: Confirm what this means
       location: `${locationCoords.latitude.meters},${locationCoords.longitude.meters},${locationCoords.altitude.meters}`,
       ownerId: userId,
-      plantsCategoryId: 1,// TODO: Enable select category
+      plantsCategoryId: category,
       imageFile: CheckEncodedImage(newImage)? newImage : ''
     };
 
     axios.post(url, data)
       .then((res) => {
         console.log('Successfully created plant');
+        console.log(res.data);
+        dispatch({type: AppValidActions.CREATE_NEW_PLANT, payload: {newPlant: res.data}});
         onClose();
       })
       .catch((e) => console.log(e))

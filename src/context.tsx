@@ -17,7 +17,8 @@ enum AppValidActions {
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
   UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
-  UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE'
+  UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE',
+  CREATE_NEW_PLANT = 'CREATE_NEW_PLANT'
 }
 
 // Interfaces and Types definition.
@@ -126,7 +127,8 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction;
+                | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction
+                | CreateNewPlantAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -197,6 +199,11 @@ interface UpdateHomePostsAction {
 interface UpdatePlantPictureAction {
   type: AppValidActions,
   payload: {userData: {plants: PlantData[]} }
+}
+
+interface CreateNewPlantAction {
+  type: AppValidActions,
+  payload: {newPlant: PlantData}
 }
 
 // Defines the default values to initialize the app.
@@ -333,6 +340,18 @@ const reducer = (state: AppState, action: AppAction) => {
           ...state.userData,
           plants: [
             ...(action as UpdatePlantPictureAction).payload.userData.plants
+          ]
+        }
+      };
+
+    case AppValidActions.CREATE_NEW_PLANT:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          plants: [
+            ...state.userData.plants,
+            (action as CreateNewPlantAction).payload.newPlant
           ]
         }
       };

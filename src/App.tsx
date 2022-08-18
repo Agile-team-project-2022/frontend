@@ -34,7 +34,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
   /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
   const fetchUserData = () => {
-    // TODO: Fetch the full associated data.
     const url = `${ state.BASE_URL }user/${ state.userData.userId }`;
 
     axios.get(url)
