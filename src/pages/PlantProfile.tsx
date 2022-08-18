@@ -6,7 +6,7 @@ import noContent from '../assets/no-content-yet.png';
 import {useNavigate, useParams} from "react-router-dom";
 import {CollectionView} from "../components/CollectionHeader";
 import ProfileHeader, {PlantHeaderData} from "../components/ProfileHeader";
-import {AppContext, PlantData} from "../context";
+import {AppContext, PlantData, UserData} from "../context";
 import axios from "axios";
 import PublishedPost from "../components/PublishedPost";
 import NewPost from "../components/NewPost";
@@ -16,6 +16,9 @@ import {DeviceTypes} from "../hooks/useWindowSize";
 import Weather from "../components/Weather";
 import Location from "../components/Location";
 import Season from "../components/Season";
+import DataSection from "../components/DataSection";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import defaultPerson from "../assets/default-person.jpeg";
 
 export interface IPlantProfileProps {}
 
@@ -23,6 +26,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
   const {state: {deviceType, BASE_URL}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
+  const [ownerData, setOwnerData] = useState<UserData>();
   const [locationData, setLocationData] = useState({altitude: 0, latitude: 0, longitude: 0});
   const [scheduleData, setScheduleData] = useState<number[]>([]);
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
@@ -74,6 +78,29 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     fetchPlant();
     // eslint-disable-next-line
   }, []);
+
+  /** Gets the owner data. */
+  useEffect(() => {
+    const fetchOwner = () => {
+      const url = `${ BASE_URL }user/${ ownerId }`;
+      axios.get(url)
+        .then((response) => {
+          setOwnerData(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+          navigate(`/not-found`, {replace: true});
+        });
+    };
+
+    fetchOwner();
+    // eslint-disable-next-line
+  }, []);
+
+  /** Redirects to owner profile. */
+  const goToOwner = () => {
+    navigate(`/collection`, {replace: false});
+  };
 
   /** Manages the badges section if the user expands it on mobile devices. */
   const expandGallery = () => {
@@ -183,7 +210,21 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
               { getPublications() }
             </div>
 
-            <div> More data {ownerId} </div>
+            <div className='owner-data-container'>
+              <DataSection title={'Owned by'} onClickSection={() => {}}>
+                <div className='list-item-container' onClick={goToOwner} >
+                  <div className='list-img-container'>
+                    <LazyLoadImage src={ownerData?.imageFile || defaultPerson} alt={`Owner`} />
+                  </div>
+                  {
+                    ownerData?.name !== undefined?
+                      <p> {ownerData.name.charAt(0).toUpperCase() + ownerData.name.substring(1)} </p>
+                      :
+                      ''
+                  }
+                </div>
+              </DataSection>
+            </div>
           </>
       }
     </main>

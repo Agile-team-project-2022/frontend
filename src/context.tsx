@@ -42,6 +42,7 @@ interface AppState {
 export interface UserData {
   updated: boolean,
   user: string,
+  name: string,
   userId: number,
   email: string,
   imageFile: string,
@@ -159,6 +160,7 @@ interface SetUserDataAction {
   payload: {userData: {
       updated: boolean,
       user: string,
+      name: string,
       email: string,
       imageFile: string,
       experience: number,
@@ -216,6 +218,7 @@ const appInitialState = {
   userData: {
     updated: false,
     user: 'guest',
+    name: '',
     userId: 2, // TODO: use correct user id
     email: '',
     imageFile: '',
