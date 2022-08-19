@@ -43,7 +43,13 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
             typePlanter: response.data.planter_type,
             experience: 2, // TODO: calculate experience
             totalBadges: 2, // TODO: calculate badges
-            count: response.data._count
+            plants: response.data.plants,
+            count: {
+              totalPlants: response.data._count.plants,
+              totalFriends: response.data._count.follower,
+              totalFollowedPlants: response.data._count.Plantsfollow,
+              totalPosts: response.data._count.posts
+            }
           };
 
           setOthersData(data as UserData);

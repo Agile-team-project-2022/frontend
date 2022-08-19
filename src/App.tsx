@@ -84,6 +84,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           <Route path="collection" element={<Collection />} />
           <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />
           <Route path="/not-found" element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
 
