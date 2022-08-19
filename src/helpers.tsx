@@ -57,3 +57,18 @@ export const mapCoordsToImage = (latitude: number, longitude: number) => {
   const y = (mapHeight / 2) - (mapWidth * mercatorVal / (2 * Math.PI));
   return {latitude: y, longitude: x};
 };
+
+/** Calculates the experience (number of stars) based on number of plants, friends, and posts. */
+export const getExperience = (totalPlants: number, totalFriends: number, totalPosts: number) => {
+  const maxStars = 5;
+  // Values for having max stars.
+  const maxPlantsConsidered = 200;
+  const maxFriendsConsidered = 100;
+  const maxPostsConsidered = 200;
+
+  const mappedPlants = (totalPlants) * (maxStars) / (maxPlantsConsidered);
+  const mappedFriends = (totalFriends) * (maxStars) / (maxFriendsConsidered);
+  const mappedPosts = (totalPosts) * (maxStars) / (maxPostsConsidered);
+
+  return Math.floor((mappedPlants + mappedFriends + mappedPosts) / 3);
+};

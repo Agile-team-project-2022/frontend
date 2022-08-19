@@ -8,6 +8,7 @@ import {DeviceTypes} from "../hooks/useWindowSize";
 import CollectionInteractions from "../components/CollectionInteractions";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import {getExperience} from "../helpers";
 
 export interface ICollectionProps {}
 
@@ -58,7 +59,11 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
             friends: friends,
             pendingFriends: pendingFriends,
             typePlanter: response.data.planter_type,
-            experience: 2, // TODO: calculate experience
+            experience: getExperience(
+              response.data._count.plants,
+              response.data._count.follower,
+              response.data._count.posts
+            ),
             totalBadges: 2, // TODO: calculate badges
             plants: response.data.plants,
             count: {
