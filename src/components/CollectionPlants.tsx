@@ -8,7 +8,7 @@ import Modal from "./Modal";
 
 export interface ICollectionPlantsProps {
   view: CollectionView,
-  ownerId: number
+  ownerId: string | number
 }
 
 const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view, ownerId}) => {

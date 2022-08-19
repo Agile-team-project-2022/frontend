@@ -23,6 +23,12 @@
             0 0 0.4rem var(--color-black-lighter-shadow);
     padding: 0.85rem;
     text-align: center;
+    cursor: pointer;
+}
+
+.data-section-title.disabled-open-section {
+    cursor: default;
+    pointer-events: none;
 }
 
 .data-section-content {

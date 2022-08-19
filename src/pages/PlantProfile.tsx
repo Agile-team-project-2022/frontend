@@ -19,6 +19,7 @@ import Season from "../components/Season";
 import DataSection from "../components/DataSection";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import defaultPerson from "../assets/default-person.jpeg";
+import {CheckEncodedImage} from "../helpers";
 
 export interface IPlantProfileProps {}
 
@@ -99,7 +100,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
   /** Redirects to owner profile. */
   const goToOwner = () => {
-    navigate(`/collection`, {replace: false});
+    navigate(`/collection/${ownerId}`, {replace: false});
   };
 
   /** Manages the badges section if the user expands it on mobile devices. */
@@ -214,7 +215,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
               <DataSection title={'Owned by'} onClickSection={() => {}}>
                 <div className='list-item-container' onClick={goToOwner} >
                   <div className='list-img-container'>
-                    <LazyLoadImage src={ownerData?.imageFile || defaultPerson} alt={`Owner`} />
+                    <LazyLoadImage src={CheckEncodedImage(ownerData?.imageFile || '')? ownerData?.imageFile : defaultPerson} alt={`Owner`} />
                   </div>
                   {
                     ownerData?.name !== undefined?

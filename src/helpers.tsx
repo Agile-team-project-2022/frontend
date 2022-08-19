@@ -6,9 +6,18 @@ export const CheckEncodedImage = (encodedFile: string) => {
     'data:image/jpeg;base64',
     'data:image/png;base64'
   ];
-  const start = encodedFile.split(',')[0];
 
-  if(validTypes.includes(start)) isValid = true;
+  try {
+    const start = encodedFile.split(',')[0];
+    for(let validType in validTypes) {
+      if(start === validType) {
+        isValid = true;
+        break;
+      }
+    }
+  } catch(e) {
+    return false;
+  }
 
   return isValid;
 };

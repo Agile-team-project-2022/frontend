@@ -54,6 +54,7 @@ export interface UserData {
   plants: PlantData[],
   followedPlants: ThumbnailData[],
   friends: ThumbnailData[],
+  pendingFriends: ThumbnailData[],
   posts: PostData[],
   count: CountData,
   createdAt: string
@@ -168,6 +169,7 @@ interface SetUserDataAction {
       plants: PlantData[],
       followedPlants: ThumbnailData[],
       friends: ThumbnailData[],
+      pendingFriends: ThumbnailData[],
       posts: PostData[],
       count: CountData,
       createdAt: string
@@ -230,6 +232,7 @@ const appInitialState = {
     plants: [],
     followedPlants: [],
     friends: [],
+    pendingFriends: [],
     posts: [],
     count: {
       totalPlants: 0,

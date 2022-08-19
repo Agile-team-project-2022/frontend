@@ -153,6 +153,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
       location: `${locationCoords.latitude.meters},${locationCoords.longitude.meters},${locationCoords.altitude.meters}`,
       ownerId: userId,
       plantsCategoryId: category,
+      initialAge: basicData.age,
       imageFile: CheckEncodedImage(newImage)? newImage : ''
     };
 

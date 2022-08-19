@@ -1,68 +1,31 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './CollectionInteractions.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import treeImg from "../assets/category-tree.jpeg";
+import defaultPersonImg from "../assets/default-person.jpeg";
 import DataSection from './DataSection';
 import Modal from "./Modal";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import {AppContext, ThumbnailData} from "../context";
+import {CollectionView} from "./CollectionHeader";
+import {CheckEncodedImage} from "../helpers";
 
-export interface ICollectionInteractionsProps {}
+export interface ICollectionInteractionsProps {
+  view: CollectionView
+  friends: ThumbnailData[],
+  friendsPending: ThumbnailData[]
+}
 
 export enum SectionType {
   PLANT = 'PLANT',
   PERSON = 'PERSON'
 }
 
-const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = (props) => {
-  const {state: {deviceType, userData}} = useContext(AppContext);
-
-  // TODO: Hardcoded. Must be replaced with the endpoint. Check if it will be implemented in backend or will be pending.
-  const [carePlants, setCarePlants] = useState<{id: number, name: string, imageFile: string}[]>([]);
-  const [carePlantsPending, setCarePlantsPending] = useState<{id: number, name: string, imageFile: string}[]>([]);
-  const [expandedCarePlants, setExpandedCarePlants] = useState(false);
-  const [expandedCarePlantsPending, setExpandedCarePlantsPending] = useState(false);
-
-  const [friends, setFriends] = useState<{id: number, name: string, imageFile: string}[]>([]);
-  const [friendsPending, setFriendsPending] = useState<{id: number, name: string, imageFile: string}[]>([]);
+const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = ({view, friends, friendsPending}) => {
+  const {state: {deviceType}} = useContext(AppContext);
   const [expandedFriends, setExpandedFriends] = useState(false);
   const [expandedFriendsPending, setExpandedFriendsPending] = useState(false);
 
-  useEffect(() => {
-    // TODO: Must be replaced with the endpoint.
-    // TODO: Include preview arrays too.
-    setCarePlants([
-      {id: 1, name: 'plant A', imageFile: ''},
-      {id: 2, name: 'plant B', imageFile: ''},
-      {id: 3, name: 'plant C', imageFile: ''}
-    ]);
-
-    setCarePlantsPending(
-      userData.followedPlants // TODO: use correct data.
-    );
-
-    setFriends([
-      {id: 1, name: 'person 1', imageFile: ''},
-      {id: 2, name: 'person 2', imageFile: ''},
-      {id: 3, name: 'person 3', imageFile: ''},
-      {id: 4, name: 'person 4', imageFile: ''}
-    ]);
-
-    setFriendsPending([
-      {id: 4, name: 'person A', imageFile: ''},
-      {id: 5, name: 'person B', imageFile: ''}
-    ]);
-  }, [userData.followedPlants]);
-
   /** Opens the respective modal. */
-  const openSectionCarePlants = () => {
-    setExpandedCarePlants(true);
-  };
-
-  const openSectionCarePlantsPending = () => {
-    setExpandedCarePlantsPending(true);
-  };
-
   const openSectionFriends = () => {
     setExpandedFriends(true);
   };
@@ -72,14 +35,6 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   };
 
   /** Closes the modals. */
-  const closeSectionCarePlants = () => {
-    setExpandedCarePlants(false);
-  };
-
-  const closeSectionCarePlantsPending = () => {
-    setExpandedCarePlantsPending(false);
-  };
-
   const closeSectionFriends = () => {
     setExpandedFriends(false);
   };
@@ -103,7 +58,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
           array.map((item, index) => {
             return (
               <div className={`list-img-container ${sectionType === SectionType.PLANT? 'squared-img' : ''}`} key={`item-interaction-${item.name}-${item.id}`}>
-                <LazyLoadImage src={treeImg} alt={'Interaction'} />
+                <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Interaction'} />
               </div>
             );
           })
@@ -119,7 +74,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
                   return (
                     <div className='list-item-container' key={`list-item-interaction-${item.name}-${item.id}`}>
                       <div className='list-img-container'>
-                        <LazyLoadImage src={treeImg} alt={'Interaction'} />
+                        <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Interaction'} />
                       </div>
                       <p> {item.name.charAt(0).toUpperCase() + item.name.substring(1)} </p>
                     </div>
@@ -139,17 +94,6 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
         {
           getSection(
-            'Requests for taking care',
-            SectionType.PLANT,
-            carePlantsPending, // TODO: fetch from endpoint the correct data.
-            expandedCarePlantsPending,
-            openSectionCarePlantsPending,
-            closeSectionCarePlantsPending
-          )
-        }
-
-        {
-          getSection(
             'Friend requests',
             SectionType.PERSON,
             friendsPending, // TODO: fetch from endpoint
@@ -161,17 +105,6 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       </div>
 
       <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
-        {
-          getSection(
-            'Currently taking care for',
-            SectionType.PLANT,
-            carePlants, // TODO: fetch from endpoint
-            expandedCarePlants,
-            openSectionCarePlants,
-            closeSectionCarePlants
-          )
-        }
-
         {
           getSection(
             'Friends',

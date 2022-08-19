@@ -21,7 +21,11 @@ const DataSection: React.FunctionComponent<IDataSectionProps> = ({
 
   return (
     <div className="data-section-container">
-      <h4 className="data-section-title"> {title} {totalItems !== undefined? `(${totalItems})` : ''} </h4>
+      <h4 className={`data-section-title ${totalItems !== undefined && totalItems > 0? '' : 'disabled-open-section'}`}
+          onClick={onClickSection}
+      >
+        {title} {totalItems !== undefined? `(${totalItems})` : ''}
+      </h4>
       <div className="data-section-content">
         {children}
         {

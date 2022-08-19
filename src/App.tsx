@@ -7,6 +7,7 @@ import useWindowSize, {DeviceTypes} from "./hooks/useWindowSize";
 import axios from "axios";
 import PlantProfile from "./pages/PlantProfile";
 import NotFound from "./components/NotFound";
+import {CollectionView} from "./components/CollectionHeader";
 
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
@@ -48,6 +49,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           plants: response.data.plants,
           followedPlants: response.data.Plantsfollow,
           friends: response.data.follower,
+          pendingFriends: response.data.following,
           posts: response.data.posts,
           count: {
             totalPlants: response.data._count.plants,
@@ -78,7 +80,8 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
-          <Route path="collection" element={<Collection />} />
+          <Route path="collection/:ownerId" element={<Collection view={CollectionView.OTHERS} />} />
+          <Route path="collection" element={<Collection view={CollectionView.OWNER} />} />
           <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />
           <Route path="/not-found" element={<NotFound />} />
         </Routes>
