@@ -25,12 +25,14 @@ export interface IPlantProfileProps {}
 
 const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
-  const {state: {deviceType, BASE_URL, userData: {userId, plants}}} = useContext(AppContext);
+  const {state: {deviceType, BASE_URL, userData: {userId, plants, followedPlants}}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [ownerData, setOwnerData] = useState<UserData>();
   const [locationData, setLocationData] = useState({altitude: 0, latitude: 0, longitude: 0});
   const [scheduleData, setScheduleData] = useState<number[]>([]);
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
+  const [disableButton, setDisableButton] = useState(false);
+  const [alreadyFollow, setAlreadyFollow] = useState(false);
   // Manages the sections to expand on mobile devices.
   const [showGallery, setShowGallery] = useState(true);
   const [showData, setShowData] = useState(false);
@@ -49,7 +51,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             name: response.data.name,
             imageFile: response.data.imageFile,
             species: response.data.species,
-            followers: response.data.followers?.length || 0
+            followers: response.data.followers?.length || 0 // TODO: Send total followers
           });
 
           // Parses the string containing coordinates.
@@ -79,6 +81,19 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     fetchPlant();
     // eslint-disable-next-line
   }, [plants]);
+
+  /** Initializes with the correct plant followers data. */
+  useEffect(() => {
+    if(parseInt(ownerId || '0') !== userId) {
+      for(let follower of followedPlants) {
+        // Disables requesting for friends more than once.
+        if(follower.id === parseInt(plantId || '0')) {
+          setAlreadyFollow(true);
+          break;
+        }
+      }
+    }
+  }, [followedPlants, ownerId, userId, plantId]);
 
   /** Gets the owner data. */
   useEffect(() => {
@@ -171,9 +186,47 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     );
   };
 
+  /** For others view, enables asking for following plant. */
+  const sendFollow = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-plant`;
+    const data = {
+      userId: userId,
+      plantId: plantId || 0
+    };
+
+    axios.post(url, data)
+      .then((res) => {
+        console.log('Successfully following plant');
+        setDisableButton(false);
+        setAlreadyFollow(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** For others view, enables unfollowing. */
+  const deleteFollow = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-plant/${1}`; // TODO: Correct delete function request
+
+    axios.delete(url)
+      .then((res) => {
+        console.log('Successfully stopped following user');
+        setDisableButton(false);
+        setAlreadyFollow(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
   return (
     <main className="plant-profile-page">
-      <ProfileHeader plantData={plantHeaderData} view={CollectionView.OWNER} />
+      <ProfileHeader plantData={plantHeaderData} view={(plantData?.ownerId || 0) === userId? CollectionView.OWNER : CollectionView.OTHERS} />
 
       {
         deviceType === DeviceTypes.MOBILE?
@@ -213,6 +266,13 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             </div>
 
             <div className='owner-data-container'>
+              <button className={`button-open-section`}
+                      onClick={alreadyFollow? deleteFollow : sendFollow}
+                      disabled={disableButton}
+              >
+                {alreadyFollow? 'Unfollow' : 'Follow'}
+              </button>
+
               <DataSection title={'Owned by'} onClickSection={() => {}}>
                 <div className='list-item-container' onClick={goToOwner} >
                   <div className='list-img-container'>

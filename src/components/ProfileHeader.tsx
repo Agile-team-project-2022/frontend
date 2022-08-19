@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './CollectionHeader.css';
 import './ProfileHeader.css';
 import defaultPlantImg from '../assets/default-plant.jpg';
@@ -27,10 +27,25 @@ export interface PlantHeaderData {
 }
 
 const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plantData}) => {
-  const {state: {deviceType, userData: {plants}, BASE_URL}, dispatch} = useContext(AppContext);
+  const {state: {deviceType, userData: {plants, userId, followedPlants}, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const isValid = CheckEncodedImage(plantData.imageFile);
+  const [disableButton, setDisableButton] = useState(false);
+  const [alreadyFollow, setAlreadyFollow] = useState(false);
   const navigate = useNavigate();
+
+  /** Initializes with the correct plant followers data. */
+  useEffect(() => {
+    if(view === CollectionView.OTHERS) {
+      for(let follower of followedPlants) {
+        // Disables requesting for friends more than once.
+        if(follower.id === plantData.id) {
+          setAlreadyFollow(true);
+          break;
+        }
+      }
+    }
+  }, [followedPlants, plantData, view]);
 
   /** Returns the content that allows the owner to change their image. */
   const onImgClickOwner = () => {
@@ -41,10 +56,9 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
     );
   };
 
-  /** TODO: Expands the image. */
+  /** Expands the image. */
   const onImgClickOthers = () => {
     return (
-      // TODO: Configure to use OTHERS pictures instead of 'userData.imageFile'.
       <GalleryExpanded imageFile={plantData.imageFile} onClose={closeModal} />
     );
   };
@@ -55,6 +69,44 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
 
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  /** For others view, enables asking for following plant. */
+  const sendFollow = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-plant`;
+    const data = {
+      userId: userId,
+      plantId: plantData.id
+    };
+
+    axios.post(url, data)
+      .then((res) => {
+        console.log('Successfully following plant');
+        setDisableButton(false);
+        setAlreadyFollow(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** For others view, enables unfollowing. */
+  const deleteFollow = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-plant/${1}`; // TODO: Correct delete function request
+
+    axios.delete(url)
+      .then((res) => {
+        console.log('Successfully stopped following user');
+        setDisableButton(false);
+        setAlreadyFollow(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   /** Deletes the plant from the database. */
@@ -99,8 +151,13 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
 
       {
         // Shows the friend request button in the header in mobile devices.
-        deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS?
-          <button className='button-open-section collection-header-button'>Follow</button>
+        view === CollectionView.OTHERS && deviceType === DeviceTypes.MOBILE?
+          <button className={`${deviceType === DeviceTypes.MOBILE? 'mobile-follow-button' : ''} button-open-section collection-header-button`}
+                  onClick={alreadyFollow? deleteFollow : sendFollow}
+                  disabled={disableButton}
+          >
+            {alreadyFollow? 'Unfollow' : 'Follow'}
+          </button>
           :
           ''
       }
