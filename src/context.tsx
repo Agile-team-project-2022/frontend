@@ -226,7 +226,7 @@ const appInitialState = {
     updated: false,
     user: 'guest',
     name: '',
-    userId: 1, // TODO: use correct user id
+    userId: 5, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,

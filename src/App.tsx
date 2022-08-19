@@ -7,6 +7,7 @@ import useWindowSize, {DeviceTypes} from "./hooks/useWindowSize";
 import axios from "axios";
 import PlantProfile from "./pages/PlantProfile";
 import NotFound from "./components/NotFound";
+import {getExperience} from "./helpers";
 
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
@@ -60,10 +61,14 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           name: response.data.name,
           email: response.data.email,
           imageFile: response.data.imageFile,
-          experience: 0, // TODO: Calculate
+          experience: getExperience(
+            response.data._count.plants,
+            response.data._count.follower,
+            response.data._count.posts
+          ),
           typePlanter: response.data.planter_type,
           plants: response.data.plants,
-          followedPlants: response.data.Plantsfollow,
+          followedPlants: response.data.Plantsfollow.map((item: any) => item.plant),
           friends: friends,
           pendingFriends: pendingFriends,
           posts: response.data.posts,

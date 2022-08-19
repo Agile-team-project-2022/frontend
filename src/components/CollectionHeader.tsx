@@ -32,8 +32,18 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
   /** Initializes with the correct owner data. */
   useEffect(() => {
-    if(view === CollectionView.OTHERS && othersData) setOwnerData(othersData);
-    else setOwnerData(userData);
+    if(view === CollectionView.OTHERS && othersData) {
+      setOwnerData(othersData);
+      for(let friend of othersData.friends) {
+        // Disables requesting for friends more than once.
+        if(friend.id === userData.userId) {
+          setAlreadyFriends(true);
+          break;
+        }
+      }
+    } else {
+      setOwnerData(userData);
+    }
   }, [userData, othersData, view]);
 
   /** Returns the content that allows the owner to change their image. */
@@ -81,6 +91,23 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       });
   };
 
+  /** For others view, enables stopping being friends. */
+  const deleteFriends = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend/${1}`; // TODO: Correct delete function request
+
+    axios.delete(url)
+      .then((res) => {
+        console.log('Successfully stopped following user');
+        setDisableButton(false);
+        setAlreadyFriends(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
   /** Deletes the owner from the database. */
   const deleteOwner = () => {
     const url = `${ BASE_URL }user/${ userData.userId }`;
@@ -110,12 +137,12 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
       {
         // Shows the friend request button in the header in mobile devices.
-        deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS && !alreadyFriends?
-          <button className='button-open-section collection-header-button'
-                  onClick={sendFriendRequest}
+        view === CollectionView.OTHERS && deviceType === DeviceTypes.MOBILE?
+          <button className={`${deviceType === DeviceTypes.MOBILE? 'mobile-follow-button' : ''} button-open-section collection-header-button`}
+                  onClick={alreadyFriends? deleteFriends : sendFriendRequest}
                   disabled={disableButton}
           >
-            Friend request
+            {alreadyFriends? 'Delete friend' : 'Friend request'}
           </button>
           :
           ''
