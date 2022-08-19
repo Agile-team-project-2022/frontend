@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './CollectionHeader.css';
 import defaultPersonImg from '../assets/default-person.jpeg';
-import {AppContext} from "../context";
+import {AppContext, UserData} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";
 import ChangeProfilePicture from "./ChangeProfilePicture";
@@ -10,7 +10,8 @@ import GalleryExpanded from "./GalleryExpanded";
 import {SectionType} from "./CollectionInteractions";
 
 export interface ICollectionHeaderProps {
-  view: CollectionView
+  view: CollectionView,
+  othersData?: UserData
 }
 
 export enum CollectionView {
@@ -18,10 +19,17 @@ export enum CollectionView {
   OTHERS = 'OTHERS'
 }
 
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view}) => {
+const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view, othersData}) => {
   const {state: {userData, deviceType}} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const isValid = CheckEncodedImage(userData.imageFile);
+  const [ownerData, setOwnerData] = useState<UserData>(userData);
+  const isValid = CheckEncodedImage(view === CollectionView.OWNER? userData.imageFile : othersData?.imageFile || '');
+
+  /** Initializes with the correct owner data. */
+  useEffect(() => {
+    if(view === CollectionView.OTHERS && othersData) setOwnerData(othersData);
+    else setOwnerData(userData);
+  }, [userData, othersData, view]);
 
   /** Returns the content that allows the owner to change their image. */
   const onImgClickOwner = () => {
@@ -32,11 +40,10 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
     );
   };
 
-  /** TODO: Expands the image. */
+  /** Expands the image for others to view it. */
   const onImgClickOthers = () => {
     return (
-      // TODO: Configure to use OTHERS pictures instead of 'userData.imageFile'.
-      <GalleryExpanded imageFile={userData.imageFile} onClose={closeModal} />
+      <GalleryExpanded imageFile={othersData?.imageFile || ''} onClose={closeModal} />
     );
   };
 
@@ -55,13 +62,13 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       <div className='third-background'> </div>
 
       <div className='list-img-container'>
-        <img src={isValid? userData.imageFile : defaultPersonImg}
+        <img src={isValid? ownerData.imageFile : defaultPersonImg}
              alt={'Profile owner'}
              onClick={openModal}
         />
       </div>
 
-      <h2>{userData.user.charAt(0).toUpperCase() + userData.user.substring(1)}</h2>
+      <h2>{ownerData.name.charAt(0).toUpperCase() + ownerData.name.substring(1)}</h2>
 
       {
         // Shows the friend request button in the header in mobile devices.
@@ -73,21 +80,21 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
       <div className='collection-overview'>
         <h4>Overview</h4>
-        <p>Total: <span>{userData.count.totalPlants} Plants</span></p>
+        <p>Total: <span>{ownerData.count.totalPlants} Plants</span></p>
         <p>
           Experience:
           <span className='star-container'>
             {
               [...Array(5)].map((item, index) => {
                 return (
-                  <span className={`star ${index < userData.experience? 'filled' : ''}`} key={`star-rating-${index}`} />
+                  <span className={`star ${index < ownerData.experience? 'filled' : ''}`} key={`star-rating-${index}`} />
                 );
               })
             }
           </span>
         </p>
-        <p>Planter: <span>{userData.typePlanter.charAt(0).toUpperCase() + userData.typePlanter.substring(1)}</span></p>
-        <p>Badges: <span>{userData.totalBadges}</span></p>
+        <p>Planter: <span>{ownerData.typePlanter.charAt(0).toUpperCase() + ownerData.typePlanter.substring(1)}</span></p>
+        <p>Badges: <span>{ownerData.totalBadges}</span></p>
       </div>
 
       {

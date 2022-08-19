@@ -1,19 +1,19 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './CollectionPlants.css';
 import CollectionCard from "./CollectionCard";
-import {AppContext} from "../context";
+import { PlantData} from "../context";
 import {CollectionView} from "./CollectionHeader";
 import NewProfile from "./NewProfile";
 import Modal from "./Modal";
 
 export interface ICollectionPlantsProps {
   view: CollectionView,
-  ownerId: string | number
+  ownerId: string | number,
+  plants: PlantData[],
+  totalPlants: number
 }
 
-const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view, ownerId}) => {
-  /** TODO: Fetch plants from others instead of userData. */
-  const {state: {userData: {plants, count: {totalPlants}}}} = useContext(AppContext);
+const CollectionPlants: React.FunctionComponent<ICollectionPlantsProps> = ({view, ownerId, plants, totalPlants}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {

@@ -255,7 +255,8 @@ const reducer = (state: AppState, action: AppAction) => {
         ...state,
         userData: {
           ...state.userData,
-          user: (action as LogInAction).payload.user
+          user: (action as LogInAction).payload.user,
+          name: (action as LogInAction).payload.user
         },
         loggedIn: true
       };
@@ -265,7 +266,8 @@ const reducer = (state: AppState, action: AppAction) => {
         ...state,
         userData: {
           ...state.userData,
-          user: 'guest'
+          user: 'guest',
+          name: 'guest'
         },
         loggedIn: false
       };

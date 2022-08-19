@@ -9,7 +9,7 @@ export const CheckEncodedImage = (encodedFile: string) => {
 
   try {
     const start = encodedFile.split(',')[0];
-    for(let validType in validTypes) {
+    for(let validType of validTypes) {
       if(start === validType) {
         isValid = true;
         break;

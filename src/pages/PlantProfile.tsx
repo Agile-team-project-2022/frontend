@@ -25,7 +25,7 @@ export interface IPlantProfileProps {}
 
 const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
-  const {state: {deviceType, BASE_URL}} = useContext(AppContext);
+  const {state: {deviceType, BASE_URL, userData: {userId}}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [ownerData, setOwnerData] = useState<UserData>();
   const [locationData, setLocationData] = useState({altitude: 0, latitude: 0, longitude: 0});
@@ -100,7 +100,8 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
   /** Redirects to owner profile. */
   const goToOwner = () => {
-    navigate(`/collection/${ownerId}`, {replace: false});
+    if(parseInt(ownerId || '-1') === userId) navigate(`/collection`, {replace: false});
+    else navigate(`/collection/${ownerId}`, {replace: false});
   };
 
   /** Manages the badges section if the user expands it on mobile devices. */

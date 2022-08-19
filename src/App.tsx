@@ -7,7 +7,6 @@ import useWindowSize, {DeviceTypes} from "./hooks/useWindowSize";
 import axios from "axios";
 import PlantProfile from "./pages/PlantProfile";
 import NotFound from "./components/NotFound";
-import {CollectionView} from "./components/CollectionHeader";
 
 const Home = lazy(() => import('./pages/Home'));
 const Collection = lazy(() => import('./pages/Collection'));
@@ -42,10 +41,11 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         const data = {
           updated: true,
           user: response.data.name,
+          name: response.data.name,
           email: response.data.email,
           imageFile: response.data.imageFile,
           experience: 0, // TODO: Calculate
-          typePlanter: '-', // TODO: add to endpoint and ask user to type it.
+          typePlanter: response.data.planter_type,
           plants: response.data.plants,
           followedPlants: response.data.Plantsfollow,
           friends: response.data.follower,
@@ -80,8 +80,8 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
-          <Route path="collection/:ownerId" element={<Collection view={CollectionView.OTHERS} />} />
-          <Route path="collection" element={<Collection view={CollectionView.OWNER} />} />
+          <Route path="collection/:ownerId" element={<Collection />} />
+          <Route path="collection" element={<Collection />} />
           <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />
           <Route path="/not-found" element={<NotFound />} />
         </Routes>

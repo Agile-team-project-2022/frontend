@@ -58,7 +58,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
           array.map((item, index) => {
             return (
               <div className={`list-img-container ${sectionType === SectionType.PLANT? 'squared-img' : ''}`} key={`item-interaction-${item.name}-${item.id}`}>
-                <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Interaction'} />
+                <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Person'} />
               </div>
             );
           })
@@ -69,12 +69,11 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
             <Modal onClose={onCloseSection}>
               <h2 className='section-title-modal'>{title} ({array.length})</h2>
               {
-                // TODO: Add the correct img assets.
                 array.map((item, index) => {
                   return (
                     <div className='list-item-container' key={`list-item-interaction-${item.name}-${item.id}`}>
                       <div className='list-img-container'>
-                        <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Interaction'} />
+                        <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Person'} />
                       </div>
                       <p> {item.name.charAt(0).toUpperCase() + item.name.substring(1)} </p>
                     </div>
@@ -91,25 +90,30 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
 
   return (
     <div className="collection-interactions">
-      <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
-        {
-          getSection(
-            'Friend requests',
-            SectionType.PERSON,
-            friendsPending, // TODO: fetch from endpoint
-            expandedFriendsPending,
-            openSectionFriendsPending,
-            closeSectionFriendsPending
-          )
-        }
-      </div>
+      {
+        view === CollectionView.OWNER?
+          <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
+            {
+              getSection(
+                'Friend requests',
+                SectionType.PERSON,
+                friendsPending,
+                expandedFriendsPending,
+                openSectionFriendsPending,
+                closeSectionFriendsPending
+              )
+            }
+          </div>
+          :
+          ''
+      }
 
       <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>
         {
           getSection(
             'Friends',
             SectionType.PERSON,
-            friends, // TODO: fetch from endpoint
+            friends,
             expandedFriends,
             openSectionFriends,
             closeSectionFriends
