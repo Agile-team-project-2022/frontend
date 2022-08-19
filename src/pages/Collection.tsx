@@ -35,12 +35,28 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
 
       axios.get(url)
         .then((response) => {
+          // Prepares list of incoming and out friends.
+          const outFriends = response.data.follower.map((item: any) => {
+            return {
+              ...item.followee,
+              accepted: item.accepted
+            }
+          });
+          const inFriends = response.data.following.map((item: any) => {
+            return {
+              ...item.follower,
+              accepted: item.accepted
+            }
+          });
+          const pendingFriends = inFriends.filter((item: any) => !item.accepted);
+          const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
+
           const data = {
             userId: response.data.id,
             name: response.data.name,
             imageFile: response.data.imageFile,
-            friends: response.data.follower.map((item: any) => item.followee),
-            pendingFriends: response.data.following.map((item: any) => item.follower),
+            friends: friends,
+            pendingFriends: pendingFriends,
             typePlanter: response.data.planter_type,
             experience: 2, // TODO: calculate experience
             totalBadges: 2, // TODO: calculate badges
@@ -98,7 +114,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
           <CollectionPlants ownerId={view === CollectionView.OWNER? userData.userId : (ownerId || '')}
                             plants={view === CollectionView.OWNER? userData.plants : othersData?.plants || []}
                             totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}
-                            view={CollectionView.OWNER}
+                            view={view}
           />
         </div>
       );

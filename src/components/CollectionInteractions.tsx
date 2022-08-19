@@ -8,6 +8,7 @@ import {DeviceTypes} from "../hooks/useWindowSize";
 import {AppContext, ThumbnailData} from "../context";
 import {CollectionView} from "./CollectionHeader";
 import {CheckEncodedImage} from "../helpers";
+import {useNavigate} from "react-router-dom";
 
 export interface ICollectionInteractionsProps {
   view: CollectionView
@@ -24,6 +25,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   const {state: {deviceType}} = useContext(AppContext);
   const [expandedFriends, setExpandedFriends] = useState(false);
   const [expandedFriendsPending, setExpandedFriendsPending] = useState(false);
+  const navigate = useNavigate();
 
   /** Opens the respective modal. */
   const openSectionFriends = () => {
@@ -43,6 +45,13 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
     setExpandedFriendsPending(false);
   };
 
+  /** Goes to the owner profile when clicked on the friends section. */
+  const goToOwner = (id: number) => {
+    closeSectionFriends();
+    closeSectionFriendsPending();
+    navigate(`/collection/${id}`, {replace: false});
+  };
+
   /** Renders the section depending on the interaction. */
   const getSection = (
     title: string,
@@ -57,7 +66,10 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
         {
           array.map((item, index) => {
             return (
-              <div className={`list-img-container ${sectionType === SectionType.PLANT? 'squared-img' : ''}`} key={`item-interaction-${item.name}-${item.id}`}>
+              <div className={`list-img-container ${sectionType === SectionType.PLANT? 'squared-img' : ''}`}
+                   key={`item-interaction-${item.name}-${item.id}`}
+                   onClick={() => goToOwner(item.id)}
+              >
                 <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Person'} />
               </div>
             );
@@ -71,7 +83,10 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
               {
                 array.map((item, index) => {
                   return (
-                    <div className='list-item-container' key={`list-item-interaction-${item.name}-${item.id}`}>
+                    <div className='list-item-container'
+                         key={`list-item-interaction-${item.name}-${item.id}`}
+                         onClick={() => goToOwner(item.id)}
+                    >
                       <div className='list-img-container'>
                         <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Person'} />
                       </div>

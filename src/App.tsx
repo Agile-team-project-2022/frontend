@@ -38,6 +38,22 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
     axios.get(url)
       .then((response) => {
+        // Prepares list of incoming and out friends.
+        const outFriends = response.data.follower.map((item: any) => {
+          return {
+            ...item.followee,
+            accepted: item.accepted
+          }
+        });
+        const inFriends = response.data.following.map((item: any) => {
+          return {
+            ...item.follower,
+            accepted: item.accepted
+          }
+        });
+        const pendingFriends = inFriends.filter((item: any) => !item.accepted);
+        const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
+
         const data = {
           updated: true,
           user: response.data.name,
@@ -48,8 +64,8 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           typePlanter: response.data.planter_type,
           plants: response.data.plants,
           followedPlants: response.data.Plantsfollow,
-          friends: response.data.follower,
-          pendingFriends: response.data.following,
+          friends: friends,
+          pendingFriends: pendingFriends,
           posts: response.data.posts,
           count: {
             totalPlants: response.data._count.plants,

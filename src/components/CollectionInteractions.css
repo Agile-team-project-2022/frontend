@@ -3,6 +3,10 @@
     grid-area: content;
 }
 
+.collection-interactions .list-img-container  {
+    cursor: pointer;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .collection-interactions {
