@@ -38,6 +38,10 @@
     cursor: default;
 }
 
+.data-section-container .react-calendar__month-view__days button {
+    pointer-events: none;
+}
+
 .react-calendar__month-view__days button.selected-day,
 .react-calendar__month-view__days button:hover {
     background: #B0DCE2;

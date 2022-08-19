@@ -3,18 +3,18 @@ import './WaterSchedule.css';
 import DataSection from "./DataSection";
 import Calendar from "./Calendar";
 
-export interface IWaterScheduleProps {}
+export interface IWaterScheduleProps {
+  selectedDates: number[]
+}
 
-const WaterSchedule: React.FunctionComponent<IWaterScheduleProps> = () => {
-  /** TODO: Decide how to manage the water schedule in backend. */
-  const selectDay = (day: number) => {
-    console.log('changed to: ', day)
-  };
+const WaterSchedule: React.FunctionComponent<IWaterScheduleProps> = ({selectedDates}) => {
+  /** Note: At this stage the schedule is not mutable. Fill the function below to enable it in the future. */
+  const selectDay = (day: number) => { };
 
   return (
     <DataSection title='Water schedule' onClickSection={() => {}}>
       {/* TODO: Pass correct selected days. */}
-      <Calendar onSelectDay={selectDay} selectedDates={[2, 4, 6, 9, 16, 21, 23, 25]} />
+      <Calendar onSelectDay={selectDay} selectedDates={selectedDates} />
     </DataSection>
   );
 }

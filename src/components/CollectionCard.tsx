@@ -8,7 +8,7 @@ import {CheckEncodedImage} from "../helpers";
 
 export interface ICollectionCardProps {
   plant: PlantData,
-  ownerId: number
+  ownerId: string | number
 }
 
 const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant, ownerId}) => {

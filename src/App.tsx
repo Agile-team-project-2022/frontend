@@ -34,21 +34,38 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
   /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
   const fetchUserData = () => {
-    // TODO: Fetch the full associated data.
     const url = `${ state.BASE_URL }user/${ state.userData.userId }`;
 
     axios.get(url)
       .then((response) => {
+        // Prepares list of incoming and out friends.
+        const outFriends = response.data.follower.map((item: any) => {
+          return {
+            ...item.followee,
+            accepted: item.accepted
+          }
+        });
+        const inFriends = response.data.following.map((item: any) => {
+          return {
+            ...item.follower,
+            accepted: item.accepted
+          }
+        });
+        const pendingFriends = inFriends.filter((item: any) => !item.accepted);
+        const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
+
         const data = {
           updated: true,
           user: response.data.name,
+          name: response.data.name,
           email: response.data.email,
           imageFile: response.data.imageFile,
           experience: 0, // TODO: Calculate
-          typePlanter: '-', // TODO: add to endpoint and ask user to type it.
+          typePlanter: response.data.planter_type,
           plants: response.data.plants,
           followedPlants: response.data.Plantsfollow,
-          friends: response.data.follower,
+          friends: friends,
+          pendingFriends: pendingFriends,
           posts: response.data.posts,
           count: {
             totalPlants: response.data._count.plants,
@@ -79,9 +96,11 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
+          <Route path="collection/:ownerId" element={<Collection />} />
           <Route path="collection" element={<Collection />} />
           <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />
           <Route path="/not-found" element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
 

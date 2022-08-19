@@ -17,7 +17,9 @@ enum AppValidActions {
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
   UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
-  UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE'
+  UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE',
+  CREATE_NEW_PLANT = 'CREATE_NEW_PLANT',
+  DELETE_OWNER = 'DELETE_OWNER' // TODO: implement delete account in context.
 }
 
 // Interfaces and Types definition.
@@ -41,6 +43,7 @@ interface AppState {
 export interface UserData {
   updated: boolean,
   user: string,
+  name: string,
   userId: number,
   email: string,
   imageFile: string,
@@ -52,6 +55,7 @@ export interface UserData {
   plants: PlantData[],
   followedPlants: ThumbnailData[],
   friends: ThumbnailData[],
+  pendingFriends: ThumbnailData[],
   posts: PostData[],
   count: CountData,
   createdAt: string
@@ -126,7 +130,8 @@ export interface CountData {
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
-                | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction;
+                | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction
+                | CreateNewPlantAction | DeleteOwnerAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -157,6 +162,7 @@ interface SetUserDataAction {
   payload: {userData: {
       updated: boolean,
       user: string,
+      name: string,
       email: string,
       imageFile: string,
       experience: number,
@@ -164,6 +170,7 @@ interface SetUserDataAction {
       plants: PlantData[],
       followedPlants: ThumbnailData[],
       friends: ThumbnailData[],
+      pendingFriends: ThumbnailData[],
       posts: PostData[],
       count: CountData,
       createdAt: string
@@ -199,6 +206,15 @@ interface UpdatePlantPictureAction {
   payload: {userData: {plants: PlantData[]} }
 }
 
+interface CreateNewPlantAction {
+  type: AppValidActions,
+  payload: {newPlant: PlantData}
+}
+
+interface DeleteOwnerAction {
+  type: AppValidActions
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   language: 'en',
@@ -209,7 +225,8 @@ const appInitialState = {
   userData: {
     updated: false,
     user: 'guest',
-    userId: 2, // TODO: use correct user id
+    name: '',
+    userId: 1, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,
@@ -220,6 +237,7 @@ const appInitialState = {
     plants: [],
     followedPlants: [],
     friends: [],
+    pendingFriends: [],
     posts: [],
     count: {
       totalPlants: 0,
@@ -242,7 +260,8 @@ const reducer = (state: AppState, action: AppAction) => {
         ...state,
         userData: {
           ...state.userData,
-          user: (action as LogInAction).payload.user
+          user: (action as LogInAction).payload.user,
+          name: (action as LogInAction).payload.user
         },
         loggedIn: true
       };
@@ -252,7 +271,8 @@ const reducer = (state: AppState, action: AppAction) => {
         ...state,
         userData: {
           ...state.userData,
-          user: 'guest'
+          user: 'guest',
+          name: 'guest'
         },
         loggedIn: false
       };
@@ -335,6 +355,23 @@ const reducer = (state: AppState, action: AppAction) => {
             ...(action as UpdatePlantPictureAction).payload.userData.plants
           ]
         }
+      };
+
+    case AppValidActions.CREATE_NEW_PLANT:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          plants: [
+            ...state.userData.plants,
+            (action as CreateNewPlantAction).payload.newPlant
+          ]
+        }
+      };
+
+    case AppValidActions.DELETE_OWNER:
+      return {
+        ...appInitialState
       };
 
     default:

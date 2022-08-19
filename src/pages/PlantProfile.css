@@ -76,6 +76,17 @@
     display: block;
 }
 
+.owner-data-container .list-item-container {
+    padding: 0;
+    width: 100%;
+    margin: 0;
+}
+
+.owner-data-container .list-item-container .list-img-container {
+    width: 2rem;
+    height: 2rem;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .plant-profile-page {
@@ -103,6 +114,10 @@
 
     .plant-profile-page .section-title {
         padding: 0 0 1rem 0;
+    }
+
+    .owner-data-container {
+        justify-self: right;
     }
 }
 

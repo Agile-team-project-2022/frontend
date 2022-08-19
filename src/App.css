@@ -316,6 +316,20 @@ textarea::-webkit-resizer {
   background: var(--color-green-header);
 }
 
+.delete-control {
+  cursor: pointer;
+  transition-property: transform, color;
+  transition-duration: 0.5s;
+}
+
+.delete-control:hover {
+  font-weight: 500;
+  transform: scale(1.2);
+  transform-origin: center;
+  color: var(--color-red-warning);
+  transition-duration: 0.2s;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {
