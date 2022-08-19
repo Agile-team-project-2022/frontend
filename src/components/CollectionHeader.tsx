@@ -25,6 +25,8 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   const {state: {userData, deviceType, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [ownerData, setOwnerData] = useState<UserData>(userData);
+  const [disableButton, setDisableButton] = useState(false);
+  const [alreadyFriends, setAlreadyFriends] = useState(false);
   const isValid = CheckEncodedImage(view === CollectionView.OWNER? userData.imageFile : othersData?.imageFile || '');
   const navigate = useNavigate();
 
@@ -58,6 +60,27 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
     setModalIsOpen(false);
   };
 
+  /** For others view, enables asking for being friends. */
+  const sendFriendRequest = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend`;
+    const data = {
+      followerId: userData.userId,
+      followeeId: othersData?.userId || 0
+    };
+
+    axios.post(url, data)
+      .then((res) => {
+        console.log('Successfully following user');
+        setDisableButton(false);
+        setAlreadyFriends(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
   /** Deletes the owner from the database. */
   const deleteOwner = () => {
     const url = `${ BASE_URL }user/${ userData.userId }`;
@@ -87,8 +110,13 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
       {
         // Shows the friend request button in the header in mobile devices.
-        deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS?
-          <button className='button-open-section collection-header-button'>Friend request</button>
+        deviceType === DeviceTypes.MOBILE && view === CollectionView.OTHERS && !alreadyFriends?
+          <button className='button-open-section collection-header-button'
+                  onClick={sendFriendRequest}
+                  disabled={disableButton}
+          >
+            Friend request
+          </button>
           :
           ''
       }

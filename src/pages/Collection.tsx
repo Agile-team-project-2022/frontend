@@ -36,6 +36,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
       axios.get(url)
         .then((response) => {
           const data = {
+            userId: response.data.id,
             name: response.data.name,
             imageFile: response.data.imageFile,
             friends: response.data.follower.map((item: any) => item.followee),
