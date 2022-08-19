@@ -36,7 +36,10 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       setOwnerData(othersData);
       for(let friend of othersData.friends) {
         // Disables requesting for friends more than once.
-        if(friend.id === userData.userId) setAlreadyFriends(true);
+        if(friend.id === userData.userId) {
+          setAlreadyFriends(true);
+          break;
+        }
       }
     } else {
       setOwnerData(userData);

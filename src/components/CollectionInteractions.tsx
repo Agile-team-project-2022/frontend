@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useContext, useState} from 'react';
+import React, {lazy, Suspense, useContext, useEffect, useState} from 'react';
 import './CollectionInteractions.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import defaultPersonImg from "../assets/default-person.jpeg";
@@ -33,6 +33,19 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   const [disableButton, setDisableButton] = useState(false);
   const [alreadyFriends, setAlreadyFriends] = useState(false);
   const navigate = useNavigate();
+
+  /** Initializes with the correct friends owner data. */
+  useEffect(() => {
+    if(view === CollectionView.OTHERS && friends) {
+      for(let friend of friends) {
+        // Disables requesting for friends more than once.
+        if(friend.id === userId) {
+          setAlreadyFriends(true);
+          break;
+        }
+      }
+    }
+  }, [friends, view, userId]);
 
   /** Opens the respective modal. */
   const openSectionFriends = () => {
