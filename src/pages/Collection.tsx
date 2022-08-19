@@ -164,6 +164,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
                               totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}
                               view={view}
             />
+
             <CollectionInteractions friends={view === CollectionView.OWNER? userData.friends : othersData?.friends || []}
                                     friendsPending={view === CollectionView.OWNER? userData.pendingFriends : []}
                                     view={view}

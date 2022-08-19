@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {lazy, Suspense, useContext, useState} from 'react';
 import './CollectionInteractions.css';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import defaultPersonImg from "../assets/default-person.jpeg";
@@ -9,11 +9,16 @@ import {AppContext, ThumbnailData} from "../context";
 import {CollectionView} from "./CollectionHeader";
 import {CheckEncodedImage} from "../helpers";
 import {useNavigate} from "react-router-dom";
+import {ListType} from "./ExpandedList";
+import axios from "axios";
+
+const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
 export interface ICollectionInteractionsProps {
   view: CollectionView
   friends: ThumbnailData[],
-  friendsPending: ThumbnailData[]
+  friendsPending: ThumbnailData[],
+  othersId?: number
 }
 
 export enum SectionType {
@@ -21,10 +26,12 @@ export enum SectionType {
   PERSON = 'PERSON'
 }
 
-const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = ({view, friends, friendsPending}) => {
-  const {state: {deviceType}} = useContext(AppContext);
+const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = ({view, friends, friendsPending, othersId}) => {
+  const {state: {deviceType, BASE_URL, userData: {userId}}} = useContext(AppContext);
   const [expandedFriends, setExpandedFriends] = useState(false);
   const [expandedFriendsPending, setExpandedFriendsPending] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
+  const [alreadyFriends, setAlreadyFriends] = useState(false);
   const navigate = useNavigate();
 
   /** Opens the respective modal. */
@@ -43,6 +50,44 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
 
   const closeSectionFriendsPending = () => {
     setExpandedFriendsPending(false);
+  };
+
+  /** For others view, enables asking for being friends. */
+  const sendFriendRequest = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend`;
+    const data = {
+      followerId: userId,
+      followeeId: othersId || 0
+    };
+
+    axios.post(url, data)
+      .then((res) => {
+        console.log('Successfully following user');
+        setDisableButton(false);
+        setAlreadyFriends(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** For others view, enables stopping being friends. */
+  const deleteFriends = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend/${1}`; // TODO: Correct delete function request
+
+    axios.delete(url)
+      .then((res) => {
+        console.log('Successfully stopped following user');
+        setDisableButton(false);
+        setAlreadyFriends(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   /** Goes to the owner profile when clicked on the friends section. */
@@ -105,6 +150,27 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
 
   return (
     <div className="collection-interactions">
+      {
+        view === CollectionView.OWNER?
+          <Suspense>
+            <ExpandedList title='Plants you Follow' type={ListType.FOLLOWED_PLANTS} />
+          </Suspense>
+          :
+          <>
+            {
+              deviceType === DeviceTypes.MOBILE?
+                ''
+                :
+                <button className={`button-open-section`}
+                        onClick={alreadyFriends? deleteFriends : sendFriendRequest}
+                        disabled={disableButton}
+                >
+                  {alreadyFriends? 'Delete friend' : 'Friend request'}
+                </button>
+            }
+          </>
+      }
+
       {
         view === CollectionView.OWNER?
           <div className={`${deviceType === DeviceTypes.MOBILE? 'mobile-section-container' : ''}`}>

@@ -41,11 +41,6 @@
     opacity: 40%;
 }
 
-/* TODO: Move to app.css to use with plants profiles too. */
-.collection-profile-header {
-
-}
-
 .collection-profile-header .list-img-container {
     grid-area: img;
     width: 4rem;
@@ -148,7 +143,7 @@
     margin-left: 0;
 }
 
-.collection-header-button {
+.collection-header-button.mobile-follow-button {
     grid-area: request-button;
     font-size: 0.65rem;
     width: 4.6rem;
@@ -160,12 +155,12 @@
     z-index: 1;
 }
 
-.collection-header-button:hover {
+.mobile-follow-button:hover {
     background: var(--color-green-lighter-header-medium-transparency);
     filter: unset;
 }
 
-.collection-header-button:active {
+.mobile-follow-button:active {
     background: var(--color-green-dark);
     filter: unset;
 }
@@ -187,7 +182,11 @@
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .collection-header {
-        grid-template-rows: auto 2rem;
+        grid-template-rows: auto 2rem 4.1rem;
+        grid-template-areas:
+            "img name overview"
+            "empty none controls"
+            "request-button request-button request-button";
         width: 100%;
         height: 13rem;
     }
@@ -202,6 +201,18 @@
         width: 7.5rem;
         height: 7.5rem;
         margin: 1.5rem 2rem;
+    }
+
+    .collection-header-button {
+        grid-area: request-button;
+        height: 1rem;
+        position: absolute;
+        width: 5.35rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        justify-self: right;
+        align-self: flex-end;
     }
 
     .collection-profile-header h2 {
@@ -241,6 +252,7 @@
 @media all and (min-width: 1100px) {
     .collection-header {
         height: 14rem;
+        grid-template-rows: auto 2rem 5.6rem;
     }
 
     .collection-header .first-background,
@@ -252,6 +264,11 @@
     .collection-profile-header .list-img-container {
         width: 9rem;
         height: 9rem;
+    }
+
+    .collection-header-button {
+        height: 1.6rem;
+        width: 9.1rem;
     }
 
     .collection-profile-header h2 {
