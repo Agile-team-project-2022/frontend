@@ -1,13 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './CollectionHeader.css';
 import defaultPersonImg from '../assets/default-person.jpeg';
-import {AppContext, UserData} from "../context";
+import {AppContext, AppValidActions, UserData} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";
 import ChangeProfilePicture from "./ChangeProfilePicture";
 import {CheckEncodedImage} from '../helpers';
 import GalleryExpanded from "./GalleryExpanded";
 import {SectionType} from "./CollectionInteractions";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export interface ICollectionHeaderProps {
   view: CollectionView,
@@ -20,10 +22,11 @@ export enum CollectionView {
 }
 
 const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view, othersData}) => {
-  const {state: {userData, deviceType}} = useContext(AppContext);
+  const {state: {userData, deviceType, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [ownerData, setOwnerData] = useState<UserData>(userData);
   const isValid = CheckEncodedImage(view === CollectionView.OWNER? userData.imageFile : othersData?.imageFile || '');
+  const navigate = useNavigate();
 
   /** Initializes with the correct owner data. */
   useEffect(() => {
@@ -53,6 +56,18 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  /** Deletes the owner from the database. */
+  const deleteOwner = () => {
+    const url = `${ BASE_URL }user/${ userData.userId }`;
+    axios.delete(url)
+      .then((res) => {
+        console.log('Successfully deleted Owner.');
+        dispatch({type: AppValidActions.DELETE_OWNER});
+        navigate(`/home`, {replace: true});
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -100,9 +115,11 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       {
         // Sets the correct options to show for owner/others viewing the collection.
         view === CollectionView.OTHERS?
-          <div className='controls'>! Report</div>
+          ''
           :
-          <div className='controls'>Delete</div>
+          <div className='controls'>
+            <span className='delete-control' onClick={deleteOwner}>Delete</span>
+          </div>
       }
 
       {

@@ -18,7 +18,8 @@ enum AppValidActions {
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
   UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
   UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE',
-  CREATE_NEW_PLANT = 'CREATE_NEW_PLANT'
+  CREATE_NEW_PLANT = 'CREATE_NEW_PLANT',
+  DELETE_OWNER = 'DELETE_OWNER' // TODO: implement delete account in context.
 }
 
 // Interfaces and Types definition.
@@ -130,7 +131,7 @@ export interface CountData {
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
                 | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
                 | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction
-                | CreateNewPlantAction;
+                | CreateNewPlantAction | DeleteOwnerAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -210,6 +211,10 @@ interface CreateNewPlantAction {
   payload: {newPlant: PlantData}
 }
 
+interface DeleteOwnerAction {
+  type: AppValidActions
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   language: 'en',
@@ -221,7 +226,7 @@ const appInitialState = {
     updated: false,
     user: 'guest',
     name: '',
-    userId: 2, // TODO: use correct user id
+    userId: 5, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,
@@ -362,6 +367,11 @@ const reducer = (state: AppState, action: AppAction) => {
             (action as CreateNewPlantAction).payload.newPlant
           ]
         }
+      };
+
+    case AppValidActions.DELETE_OWNER:
+      return {
+        ...appInitialState
       };
 
     default:
