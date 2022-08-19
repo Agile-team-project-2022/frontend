@@ -10,16 +10,16 @@ export interface IModalProps {
 
 const Modal: React.FunctionComponent<IModalProps> = ({children, onClose, className = ''}) => {
   return createPortal(
-    <div className='modal-background'>
+    <div className='modal-background' onClick={onClose}>
       <div className={`modal-container ${className}`} >
         <header className='modal-header'
-                onClick={() => onClose()}
+                onClick={onClose}
         >
           <div> </div>
           <span> Go back </span>
         </header>
 
-        <div className='modal-content'>
+        <div className='modal-content' onClick={(e) => e.stopPropagation()}>
           { children }
         </div>
       </div>
