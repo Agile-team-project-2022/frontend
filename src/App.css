@@ -324,10 +324,14 @@ textarea::-webkit-resizer {
 
 .delete-control:hover {
   font-weight: 500;
-  transform: scale(1.2);
+  transform: scale(1.15);
   transform-origin: center;
-  color: var(--color-red-warning);
   transition-duration: 0.2s;
+}
+
+.disabled-delete-button {
+  pointer-events: none;
+  cursor: default;
 }
 
 /* Tablet version. */

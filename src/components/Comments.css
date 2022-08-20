@@ -13,9 +13,11 @@
     display: grid;
     grid-template-areas:
             "metadata metadata"
-            "content empty";
-    grid-row-gap: 1rem;
-    grid-template-columns: auto 0.6rem;
+            "delete delete"
+            "content content";
+    grid-template-rows: 0.8rem 1.2rem auto;
+    grid-row-gap: 0.5rem;
+    grid-template-columns: minmax(2rem, auto) 0.6rem;
     background: var(--color-gray-light);
     padding: 0.6rem 0.5rem 1rem 1rem;
     border-radius: 0.2rem;
@@ -97,10 +99,29 @@
     margin-top: 0;
 }
 
+.delete-comment-button {
+    grid-area: delete;
+    margin: 0 0.2rem 0 0;
+    justify-self: right;
+    align-self: flex-start;
+    cursor: pointer;
+    width: fit-content;
+    transition-property: transform, filter;
+    transition-duration: 0.5s;
+}
+
+.delete-comment-button img {
+    height: 0.9rem;
+}
+
+.delete-comment-button:hover {
+    transform: scale(1.2);
+    filter: brightness(10%);
+    transition-duration: 0.2s;
+}
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
-
 }
 
 /* Desktop version. */
@@ -109,6 +130,14 @@
         row-gap: 0.5rem;
         padding: 0.3rem 1rem 1rem 1rem;
         width: calc(100% - 3rem);
+    }
+
+    .comment-item {
+        grid-template-areas:
+            "metadata metadata"
+            "content delete";
+        grid-template-rows: auto;
+        grid-row-gap: 1rem;
     }
 
     .new-comment-content .section-title {

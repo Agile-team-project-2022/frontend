@@ -19,6 +19,7 @@ enum AppValidActions {
   UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
   UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE',
   CREATE_NEW_PLANT = 'CREATE_NEW_PLANT',
+  DELETE_PLANT = 'DELETE_PLANT',
   DELETE_OWNER = 'DELETE_OWNER' // TODO: implement delete account in context.
 }
 
@@ -37,7 +38,8 @@ interface AppState {
   userData: UserData,
   homePosts: PostData[],
   deviceType?: DeviceTypes,
-  BASE_URL: string
+  BASE_URL: string,
+  updateFetchUser: boolean
 }
 
 export interface UserData {
@@ -79,8 +81,8 @@ export interface PlantData {
 // Applies for Friends, Followed plants, Requests to take care of, Requests for being friends.
 export interface ThumbnailData {
   id: number,
-  imageFile: string, // TODO: Add img property.
-  name: string // TODO: Add name property in endpoint to avoid fetching all the plant's data.
+  imageFile: string,
+  name: string
 }
 
 export interface PostData {
@@ -249,7 +251,8 @@ const appInitialState = {
   },
   homePosts: [],
   deviceType: undefined,
-  BASE_URL: 'https://interplant-b.herokuapp.com/'
+  BASE_URL: 'https://interplant-b.herokuapp.com/',
+  updateFetchUser: false
 };
 
 // Creates the reducer.
@@ -367,6 +370,12 @@ const reducer = (state: AppState, action: AppAction) => {
             (action as CreateNewPlantAction).payload.newPlant
           ]
         }
+      };
+
+    case AppValidActions.DELETE_PLANT:
+      return {
+        ...state,
+        updateFetchUser: !state.updateFetchUser
       };
 
     case AppValidActions.DELETE_OWNER:

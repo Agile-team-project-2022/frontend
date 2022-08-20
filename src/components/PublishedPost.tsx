@@ -1,6 +1,6 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react';
 import './PublishedPost.css';
-import {AppContext, CommentData, PostData, ThumbnailData} from "../context";
+import {AppContext, AppValidActions, CommentData, PostData, ThumbnailData} from "../context";
 import {CheckEncodedImage, parseDate} from "../helpers";
 import defaultPostImg from '../assets/example-plant-2.jpeg';
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -8,6 +8,7 @@ import flagImg from '../assets/report.png';
 import likeImg from '../assets/like-empty.png';
 import likedImg from '../assets/like-filled.png';
 import commentImg from '../assets/comment.png';
+import deleteImg from '../assets/delete.png';
 import axios from "axios";
 import Comments from "./Comments";
 import {DeviceTypes} from "../hooks/useWindowSize";
@@ -18,7 +19,7 @@ export interface IPublishedPostProps {
 }
 
 const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => {
-  const {state: {userData: {userId}, BASE_URL, deviceType}} = useContext(AppContext);
+  const {state: {userData: {userId}, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [readMore, setReadMore] = useState(false);
   const [expandedPost, setExpandedPost] = useState(false);
   const [authorPlantData, setAuthorPlantData] = useState<ThumbnailData>({id: -1, name: '', imageFile: ''});
@@ -29,6 +30,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const [commentCount, setCommentCount] = useState(0);
   const [updatedComments, setUpdatedComments] = useState<CommentData[]>([]);
   const [expandComments, setExpandComments] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,6 +81,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
 
   /** Sets or removes the like status. */
   const like = () => {
+    setDisableButton(true);
     if(!liked) {
       // Creates new like relationship.
       const url = `${ BASE_URL }postlike`;
@@ -92,8 +95,12 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           setLikePostId(response.data.id);
           setLiked(true);
           setLikeCount(prevState => prevState + 1);
+          setDisableButton(false);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          setDisableButton(false);
+        });
     } else {
       // Removes the Like.
       const url = `${ BASE_URL }postlike/${likePostId}`;
@@ -103,15 +110,33 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           setLikePostId(-1);
           setLiked(false);
           setLikeCount(prevState => prevState - 1);
+          setDisableButton(false);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          setDisableButton(false);
+        });
     }
   };
 
   /** Receives the updated number of comments to display in the buttons. */
-  const onUpdateComments = (count: number, newComment: CommentData) => {
+  const onUpdateComments = (count: number, newComment: CommentData, deleteComment: boolean) => {
     setCommentCount(count);
-    setUpdatedComments(prevState => [...prevState, newComment]);
+    if(deleteComment) {
+      const newComments = updatedComments;
+      let index = 0;
+      for(let i = 0; i < newComments.length; i++) {
+        if(newComment.id === newComments[i].id) {
+          index = i;
+          break;
+        }
+      }
+
+      newComments.splice(index, 1);
+      setUpdatedComments(prevState => [...newComments]);
+    } else {
+      setUpdatedComments(prevState => [...prevState, newComment]);
+    }
   };
 
   /** Expands or hides the comments section. */
@@ -127,10 +152,42 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       userId: userId,
       postId: post.id
     };
+    setDisableButton(true);
 
     axios.post(url, data)
       .then((response) => {
         console.log('Content flagged successfully.');
+        setDisableButton(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** Deletes the post. Only available for the owner of the author plant. */
+  const deletePost = () => {
+    const url = `${ BASE_URL }post/${ post.id }`;
+    setDisableButton(true);
+
+    axios.delete(url)
+      .then((response) => {
+        console.log('Deleted post.');
+        setDisableButton(false);
+        fetchAllPosts();
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** Queries all the stored posts to show. */
+  const fetchAllPosts = () => {
+    const url = `${ BASE_URL }post?page=1&count=100`; // TODO: use count and page parameters
+    axios.get(url)
+      .then((response) => {
+        dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
       })
       .catch((e) => console.log(e));
   };
@@ -177,11 +234,19 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           </div>
         </div>
 
-        <button onClick={flagPost}>
-          <img alt='Report content' src={flagImg}/>
-          {deviceType === DeviceTypes.DESKTOP? 'Report content' : ''}
-        </button>
-        <button onClick={like}>
+        {
+          authorPlantDataOwnerID === userId?
+            <button className='delete-post-button' onClick={deletePost} disabled={disableButton} >
+              <img alt='Delete' src={deleteImg}/>
+              { deviceType === DeviceTypes.DESKTOP? 'Delete' : '' }
+            </button>
+            :
+            <button onClick={flagPost} disabled={disableButton} >
+              <img alt='Report content' src={flagImg}/>
+              { deviceType === DeviceTypes.DESKTOP? 'Report content' : '' }
+            </button>
+        }
+        <button onClick={like} disabled={disableButton} >
           <img alt='Like' src={liked? likedImg : likeImg}/>
           {deviceType === DeviceTypes.DESKTOP? 'Like' : ''} ({likeCount})
         </button>
@@ -191,7 +256,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         </button>
       </div>
 
-      {expandComments? <Comments onUpdateComments={onUpdateComments} comments={updatedComments} postId={post.id}/> : ''}
+      { expandComments? <Comments onUpdateComments={onUpdateComments} comments={updatedComments} postId={post.id}/> : '' }
     </div>
   );
 }
