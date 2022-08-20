@@ -119,7 +119,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
       return (
         <div className='mobile-section-container'>
           <Badges totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}
-                  totalFriends={view === CollectionView.OWNER? userData.count.totalFriends : othersData?.count.totalFriends || 0}
+                  totalFriends={view === CollectionView.OWNER? userData.friends.length : othersData?.friends.length || 0}
                   totalPosts={view === CollectionView.OWNER? userData.count.totalPosts : othersData?.count.totalPosts || 0}
                   updateOwnerBadges={updateBadgeCount}
           />
@@ -175,7 +175,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
           :
           <>
             <Badges totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}
-                    totalFriends={view === CollectionView.OWNER? userData.count.totalFriends : othersData?.count.totalFriends || 0}
+                    totalFriends={view === CollectionView.OWNER? userData.friends.length : othersData?.friends.length || 0}
                     totalPosts={view === CollectionView.OWNER? userData.count.totalPosts : othersData?.count.totalPosts || 0}
                     updateOwnerBadges={updateBadgeCount}
             />

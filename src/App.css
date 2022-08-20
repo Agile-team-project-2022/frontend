@@ -151,7 +151,7 @@ button, a {
   height: 3.7rem;
   border-radius: 50%;
   border: 1px solid var(--color-white-soft-background);
-  box-shadow: 0 0 0.8rem var(--color-black-lighter-shadow);
+  box-shadow: 0 0 0.7rem var(--color-black-lighter-shadow);
   overflow: hidden;
   position: relative;
 }
