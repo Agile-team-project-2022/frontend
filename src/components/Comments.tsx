@@ -4,6 +4,7 @@ import {AppContext, CommentData, CreateCommentData} from "../context";
 import {parseDate} from "../helpers";
 import axios from "axios";
 import flagImg from "../assets/report.png";
+import deleteImg from '../assets/delete.png';
 
 export interface ICommentsProps {
   comments: CommentData[],
@@ -104,11 +105,18 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
           return (
             <div className='comment-item' key={`comment-item-${item.id}`}>
               <span className='metadata'>
-                {parseDate(item.createdAt)} by "{commentsAuthorMap[item.id]}"
-                <button onClick={() => deleteComment(item.id)} disabled={disableButton} >
-                  <img alt='Delete content' src={flagImg}/>
-                </button>
+                {parseDate(item.createdAt)} by "{(commentsAuthorMap[item.id] || '').charAt(0).toUpperCase() + (commentsAuthorMap[item.id] || '').substring(1)}"
               </span>
+
+              {
+                item.authorId === userId?
+                  <button className='delete-comment-button' onClick={() => deleteComment(item.id)} disabled={disableButton} >
+                    <img alt='Delete content' src={deleteImg}/>
+                  </button>
+                  :
+                  ''
+              }
+
               <p>
                 {formatComment(item.content).split('\n').map((itemParagraph, indexParagraph) => {
                   return itemParagraph !== ''?
