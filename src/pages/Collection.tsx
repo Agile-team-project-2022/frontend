@@ -17,6 +17,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
   const {ownerId} = useParams();
   const [view, setView] = useState(CollectionView.OWNER);
   const [othersData, setOthersData] = useState<UserData>();
+  const [ownerTotalBadges, setOwnerTotalBadges] = useState(0);
   // Manages the sections to expand on mobile devices.
   const [showBadges, setShowBadges] = useState(true);
   const [showCollection, setShowCollection] = useState(false);
@@ -64,8 +65,8 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
               response.data._count.follower,
               response.data._count.posts
             ),
-            totalBadges: 2, // TODO: calculate badges
             plants: response.data.plants,
+            createdAt: response.data.createdAt,
             count: {
               totalPlants: response.data._count.plants,
               totalFriends: response.data._count.follower,
@@ -107,11 +108,22 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
     setShowInteractions(true);
   };
 
+  /** Updates the count of badges. */
+  const updateBadgeCount = (count: number) => {
+    setOwnerTotalBadges(count);
+  };
+
   /** Renders the section selected on mobile devices. */
   const getExpandedSection = () => {
     if(showBadges) {
       return (
-        <div className='mobile-section-container'><Badges/></div>
+        <div className='mobile-section-container'>
+          <Badges totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}
+                  totalFriends={view === CollectionView.OWNER? userData.friends.length : othersData?.friends.length || 0}
+                  totalPosts={view === CollectionView.OWNER? userData.count.totalPosts : othersData?.count.totalPosts || 0}
+                  updateOwnerBadges={updateBadgeCount}
+          />
+        </div>
       );
     } else if(showCollection) {
       return (
@@ -135,7 +147,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
 
   return (
     <main className="collection-page">
-      <CollectionHeader othersData={othersData} view={view} />
+      <CollectionHeader othersData={othersData} view={view} totalBadges={ownerTotalBadges} />
 
       {
         deviceType === DeviceTypes.MOBILE?
@@ -162,8 +174,12 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
           </>
           :
           <>
-            <Badges />
-            {/** TODO: Replace with correct owner Data. */}
+            <Badges totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}
+                    totalFriends={view === CollectionView.OWNER? userData.friends.length : othersData?.friends.length || 0}
+                    totalPosts={view === CollectionView.OWNER? userData.count.totalPosts : othersData?.count.totalPosts || 0}
+                    updateOwnerBadges={updateBadgeCount}
+            />
+
             <CollectionPlants ownerId={ownerId || userData.userId}
                               plants={view === CollectionView.OWNER? userData.plants : othersData?.plants || []}
                               totalPlants={view === CollectionView.OWNER? userData.count.totalPlants : othersData?.count.totalPlants || 0}

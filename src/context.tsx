@@ -13,7 +13,6 @@ enum AppValidActions {
   CLOSE_LOG_IN = 'CLOSE_LOG_IN',
   MAP_CATEGORIES = 'MAP_CATEGORIES',
   SET_USER_DATA = 'SET_USER_DATA',
-  SET_USER_BADGES_DATA = 'SET_USER_BADGES_DATA',
   UPDATE_OWNER_PICTURE = 'UPDATE_OWNER_PICTURE',
   SET_DEVICE_TYPE = 'SET_DEVICE_TYPE',
   UPDATE_HOME_POSTS = 'UPDATE_HOME_POSTS',
@@ -51,9 +50,6 @@ export interface UserData {
   imageFile: string,
   experience: number,
   typePlanter: string,
-  badgesPreview: string[],
-  badges: {name: string, id: number}[],
-  totalBadges: number,
   plants: PlantData[],
   followedPlants: ThumbnailData[],
   friends: ThumbnailData[],
@@ -131,7 +127,7 @@ export interface CountData {
 }
 
 type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
-                | MapCategoryAction | SetUserDataAction | SetBadgesAction |SetDeviceTypeAction
+                | MapCategoryAction | SetUserDataAction |SetDeviceTypeAction
                 | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction
                 | CreateNewPlantAction | DeleteOwnerAction;
 
@@ -176,15 +172,6 @@ interface SetUserDataAction {
       posts: PostData[],
       count: CountData,
       createdAt: string
-  }}
-}
-
-interface SetBadgesAction {
-  type: AppValidActions,
-  payload: {userData: {
-      badgesPreview?: string[],
-      totalBadges?: number,
-      badges?: {name: string, id: number}[]
   }}
 }
 
@@ -233,9 +220,6 @@ const appInitialState = {
     imageFile: '',
     experience: 0,
     typePlanter: '-',
-    badgesPreview: [],
-    badges: [],
-    totalBadges: 0,
     plants: [],
     followedPlants: [],
     friends: [],
@@ -316,15 +300,6 @@ const reducer = (state: AppState, action: AppAction) => {
         userData: {
           ...state.userData,
           ...(action as SetUserDataAction).payload.userData
-        }
-      };
-
-    case AppValidActions.SET_USER_BADGES_DATA:
-      return {
-        ...state,
-        userData: {
-          ...state.userData,
-          ...(action as SetBadgesAction).payload.userData
         }
       };
 

@@ -14,7 +14,8 @@ import {useNavigate} from "react-router-dom";
 
 export interface ICollectionHeaderProps {
   view: CollectionView,
-  othersData?: UserData
+  othersData?: UserData,
+  totalBadges: number
 }
 
 export enum CollectionView {
@@ -22,7 +23,7 @@ export enum CollectionView {
   OTHERS = 'OTHERS'
 }
 
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view, othersData}) => {
+const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view, othersData, totalBadges}) => {
   const {state: {userData, deviceType, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [ownerData, setOwnerData] = useState<UserData>(userData);
@@ -168,7 +169,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
           </span>
         </p>
         <p>Planter: <span>{ownerData.typePlanter.charAt(0).toUpperCase() + ownerData.typePlanter.substring(1)}</span></p>
-        <p>Badges: <span>{ownerData.totalBadges}</span></p>
+        <p>Badges: <span>{totalBadges}</span></p>
       </div>
 
       {
