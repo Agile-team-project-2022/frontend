@@ -3,7 +3,6 @@ import './Comments.css';
 import {AppContext, CommentData, CreateCommentData} from "../context";
 import {parseDate} from "../helpers";
 import axios from "axios";
-import flagImg from "../assets/report.png";
 import deleteImg from '../assets/delete.png';
 
 export interface ICommentsProps {

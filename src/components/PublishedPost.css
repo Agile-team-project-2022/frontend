@@ -171,7 +171,7 @@
 
 .published-post-buttons button {
     cursor: pointer;
-    transition-property: filter;
+    transition-property: filter, transform;
     transition-duration: 0.5s;
     display: flex;
     flex-flow: nowrap;
@@ -180,6 +180,7 @@
 
 .published-post-buttons button:hover {
     filter: brightness(40%);
+    transform: scale(1.15);
     transition-duration: 0.2s;
 }
 
@@ -219,6 +220,12 @@
     height: 100%;
     width: 100%;
 }
+
+.delete-post-button img {
+    height: 0.83rem;
+    margin: -0.12rem 0.15rem -0.12rem 0;
+}
+
 
 /* Tablet version. */
 @media all and (min-width: 768px) {

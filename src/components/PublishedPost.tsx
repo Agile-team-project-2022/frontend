@@ -8,6 +8,7 @@ import flagImg from '../assets/report.png';
 import likeImg from '../assets/like-empty.png';
 import likedImg from '../assets/like-filled.png';
 import commentImg from '../assets/comment.png';
+import deleteImg from '../assets/delete.png';
 import axios from "axios";
 import Comments from "./Comments";
 import {DeviceTypes} from "../hooks/useWindowSize";
@@ -235,8 +236,8 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
 
         {
           authorPlantDataOwnerID === userId?
-            <button onClick={deletePost} disabled={disableButton} >
-              <img alt='Delete' src={flagImg}/>
+            <button className='delete-post-button' onClick={deletePost} disabled={disableButton} >
+              <img alt='Delete' src={deleteImg}/>
               { deviceType === DeviceTypes.DESKTOP? 'Delete' : '' }
             </button>
             :
