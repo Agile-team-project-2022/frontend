@@ -119,9 +119,23 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   };
 
   /** Receives the updated number of comments to display in the buttons. */
-  const onUpdateComments = (count: number, newComment: CommentData) => {
+  const onUpdateComments = (count: number, newComment: CommentData, deleteComment: boolean) => {
     setCommentCount(count);
-    setUpdatedComments(prevState => [...prevState, newComment]);
+    if(deleteComment) {
+      const newComments = updatedComments;
+      let index = 0;
+      for(let i = 0; i < newComments.length; i++) {
+        if(newComment.id === newComments[i].id) {
+          index = i;
+          break;
+        }
+      }
+
+      newComments.splice(index, 1);
+      setUpdatedComments(prevState => [...newComments]);
+    } else {
+      setUpdatedComments(prevState => [...prevState, newComment]);
+    }
   };
 
   /** Expands or hides the comments section. */

@@ -1,19 +1,26 @@
-import React, {ChangeEvent, Fragment, useContext, useState} from 'react';
+import React, {ChangeEvent, Fragment, useContext, useEffect, useState} from 'react';
 import './Comments.css';
 import {AppContext, CommentData, CreateCommentData} from "../context";
 import {parseDate} from "../helpers";
 import axios from "axios";
+import flagImg from "../assets/report.png";
 
 export interface ICommentsProps {
   comments: CommentData[],
-  onUpdateComments: (count: number, newComment: CommentData) => void,
+  onUpdateComments: (count: number, newComment: CommentData, deleteComment: boolean) => void,
   postId: number
 }
 
 const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateComments, postId}) => {
-  const {state: {userData: {userId, user}, BASE_URL}} = useContext(AppContext);
+  const {state: {userData: {userId}, BASE_URL}} = useContext(AppContext);
   const [newComment, setNewComment] = useState('');
+  const [commentsAuthorMap, setCommentsAuthorMap] = useState<{[commentId: number]: string}>({0: ''});
   const [disableButton, setDisableButton] = useState(false);
+
+  /** Initializes the map of authors. */
+  useEffect(() => {
+    comments.forEach((item) => getAuthorName(item.authorId, item.id));
+  }, [comments]);
 
   /** Prepares the formatting of the content as an array before rendering. */
   const formatComment = (text: string) => {
@@ -23,6 +30,22 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
   /** Keeps track of the new comment's content. */
   const updateComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNewComment(e.target.value);
+  };
+
+  /** Gets the user author name. */
+  const getAuthorName = (commentAuthorId: number, commentId: number) => {
+    const url = `${ BASE_URL }user/${ commentAuthorId }`;
+
+    axios.get(url)
+      .then((res) => {
+        setCommentsAuthorMap(prevState => {
+          return{
+            ...prevState,
+            [commentId]: res.data.name
+          }
+        });
+      })
+      .catch((e) => console.log(e));
   };
 
   /** Drop the draft of the comment. */
@@ -46,7 +69,26 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
         discardComment();
         // Updates the local list of comments.
         const count = comments.length;
-        onUpdateComments(count + 1, response.data);
+        onUpdateComments(count + 1, response.data, false);
+        setDisableButton(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** Deletes the comment. Only available for author. */
+  const deleteComment = (commentId: number) => {
+    const url = `${ BASE_URL }comment/${ commentId }`;
+    setDisableButton(true);
+
+    axios.delete(url)
+      .then((response) => {
+        console.log(`Deleted Comment`);
+        // Updates the local list of comments.
+        const count = comments.length;
+        onUpdateComments(count - 1, response.data, true);
         setDisableButton(false);
       })
       .catch((e) => {
@@ -61,7 +103,12 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
         comments.map((item, index) => {
           return (
             <div className='comment-item' key={`comment-item-${item.id}`}>
-              <span className='metadata'>{parseDate(item.createdAt)} by "{user}"</span> {/*TODO: Replace 'user' by name of author of comment*/}
+              <span className='metadata'>
+                {parseDate(item.createdAt)} by "{commentsAuthorMap[item.id]}"
+                <button onClick={() => deleteComment(item.id)} disabled={disableButton} >
+                  <img alt='Delete content' src={flagImg}/>
+                </button>
+              </span>
               <p>
                 {formatComment(item.content).split('\n').map((itemParagraph, indexParagraph) => {
                   return itemParagraph !== ''?
