@@ -13,9 +13,12 @@
 .collection-interactions .button-open-section {
     display: block;
     padding: 0.45rem 0.2rem;
-    width: max(9rem, calc(33% - 0.7rem));
-    margin: -0.5rem 0.45rem 1rem 0.5rem;
+    width: max(5rem, calc(50% - 1rem));
+    margin: -0.5rem 0.45rem 1.2rem 0.5rem;
     font-size: 0.75rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    opacity: 80%;
 }
 
 /* Tablet version. */
@@ -27,14 +30,18 @@
     .collection-interactions .button-open-section {
         padding: 0.8rem 0.4rem;
         width: 6.4rem;
-        margin: 0 0 2rem 0;
+        font-size: 0.85rem;
+        margin: 0 0 1rem 0;
+        opacity: 100%;
+        border-radius: 0.1rem;
     }
 }
 
 /* Desktop version. */
 @media all and (min-width: 1100px) {
     .collection-interactions .button-open-section {
-        padding: 0.8rem 0.4rem;
         width: 10.3rem;
+        font-size: 0.98rem;
+        padding: 1rem 0.4rem;
     }
 }

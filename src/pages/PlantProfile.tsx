@@ -266,12 +266,17 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             </div>
 
             <div className='owner-data-container'>
-              <button className={`button-open-section`}
-                      onClick={alreadyFollow? deleteFollow : sendFollow}
-                      disabled={disableButton}
-              >
-                {alreadyFollow? 'Unfollow' : 'Follow'}
-              </button>
+              {
+                parseInt(plantId || '0') !== userId?
+                  <button className={`button-open-section`}
+                          onClick={alreadyFollow? deleteFollow : sendFollow}
+                          disabled={disableButton}
+                  >
+                    {alreadyFollow? 'Unfollow' : 'Follow'}
+                  </button>
+                  :
+                  ''
+              }
 
               <DataSection title={'Owned by'} onClickSection={() => {}}>
                 <div className='list-item-container' onClick={goToOwner} >
