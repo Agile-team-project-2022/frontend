@@ -13,6 +13,7 @@ export interface ICommentsProps {
 const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateComments, postId}) => {
   const {state: {userData: {userId, user}, BASE_URL}} = useContext(AppContext);
   const [newComment, setNewComment] = useState('');
+  const [disableButton, setDisableButton] = useState(false);
 
   /** Prepares the formatting of the content as an array before rendering. */
   const formatComment = (text: string) => {
@@ -37,6 +38,7 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
       authorId: userId,
       postId: postId
     };
+    setDisableButton(true);
 
     axios.post(url, data)
       .then((response) => {
@@ -45,8 +47,12 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
         // Updates the local list of comments.
         const count = comments.length;
         onUpdateComments(count + 1, response.data);
+        setDisableButton(false);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   return (
@@ -79,13 +85,14 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
                     placeholder='Write your comment here...'
                     onChange={(e) => updateComment(e)}
                     value={newComment}
+                    disabled={disableButton}
           />
         </div>
         <div className='new-post-buttons'>
           <button className='button-action' onClick={discardComment}> Cancel </button>
           <button className={`button-action ${newComment.length === 0? 'disabled-button' : ''}`}
                   onClick={saveComment}
-                  disabled={newComment.length === 0}
+                  disabled={newComment.length === 0 || disableButton}
           >
             Publish
           </button>
