@@ -29,6 +29,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const [commentCount, setCommentCount] = useState(0);
   const [updatedComments, setUpdatedComments] = useState<CommentData[]>([]);
   const [expandComments, setExpandComments] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,6 +80,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
 
   /** Sets or removes the like status. */
   const like = () => {
+    setDisableButton(true);
     if(!liked) {
       // Creates new like relationship.
       const url = `${ BASE_URL }postlike`;
@@ -92,8 +94,12 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           setLikePostId(response.data.id);
           setLiked(true);
           setLikeCount(prevState => prevState + 1);
+          setDisableButton(false);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          setDisableButton(false);
+        });
     } else {
       // Removes the Like.
       const url = `${ BASE_URL }postlike/${likePostId}`;
@@ -103,8 +109,12 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           setLikePostId(-1);
           setLiked(false);
           setLikeCount(prevState => prevState - 1);
+          setDisableButton(false);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          setDisableButton(false);
+        });
     }
   };
 
@@ -127,12 +137,17 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       userId: userId,
       postId: post.id
     };
+    setDisableButton(true);
 
     axios.post(url, data)
       .then((response) => {
         console.log('Content flagged successfully.');
+        setDisableButton(false);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   /** Redirects to plant profile. */
@@ -177,11 +192,11 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           </div>
         </div>
 
-        <button onClick={flagPost}>
+        <button onClick={flagPost} disabled={disableButton} >
           <img alt='Report content' src={flagImg}/>
           {deviceType === DeviceTypes.DESKTOP? 'Report content' : ''}
         </button>
-        <button onClick={like}>
+        <button onClick={like} disabled={disableButton} >
           <img alt='Like' src={liked? likedImg : likeImg}/>
           {deviceType === DeviceTypes.DESKTOP? 'Like' : ''} ({likeCount})
         </button>
