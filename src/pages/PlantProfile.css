@@ -119,6 +119,11 @@
     .owner-data-container {
         justify-self: right;
     }
+
+    .owner-data-container .button-open-section {
+        display: block;
+        margin-bottom: 1rem;
+    }
 }
 
 /* Desktop version. */
@@ -159,5 +164,9 @@
     .plant-profile-data-container .data-section-container {
         margin: 0 0 1.5rem 0;
         width: 12rem;
+    }
+
+    .owner-data-container .button-open-section {
+        margin-bottom: 1.5rem;
     }
 }

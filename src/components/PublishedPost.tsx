@@ -11,6 +11,7 @@ import commentImg from '../assets/comment.png';
 import axios from "axios";
 import Comments from "./Comments";
 import {DeviceTypes} from "../hooks/useWindowSize";
+import {useNavigate} from "react-router-dom";
 
 export interface IPublishedPostProps {
   post: PostData
@@ -21,12 +22,14 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const [readMore, setReadMore] = useState(false);
   const [expandedPost, setExpandedPost] = useState(false);
   const [authorPlantData, setAuthorPlantData] = useState<ThumbnailData>({id: -1, name: '', imageFile: ''});
+  const [authorPlantDataOwnerID, setAuthorPlantDataOwnerID] = useState(-1);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [likePostId, setLikePostId] = useState(-1);
   const [commentCount, setCommentCount] = useState(0);
   const [updatedComments, setUpdatedComments] = useState<CommentData[]>([]);
   const [expandComments, setExpandComments] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Trims the post.
@@ -49,13 +52,14 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     }
   }, [post, userId, deviceType]);
 
-  /** TODO: Gets the full plant data, replace to get only Thumbnail plant data. */
+  /** Gets the full plant data. */
   useEffect(() => {
     const fetchPlant = () => {
       const url = `${ BASE_URL }plant/${ post.plantId }`;
       axios.get(url)
         .then((response) => {
           setAuthorPlantData(response.data);
+          setAuthorPlantDataOwnerID(response.data.ownerId);
         })
         .catch((e) => console.log(e));
     };
@@ -131,6 +135,11 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       .catch((e) => console.log(e));
   };
 
+  /** Redirects to plant profile. */
+  const goToPlant = (plantId: number, ownerId: number) => {
+    navigate(`/plant-profile/${ plantId }/${ ownerId }`, {replace: false});
+  };
+
   return (
     <div className={`post-container-published ${expandedPost? 'expanded-post' : ''}`}>
       <div className='post-content-published'>
@@ -161,8 +170,10 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       <div className='published-post-buttons'>
         <div className='published-post-signature'>
           <span>By "{authorPlantData.name.charAt(0).toUpperCase() + authorPlantData.name.substring(1)}"</span>
-          <div className='signature-img-container'>
-            <img src={CheckEncodedImage(authorPlantData.imageFile)? authorPlantData.imageFile : defaultPostImg} alt='Author post plant'/>
+          <div className='signature-img-container' onClick={() => goToPlant(authorPlantData.id, authorPlantDataOwnerID)}>
+            <img src={CheckEncodedImage(authorPlantData.imageFile)? authorPlantData.imageFile : defaultPostImg}
+                 alt='Author post plant'
+            />
           </div>
         </div>
 

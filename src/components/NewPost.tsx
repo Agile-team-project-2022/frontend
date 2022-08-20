@@ -20,6 +20,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   const [highlightSelect, setHighlightSelect] = useState(false);
   const [highlightTitle, setHighlightTitle] = useState(false);
   const [highlightContent, setHighlightContent] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const uploadNewImage = (encodedImg: string) => {
     if(CheckEncodedImage(encodedImg)) setImage(encodedImg);
@@ -62,6 +63,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
     content.length === 0? setHighlightContent(true) : setHighlightContent(false);
   };
 
+  /** Sends the request for saving while preventing multiple clicks. */
   const savePost = () => {
     const url = `${ BASE_URL }post`;
     const data: CreatePostData = {
@@ -71,6 +73,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
       plantId: plantProfile || -1,
       imageFile: image
     };
+    setDisableButton(true);
 
     axios.post(url, data)
       .then((response) => {
@@ -78,8 +81,12 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
         discardPost();
         // Once saved in the Database, retrieves the updated posts list and updates it in the app.
         fetchAllPosts();
+        setDisableButton(false);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   /** Queries all the stored posts to show. */
@@ -102,7 +109,10 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
             <label>{plantProfileName}</label>
             <div> </div>
           </span>
-          <select defaultValue={-1} onChange={(e) => selectPlantProfile(e)}>
+          <select defaultValue={-1}
+                  onChange={(e) => selectPlantProfile(e)}
+                  disabled={disableButton}
+          >
             <option value={-1} disabled>Select plant profile</option>
             {
               userData.plants.map((item, index) => {
@@ -116,7 +126,10 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
           </select>
         </label>
 
-        <InputImage onUploadImage={uploadNewImage} className={image === ''? 'hidden-message' : ''}>
+        <InputImage onUploadImage={uploadNewImage}
+                    className={image === ''? 'hidden-message' : ''}
+                    disabled={disableButton}
+        >
           { image === ''? <span>Upload image</span> : <img src={image} alt='NewPost plant'/> }
         </InputImage>
 
@@ -125,12 +138,14 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
                placeholder='Type the title of the NewPost here...'
                onChange={(e) => updateTitle(e)}
                value={title}
+               disabled={disableButton}
         />
 
         <textarea className={`input-section ${highlightContent? 'invalid-post-input' : ''}`}
                   placeholder='Write your NewPost here...'
                   onChange={(e) => updateContent(e)}
                   value={content}
+                  disabled={disableButton}
         />
       </div>
 
@@ -138,6 +153,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
         <button className='button-action' onClick={discardPost}> Cancel </button>
         <button className={`button-action ${validatePost()? 'disabled-button' : ''}`}
                 onClick={validatePost()? showHints : savePost}
+                disabled={disableButton}
         >
           Publish
         </button>

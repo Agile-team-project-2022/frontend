@@ -43,10 +43,19 @@
 }
 
 .signature-img-container {
-    opacity: 90%;
-    filter: grayscale(30%);
+    opacity: 75%;
+    filter: grayscale(10%);
+    cursor: pointer;
+    transition-property: opacity, transform;
+    transition-duration: 0.5s;
 }
 
+.signature-img-container:hover {
+    opacity: 100%;
+    transition-duration: 0.2s;
+    transform-origin: center;
+    transform: scale(1.1);
+}
 
 .post-date {
     grid-area: date;
