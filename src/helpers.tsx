@@ -1,3 +1,5 @@
+import floralBadgeImg from '../src/assets/category-flower.jpg';
+
 /** Returns true if the file is starts with a valid encoded value. */
 export const CheckEncodedImage = (encodedFile: string) => {
   let isValid = false;
@@ -71,4 +73,39 @@ export const getExperience = (totalPlants: number, totalFriends: number, totalPo
   const mappedPosts = (totalPosts) * (maxStars) / (maxPostsConsidered);
 
   return Math.floor((mappedPlants + mappedFriends + mappedPosts) / 3);
+};
+
+/** Calculates the badges for the owner based on joining date, total plants, posts, and friends. */
+export const getBadges = (totalPlants: number, totalFriends: number, totalPosts: number) => {
+  // Defines the badges and their pictures.
+  enum ValidBadges {
+    FRIENDLY = 'FRIENDLY',
+    FIRST_PLANT = 'FIRST_PLANT',
+    FIVE_PLANTS = 'FIVE_PLANTS',
+    TEN_PLANTS = 'TEN_PLANTS',
+    HELPFUL = 'HELPFUL',
+    WELCOME = 'WELCOME'
+  }
+
+  const badgesMap = {
+    [ValidBadges.WELCOME] : {name: 'Joined the app!', imageFile: floralBadgeImg},
+    [ValidBadges.FIRST_PLANT] : {name: 'First plant!', imageFile: floralBadgeImg},
+    [ValidBadges.FIVE_PLANTS] : {name: 'First 5 plants!', imageFile: floralBadgeImg},
+    [ValidBadges.TEN_PLANTS] : {name: 'First 10 plants!!!', imageFile: floralBadgeImg},
+    [ValidBadges.FRIENDLY] : {name: 'Friendly', imageFile: floralBadgeImg},
+    [ValidBadges.HELPFUL] : {name: 'Helpful planter', imageFile: floralBadgeImg},
+  };
+
+  // Starts the calculations.
+  const userBadges = [
+    badgesMap[ValidBadges.WELCOME]
+  ];
+
+  if(totalPlants >= 1) userBadges.push(badgesMap[ValidBadges.FIRST_PLANT]);
+  if(totalPlants >= 5) userBadges.push(badgesMap[ValidBadges.FIVE_PLANTS]);
+  if(totalPlants >= 10) userBadges.push(badgesMap[ValidBadges.TEN_PLANTS]);
+  if(totalFriends >= 1) userBadges.push(badgesMap[ValidBadges.FRIENDLY]);
+  if(totalPosts >= 2) userBadges.push(badgesMap[ValidBadges.HELPFUL]);
+
+  return userBadges;
 };
