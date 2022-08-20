@@ -1,8 +1,7 @@
-import React, {lazy, Suspense, useContext, useEffect} from 'react';
+import React, {lazy, Suspense, useContext} from 'react';
 import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
-import axios from "axios";
 import noContent from "../assets/no-content-yet.png";
 const NewPost = lazy(() => import('../components/NewPost'));
 const PublishedPost = lazy(() => import('../components/PublishedPost'));
@@ -13,22 +12,7 @@ const ExpandedList = lazy(() => import('../components/ExpandedList'));
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const {state: {loggedIn, userData:{user}, homePosts, BASE_URL}, dispatch} = useContext(AppContext);
-
-  /** Gets all the Posts data only for the first time. */
-  useEffect(() => {
-    const fetchAllPosts = () => { // TODO: adjust count and page limits
-      const url = `${ BASE_URL }post?page=1&count=100`;
-      axios.get(url)
-        .then((response) => {
-          dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
-        })
-        .catch((e) => console.log(e));
-    };
-
-    fetchAllPosts();
-    // eslint-disable-next-line
-  }, []);
+  const {state: {loggedIn, userData:{user}, homePosts}, dispatch} = useContext(AppContext);
 
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {

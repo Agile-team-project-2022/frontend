@@ -12,6 +12,7 @@ import {CollectionView} from "./CollectionHeader";
 import {SectionType} from "./CollectionInteractions";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import deleteImg from "../assets/delete.png";
 
 export interface IProfileHeaderProps {
   view: CollectionView,
@@ -27,7 +28,7 @@ export interface PlantHeaderData {
 }
 
 const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plantData}) => {
-  const {state: {deviceType, userData: {plants, userId, followedPlants}, BASE_URL}, dispatch} = useContext(AppContext);
+  const {state: {deviceType, userData: {userId, followedPlants}, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const isValid = CheckEncodedImage(plantData.imageFile);
   const [disableButton, setDisableButton] = useState(false);
@@ -111,26 +112,21 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
 
   /** Deletes the plant from the database. */
   const deletePlant = () => {
+    setDisableButton(true);
     const url = `${ BASE_URL }plant/${ plantData.id }`;
+
     axios.delete(url)
       .then((res) => {
         console.log('Successfully deleted plant.');
-        let index = -1;
-        for(let i = 0; i < plants.length; i++) {
-          if(plants[i].id === res.data.id) {
-            index = i;
-            break;
-          }
-        }
-
-        const newPlants = plants;
-        if(index > -1) newPlants.splice(index, 1);
 
         // Updates the plant's collection without need for fetching the whole data or refreshing.
-        dispatch({type: AppValidActions.UPDATE_PLANT_PICTURE, payload: {userData: {plants: newPlants}}});
+        dispatch({type: AppValidActions.DELETE_PLANT});
         navigate(`/collection`, {replace: true});
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   return (
@@ -168,7 +164,10 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
           <div className='controls'><span>Followers: ({plantData.followers})</span></div>
           :
           <div className='controls'>
-            <span className='delete-control' onClick={deletePlant}>Delete</span>
+            <span className={`${disableButton? 'disabled-delete-button' : ''} delete-control`} onClick={deletePlant}>
+              <img src={deleteImg} alt='Delete' />
+              Delete
+            </span>
             <span>Followers: ({plantData.followers})</span>
           </div>
       }

@@ -20,6 +20,7 @@ const Comments: React.FunctionComponent<ICommentsProps> = ({comments, onUpdateCo
   /** Initializes the map of authors. */
   useEffect(() => {
     comments.forEach((item) => getAuthorName(item.authorId, item.id));
+    // eslint-disable-next-line
   }, [comments]);
 
   /** Prepares the formatting of the content as an array before rendering. */

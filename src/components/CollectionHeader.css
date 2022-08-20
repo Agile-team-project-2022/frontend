@@ -179,6 +179,23 @@
     padding: 0.2rem 0.8rem;
 }
 
+.delete-control {
+    display: flex;
+    column-gap: 0.2rem;
+    align-items: flex-start;
+    height: 1rem;
+}
+
+.delete-control img {
+    position: relative;
+    top: -0.15rem;
+    height: 0.8rem;
+}
+
+.delete-control:hover img {
+    filter: brightness(10%);
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .collection-header {

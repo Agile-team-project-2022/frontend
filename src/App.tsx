@@ -29,62 +29,73 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
   /** Gets and saves the user data only if it is not already saved. */
   useEffect(() => {
-    if(!state.userData.updated) fetchUserData();
+    /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
+    const fetchUserData = () => {
+      const url = `${ state.BASE_URL }user/${ state.userData.userId }`;
+
+      axios.get(url)
+        .then((response) => {
+          // Prepares list of incoming and out friends.
+          const outFriends = response.data.follower.map((item: any) => {
+            return {
+              ...item.followee,
+              accepted: item.accepted
+            }
+          });
+          const inFriends = response.data.following.map((item: any) => {
+            return {
+              ...item.follower,
+              accepted: item.accepted
+            }
+          });
+          const pendingFriends = inFriends.filter((item: any) => !item.accepted);
+          const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
+
+          const data = {
+            updated: true,
+            user: response.data.name,
+            name: response.data.name,
+            email: response.data.email,
+            imageFile: response.data.imageFile,
+            experience: getExperience(
+              response.data._count.plants,
+              response.data._count.follower,
+              response.data._count.posts
+            ),
+            typePlanter: response.data.planter_type,
+            plants: response.data.plants,
+            followedPlants: response.data.Plantsfollow.map((item: any) => item.plant),
+            friends: friends,
+            pendingFriends: pendingFriends,
+            posts: response.data.posts,
+            count: {
+              totalPlants: response.data._count.plants,
+              totalFriends: response.data._count.follower,
+              totalFollowedPlants: response.data._count.Plantsfollow,
+              totalPosts: response.data._count.posts
+            },
+            createdAt: response.data.createdAt
+          };
+
+          dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
+        })
+        .catch((e) => console.log(e));
+    };
+
+    /** Gets all the Posts data only for the first time or when the plants change. */
+    const fetchAllPosts = () => { // TODO: adjust count and page limits
+      const url = `${ state.BASE_URL }post?page=1&count=100`;
+      axios.get(url)
+        .then((response) => {
+          dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
+        })
+        .catch((e) => console.log(e));
+    };
+
+    fetchUserData();
+    fetchAllPosts();
     // eslint-disable-next-line
-  }, []);
-
-  /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
-  const fetchUserData = () => {
-    const url = `${ state.BASE_URL }user/${ state.userData.userId }`;
-
-    axios.get(url)
-      .then((response) => {
-        // Prepares list of incoming and out friends.
-        const outFriends = response.data.follower.map((item: any) => {
-          return {
-            ...item.followee,
-            accepted: item.accepted
-          }
-        });
-        const inFriends = response.data.following.map((item: any) => {
-          return {
-            ...item.follower,
-            accepted: item.accepted
-          }
-        });
-        const pendingFriends = inFriends.filter((item: any) => !item.accepted);
-        const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
-
-        const data = {
-          updated: true,
-          user: response.data.name,
-          name: response.data.name,
-          email: response.data.email,
-          imageFile: response.data.imageFile,
-          experience: getExperience(
-            response.data._count.plants,
-            response.data._count.follower,
-            response.data._count.posts
-          ),
-          typePlanter: response.data.planter_type,
-          plants: response.data.plants,
-          followedPlants: response.data.Plantsfollow.map((item: any) => item.plant),
-          friends: friends,
-          pendingFriends: pendingFriends,
-          posts: response.data.posts,
-          count: {
-            totalPlants: response.data._count.plants,
-            totalFriends: response.data._count.follower,
-            totalFollowedPlants: response.data._count.Plantsfollow,
-            totalPosts: response.data._count.posts
-          },
-          createdAt: response.data.createdAt
-        };
-
-        dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
-      })
-      .catch((e) => console.log(e));
-  };
+  }, [state.updateFetchUser]);
 
   const scrollTop = () => {
     window.scrollTo(0, 0);

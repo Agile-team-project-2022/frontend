@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './CollectionHeader.css';
 import defaultPersonImg from '../assets/default-person.jpeg';
+import deleteImg from '../assets/delete.png';
 import {AppContext, AppValidActions, UserData} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import Modal from "./Modal";
@@ -93,9 +94,8 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
 
   /** For others view, enables stopping being friends. */
   const deleteFriends = () => {
-    setDisableButton(true);
     const url = `${ BASE_URL }follow-friend/${1}`; // TODO: Correct delete function request
-
+    setDisableButton(true);
     axios.delete(url)
       .then((res) => {
         console.log('Successfully stopped following user');
@@ -111,13 +111,17 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   /** Deletes the owner from the database. */
   const deleteOwner = () => {
     const url = `${ BASE_URL }user/${ userData.userId }`;
+    setDisableButton(true);
     axios.delete(url)
       .then((res) => {
         console.log('Successfully deleted Owner.');
         dispatch({type: AppValidActions.DELETE_OWNER});
         navigate(`/home`, {replace: true});
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   return (
@@ -173,7 +177,10 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
           ''
           :
           <div className='controls'>
-            <span className='delete-control' onClick={deleteOwner}>Delete</span>
+            <span className={`${disableButton? 'disabled-delete-button' : ''} delete-control`} onClick={deleteOwner}>
+              <img src={deleteImg} alt='Delete' />
+              Delete
+            </span>
           </div>
       }
 
