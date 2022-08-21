@@ -78,7 +78,8 @@ export interface PlantData {
 export interface ThumbnailData {
   id: number,
   imageFile: string,
-  name: string
+  name: string,
+  relationId?: number
 }
 
 export interface PostData {

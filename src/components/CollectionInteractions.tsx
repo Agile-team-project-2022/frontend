@@ -18,7 +18,9 @@ export interface ICollectionInteractionsProps {
   view: CollectionView
   friends: ThumbnailData[],
   friendsPending: ThumbnailData[],
-  othersId?: number
+  othersId?: number,
+  confirm?: boolean,
+  relationId?: string
 }
 
 export enum SectionType {
@@ -26,7 +28,14 @@ export enum SectionType {
   PERSON = 'PERSON'
 }
 
-const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = ({view, friends, friendsPending, othersId}) => {
+const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsProps> = ({
+  view,
+  friends,
+  friendsPending,
+  othersId,
+  confirm,
+  relationId
+}) => {
   const {state: {deviceType, BASE_URL, userData: {userId}}} = useContext(AppContext);
   const [expandedFriends, setExpandedFriends] = useState(false);
   const [expandedFriendsPending, setExpandedFriendsPending] = useState(false);
@@ -103,11 +112,30 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       });
   };
 
+  /** Accepts the request of being friends. */
+  const acceptFriend = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend/${relationId}`;
+    const data = {accepted: true};
+    axios.put(url, data)
+      .then((res) => {
+        console.log('Accepted friend');
+        setDisableButton(false);
+        setAlreadyFriends(true);
+        navigate(`/collection/${ othersId }`, {replace: false});
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
   /** Goes to the owner profile when clicked on the friends section. */
-  const goToOwner = (id: number) => {
+  const goToOwner = (id: number, askConfirm: boolean, relationId?: number) => {
     closeSectionFriends();
     closeSectionFriendsPending();
-    navigate(`/collection/${id}`, {replace: false});
+    if(askConfirm) navigate(`/collection/${ id }/confirm-friend/${ relationId }`, {replace: false});
+    else navigate(`/collection/${ id }`, {replace: false});
   };
 
   /** Renders the section depending on the interaction. */
@@ -117,7 +145,8 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
     array: ThumbnailData[],
     modalIsOpen: boolean,
     onOpenSection: () => void,
-    onCloseSection: () => void
+    onCloseSection: () => void,
+    askConfirm: boolean
   ) => {
     return (
       <DataSection title={title} totalItems={array.length} onClickSection={onOpenSection}>
@@ -126,7 +155,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
             return (
               <div className={`list-img-container ${sectionType === SectionType.PLANT? 'squared-img' : ''}`}
                    key={`item-interaction-${item.name}-${item.id}`}
-                   onClick={() => goToOwner(item.id)}
+                   onClick={() => goToOwner(item.id, askConfirm, item.relationId)}
               >
                 <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Person'} />
               </div>
@@ -143,7 +172,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
                   return (
                     <div className='list-item-container'
                          key={`list-item-interaction-${item.name}-${item.id}`}
-                         onClick={() => goToOwner(item.id)}
+                         onClick={() => goToOwner(item.id, askConfirm, item.relationId)}
                     >
                       <div className='list-img-container'>
                         <LazyLoadImage src={CheckEncodedImage(item.imageFile)? item.imageFile : defaultPersonImg} alt={'Person'} />
@@ -175,10 +204,10 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
                 ''
                 :
                 <button className={`button-open-section`}
-                        onClick={alreadyFriends? deleteFriends : sendFriendRequest}
+                        onClick={confirm? acceptFriend : alreadyFriends? deleteFriends : sendFriendRequest}
                         disabled={disableButton}
                 >
-                  {alreadyFriends? 'Delete friend' : 'Friend request'}
+                  {confirm? 'Accept friend' : alreadyFriends? 'Delete friend' : 'Friend request'}
                 </button>
             }
           </>
@@ -194,7 +223,8 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
                 friendsPending,
                 expandedFriendsPending,
                 openSectionFriendsPending,
-                closeSectionFriendsPending
+                closeSectionFriendsPending,
+                true
               )
             }
           </div>
@@ -210,7 +240,8 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
             friends,
             expandedFriends,
             openSectionFriends,
-            closeSectionFriends
+            closeSectionFriends,
+            false
           )
         }
       </div>

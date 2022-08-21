@@ -15,7 +15,9 @@ import {useNavigate} from "react-router-dom";
 export interface ICollectionHeaderProps {
   view: CollectionView,
   othersData?: UserData,
-  totalBadges: number
+  totalBadges: number,
+  confirm?: boolean,
+  relationId?: string
 }
 
 export enum CollectionView {
@@ -23,7 +25,13 @@ export enum CollectionView {
   OTHERS = 'OTHERS'
 }
 
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view, othersData, totalBadges}) => {
+const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
+  view,
+  othersData,
+  totalBadges,
+  confirm,
+  relationId
+}) => {
   const {state: {userData, deviceType, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [ownerData, setOwnerData] = useState<UserData>(userData);
@@ -93,6 +101,24 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
       });
   };
 
+  /** Accepts the request of being friends. */
+  const acceptFriend = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend/${relationId}`;
+    const data = {accepted: true};
+    axios.put(url, data)
+      .then((res) => {
+        console.log('Accepted friend');
+        setDisableButton(false);
+        setAlreadyFriends(true);
+        navigate(`/collection/${ othersData?.userId }`, {replace: false});
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
   /** For others view, enables stopping being friends. */
   const deleteFriends = () => {
     const url = `${ BASE_URL }follow-friend/${1}`; // TODO: Correct delete function request
@@ -144,10 +170,10 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
         // Shows the friend request button in the header in mobile devices.
         view === CollectionView.OTHERS && deviceType === DeviceTypes.MOBILE?
           <button className={`${deviceType === DeviceTypes.MOBILE? 'mobile-follow-button' : ''} button-open-section collection-header-button`}
-                  onClick={alreadyFriends? deleteFriends : sendFriendRequest}
+                  onClick={confirm? acceptFriend : alreadyFriends? deleteFriends : sendFriendRequest}
                   disabled={disableButton}
           >
-            {alreadyFriends? 'Delete friend' : 'Friend request'}
+            {confirm? 'Accept friend' : alreadyFriends? 'Delete friend' : 'Friend request'}
           </button>
           :
           ''

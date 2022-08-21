@@ -39,13 +39,15 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           const outFriends = response.data.follower.map((item: any) => {
             return {
               ...item.followee,
-              accepted: item.accepted
+              accepted: item.accepted,
+              relationId: item.id
             }
           });
           const inFriends = response.data.following.map((item: any) => {
             return {
               ...item.follower,
-              accepted: item.accepted
+              accepted: item.accepted,
+              relationId: item.id
             }
           });
           const pendingFriends = inFriends.filter((item: any) => !item.accepted);
@@ -112,6 +114,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
+          <Route path="collection/:ownerId/confirm-friend/:relationId" element={<Collection confirm={true} />} />
           <Route path="collection/:ownerId" element={<Collection />} />
           <Route path="collection" element={<Collection />} />
           <Route path="plant-profile/:plantId/:ownerId" element={<PlantProfile />} />

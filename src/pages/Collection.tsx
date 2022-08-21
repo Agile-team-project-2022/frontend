@@ -10,11 +10,13 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {getExperience} from "../helpers";
 
-export interface ICollectionProps {}
+export interface ICollectionProps {
+  confirm? : boolean
+}
 
-const Collection: React.FunctionComponent<ICollectionProps> = () => {
+const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
   const {state: {deviceType, userData, BASE_URL}} = useContext(AppContext);
-  const {ownerId} = useParams();
+  const {ownerId, relationId} = useParams();
   const [view, setView] = useState(CollectionView.OWNER);
   const [othersData, setOthersData] = useState<UserData>();
   const [ownerTotalBadges, setOwnerTotalBadges] = useState(0);
@@ -41,15 +43,18 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
           const outFriends = response.data.follower.map((item: any) => {
             return {
               ...item.followee,
-              accepted: item.accepted
+              accepted: item.accepted,
+              relationId: item.id
             }
           });
           const inFriends = response.data.following.map((item: any) => {
             return {
               ...item.follower,
-              accepted: item.accepted
+              accepted: item.accepted,
+              relationId: item.id
             }
           });
+          console.log(inFriends)
           const pendingFriends = inFriends.filter((item: any) => !item.accepted);
           const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
 
@@ -147,7 +152,12 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
 
   return (
     <main className="collection-page">
-      <CollectionHeader othersData={othersData} view={view} totalBadges={ownerTotalBadges} />
+      <CollectionHeader othersData={othersData}
+                        view={view}
+                        totalBadges={ownerTotalBadges}
+                        confirm={confirm}
+                        relationId={relationId}
+      />
 
       {
         deviceType === DeviceTypes.MOBILE?
@@ -189,6 +199,8 @@ const Collection: React.FunctionComponent<ICollectionProps> = () => {
             <CollectionInteractions friends={view === CollectionView.OWNER? userData.friends : othersData?.friends || []}
                                     friendsPending={view === CollectionView.OWNER? userData.pendingFriends : []}
                                     view={view}
+                                    confirm={confirm}
+                                    relationId={relationId}
             />
           </>
       }
