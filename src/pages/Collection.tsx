@@ -54,7 +54,6 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
               relationId: item.id
             }
           });
-          console.log(inFriends)
           const pendingFriends = inFriends.filter((item: any) => !item.accepted);
           const friends = [...inFriends.filter((item: any) => item.accepted), ...outFriends.filter((item: any) => item.accepted)];
 
@@ -143,7 +142,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
     } else if(showInteractions) {
       return (
         <CollectionInteractions friends={view === CollectionView.OWNER? userData.friends : othersData?.friends || []}
-                                friendsPending={view === CollectionView.OWNER? userData.pendingFriends : []}
+                                friendsPending={view === CollectionView.OWNER? userData.pendingFriends : othersData?.pendingFriends || []}
                                 view={view}
         />
       );
@@ -197,7 +196,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
             />
 
             <CollectionInteractions friends={view === CollectionView.OWNER? userData.friends : othersData?.friends || []}
-                                    friendsPending={view === CollectionView.OWNER? userData.pendingFriends : []}
+                                    friendsPending={view === CollectionView.OWNER? userData.pendingFriends : othersData?.pendingFriends || []}
                                     view={view}
                                     confirm={confirm}
                                     relationId={relationId}

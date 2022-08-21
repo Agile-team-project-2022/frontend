@@ -21,6 +21,12 @@
     opacity: 80%;
 }
 
+.no-allow-follow {
+    filter: grayscale(40%);
+    opacity: 40% !important;
+    pointer-events: none;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .collection-interactions {

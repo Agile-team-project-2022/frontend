@@ -41,21 +41,35 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   const [expandedFriendsPending, setExpandedFriendsPending] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alreadyFriends, setAlreadyFriends] = useState(false);
+  const [pendingStatusFriend, setPendingStatusFriend] = useState(false);
   const [threshold, setThreshold] = useState(5);
   const navigate = useNavigate();
 
   /** Initializes with the correct friends owner data. */
   useEffect(() => {
+    // Enables stop being friends.
     if(view === CollectionView.OTHERS && friends) {
+      setAlreadyFriends(false);
       for(let friend of friends) {
-        // Disables requesting for friends more than once.
         if(friend.id === userId) {
           setAlreadyFriends(true);
           break;
         }
       }
     }
-  }, [friends, view, userId]);
+
+    // Disables requesting for friends more than once while pending.
+    if(view === CollectionView.OTHERS && friendsPending) {
+      setPendingStatusFriend(false);
+      for(let friendPending of friendsPending) {
+        console.log(friendsPending)
+        if(friendPending.id === userId) {
+          setPendingStatusFriend(true);
+          break;
+        }
+      }
+    }
+  }, [friends, view, userId, othersId, friendsPending]);
 
   /** Updates the number of items to display per section. */
   useEffect(() => {
@@ -211,7 +225,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
               deviceType === DeviceTypes.MOBILE?
                 ''
                 :
-                <button className={`button-open-section`}
+                <button className={`button-open-section ${pendingStatusFriend? 'no-allow-follow' : ''}`}
                         onClick={confirm? acceptFriend : alreadyFriends? deleteFriends : sendFriendRequest}
                         disabled={disableButton}
                 >
