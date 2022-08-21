@@ -15,7 +15,9 @@ import {useNavigate} from "react-router-dom";
 export interface ICollectionHeaderProps {
   view: CollectionView,
   othersData?: UserData,
-  totalBadges: number
+  totalBadges: number,
+  confirm?: boolean,
+  relationId?: string
 }
 
 export enum CollectionView {
@@ -23,7 +25,13 @@ export enum CollectionView {
   OTHERS = 'OTHERS'
 }
 
-const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view, othersData, totalBadges}) => {
+const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
+  view,
+  othersData,
+  totalBadges,
+  confirm,
+  relationId
+}) => {
   const {state: {userData, deviceType, BASE_URL}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [ownerData, setOwnerData] = useState<UserData>(userData);
@@ -36,6 +44,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
   useEffect(() => {
     if(view === CollectionView.OTHERS && othersData) {
       setOwnerData(othersData);
+      setAlreadyFriends(false);
       for(let friend of othersData.friends) {
         // Disables requesting for friends more than once.
         if(friend.id === userData.userId) {
@@ -86,6 +95,25 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
         console.log('Successfully following user');
         setDisableButton(false);
         setAlreadyFriends(true);
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
+
+  /** Accepts the request of being friends. */
+  const acceptFriend = () => {
+    setDisableButton(true);
+    const url = `${ BASE_URL }follow-friend/${relationId}`;
+    const data = {accepted: true};
+    axios.put(url, data)
+      .then((res) => {
+        console.log('Accepted friend');
+        setDisableButton(false);
+        setAlreadyFriends(true);
+        dispatch({type: AppValidActions.UPDATE_USER_DATA});
+        navigate(`/collection/${ othersData?.userId }`, {replace: false});
       })
       .catch((e) => {
         console.log(e);
@@ -144,10 +172,10 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({view
         // Shows the friend request button in the header in mobile devices.
         view === CollectionView.OTHERS && deviceType === DeviceTypes.MOBILE?
           <button className={`${deviceType === DeviceTypes.MOBILE? 'mobile-follow-button' : ''} button-open-section collection-header-button`}
-                  onClick={alreadyFriends? deleteFriends : sendFriendRequest}
+                  onClick={confirm? acceptFriend : alreadyFriends? deleteFriends : sendFriendRequest}
                   disabled={disableButton}
           >
-            {alreadyFriends? 'Delete friend' : 'Friend request'}
+            {confirm? 'Accept friend' : alreadyFriends? 'Delete friend' : 'Friend request'}
           </button>
           :
           ''

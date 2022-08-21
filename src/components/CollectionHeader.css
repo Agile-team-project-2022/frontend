@@ -2,6 +2,7 @@
 .collection-header {
     grid-area: header;
     display: grid;
+    grid-row-gap: 0.5rem;
     grid-template-areas:
             "img name overview"
             "empty request-button controls";
@@ -150,7 +151,7 @@
     height: fit-content;
     white-space: nowrap;
     padding: 0.2rem 0.15rem;
-    margin: -2rem 0 0 0;
+    margin: -2.7rem 0 0 0;
     border: 1px solid var(--color-white-light-border);
     z-index: 1;
 }
@@ -199,11 +200,8 @@
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .collection-header {
-        grid-template-rows: auto 2rem 4.1rem;
-        grid-template-areas:
-            "img name overview"
-            "empty none controls"
-            "request-button request-button request-button";
+        grid-template-rows: auto 1.8rem;
+        grid-row-gap: 0;
         width: 100%;
         height: 13rem;
     }
@@ -269,7 +267,8 @@
 @media all and (min-width: 1100px) {
     .collection-header {
         height: 14rem;
-        grid-template-rows: auto 2rem 5.6rem;
+        grid-row-gap: 0.5rem;
+        grid-template-rows: auto 2rem;
     }
 
     .collection-header .first-background,

@@ -10,6 +10,8 @@
     box-shadow: 0 0 0.8rem var(--color-black-lightest-shadow);
     justify-self: center;
     cursor: pointer;
+    animation-name: fadeIn;
+    animation-duration: 2s;
 }
 
 .collection-single-card-container:hover img {

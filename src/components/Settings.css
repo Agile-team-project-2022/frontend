@@ -1,0 +1,51 @@
+.settings-container {
+    width: 300px;
+    display: grid;
+    grid-template-areas:
+            "title"
+            "content";
+    grid-template-rows: 50px auto;
+}
+
+.settings-container .section-title-modal {
+    grid-area: title;
+    margin: 0 auto;
+}
+
+.font-size-option {
+    display: grid;
+    grid-template-areas:
+            "title title title"
+            "input input input"
+            "min none max";
+    grid-template-columns: repeat(3, 33.3%);
+    grid-template-rows: 50px 25px 25px;
+}
+
+.slider-label {
+    grid-area: title;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.min-slider-label, .max-slider-label {
+    font-size: 0.78rem;
+    font-weight: 300;
+}
+
+.min-slider-label {
+    grid-area: min;
+}
+
+.max-slider-label {
+    grid-area: max;
+    justify-self: right;
+}
+
+.font-size-slider {
+    grid-area: input;
+    width: 100%;
+    margin: 0;
+    cursor: pointer;
+}

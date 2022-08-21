@@ -44,6 +44,11 @@ html, main {
   scroll-behavior: smooth;
 }
 
+body {
+  transition-property: font-size;
+  transition-duration: 1s;
+}
+
 body *:active {
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -375,4 +380,15 @@ textarea::-webkit-resizer {
   .not-found-container {
     width: min(15rem, 90%);
   }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {opacity: 0; }
+  100% {opacity: 100%; }
+}
+
+@keyframes fadeInComment {
+  0% {opacity: 0; }
+  100% {opacity: 60%; }
 }

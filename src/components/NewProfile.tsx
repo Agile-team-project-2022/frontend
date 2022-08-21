@@ -149,7 +149,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
       name: basicData.name,
       species: basicData.species,
       schedule: selectedDates.join(','),
-      caringInfo: "plant", // TODO: Confirm what this means
+      caringInfo: "",
       location: `${locationCoords.latitude.meters},${locationCoords.longitude.meters},${locationCoords.altitude.meters}`,
       ownerId: userId,
       plantsCategoryId: category,

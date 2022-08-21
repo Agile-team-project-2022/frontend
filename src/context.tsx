@@ -19,7 +19,8 @@ enum AppValidActions {
   UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE',
   CREATE_NEW_PLANT = 'CREATE_NEW_PLANT',
   DELETE_PLANT = 'DELETE_PLANT',
-  DELETE_OWNER = 'DELETE_OWNER' // TODO: implement delete account in context.
+  DELETE_OWNER = 'DELETE_OWNER', // TODO: implement delete account in context.
+  UPDATE_USER_DATA = 'UPDATE_USER_DATA'
 }
 
 // Interfaces and Types definition.
@@ -30,7 +31,7 @@ interface AppContextInterface {
 
 interface AppState {
   language: string,
-  fontSize: string,
+  fontSize: number,
   loggedIn: boolean,
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
@@ -78,7 +79,8 @@ export interface PlantData {
 export interface ThumbnailData {
   id: number,
   imageFile: string,
-  name: string
+  name: string,
+  relationId?: number
 }
 
 export interface PostData {
@@ -147,7 +149,7 @@ interface ChangeLanguageAction {
 
 interface ChangeFontSizeAction {
   type: AppValidActions,
-  payload: {fontSize: string}
+  payload: {fontSize: number}
 }
 
 interface MapCategoryAction {
@@ -207,7 +209,7 @@ interface DeleteOwnerAction {
 // Defines the default values to initialize the app.
 const appInitialState = {
   language: 'en',
-  fontSize: 'normal',
+  fontSize: 1,
   loggedIn: true, // TODO set to false
   showLogIn: false,
   categoryIdMap: {},
@@ -348,6 +350,12 @@ const reducer = (state: AppState, action: AppAction) => {
       };
 
     case AppValidActions.DELETE_PLANT:
+      return {
+        ...state,
+        updateFetchUser: !state.updateFetchUser
+      };
+
+    case AppValidActions.UPDATE_USER_DATA:
       return {
         ...state,
         updateFetchUser: !state.updateFetchUser
