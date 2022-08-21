@@ -4,7 +4,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import defaultPlantImg from "../assets/default-plant.jpg";
 import {PlantData} from "../context";
 import {useNavigate} from "react-router-dom";
-import {CheckEncodedImage} from "../helpers";
+import {calculateAgePlant, CheckEncodedImage} from "../helpers";
 
 export interface ICollectionCardProps {
   plant: PlantData,
@@ -28,7 +28,7 @@ const CollectionCard: React.FunctionComponent<ICollectionCardProps> = ({plant, o
       <div className='card-data-container'>
         <p>Name: <span>{plant.name}</span></p>
         <p>Species: <span>{plant.species}</span></p>
-        <p>Age: <span>extra large content that should not fit -{/* TODO: put age in endpoint. */}</span></p>
+        <p>Age: <span>{calculateAgePlant(plant.initialAge, plant.createdAt)} years</span></p>
       </div>
     </div>
   );

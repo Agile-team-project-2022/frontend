@@ -19,7 +19,7 @@ import Season from "../components/Season";
 import DataSection from "../components/DataSection";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import defaultPerson from "../assets/default-person.jpeg";
-import {CheckEncodedImage} from "../helpers";
+import {calculateAgePlant, CheckEncodedImage} from "../helpers";
 
 export interface IPlantProfileProps {}
 
@@ -33,6 +33,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
   const [disableButton, setDisableButton] = useState(false);
   const [alreadyFollow, setAlreadyFollow] = useState(false);
+  const [plantExtraInfo, setPlantExtraInfo] = useState({age: 0, joinDate: new Date()});
   // Manages the sections to expand on mobile devices.
   const [showGallery, setShowGallery] = useState(true);
   const [showData, setShowData] = useState(false);
@@ -52,6 +53,16 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             imageFile: response.data.imageFile,
             species: response.data.species,
             followers: response.data.followers?.length || 0 // TODO: Send total followers
+          });
+
+          // Sets the calculated age and joined date.
+          const date = new Date(response.data.createdAt);
+          setPlantExtraInfo(prevState => {
+            return {
+              ...prevState,
+              age: calculateAgePlant(response.data.initialAge, response.data.createdAt),
+              joinDate: isNaN(date.getTime())? new Date : date
+            }
           });
 
           // Parses the string containing coordinates.
@@ -143,7 +154,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   /** Renders the section selected on mobile devices. */
   const getExpandedSection = () => {
     if(showGallery) return <div className='mobile-section-container'><GalleryPreview imageFiles={['', '', '', '', '']} /> {/* TODO: Pass the correct array of plant images. */}</div>;
-    else if(showData) return <div className='mobile-section-container'>{getData()}</div>;
+    else if(showData) return <div className='mobile-section-container'>{ getData() } { getExtraData() }</div>;
     else if(showPublications) return <div className='mobile-section-container publications'>{ getPublications() }</div>;
   };
 
@@ -182,6 +193,40 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
         </section>
+      </>
+    );
+  };
+
+  /** Displays extra data like the owner of the plant or measurements. */
+  const getExtraData = () => {
+    return (
+      <>
+        <DataSection title={'Extra info.'} onClickSection={() => {}}>
+          <div className='info-plant-container'>
+            <p>
+              <span>Age: </span>
+              { plantExtraInfo.age } years
+            </p>
+            <p>
+              <span>Joined since: </span>
+              { `${plantExtraInfo.joinDate.getDate()}-${plantExtraInfo.joinDate.getMonth() + 1}-${plantExtraInfo.joinDate.getFullYear()}` }
+            </p>
+          </div>
+        </DataSection>
+
+        <DataSection title={'Owned by'} onClickSection={() => {}}>
+          <div className='list-item-container' onClick={goToOwner} >
+            <div className='list-img-container'>
+              <LazyLoadImage src={CheckEncodedImage(ownerData?.imageFile || '')? ownerData?.imageFile : defaultPerson} alt={`Owner`} />
+            </div>
+            {
+              ownerData?.name !== undefined?
+                <p> {ownerData.name.charAt(0).toUpperCase() + ownerData.name.substring(1)} </p>
+                :
+                ''
+            }
+          </div>
+        </DataSection>
       </>
     );
   };
@@ -278,19 +323,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
                   ''
               }
 
-              <DataSection title={'Owned by'} onClickSection={() => {}}>
-                <div className='list-item-container' onClick={goToOwner} >
-                  <div className='list-img-container'>
-                    <LazyLoadImage src={CheckEncodedImage(ownerData?.imageFile || '')? ownerData?.imageFile : defaultPerson} alt={`Owner`} />
-                  </div>
-                  {
-                    ownerData?.name !== undefined?
-                      <p> {ownerData.name.charAt(0).toUpperCase() + ownerData.name.substring(1)} </p>
-                      :
-                      ''
-                  }
-                </div>
-              </DataSection>
+              { getExtraData() }
             </div>
           </>
       }

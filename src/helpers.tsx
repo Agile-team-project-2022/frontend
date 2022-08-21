@@ -114,3 +114,16 @@ export const getBadges = (totalPlants: number, totalFriends: number, totalPosts:
 
   return userBadges;
 };
+
+/** Calculates the age of the plant in years. */
+export const calculateAgePlant = (initialAge: number, joinedSince: string) => {
+  const joinDate = new Date(joinedSince);
+  const dateNow = new Date();
+  if(isNaN(joinDate.getTime())) return 0;
+
+  const diff = new Date(dateNow.getTime() - joinDate.getTime());
+  let diffMonths = (diff.getUTCFullYear() - 1970) * 12;
+  diffMonths += diff.getUTCMonth();
+
+  return Math.round(((diffMonths / 12) + initialAge) * 10) / 10;
+};
