@@ -83,13 +83,14 @@
     .data-section-content .list-img-container {
         width: 3.2rem;
         height: 3.2rem;
+        min-width: 2rem;
+        min-height: 2rem;
     }
 
     .data-section-content .arrow-button {
         transform: scale(0.65) rotate(90deg);
         margin: 0.5rem auto;
     }
-
 }
 
 /* Desktop version. */
