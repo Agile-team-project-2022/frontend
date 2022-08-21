@@ -19,7 +19,8 @@ enum AppValidActions {
   UPDATE_PLANT_PICTURE = 'UPDATE_PLANT_PICTURE',
   CREATE_NEW_PLANT = 'CREATE_NEW_PLANT',
   DELETE_PLANT = 'DELETE_PLANT',
-  DELETE_OWNER = 'DELETE_OWNER' // TODO: implement delete account in context.
+  DELETE_OWNER = 'DELETE_OWNER', // TODO: implement delete account in context.
+  UPDATE_USER_DATA = 'UPDATE_USER_DATA'
 }
 
 // Interfaces and Types definition.
@@ -349,6 +350,12 @@ const reducer = (state: AppState, action: AppAction) => {
       };
 
     case AppValidActions.DELETE_PLANT:
+      return {
+        ...state,
+        updateFetchUser: !state.updateFetchUser
+      };
+
+    case AppValidActions.UPDATE_USER_DATA:
       return {
         ...state,
         updateFetchUser: !state.updateFetchUser

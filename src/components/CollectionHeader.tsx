@@ -111,6 +111,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
         console.log('Accepted friend');
         setDisableButton(false);
         setAlreadyFriends(true);
+        dispatch({type: AppValidActions.UPDATE_USER_DATA});
         navigate(`/collection/${ othersData?.userId }`, {replace: false});
       })
       .catch((e) => {

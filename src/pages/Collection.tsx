@@ -201,6 +201,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
                                     view={view}
                                     confirm={confirm}
                                     relationId={relationId}
+                                    othersId={parseInt(ownerId || '0')}
             />
           </>
       }

@@ -5,7 +5,7 @@ import defaultPersonImg from "../assets/default-person.jpeg";
 import DataSection from './DataSection';
 import Modal from "./Modal";
 import {DeviceTypes} from "../hooks/useWindowSize";
-import {AppContext, ThumbnailData} from "../context";
+import {AppContext, AppValidActions, ThumbnailData} from "../context";
 import {CollectionView} from "./CollectionHeader";
 import {CheckEncodedImage} from "../helpers";
 import {useNavigate} from "react-router-dom";
@@ -36,11 +36,12 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   confirm,
   relationId
 }) => {
-  const {state: {deviceType, BASE_URL, userData: {userId}}} = useContext(AppContext);
+  const {state: {deviceType, BASE_URL, userData: {userId}}, dispatch} = useContext(AppContext);
   const [expandedFriends, setExpandedFriends] = useState(false);
   const [expandedFriendsPending, setExpandedFriendsPending] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alreadyFriends, setAlreadyFriends] = useState(false);
+  const [threshold, setThreshold] = useState(5);
   const navigate = useNavigate();
 
   /** Initializes with the correct friends owner data. */
@@ -55,6 +56,12 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
       }
     }
   }, [friends, view, userId]);
+
+  /** Updates the number of items to display per section. */
+  useEffect(() => {
+    if(deviceType === DeviceTypes.MOBILE) setThreshold(20);
+    else setThreshold(5);
+  }, [deviceType]);
 
   /** Opens the respective modal. */
   const openSectionFriends = () => {
@@ -122,7 +129,8 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
         console.log('Accepted friend');
         setDisableButton(false);
         setAlreadyFriends(true);
-        navigate(`/collection/${ othersId }`, {replace: false});
+        dispatch({type: AppValidActions.UPDATE_USER_DATA});
+        navigate(`/collection/${ othersId || userId }`, {replace: false});
       })
       .catch((e) => {
         console.log(e);
@@ -151,7 +159,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
     return (
       <DataSection title={title} totalItems={array.length} onClickSection={onOpenSection}>
         {
-          array.map((item, index) => {
+          array.slice(0, Math.min(array.length, threshold)).map((item, index) => {
             return (
               <div className={`list-img-container ${sectionType === SectionType.PLANT? 'squared-img' : ''}`}
                    key={`item-interaction-${item.name}-${item.id}`}
