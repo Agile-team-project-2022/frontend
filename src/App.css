@@ -44,6 +44,11 @@ html, main {
   scroll-behavior: smooth;
 }
 
+body {
+  transition-property: font-size;
+  transition-duration: 1s;
+}
+
 body *:active {
   outline: none;
   -webkit-tap-highlight-color: transparent;

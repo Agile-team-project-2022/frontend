@@ -30,7 +30,7 @@ interface AppContextInterface {
 
 interface AppState {
   language: string,
-  fontSize: string,
+  fontSize: number,
   loggedIn: boolean,
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
@@ -147,7 +147,7 @@ interface ChangeLanguageAction {
 
 interface ChangeFontSizeAction {
   type: AppValidActions,
-  payload: {fontSize: string}
+  payload: {fontSize: number}
 }
 
 interface MapCategoryAction {
@@ -207,7 +207,7 @@ interface DeleteOwnerAction {
 // Defines the default values to initialize the app.
 const appInitialState = {
   language: 'en',
-  fontSize: 'normal',
+  fontSize: 1,
   loggedIn: true, // TODO set to false
   showLogIn: false,
   categoryIdMap: {},

@@ -10,6 +10,8 @@ import './Header.css';
 import {AppContext, AppValidActions} from "../context";
 import {googleLogout} from '@react-oauth/google';
 import {ListType} from "../components/ExpandedList";
+import Modal from "../components/Modal";
+import Settings from "../components/Settings";
 
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
@@ -20,6 +22,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const [expanded, setExpanded] = useState(false);
   const [expandedFollowType, setExpandedFollowType] = useState(ListType.FOLLOWED_PLANTS);
   const [expandedFollowSection, setExpandedFollowSection] = useState(false);
+  const [expandedSettingsSection, setExpandedSettingsSection] = useState(false);
 
   const expandMobileMenu = () => {
     setExpanded(prevState => !prevState);
@@ -52,9 +55,19 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     expandMobileMenu();
   }
 
+  /** Shows the settings options for any device. */
+  const expandSettings = () => {
+    setExpandedSettingsSection(true);
+  }
+
   /** Handles closing the follow section on mobile devices. */
   const onCloseFollow = () => {
     setExpandedFollowSection(false);
+  }
+
+  /** Handles closing the settings section on any devices. */
+  const onCloseSettings = () => {
+    setExpandedSettingsSection(false);
   }
 
   return (
@@ -103,7 +116,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           </nav>
         </div>
 
-        <button className='header-option-container settings-logo'>
+        <button className='header-option-container settings-logo' onClick={expandSettings}>
           <img src={settingsImg} alt="settings button" />
         </button>
         <button className='header-option-container help-logo'>
@@ -111,7 +124,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         </button>
 
         <button className={`burger-icon ${expanded? 'selected-burger-icon' : ''}`}
-                onClick={() => expandMobileMenu()}
+                onClick={expandMobileMenu}
         >
           <div> </div>
           <div> </div>
@@ -128,6 +141,15 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                           onClose={onCloseFollow}
             />
           </Suspense>
+          :
+          ''
+      }
+
+      {
+        expandedSettingsSection?
+          <Modal onClose={onCloseSettings}>
+            <Settings />
+          </Modal>
           :
           ''
       }
