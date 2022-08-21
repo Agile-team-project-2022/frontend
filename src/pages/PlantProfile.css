@@ -87,6 +87,25 @@
     height: 2rem;
 }
 
+.info-plant-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+}
+
+.info-plant-container p {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 300;
+    padding: 0.4rem 1.5rem;
+    width: calc(100% - 3rem);
+    text-align: left;
+}
+
+.info-plant-container p span {
+    font-weight: 500;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .plant-profile-page {
@@ -145,6 +164,13 @@
     .plant-profile-data-container .data-section-container:nth-child(3) {
         animation-duration: 1.5s;
     }
+
+    .info-plant-container p {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.5rem;
+        width: calc(100% - 1rem);
+        text-align: center;
+    }
 }
 
 /* Desktop version. */
@@ -189,5 +215,9 @@
 
     .owner-data-container .button-open-section {
         margin-bottom: 1.5rem;
+    }
+
+    .info-plant-container p {
+        text-align: left;
     }
 }
