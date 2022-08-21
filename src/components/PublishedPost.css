@@ -5,6 +5,8 @@
     margin: 0 auto 3rem auto;
     width: calc(100% - 1.4rem);
     height: fit-content;
+    animation-name: fadeIn;
+    animation-duration: 2s;
 }
 
 .post-content-published {

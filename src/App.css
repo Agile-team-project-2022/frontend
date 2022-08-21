@@ -381,3 +381,14 @@ textarea::-webkit-resizer {
     width: min(15rem, 90%);
   }
 }
+
+/* Animations */
+@keyframes fadeIn {
+  0% {opacity: 0; }
+  100% {opacity: 100%; }
+}
+
+@keyframes fadeInComment {
+  0% {opacity: 0; }
+  100% {opacity: 60%; }
+}

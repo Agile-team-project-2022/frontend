@@ -267,7 +267,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
             <div className='owner-data-container'>
               {
-                parseInt(plantId || '0') !== userId?
+                parseInt(ownerId || '0') !== userId?
                   <button className={`button-open-section`}
                           onClick={alreadyFollow? deleteFollow : sendFollow}
                           disabled={disableButton}
