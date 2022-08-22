@@ -65,7 +65,7 @@ export interface PlantData {
   ownerId: number,
   name: string,
   species: string,
-  age: string,
+  initialAge: number,
   imageFile: string,
   schedule: string,
   caringInfo: string,
