@@ -18,6 +18,9 @@
 .sun-animation {
     grid-area: sun;
     align-self: center;
+    position: relative;
+    top: -0.5rem;
+    left: 0.3rem;
     width: 3rem;
     height: 3rem;
 }
@@ -25,8 +28,10 @@
 .plant-animation {
     grid-area: plant;
     align-self: flex-end;
-    width: 2rem;
-    height: 2rem;
+    position: relative;
+    top: 2.53rem;
+    width: 4.5rem;
+    height: 4.5rem;
     opacity: 70%;
 }
 
@@ -44,6 +49,7 @@
     width: 120%;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
+    z-index: 1;
 }
 
 .weather-data-outer-container {
@@ -122,6 +128,25 @@
 
 .data-content p span {
     font-weight: 600;
+}
+
+.day-background, .night-background {
+    margin: -0.25rem 0 0 -0.3rem;
+    width: calc(100% + 0.6rem);
+    padding-top: 0.3rem;
+}
+
+.night-background {
+    background: linear-gradient(to top, black  0%, #1c314f 80%);
+}
+
+.night-background .weather-data-container h6, .night-background label  {
+    color: white;
+}
+
+.night-background .cloud-animation  {
+    position: relative;
+    top: 1rem;
 }
 
 /* Tablet version. */

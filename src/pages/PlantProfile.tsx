@@ -163,7 +163,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     return (
       <>
         <WaterSchedule selectedDates={scheduleData}/>
-        <Weather />
+        <Weather latitude={locationData.latitude} longitude={locationData.longitude} />
         <Location altitude={locationData.altitude} latitude={locationData.latitude} longitude={locationData.longitude}/>
         <Season />
       </>
