@@ -6,7 +6,7 @@ import noContent from '../assets/no-content-yet.png';
 import {useNavigate, useParams} from "react-router-dom";
 import {CollectionView} from "../components/CollectionHeader";
 import ProfileHeader, {PlantHeaderData} from "../components/ProfileHeader";
-import {AppContext, PlantData, UserData} from "../context";
+import {AppContext, AppValidActions, PlantData, UserData} from "../context";
 import axios from "axios";
 import PublishedPost from "../components/PublishedPost";
 import NewPost from "../components/NewPost";
@@ -25,7 +25,7 @@ export interface IPlantProfileProps {}
 
 const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
-  const {state: {deviceType, BASE_URL, userData: {userId, plants, followedPlants}}} = useContext(AppContext);
+  const {state: {deviceType, BASE_URL, userData: {userId, plants, followedPlants}}, dispatch} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [ownerData, setOwnerData] = useState<UserData>();
   const [locationData, setLocationData] = useState<{altitude?: number, latitude?: number, longitude?: number}>({
@@ -179,7 +179,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
         <WaterSchedule selectedDates={scheduleData}/>
         <Weather latitude={locationData.latitude} longitude={locationData.longitude} setSeaLevel={setSeaLevel} />
         <Location altitude={locationData.altitude || 0} latitude={locationData.latitude || 0} longitude={locationData.longitude || 0}/>
-        <Season />
+        <Season latitude={locationData.latitude}/>
       </>
     );
   };
@@ -251,7 +251,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     const url = `${ BASE_URL }follow-plant`;
     const data = {
       userId: userId,
-      plantId: plantId || 0
+      plantId: parseInt(plantId || '0')
     };
 
     axios.post(url, data)
@@ -259,6 +259,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
         console.log('Successfully following plant');
         setDisableButton(false);
         setAlreadyFollow(true);
+        dispatch({type: AppValidActions.UPDATE_USER_DATA});
       })
       .catch((e) => {
         console.log(e);

@@ -29,13 +29,11 @@ const Weather: React.FunctionComponent<IWeatherProps> = ({latitude, longitude, s
       const url = `https://api.openweathermap.org/data/2.5/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
       axios.get(url)
         .then((res) => {
-          console.log(res.data);
           const sunrise = new Date(res.data.sys.sunrise * 1000);
           const sunset = new Date(res.data.sys.sunset * 1000);
           const viewerTime = new Date();
           const plantTime = (viewerTime.getHours() + (viewerTime.getTimezoneOffset() / 60) + (res.data.timezone / 3600)) % 24;
 
-          console.log(res.data)
           setTime(`${plantTime}: ${viewerTime.getMinutes()}`);
           setIsDay(viewerTime.getTime() > sunrise.getTime() && viewerTime.getTime() < sunset.getTime());
           setTemperature(res.data.main.temp);
