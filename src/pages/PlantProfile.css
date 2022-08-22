@@ -6,7 +6,7 @@
             "options options options"
             "content content content"
             "footer footer footer";
-    grid-template-columns: 20% auto 20%;
+    grid-template-columns: 20% minmax(1rem, auto) 20%;
     grid-template-rows: 9.3rem 4rem auto 3rem;
     width: 100vw;
     margin: 0;
@@ -190,7 +190,7 @@
     }
 
     .plant-profile-page .post-content {
-        grid-template-columns: 9rem minmax(3rem, auto) 5rem;
+        grid-template-columns: min(9rem, 30%) minmax(3rem, auto) 5rem;
     }
 
     .plant-profile-page .section-title {
