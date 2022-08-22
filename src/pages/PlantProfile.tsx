@@ -28,7 +28,11 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {state: {deviceType, BASE_URL, userData: {userId, plants, followedPlants}}} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [ownerData, setOwnerData] = useState<UserData>();
-  const [locationData, setLocationData] = useState({altitude: 0, latitude: 0, longitude: 0});
+  const [locationData, setLocationData] = useState<{altitude?: number, latitude?: number, longitude?: number}>({
+    altitude: undefined,
+    latitude: undefined,
+    longitude: undefined
+  });
   const [scheduleData, setScheduleData] = useState<number[]>([]);
   const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
   const [disableButton, setDisableButton] = useState(false);
@@ -61,7 +65,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             return {
               ...prevState,
               age: calculateAgePlant(response.data.initialAge, response.data.createdAt),
-              joinDate: isNaN(date.getTime())? new Date : date
+              joinDate: isNaN(date.getTime())? new Date() : date
             }
           });
 
@@ -130,6 +134,16 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     else navigate(`/collection/${ownerId}`, {replace: false});
   };
 
+  /** Updates the sea level (altitude) after fetching specialized data. */
+  const setSeaLevel = (level: number) => {
+    setLocationData(prevState => {
+      return {
+        ...prevState,
+        altitude: level
+      }
+    })
+  };
+
   /** Manages the badges section if the user expands it on mobile devices. */
   const expandGallery = () => {
     setShowGallery(true);
@@ -163,8 +177,8 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     return (
       <>
         <WaterSchedule selectedDates={scheduleData}/>
-        <Weather latitude={locationData.latitude} longitude={locationData.longitude} />
-        <Location altitude={locationData.altitude} latitude={locationData.latitude} longitude={locationData.longitude}/>
+        <Weather latitude={locationData.latitude} longitude={locationData.longitude} setSeaLevel={setSeaLevel} />
+        <Location altitude={locationData.altitude || 0} latitude={locationData.latitude || 0} longitude={locationData.longitude || 0}/>
         <Season />
       </>
     );

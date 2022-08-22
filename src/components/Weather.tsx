@@ -10,34 +10,52 @@ import animatedStars from '../assets/stars.json';
 import axios from "axios";
 
 export interface IWeatherProps {
-  latitude: number,
-  longitude: number
+  latitude?: number,
+  longitude?: number,
+  setSeaLevel: (level: number) => void
 }
 
-const Weather: React.FunctionComponent<IWeatherProps> = ({latitude, longitude}) => {
+const Weather: React.FunctionComponent<IWeatherProps> = ({latitude, longitude, setSeaLevel}) => {
   const [time, setTime] = useState('');
   const [isDay, setIsDay] = useState(true);
+  const [temperature, setTemperature] = useState(0);
+  const [humidity, setHumidity] = useState(0);
+  const [wind, setWind] = useState({speed: 0, degree: 0});
+  const [cloudPercentage, setCloudPercentage] = useState(0);
 
   useEffect(() => {
-    getWeather();
-  }, []);
+    /** Fetches the weather data to openweathermap.org */
+    const getWeather = () => {
+      const url = `https://api.openweathermap.org/data/2.5/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+      axios.get(url)
+        .then((res) => {
+          console.log(res.data);
+          const sunrise = new Date(res.data.sys.sunrise * 1000);
+          const sunset = new Date(res.data.sys.sunset * 1000);
+          const viewerTime = new Date();
+          const plantTime = (viewerTime.getHours() + (viewerTime.getTimezoneOffset() / 60) + (res.data.timezone / 3600)) % 24;
 
-  /** Fetches the weather data to openweathermap.org */
-  const getWeather = () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
-    axios.get(url)
-      .then((res) => {
-        console.log(res.data);
-        const sunrise = new Date(res.data.sys.sunrise * 1000);
-        const sunset = new Date(res.data.sys.sunset * 1000);
-        const viewerTime = new Date();
-        const plantTime = (viewerTime.getHours() + (viewerTime.getTimezoneOffset() / 60) + (res.data.timezone / 3600)) % 24;
+          console.log(res.data)
+          setTime(`${plantTime}: ${viewerTime.getMinutes()}`);
+          setIsDay(viewerTime.getTime() > sunrise.getTime() && viewerTime.getTime() < sunset.getTime());
+          setTemperature(res.data.main.temp);
+          setHumidity(res.data.main.humidity);
+          setCloudPercentage(res.data.clouds.all);
+          setWind(prevState => {
+            return {
+              ...prevState,
+              speed: res.data.wind.speed,
+              degree: res.data.wind.deg
+            }
+          });
+          setSeaLevel(res.data.main.sea_level);
+        })
+        .catch((e) => console.log(e));
+    };
 
-        setTime(`${plantTime}: ${viewerTime.getMinutes()}`);
-        setIsDay(viewerTime.getTime() > sunrise.getTime() && viewerTime.getTime() < sunset.getTime());
-      })
-      .catch((e) => console.log(e));
-  };
+    if(latitude && longitude) getWeather();
+    // eslint-disable-next-line
+  }, [latitude, longitude]);
 
   return (
     <DataSection title='Live weather' onClickSection={() => {}}>
@@ -71,11 +89,17 @@ const Weather: React.FunctionComponent<IWeatherProps> = ({latitude, longitude}) 
           <div className='weather-data-container'>
             {/* TODO: Fill with the fetched data. */}
             <label><div className='clock'><div> </div></div> {time}</label>
-            <h6>25ºC</h6>
+            <h6>{temperature}ºC</h6>
             <div className='data-content'>
-              <p><span>UV: </span> High</p>
-              <p><span>Humidity: </span> 50%</p>
-              <p><span>Wind: </span> 2m/s</p>
+              <p><span>Clouds: </span> {cloudPercentage}%</p>
+              <p><span>Humidity: </span> {humidity}%</p>
+              <p className='wind-data'>
+                <span>Wind: </span> {wind.speed}m/s
+                <label style={{transform: `rotate(${wind.degree + 135}deg)`}}>
+                  <span> </span>
+                  <span> </span>
+                </label>
+              </p>
             </div>
           </div>
         </div>

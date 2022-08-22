@@ -24,7 +24,6 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     species: ''
   });
   const [locationCoords, setLocationCoords] = useState({
-    altitude: {meters: 0.0, updated: false},
     latitude: {meters: 0.0, updated: false},
     longitude: {meters: 0.0, updated: false}
   });
@@ -34,7 +33,6 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
   const [highlightName, setHighlightName] = useState(false);
   const [highlightCategory, setHighlightCategory] = useState(false);
   const [highlightLatitude, setHighlightLatitude] = useState(false);
-  const [highlightAltitude, setHighlightAltitude] = useState(false);
   const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
@@ -61,10 +59,6 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
   /** Auto fills the available geolocation data. */
   const calculateLocation = () => {
     setLocationCoords({
-      altitude: {
-        meters: coords?.altitude || 0,
-        updated: !!coords
-      },
       latitude: {
         meters: coords?.latitude || 0,
         updated: !!coords
@@ -104,15 +98,6 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     setHighlightCategory(false);
   };
 
-  const handleChangeAltitude = (e: ChangeEvent<HTMLInputElement>) => {
-    const meters = parseFloat(e.target.value || '0');
-    setLocationCoords(prevState => {
-      return {...prevState, altitude: {meters: meters, updated: true}}
-    });
-
-    setHighlightAltitude(false);
-  };
-
   const handleChangeLatitude = (e: ChangeEvent<HTMLInputElement>) => {
     const meters = parseFloat(e.target.value || '0');
     setLocationCoords(prevState => {
@@ -131,14 +116,13 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
 
   /** Validates that the required fields are filled. Returns true if button should be disabled. */
   const validateFields = () => {
-    return basicData.name === '' || category === undefined || !locationCoords.altitude.updated || !locationCoords.latitude.updated;
+    return basicData.name === '' || category === undefined || !locationCoords.latitude.updated;
   };
 
   /** Highlights the missing values. */
   const showHints = () => {
     basicData.name === ''? setHighlightName(true) : setHighlightName(false);
     category === undefined? setHighlightCategory(true) : setHighlightCategory(false);
-    locationCoords.altitude.updated? setHighlightAltitude(false) : setHighlightAltitude(true);
     locationCoords.latitude.updated? setHighlightLatitude(false) : setHighlightLatitude(true);
   };
 
@@ -150,7 +134,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
       species: basicData.species,
       schedule: selectedDates.join(','),
       caringInfo: "",
-      location: `${locationCoords.latitude.meters},${locationCoords.longitude.meters},${locationCoords.altitude.meters}`,
+      location: `${locationCoords.latitude.meters},${locationCoords.longitude.meters},${0}`,
       ownerId: userId,
       plantsCategoryId: category,
       initialAge: basicData.age,
@@ -258,16 +242,6 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
         <h5>Location (approx.): </h5>
         <p>Tell where the plant is located (in meters). Or give access to calculate it automatically.</p>
         <label>
-          <span>Altitude (m):</span>
-          <input className={`input-section ${highlightAltitude? 'invalid-input' : ''}`}
-                 type='number'
-                 value={locationCoords.altitude.meters}
-                 onChange={(e) => handleChangeAltitude(e)}
-          />
-          <div className='required-mark input-mark'> </div>
-        </label>
-
-        <label>
           <span>Latitude (m):</span>
           <input  className={`input-section ${highlightLatitude? 'invalid-input' : ''}`}
                   type='number'
@@ -306,7 +280,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
       </div>
 
       {
-        highlightName || highlightLatitude || highlightAltitude?
+        highlightName || highlightLatitude?
           <p className='error-message'>Error: Fill the missing required data</p>
           :
           ''
