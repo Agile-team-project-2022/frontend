@@ -19,6 +19,10 @@
     grid-row-gap: 0.5rem;
     grid-template-columns: minmax(2rem, auto) 0.6rem;
     background: var(--color-gray-light);
+    box-shadow:
+            0 0 1rem var(--color-contrast-shadow),
+            0 0 8px var(--color-contrast-shadow),
+            0 0 1px var(--color-contrast-border);
     padding: 0.6rem 0.5rem 1rem 1rem;
     border-radius: 0.2rem;
     height: fit-content;

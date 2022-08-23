@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext} from 'react';
+import React, {ChangeEvent, useContext, useEffect} from 'react';
 import './Settings.css';
 import {AppContext, AppValidActions} from "../context";
 import img1 from '../assets/login-img-1.jpg';
@@ -11,6 +11,31 @@ export interface ISettingsProps {}
 
 const Settings: React.FunctionComponent<ISettingsProps> = () => {
   const {state: {settings: {fontSize, grayscale, contrast, brightness}}, dispatch} = useContext(AppContext);
+
+  /** Updates css variables based on the new set contrast. */
+  useEffect(() => {
+    const root = document.documentElement;
+    if(root) {
+      // Highlights text, critical borders, and backgrounds.
+      if(contrast > 110) {
+        root.style.setProperty('--color-gray-background', '#D4D6D6');
+        root.style.setProperty('--color-gray-light', '#D4D6D6');
+        root.style.setProperty('--color-gray-medium', '#babfbf');
+        root.style.setProperty('--color-gray-border', '#D4D6D6');
+        root.style.setProperty('--color-contrast-shadow', `rgba(0, 0, 0, ${contrast / 800})`);
+        root.style.setProperty('--color-contrast-border', `rgba(0, 0, 0, ${contrast / 600})`);
+        root.style.setProperty('--color-black-text', 'rgba(0, 0, 0, 1)');
+      } else {
+        root.style.setProperty('--color-gray-background', '#F1F3F3');
+        root.style.setProperty('--color-gray-light', '#F5F7F9');
+        root.style.setProperty('--color-gray-medium', '#dce0e3');
+        root.style.setProperty('--color-gray-border', '#e6e9eb');
+        root.style.setProperty('--color-contrast-shadow', 'transparent');
+        root.style.setProperty('--color-contrast-border', 'transparent');
+        root.style.setProperty('--color-black-text', 'rgba(0, 0, 0, 0.8)');
+      }
+    }
+  }, [contrast]);
 
   /** Revert all the changes done. */
   const handleReset = () => {
@@ -55,7 +80,7 @@ const Settings: React.FunctionComponent<ISettingsProps> = () => {
     body.style.filter = appliedFilters.join(' ');
     dispatch({type: AppValidActions.CHANGE_SETTINGS, payload: {
         newSettings: { grayscale: parseFloat(e.target.value)}
-      }});
+    }});
   };
 
   /** Updates the saturation of the app. */
@@ -75,7 +100,7 @@ const Settings: React.FunctionComponent<ISettingsProps> = () => {
     body.style.filter = appliedFilters.join(' ');
     dispatch({type: AppValidActions.CHANGE_SETTINGS, payload: {
         newSettings: { contrast: parseFloat(e.target.value)}
-      }});
+    }});
   };
 
   /** Updates the saturation of the app. */
@@ -161,7 +186,6 @@ const Settings: React.FunctionComponent<ISettingsProps> = () => {
         <span>Reset to default</span>
         <img src={resetImg} alt='Reset' onClick={handleReset} />
       </div>
-
     </div>
   );
 }

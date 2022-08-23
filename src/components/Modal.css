@@ -146,6 +146,10 @@
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
+    .modal-container {
+        margin: 7.2rem auto;
+    }
+
     .modal-list-container {
         min-width: 38rem;
     }

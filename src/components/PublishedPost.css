@@ -18,7 +18,10 @@
     grid-template-columns: 5.3rem minmax(1rem, auto) 5rem;
     grid-template-rows: 3.3rem 6.5rem auto;
     grid-column-gap: 1rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.062);
+    box-shadow:
+            0 0 1rem rgba(0, 0, 0, 0.062),
+            0 0 3rem var(--color-contrast-shadow),
+            0 0 1px var(--color-contrast-border);
     width: calc(100% - 0.5rem);
     height: 11rem;
     padding: 0 0.5rem 0 0;
