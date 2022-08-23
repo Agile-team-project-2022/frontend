@@ -1,6 +1,7 @@
 /* Mobile version. */
 .settings-container-modal {
     min-width: 275px;
+    border: 1px solid rgba(25, 25, 25, 0.84);
 }
 
 .settings-container-modal .modal-content {
