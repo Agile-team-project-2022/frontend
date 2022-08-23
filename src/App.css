@@ -42,6 +42,7 @@ html, main {
   min-width: 280px;
   color: var(--color-black-text);
   scroll-behavior: smooth;
+  background: white;
 }
 
 body {

@@ -1,10 +1,20 @@
+/* Mobile version. */
+.settings-container-modal {
+    min-width: 275px;
+}
+
+.settings-container-modal .modal-content {
+    margin: 2rem 0 0 0;
+}
+
 .settings-container {
-    width: 300px;
+    width: 275px;
     display: grid;
     grid-template-areas:
             "title"
             "content";
     grid-template-rows: 50px auto;
+    overflow: hidden;
 }
 
 .settings-container .section-title-modal {
@@ -12,14 +22,32 @@
     margin: 0 auto;
 }
 
-.font-size-option {
+.settings-option-item {
     display: grid;
     grid-template-areas:
-            "title title title"
-            "input input input"
-            "min none max";
-    grid-template-columns: repeat(3, 33.3%);
-    grid-template-rows: 50px 25px 25px;
+            "img title title title"
+            "img input input input"
+            "img min none max";
+    grid-template-columns: 60px repeat(3, 56px);
+    grid-column-gap: 9px;
+    grid-template-rows: 48px 23px 40px;
+    box-shadow: inset 15px -15px 30px rgba(0, 0, 0, 0.035);
+}
+
+.settings-option-img {
+    grid-area: img;
+    height: 100%;
+    width: calc(100% - 9px);
+}
+
+.settings-option-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.settings-option-item:nth-child(1) .settings-option-img img {
+    border-top-right-radius: 25px;
 }
 
 .slider-label {
@@ -43,9 +71,112 @@
     justify-self: right;
 }
 
-.font-size-slider {
+.settings-slider {
+    all: unset;
     grid-area: input;
     width: 100%;
     margin: 0;
     cursor: pointer;
+    background: var(--color-gray-dark);
+    height: 6px;
+    border-radius: 10px;
+    opacity: 70%;
+    position: relative;
+    top: 6px;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+.settings-slider:hover {
+    opacity: 100%;
+    transition-duration: 0.2s;
+}
+
+.settings-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #588077;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.settings-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #588077;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.reset-button {
+    display: flex;
+    width: calc(100% - 40px);
+    column-gap: 0.5rem;
+    justify-self: right;
+    margin: 0;
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    box-shadow: inset 15px -15px 15px rgba(0, 0, 0, 0.035);
+}
+
+.reset-button div {
+    height: 100%;
+    width: 51px;
+    background: black;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.reset-button span {
+    width: fit-content;
+    font-size: 0.7rem;
+    padding: 0;
+    font-weight: 400;
+    text-align: right;
+}
+
+.reset-button img {
+    height: 1.3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid rgba(208, 206, 206, 0.7);
+    transition-property: border, outline;
+    transition-duration: 0.5s;
+}
+
+.reset-button img:hover {
+    border: 3px solid var(--color-black-medium-shadow);
+    outline: 1px solid white;
+    outline-offset: -3px;
+    transition-duration: 0.2s;
+}
+
+/* Tablet version. */
+@media all and (min-width: 768px) {
+    .settings-container {
+        width: 400px;
+        grid-template-rows: 50px auto;
+    }
+
+    .settings-option-item {
+        grid-template-columns: 100px repeat(3, 83px);
+        grid-column-gap: 10px;
+        grid-template-rows: 50px 25px 45px;
+        box-shadow: inset 15px -15px 30px rgba(0, 0, 0, 0.035);
+    }
+
+    .reset-button div {
+        width: 91px;
+    }
+}
+
+/* Desktop version. */
+@media all and (min-width: 1100px) {
+
 }

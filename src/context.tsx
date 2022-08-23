@@ -7,8 +7,7 @@ import {DeviceTypes} from "./hooks/useWindowSize";
 enum AppValidActions {
   LOG_IN = 'LOG_IN',
   LOG_OUT = 'LOG_OUT',
-  CHANGE_LANGUAGE = 'CHANGE_LANGUAGE',
-  CHANGE_FONT_SIZE = 'CHANGE_FONT_SIZE',
+  CHANGE_SETTINGS = 'CHANGE_SETTINGS',
   SHOW_LOG_IN = 'SHOW_LOG_IN',
   CLOSE_LOG_IN = 'CLOSE_LOG_IN',
   MAP_CATEGORIES = 'MAP_CATEGORIES',
@@ -30,8 +29,12 @@ interface AppContextInterface {
 }
 
 interface AppState {
-  language: string,
-  fontSize: number,
+  settings: {
+    fontSize: number,
+    contrast: number,
+    brightness: number,
+    grayscale: number
+  },
   loggedIn: boolean,
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
@@ -128,7 +131,7 @@ export interface CountData {
   totalFollowedPlants: number
 }
 
-type AppAction = LogInAction | LogOutAction | ChangeLanguageAction | ChangeFontSizeAction
+type AppAction = LogInAction | LogOutAction | ChangeSettingsAction
                 | MapCategoryAction | SetUserDataAction |SetDeviceTypeAction
                 | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction
                 | CreateNewPlantAction | DeleteOwnerAction;
@@ -142,14 +145,9 @@ interface LogOutAction {
   type: AppValidActions
 }
 
-interface ChangeLanguageAction {
+interface ChangeSettingsAction {
   type: AppValidActions,
-  payload: {language: string}
-}
-
-interface ChangeFontSizeAction {
-  type: AppValidActions,
-  payload: {fontSize: number}
+  payload: {newSettings: {}}
 }
 
 interface MapCategoryAction {
@@ -208,8 +206,12 @@ interface DeleteOwnerAction {
 
 // Defines the default values to initialize the app.
 const appInitialState = {
-  language: 'en',
-  fontSize: 1,
+  settings: {
+    fontSize: 1,
+    contrast: 100,
+    brightness: 100,
+    grayscale: 0
+  },
   loggedIn: true, // TODO set to false
   showLogIn: false,
   categoryIdMap: {},
@@ -266,16 +268,13 @@ const reducer = (state: AppState, action: AppAction) => {
         loggedIn: false
       };
 
-    case AppValidActions.CHANGE_LANGUAGE:
+    case AppValidActions.CHANGE_SETTINGS:
       return {
         ...state,
-        language: (action as ChangeLanguageAction).payload.language
-      };
-
-    case AppValidActions.CHANGE_FONT_SIZE:
-      return {
-        ...state,
-        fontSize: (action as ChangeFontSizeAction).payload.fontSize
+        settings: {
+          ...state.settings,
+          ...(action as ChangeSettingsAction).payload.newSettings
+        }
       };
 
     case AppValidActions.SHOW_LOG_IN:

@@ -147,7 +147,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
       {
         expandedSettingsSection?
-          <Modal onClose={onCloseSettings}>
+          <Modal onClose={onCloseSettings} className='settings-container-modal'>
             <Settings />
           </Modal>
           :
