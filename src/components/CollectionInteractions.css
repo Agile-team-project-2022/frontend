@@ -50,4 +50,8 @@
         font-size: 0.98rem;
         padding: 1rem 0.4rem;
     }
+
+    .collection-interactions .button-open-section {
+        max-width: calc(185px - 0.8rem);
+    }
 }
