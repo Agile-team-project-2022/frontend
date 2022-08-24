@@ -71,7 +71,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   }, [filtersResponse]);
 
   /** Expands the section containing the options to select from. */
-  const expandFilters = () => {
+  const expandFilters = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setOpenFilters(prevState => !prevState);
     setPreselectedFilters(filters);
   };
@@ -247,7 +248,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
           /** Tablet and Desktop views. */
           state.deviceType !== DeviceTypes.MOBILE?
             <>
-              <h3 className='button-open-section' onClick={() => expandFilters()}>
+              <h3 className='button-open-section' onClick={expandFilters}>
                 Filter by category
               </h3>
 
@@ -264,7 +265,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
             :
             /** Mobile view. */
             <>
-              <div className='mobile-filters' onClick={() => expandFilters()}>
+              <div className='mobile-filters' onClick={expandFilters}>
                 Filter
                 <img src={searchImg} className="search-img" alt="Search." />
               </div>
