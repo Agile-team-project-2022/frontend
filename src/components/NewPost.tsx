@@ -21,6 +21,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   const [highlightTitle, setHighlightTitle] = useState(false);
   const [highlightContent, setHighlightContent] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+  const [confirmSuccess, setConfirmSuccess] = useState(false);
 
   const uploadNewImage = (encodedImg: string) => {
     if(CheckEncodedImage(encodedImg)) setImage(encodedImg);
@@ -78,6 +79,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
     axios.post(url, data)
       .then((response) => {
         console.log(`Successfully created Post`);
+        showConfirmationSuccess();
         discardPost();
         // Once saved in the Database, retrieves the updated posts list and updates it in the app.
         fetchAllPosts();
@@ -97,6 +99,14 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
       })
       .catch((e) => console.log(e));
+  };
+
+  /** Shows a confirmation animation when the post is successfully published. */
+  const showConfirmationSuccess = () => {
+    setConfirmSuccess(true);
+    setTimeout(() => {
+      setConfirmSuccess(false);
+    }, 3500);
   };
 
   return (
@@ -158,6 +168,20 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
           Publish
         </button>
       </div>
+
+      {
+        confirmSuccess?
+          <div className='success-new-post-container'>
+            <div className="success-animation-container">
+              <div className="success-animation">
+                <div> </div>
+                <div> </div>
+              </div>
+            </div>
+          </div>
+          :
+          ''
+      }
     </div>
   );
 }

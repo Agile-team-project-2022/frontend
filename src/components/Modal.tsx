@@ -4,7 +4,7 @@ import {createPortal} from "react-dom";
 
 export interface IModalProps {
   children: ReactNode,
-  onClose: () => void,
+  onClose: ((e: React.MouseEvent) => void) | (() => void),
   className?: string
 }
 
