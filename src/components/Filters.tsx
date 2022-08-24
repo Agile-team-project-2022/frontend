@@ -14,7 +14,7 @@ import plantImg from '../assets/category-plant.jpg';
 import otherImg from '../assets/category-other.jpeg';
 import Modal from "./Modal";
 import axios from "axios";
-import {AppContext, AppValidActions} from "../context";
+import {AppContext, AppValidActions, PostData} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 
 export interface IFiltersProps {}
@@ -62,7 +62,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   useEffect(() => {
     fetchAllFilters();
     // eslint-disable-next-line
-  }, []);
+  }, [state.updateFetchUser]);
 
   /** Maps the categories and IDs only if not done yet. */
   useEffect(() => {
@@ -150,20 +150,42 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
     setOpenFilters(false);
     setFilters(preselectedFilters);
     console.log('fetching...')
-    // Query for each selected filter.
-    preselectedFilters.forEach((filter, index) => {
-      fetchFilter(state.categoryIdMap[filter.toLowerCase()]);
-    });
+    if(preselectedFilters.length === 0) {
+      fetchAllFilters();
+    } else {
+      // Query for each selected filter.
+      const allPosts: PostData[] = [];
+      Promise.all(preselectedFilters.map(async (filter, index) => {
+        const filterPosts = await fetchFilter(state.categoryIdMap[filter.toLowerCase()]);
+        await Promise.all(filterPosts).then(() => {
+          allPosts.push(...filterPosts);
+        });
+      })).then(() => {
+        console.log('concat all', allPosts);
+        dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: allPosts}});
+      });
+    }
   };
 
-  /** Queries all the filters if no filter is selected yet. */
+  /** Queries all the filters (to get all posts) if no filter is selected yet. */
   const fetchAllFilters = () => {
     // TODO: Use page and count in the query.
-    const url = `${ state.BASE_URL }plant-category?page=1&count=10`;
+    const url = `${ state.BASE_URL }plant-category?page=1&count=1000`;
 
     axios.get(url)
       .then((response) => {
         setFiltersResponse(response.data);
+        // Gets the posts of the linked plants with the selected category.
+        const posts: PostData[] = [];
+        response.data.forEach((item: any) => {
+          item.plants.forEach((plantItem: any) => {
+            if(plantItem.posts && plantItem.posts.length > 0) posts.push(...plantItem.posts);
+          });
+        });
+
+        // Orders the posts by timestamp.
+        posts.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+        dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: posts}});
       })
       .catch((e) => console.log(e));
   };
@@ -187,15 +209,18 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
   };
 
   /** Queries the selected filter to database. */
-  const fetchFilter = (id: number) => {
+  const fetchFilter = async (id: number) => {
     const url = `${ state.BASE_URL }plant-category/${id}`;
 
-    axios.get(url)
-      .then((response) => {
-        // TODO: Save the data.
-        console.log(response.data);
-      })
-      .catch((e) => console.log(e));
+    const response = await axios.get(url)
+    const postsAsArr: PostData[][] = await
+      [response.data.plants
+        .map((item: any) => item.posts)][0]
+        .filter((item: any) => item.length > 0);
+    const posts: PostData[] = await ([] as PostData[]).concat(...postsAsArr.map((item) => item));
+    // Orders the posts by timestamp.
+    posts.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    return posts;
   };
 
   /** Creates new filters. NOTE: By now, only used to initialize the 8 valid filters in the DB. */

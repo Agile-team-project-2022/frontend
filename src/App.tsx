@@ -84,18 +84,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         .catch((e) => console.log(e));
     };
 
-    /** Gets all the Posts data only for the first time or when the plants change. */
-    const fetchAllPosts = () => { // TODO: adjust count and page limits
-      const url = `${ state.BASE_URL }post?page=1&count=100`;
-      axios.get(url)
-        .then((response) => {
-          dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
-        })
-        .catch((e) => console.log(e));
-    };
-
     fetchUserData();
-    fetchAllPosts();
     // eslint-disable-next-line
   }, [state.updateFetchUser]);
 

@@ -114,7 +114,7 @@
     height: 0;
     margin: 0 -0.17rem -0.065rem 0;
     border-right: 0.3rem solid transparent;
-    border-bottom: 0.7rem solid var(--color-gray-border);
+    border-bottom: 0.7rem solid var(--color-gray-medium);
     border-left: 0.3rem solid transparent;
     transform-origin: center;
     transform: scale(0.2);
@@ -127,7 +127,7 @@
     top: 0.6rem;
     left: -1rem;
     border-right: 1rem solid transparent;
-    border-bottom: 0.7rem  solid var(--color-gray-border);
+    border-bottom: 0.7rem  solid var(--color-gray-medium);
     border-left: 1rem solid transparent;
     transform: rotate(-35deg);
 }
@@ -137,7 +137,7 @@
  }
 
 .filled, .filled:before, .filled:after  {
-    border-bottom: 0.7rem solid var(--color-gray-dark);
+    border-bottom: 0.7rem solid var(--color-green-dark);
 }
 
 .collection-overview p .star:nth-child(1) {

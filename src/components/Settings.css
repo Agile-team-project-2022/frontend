@@ -1,7 +1,8 @@
 /* Mobile version. */
 .settings-container-modal {
     min-width: 275px;
-    border: 1px solid rgba(25, 25, 25, 0.84);
+    border: 1px solid rgb(55, 55, 55);
+    margin: 3.6rem auto;
 }
 
 .settings-container-modal .modal-content {
@@ -32,7 +33,9 @@
     grid-template-columns: 60px repeat(3, 56px);
     grid-column-gap: 9px;
     grid-template-rows: 48px 23px 40px;
-    box-shadow: inset 15px -15px 30px rgba(0, 0, 0, 0.035);
+    box-shadow:
+            inset 15px -15px 30px rgba(0, 0, 0, 0.035),
+            inset 1px -1px 1px var(--color-contrast-border);
 }
 
 .settings-option-img {
@@ -160,6 +163,10 @@
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
+    .settings-container-modal {
+        margin: 7.2rem auto;
+    }
+
     .settings-container {
         width: 400px;
         grid-template-rows: 50px auto;
@@ -169,7 +176,6 @@
         grid-template-columns: 100px repeat(3, 83px);
         grid-column-gap: 10px;
         grid-template-rows: 50px 25px 45px;
-        box-shadow: inset 15px -15px 30px rgba(0, 0, 0, 0.035);
     }
 
     .reset-button div {

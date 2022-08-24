@@ -35,6 +35,8 @@
   --color-blue-button: #002F6D;
   --color-red-warning: #bf3715;
   --color-red-warning-shadow: rgba(191, 55, 21, 0.2);
+  --color-contrast-shadow: transparent;
+  --color-contrast-border: transparent;
 }
 
 /* Mobile version. */

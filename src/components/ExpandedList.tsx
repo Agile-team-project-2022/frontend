@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Modal from "./Modal";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {AppContext, ThumbnailData} from "../context";
+import {AppContext, ThumbnailData, PlantData} from "../context";
 import noContent from "../assets/no-content-yet.png";
 import {CheckEncodedImage} from "../helpers";
 import defaultPersonImg from "../assets/default-person.jpeg";
 import defaultPlantImg from "../assets/default-plant.jpg";
+import {useNavigate} from "react-router-dom";
 
 export enum ListType {
   FOLLOWED_PLANTS = 'FOLLOWED_PLANTS',
@@ -22,9 +23,9 @@ export interface IExpandedListProps {
 const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type, show=false, onClose}) => {
   const {state: {userData: {followedPlants, friends}}} = useContext(AppContext);
   const [showSection, setShowSection] = useState(false);
-  // TODO: Fetch the data and add images.
   const [data, setData] = useState<ThumbnailData[]>([]);
   const [totalData, setTotalData] = useState(0);
+  const navigate = useNavigate();
 
   /** Initializes the flag telling if the list should appear expanded at first or not. */
   useEffect(() => {
@@ -53,6 +54,12 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type,
     if(onClose) onClose();
   };
 
+  /** Goes to the owner or plant profile when clicked on the item. */
+  const goToProfile = (data: ThumbnailData | PlantData) => {
+    if(type === ListType.FOLLOWED_PLANTS) navigate(`/plant-profile/${ (data as PlantData).id }/${ (data as PlantData).ownerId }`, {replace: false});
+    else navigate(`/collection/${ data.id }`, {replace: false});
+  };
+
   return (
     <>
       {
@@ -67,9 +74,9 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type,
                     return (
                       <div className='list-item-container'
                            key={`list-item-${item.id}`}
+                           onClick={() => goToProfile(item)}
                       >
                         <div className='list-img-container'>
-                          {/* TODO: Add the correct plant name and img assets. */}
                           <LazyLoadImage  src={CheckEncodedImage(item.imageFile)? item.imageFile : (type === ListType.FOLLOWED_PLANTS? defaultPlantImg : defaultPersonImg)}
                                           alt={`Relation`}
                           />
