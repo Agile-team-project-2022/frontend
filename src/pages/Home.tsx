@@ -43,12 +43,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <div className='section-divisor'> </div>
 
         <section className='publications-container'>
-          <button className={`button-action load-more-button ${homePosts.length - (currentPostsPage * postsPerPage) <= 0? 'disabled-button' : ''}`}
-                  onClick={loadMorePosts}
-                  disabled={homePosts.length - (currentPostsPage * postsPerPage) <= 0}
-          >
-            Load more
-          </button>
+          {
+            homePosts.length > 0?
+              <button className={`button-action load-more-button ${homePosts.length - (currentPostsPage * postsPerPage) <= 0? 'disabled-button' : ''}`}
+                      onClick={loadMorePosts}
+                      disabled={homePosts.length - (currentPostsPage * postsPerPage) <= 0}
+              >
+                Load more
+              </button>
+              :
+              ''
+          }
           <Suspense>
             {
               homePosts

@@ -91,7 +91,7 @@ export interface PostData {
   id: number,
   title: string,
   content: string,
-  flag: boolean,
+  flags: {}[],
   published: boolean,
   imageFile: string,
   postlikes: {id: number, userId: number}[],
@@ -239,7 +239,7 @@ const appInitialState = {
     createdAt: ''
   },
   homePosts: [],
-  postsPerPage: 3,
+  postsPerPage: 10,
   deviceType: undefined,
   BASE_URL: 'https://interplant-b.herokuapp.com/',
   updateFetchUser: false

@@ -162,7 +162,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
           allPosts.push(...filterPosts);
         });
       })).then(() => {
-        console.log('concat all', allPosts);
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: allPosts}});
       });
     }
@@ -182,6 +181,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
             if(plantItem.posts && plantItem.posts.length > 0) posts.push(...plantItem.posts);
           });
         });
+        console.log((response.data)) // TODO: check comments, likes, flags are received
 
         // Orders the posts by timestamp.
         posts.sort((a, b) => a.createdAt.localeCompare(b.createdAt));

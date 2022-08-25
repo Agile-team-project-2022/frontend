@@ -414,8 +414,8 @@ textarea::-webkit-resizer {
 }
 
 .load-more-button {
-  width: 10rem;
-  margin: 0 auto;
+  width: 8rem;
+  margin: 0.8rem auto 2.5rem auto;
 }
 
 /* Tablet version. */
