@@ -10,7 +10,7 @@ export interface IModalProps {
 
 const Modal: React.FunctionComponent<IModalProps> = ({children, onClose, className = ''}) => {
   return createPortal(
-    <div className='modal-background' onClick={onClose}>
+    <div className='modal-background' onMouseDown={onClose}>
       <div className={`modal-container ${className}`} >
         <header className='modal-header'
                 onClick={onClose}
@@ -19,7 +19,7 @@ const Modal: React.FunctionComponent<IModalProps> = ({children, onClose, classNa
           <span> Go back </span>
         </header>
 
-        <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+        <div className='modal-content' onMouseDown={(e) => e.stopPropagation()}>
           { children }
         </div>
       </div>
