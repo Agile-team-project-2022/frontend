@@ -186,6 +186,16 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
         }
 
         {
+          array.length === 0 ?
+            <div className='no-content-data-section'>
+              <div className='no-content-data-section-background'> </div>
+              <p>No content yet</p>
+            </div>
+            :
+            ''
+        }
+
+        {
           modalIsOpen?
             <Modal onClose={onCloseSection}>
               <h2 className='section-title-modal'>{title} ({array.length})</h2>
