@@ -119,9 +119,12 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
   /** For others view, enables stopping being friends. */
   const deleteFriends = () => {
     setDisableButton(true);
-    const url = `${ BASE_URL }follow-friend/${1}`; // TODO: Correct delete function request
-
-    axios.delete(url)
+    const url = `${ BASE_URL }follow-friend/delete`;
+    const data = {
+      followerId: userId,
+      followeeId: othersId
+    };
+    axios.put(url, data)
       .then((res) => {
         console.log('Successfully stopped following user');
         setDisableButton(false);
@@ -239,7 +242,7 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
                         onClick={confirm? acceptFriend : alreadyFriends? deleteFriends : sendFriendRequest}
                         disabled={disableButton}
                 >
-                  {confirm? 'Accept friend' : alreadyFriends? 'Delete friend' : 'Friend request'}
+                  {confirm? 'Accept friend' : alreadyFriends && !pendingStatusFriend? 'Delete friend' : 'Friend request'}
                 </button>
             }
           </>

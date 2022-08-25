@@ -144,6 +144,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
   const clearFilters = () => {
     setOpenFilters(false);
     setFilters([]);
+    fetchAllFilters();
   };
 
   /** Applies all the selected filters. */
