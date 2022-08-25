@@ -5,6 +5,7 @@
     left: 0;
     height: 4.6rem;
     width: 100vw;
+    min-width: 280px;
     background: var(--color-green-lighter-header-low-transparency);
     transition-property: background;
     transition-duration: 0.5s;
@@ -16,6 +17,7 @@
     height: 2.85rem;
     position: absolute;
     width: 100vw;
+    min-width: 280px;
     box-shadow: 0 0 1.5rem var(--color-black-medium-shadow);
     overflow: hidden;
 }
