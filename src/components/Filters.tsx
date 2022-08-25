@@ -51,7 +51,7 @@ const filterImagesArr = {
   [ValidFilters.PLANT] :  plantImg
 };
 
-const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
+const Filters: React.FunctionComponent<IFiltersProps> = () => {
   const {state, dispatch} = useContext(AppContext);
   const [openFilters, setOpenFilters] = useState(false);
   const [filters, setFilters] = useState<ValidFilters[]>([]);
@@ -170,8 +170,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = (props) => {
 
   /** Queries all the filters (to get all posts) if no filter is selected yet. */
   const fetchAllFilters = () => {
-    // TODO: Use page and count in the query.
-    const url = `${ state.BASE_URL }plant-category?page=1&count=1000`;
+    const url = `${ state.BASE_URL }plant-category?page=1&count=100`;
 
     axios.get(url)
       .then((response) => {

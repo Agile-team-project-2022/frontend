@@ -413,6 +413,11 @@ textarea::-webkit-resizer {
           0 0 0.2rem white;
 }
 
+.load-more-button {
+  width: 10rem;
+  margin: 0 auto;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {

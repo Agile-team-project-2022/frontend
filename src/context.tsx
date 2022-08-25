@@ -40,6 +40,7 @@ interface AppState {
   categoryIdMap: {[name: string]: number},
   userData: UserData,
   homePosts: PostData[],
+  postsPerPage: number,
   deviceType?: DeviceTypes,
   BASE_URL: string,
   updateFetchUser: boolean
@@ -238,6 +239,7 @@ const appInitialState = {
     createdAt: ''
   },
   homePosts: [],
+  postsPerPage: 3,
   deviceType: undefined,
   BASE_URL: 'https://interplant-b.herokuapp.com/',
   updateFetchUser: false
