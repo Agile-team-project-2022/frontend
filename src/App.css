@@ -390,6 +390,29 @@ textarea::-webkit-resizer {
   opacity: 0;
 }
 
+.success-page-container {
+  background: var(--color-black-darker-shadow);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-name: fadeInFadeOut;
+  animation-duration: 3.5s;
+  opacity: 0;
+  z-index: 1;
+}
+
+.success-page-container .success-animation {
+  box-shadow:
+          0 0 6rem var(--color-white-soft-background),
+          0 0 8rem white,
+          0 0 0.2rem white;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
   .copyright-footer {

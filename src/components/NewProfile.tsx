@@ -38,6 +38,8 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
   const [highlightName, setHighlightName] = useState(false);
   const [highlightCategory, setHighlightCategory] = useState(false);
   const [highlightLatitude, setHighlightLatitude] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
+  const [confirmSuccess, setConfirmSuccess] = useState(false);
   const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
@@ -149,6 +151,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
 
   /** Saves the new plant into the database. */
   const createPlant = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setDisableButton(true);
     const url = `${ BASE_URL }plant`;
     const data = {
       name: basicData.name,
@@ -165,11 +168,25 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     axios.post(url, data)
       .then((res) => {
         console.log('Successfully created plant');
-        console.log(res.data);
         dispatch({type: AppValidActions.CREATE_NEW_PLANT, payload: {newPlant: res.data}});
-        onClose();
+        showConfirmationSuccess();
+        setTimeout(() => {
+          setDisableButton(false);
+          onClose();
+        }, 3550);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      })
+  };
+
+  /** Shows a confirmation animation when the new profile is successfully created. */
+  const showConfirmationSuccess = () => {
+    setConfirmSuccess(true);
+    setTimeout(() => {
+      setConfirmSuccess(false);
+    }, 3500);
   };
 
   return (
@@ -313,13 +330,30 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
       }
 
       <div className='modal-list-buttons'>
-        <button className='button-action' onClick={onClose}> Cancel </button>
+        <button className='button-action' onClick={onClose} disabled={disableButton}>
+          Cancel
+        </button>
         <button className={`button-action ${validateFields()? 'disabled-button' : ''}`}
                 onClick={validateFields()? showHints : (e) => createPlant(e)}
+                disabled={disableButton}
         >
           Create profile
         </button>
       </div>
+
+      {
+        confirmSuccess?
+          <div className='success-page-container'>
+            <div className="success-animation-container">
+              <div className="success-animation">
+                <div> </div>
+                <div> </div>
+              </div>
+            </div>
+          </div>
+          :
+          ''
+      }
     </div>
   );
 }
