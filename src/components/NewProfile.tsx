@@ -15,6 +15,11 @@ export interface INewProfileProps {
   onClose: () => void
 }
 
+interface Coords {
+  latitude: {meters: string, updated: boolean},
+  longitude: {meters: string, updated: boolean}
+}
+
 const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
   const {state: {userData: {userId}, BASE_URL, categoryIdMap}, dispatch} = useContext(AppContext);
   const [selectedDates, setSelectedDates] = useState<number[]>([]);
@@ -23,9 +28,9 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     age: 0.0,
     species: ''
   });
-  const [locationCoords, setLocationCoords] = useState({
-    latitude: {meters: 0.0, updated: false},
-    longitude: {meters: 0.0, updated: false}
+  const [locationCoords, setLocationCoords] = useState<Coords>({
+    latitude: {meters: '', updated: false},
+    longitude: {meters: '', updated: false}
   });
   const [category, setCategory] = useState<number | undefined>(undefined);
   const [newImage, setNewImage] = useState('');
@@ -48,7 +53,6 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     setNewImage(encodedImg);
   };
 
-  /** TODO: Decide how to manage the water schedule in backend. */
   const selectDay = (day: number) => {
     setSelectedDates(prevState => {
       if(prevState.includes(day)) return prevState.filter(item => item !== day);
@@ -60,11 +64,11 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
   const calculateLocation = () => {
     setLocationCoords({
       latitude: {
-        meters: coords?.latitude || 0,
+        meters: `${coords && coords.latitude? coords.latitude : 0}`,
         updated: !!coords
       },
       longitude: {
-        meters: coords?.longitude || 0,
+        meters: `${coords && coords.longitude? coords.longitude : 0}`,
         updated: !!coords
       },
     });
@@ -98,8 +102,25 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
     setHighlightCategory(false);
   };
 
+  /** Formats the input numbers. Required for a smooth experience typing numbers in location fields. */
+  const validateNumbers = (value: string, threshold: number) => {
+    const floats = value.match(/[.]/g)?.length || 0;
+    const validatedValue = floats >= 1?
+      value.slice(0, value.indexOf('.') + 1).replace(/[^0-9.]/g, '')
+      + value.slice(value.indexOf('.') + 1, value.length).replace(/[^0-9]/g, '')
+      :
+      value.replace(/[^0-9.]/g, '');
+    const negative = value[0] === '-';
+    if(parseFloat(`${negative? '-' : ''}${validatedValue}`) > threshold
+      || parseFloat(`${negative? '-' : ''}${validatedValue}`) < -threshold) {
+      return `${negative? '-' : ''}${threshold}`;
+    } else {
+      return `${negative? '-' : ''}${validatedValue}`;
+    }
+  };
+
   const handleChangeLatitude = (e: ChangeEvent<HTMLInputElement>) => {
-    const meters = parseFloat(e.target.value || '0');
+    const meters = validateNumbers(e.target.value, 82);
     setLocationCoords(prevState => {
       return {...prevState, latitude: {meters: meters, updated: true}}
     });
@@ -108,7 +129,7 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
   };
 
   const handleChangeLongitude = (e: ChangeEvent<HTMLInputElement>) => {
-    const meters = parseFloat(e.target.value || '0');
+    const meters = validateNumbers(e.target.value, 170);
     setLocationCoords(prevState => {
       return {...prevState, longitude: {meters: meters, updated: true}}
     });
@@ -244,7 +265,8 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
         <label>
           <span>Latitude (m):</span>
           <input  className={`input-section ${highlightLatitude? 'invalid-input' : ''}`}
-                  type='number'
+                  type='text'
+                  placeholder='0.0'
                   value={locationCoords.latitude.meters}
                   onChange={(e) => handleChangeLatitude(e)}
           />
@@ -254,7 +276,8 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
         <label>
           <span>Longitude (m):</span>
           <input className='input-section'
-                 type='number'
+                 type='text'
+                 placeholder='0.0'
                  value={locationCoords.longitude.meters}
                  onChange={(e) => handleChangeLongitude(e)}
           />
@@ -263,7 +286,10 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
 
         <label className='calculate-coords-label-container'>
           <span>Or:</span>
-          <button onClick={calculateLocation} className={`button-action ${isGeolocationAvailable && isGeolocationEnabled && coords? '' : 'disabled-button'}`}>
+          <button onClick={calculateLocation}
+                  className={`button-action ${isGeolocationAvailable && isGeolocationEnabled && coords && coords.latitude && coords.longitude? '' : 'disabled-button'}`}
+                  disabled={!(isGeolocationAvailable && isGeolocationEnabled && coords && coords.latitude && coords.longitude)}
+          >
             Calculate automatically
           </button>
         </label>
@@ -272,8 +298,8 @@ const NewProfile: React.FunctionComponent<INewProfileProps> = ({onClose}) => {
         <div className='location-container-background'>
           <img src={mapImg} alt='Global map' />
           <div className='location-marker' style={{
-            top: `${mapCoordsToImage(locationCoords.latitude.meters, locationCoords.longitude.meters).latitude}%`,
-            left: `${mapCoordsToImage(locationCoords.latitude.meters, locationCoords.longitude.meters).longitude}%`
+            top: `${mapCoordsToImage(parseFloat(locationCoords.latitude.meters || '0'), parseFloat(locationCoords.longitude.meters || '0')).latitude}%`,
+            left: `${mapCoordsToImage(parseFloat(locationCoords.latitude.meters || '0'), parseFloat(locationCoords.longitude.meters || '0')).longitude}%`
           }}>
           </div>
         </div>

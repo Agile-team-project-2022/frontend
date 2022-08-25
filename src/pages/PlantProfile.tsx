@@ -25,7 +25,7 @@ export interface IPlantProfileProps {}
 
 const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const {plantId, ownerId} = useParams();
-  const {state: {deviceType, BASE_URL, userData: {userId, plants, followedPlants}}, dispatch} = useContext(AppContext);
+  const {state: {deviceType, homePosts, BASE_URL, userData: {userId, plants, followedPlants}}, dispatch} = useContext(AppContext);
   const [plantData, setPlantData] = useState<PlantData>();
   const [ownerData, setOwnerData] = useState<UserData>();
   const [locationData, setLocationData] = useState<{altitude?: number, latitude?: number, longitude?: number}>({
@@ -95,7 +95,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
 
     fetchPlant();
     // eslint-disable-next-line
-  }, [plants]);
+  }, [plants, homePosts]);
 
   /** Initializes with the correct plant followers data. */
   useEffect(() => {
