@@ -40,6 +40,7 @@
     margin: 0 auto;
     align-items: center;
     height: fit-content;
+    justify-content: center;
 }
 
 .collection-badges .data-section-content {
@@ -71,6 +72,7 @@
     background-size: cover;
     background-position: center;
     position: absolute;
+    left: 0;
     width: 100%;
     height: 100%;
     opacity: 15%;
@@ -82,6 +84,7 @@
     width: 100%;
     height: 5rem;
     margin: 0;
+    left: 0;
     padding: 2.5rem 0;
     text-align: center;
     font-weight: 500;
