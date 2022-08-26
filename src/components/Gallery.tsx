@@ -49,6 +49,17 @@ const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, v
     setImage('');
   };
 
+  /** Switches images. */
+  const switchToLeft = () => {
+    const index =  (((imageFiles.indexOf(selectedImage) - 1)  % (imageFiles.length)) + imageFiles.length) % (imageFiles.length);
+    setSelectedImage(imageFiles[index]);
+  };
+
+  const switchToRight = () => {
+    const index = ((imageFiles.indexOf(selectedImage)) + 1) % imageFiles.length;
+    setSelectedImage(imageFiles[index]);
+  };
+
   return (
     <Modal onClose={onClose} className='gallery-modal'>
       <h2 className='section-title-modal'>Gallery of photos ({imageFiles.length})</h2>
@@ -98,7 +109,16 @@ const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, v
         </div>
       </div>
 
-      {modalIsOpen? <GalleryExpanded imageFile={selectedImage} onClose={closeModal} /> : ''}
+      {
+        modalIsOpen?
+          <GalleryExpanded imageFile={selectedImage}
+                           onClose={closeModal}
+                           switchToLeft={switchToLeft}
+                           switchToRight={switchToRight}
+          />
+          :
+          ''
+      }
     </Modal>
   );
 }

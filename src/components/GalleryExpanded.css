@@ -79,6 +79,59 @@
     object-fit: cover;
 }
 
+.gallery-button {
+    display: flex;
+    width: fit-content;
+    height: 80%;
+    align-self: flex-start;
+    justify-self: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 80%;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    margin-top: 1.5rem;
+}
+
+.gallery-button button {
+    background: black;
+    transition-property: transform, outline, outline-offset;
+    outline: 1px solid rgba(255, 255, 255, 0);
+    outline-offset: -0.3rem;
+    border: 2px solid black;
+}
+
+.gallery-button button:hover {
+    background: black;
+    outline: 1px solid var(--color-white-soft-background);
+    outline-offset: 0.2rem;
+    transition-duration: 0.2s;
+}
+
+.left-gallery-button {
+    grid-area: left;
+}
+
+.left-gallery-button button {
+    transform: scale(0.65) rotate(-90deg);
+}
+
+.left-gallery-button button:hover {
+    transform: scale(0.75) rotate(-90deg);
+}
+
+.right-gallery-button {
+    grid-area: right;
+}
+
+.right-gallery-button button {
+    transform: scale(0.65) rotate(90deg);
+}
+
+.right-gallery-button button:hover {
+    transform: scale(0.75) rotate(90deg);
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .expanded-gallery-picture-modal .modal-content {
@@ -92,6 +145,26 @@
     .expanded-gallery-img-container {
         margin-top: 1.5rem;
         height: min(80%, 55rem);
+    }
+
+    .gallery-button button:hover {
+        outline-offset: 0.3rem;
+    }
+
+    .left-gallery-button button {
+        transform: scale(0.8) rotate(-90deg);
+    }
+
+    .left-gallery-button button:hover {
+        transform: scale(0.9) rotate(-90deg);
+    }
+
+    .right-gallery-button button {
+        transform: scale(0.8) rotate(90deg);
+    }
+
+    .right-gallery-button button:hover {
+        transform: scale(0.9) rotate(90deg);
     }
 }
 

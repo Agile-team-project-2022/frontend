@@ -11,9 +11,8 @@
     margin: 0.2rem 0;
     padding: 0;
     align-self: flex-end;
-    max-width: 100%;
-    white-space: nowrap;
     -webkit-line-clamp: 1;
+    max-width: 80%;
 }
 
 .species {

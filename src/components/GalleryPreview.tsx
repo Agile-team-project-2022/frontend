@@ -41,6 +41,17 @@ const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFil
     setShowGallery(false);
   };
 
+  /** Switches images. */
+  const switchToLeft = () => {
+    const index =  (((imageFiles.indexOf(selectedImage) - 1)  % (imageFiles.length)) + imageFiles.length) % (imageFiles.length);
+    setSelectedImage(imageFiles[index]);
+  };
+
+  const switchToRight = () => {
+    const index = ((imageFiles.indexOf(selectedImage)) + 1) % imageFiles.length;
+    setSelectedImage(imageFiles[index]);
+  };
+
   return (
     <div className='gallery-preview-container'>
       <h2 className='section-title'>Photo gallery <span>({imageFiles.length})</span></h2>
@@ -65,7 +76,16 @@ const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFil
         </button>
       </div>
 
-      {modalIsOpen? <GalleryExpanded imageFile={selectedImage} onClose={closeModal} /> : ''}
+      {
+        modalIsOpen?
+          <GalleryExpanded imageFile={selectedImage}
+                           onClose={closeModal}
+                           switchToLeft={switchToLeft}
+                           switchToRight={switchToRight}
+          />
+          :
+          ''
+      }
       {
         showGallery?
           <Gallery imageFiles={imageFiles}
