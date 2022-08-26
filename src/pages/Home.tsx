@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useContext} from 'react';
+import React, {lazy, Suspense, useContext, useState} from 'react';
 import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
@@ -12,11 +12,17 @@ const ExpandedList = lazy(() => import('../components/ExpandedList'));
 export interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const {state: {loggedIn, userData:{user}, homePosts}, dispatch} = useContext(AppContext);
+  const {state: {loggedIn, userData:{user}, homePosts, postsPerPage}, dispatch} = useContext(AppContext);
+  const [currentPostsPage, setCurrentPostsPage] = useState(1);
 
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {
     dispatch({type: AppValidActions.SHOW_LOG_IN});
+  };
+
+  /** Shows more posts if available. */
+  const loadMorePosts = () => {
+    setCurrentPostsPage(prevState => prevState + 1);
   };
 
   return (
@@ -27,7 +33,6 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         Welcome {user.charAt(0).toUpperCase() + user.substring(1)}!
       </h2>
 
-      {/* TODO: Create the real filters sections. */}
       <Suspense> <Filters /> </Suspense>
 
       <div className='page-content-container'>
@@ -38,11 +43,24 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <div className='section-divisor'> </div>
 
         <section className='publications-container'>
+          {
+            homePosts.length > 0?
+              <button className={`button-action load-more-button ${homePosts.length - (currentPostsPage * postsPerPage) <= 0? 'disabled-button' : ''}`}
+                      onClick={loadMorePosts}
+                      disabled={homePosts.length - (currentPostsPage * postsPerPage) <= 0}
+              >
+                Load more
+              </button>
+              :
+              ''
+          }
           <Suspense>
             {
-              homePosts.map((item, index) => {
-                return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
-              })
+              homePosts
+                .slice(Math.max(homePosts.length - (currentPostsPage * postsPerPage), 0), homePosts.length)
+                .map((item, index) => {
+                  return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
+                })
             }
             { homePosts.length === 0? <div className='not-found-container'> <img src={noContent} alt='No content to show'/> </div> : '' }
           </Suspense>

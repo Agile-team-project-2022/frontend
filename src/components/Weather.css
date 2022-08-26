@@ -138,6 +138,10 @@
 
 .night-background {
     background: linear-gradient(to top, black  0%, #1c314f 80%);
+    position: relative;
+    top: -0.3rem;
+    left: -0.3rem;
+    width: calc(100% + 1.3rem);
 }
 
 .night-background .weather-data-container h6, .night-background label  {
@@ -196,6 +200,11 @@
         margin: 2.9rem 0 0 0.5rem;
     }
 
+    .night-background {
+        top: 0;
+        left: 0;
+        width: calc(100% + 0.6rem);
+    }
 }
 
 /* Desktop version. */

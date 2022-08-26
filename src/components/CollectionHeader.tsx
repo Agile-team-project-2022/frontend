@@ -37,6 +37,7 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
   const [ownerData, setOwnerData] = useState<UserData>(userData);
   const [disableButton, setDisableButton] = useState(false);
   const [alreadyFriends, setAlreadyFriends] = useState(false);
+  const [pendingStatusFriend, setPendingStatusFriend] = useState(false);
   const isValid = CheckEncodedImage(view === CollectionView.OWNER? userData.imageFile : othersData?.imageFile || '');
   const navigate = useNavigate();
 
@@ -49,6 +50,15 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
         // Disables requesting for friends more than once.
         if(friend.id === userData.userId) {
           setAlreadyFriends(true);
+          break;
+        }
+      }
+
+      // Disables requesting for friends more than once while pending.
+      setPendingStatusFriend(false);
+      for(let friendPending of othersData.pendingFriends) {
+        if(friendPending.id === userData.userId) {
+          setPendingStatusFriend(true);
           break;
         }
       }
@@ -123,9 +133,13 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
 
   /** For others view, enables stopping being friends. */
   const deleteFriends = () => {
-    const url = `${ BASE_URL }follow-friend/${1}`; // TODO: Correct delete function request
     setDisableButton(true);
-    axios.delete(url)
+    const url = `${ BASE_URL }follow-friend/delete`;
+    const data = {
+      followerId: userData.userId,
+      followeeId: othersData?.userId || 0
+    };
+    axios.put(url, data)
       .then((res) => {
         console.log('Successfully stopped following user');
         setDisableButton(false);
@@ -171,11 +185,11 @@ const CollectionHeader: React.FunctionComponent<ICollectionHeaderProps> = ({
       {
         // Shows the friend request button in the header in mobile devices.
         view === CollectionView.OTHERS && deviceType === DeviceTypes.MOBILE?
-          <button className={`${deviceType === DeviceTypes.MOBILE? 'mobile-follow-button' : ''} button-open-section collection-header-button`}
+          <button className={`${deviceType === DeviceTypes.MOBILE? 'mobile-follow-button' : ''} ${pendingStatusFriend? 'no-allow-follow' : ''} button-open-section collection-header-button`}
                   onClick={confirm? acceptFriend : alreadyFriends? deleteFriends : sendFriendRequest}
                   disabled={disableButton}
           >
-            {confirm? 'Accept friend' : alreadyFriends? 'Delete friend' : 'Friend request'}
+            {confirm? 'Accept friend' : alreadyFriends && !pendingStatusFriend? 'Delete friend' : 'Friend request'}
           </button>
           :
           ''

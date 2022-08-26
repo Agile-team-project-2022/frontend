@@ -96,9 +96,12 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = ({view, plan
   /** For others view, enables unfollowing. */
   const deleteFollow = () => {
     setDisableButton(true);
-    const url = `${ BASE_URL }follow-plant/${1}`; // TODO: Correct delete function request
-
-    axios.delete(url)
+    const url = `${ BASE_URL }follow-plant/delete`;
+    const data = {
+      userId: userId,
+      plantId: plantData.id
+    };
+    axios.put(url, data)
       .then((res) => {
         console.log('Successfully stopped following user');
         setDisableButton(false);

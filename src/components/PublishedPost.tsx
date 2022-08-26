@@ -38,7 +38,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     const threshold = deviceType === DeviceTypes.MOBILE? 210 : 250;
     if(post.content.length > threshold) {setReadMore(true);}
 
-    // Detects if the current user has already liked the post. // TODO: Add postlikes and comments in the returned array of Posts from get a single plant.
+    // Detects if the current user has already liked the post.
     if(post.postlikes && post.comments) {
       post.postlikes.forEach((item, index) => {
         if(userId === item.userId) {
@@ -53,6 +53,13 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
       setUpdatedComments(post.comments);
     }
   }, [post, userId, deviceType]);
+
+  /** Deletes the post if it meets the flags limit. */ // TODO: confirm the post flags are being received
+  useEffect(() => {
+    console.log(post.flags)
+    if(post.flags && post.flags.length >= 3) deletePost();
+    // eslint-disable-next-line
+  }, [post]);
 
   /** Gets the full plant data. */
   useEffect(() => {
