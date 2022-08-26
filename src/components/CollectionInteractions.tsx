@@ -62,7 +62,6 @@ const CollectionInteractions: React.FunctionComponent<ICollectionInteractionsPro
     if(view === CollectionView.OTHERS && friendsPending) {
       setPendingStatusFriend(false);
       for(let friendPending of friendsPending) {
-        console.log(friendsPending)
         if(friendPending.id === userId) {
           setPendingStatusFriend(true);
           break;
