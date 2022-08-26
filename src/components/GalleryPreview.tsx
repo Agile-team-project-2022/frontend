@@ -46,7 +46,7 @@ const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFil
       <h2 className='section-title'>Photo gallery <span>({imageFiles.length})</span></h2>
       <div className='gallery-preview-content'>
         {
-          imageFiles.map((item, index) => {
+          imageFiles.slice(0, Math.min(5, imageFiles.length)).map((item, index) => {
             return (
               <div className='gallery-img-container'
                    key={`gallery-preview-item-${index}`}
