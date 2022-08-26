@@ -36,7 +36,6 @@ const GalleryExpanded: React.FunctionComponent<IGalleryExpandedProps> = ({imageF
           ''
       }
 
-
       <div className='expanded-gallery-img-container'>
         <img src={CheckEncodedImage(imageFile)? imageFile : defaultImg} alt='Expanded profile'/>
       </div>

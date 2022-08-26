@@ -62,6 +62,7 @@
 }
 
 .publications-container {
+    position: relative;
     background: white;
     height: fit-content;
     box-shadow: 0 0 1.5rem var(--color-black-lighter-shadow);

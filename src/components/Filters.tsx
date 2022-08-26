@@ -17,7 +17,9 @@ import axios from "axios";
 import {AppContext, AppValidActions, PostData} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 
-export interface IFiltersProps {}
+export interface IFiltersProps {
+  onLoading?: (loading: boolean) => void
+}
 
 enum ValidFilters {
   SUN = 'SUN',
@@ -51,7 +53,7 @@ const filterImagesArr = {
   [ValidFilters.PLANT] :  plantImg
 };
 
-const Filters: React.FunctionComponent<IFiltersProps> = () => {
+const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
   const {state, dispatch} = useContext(AppContext);
   const [openFilters, setOpenFilters] = useState(false);
   const [filters, setFilters] = useState<ValidFilters[]>([]);
@@ -151,6 +153,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
   const applyFilters = () => {
     setOpenFilters(false);
     setFilters(preselectedFilters);
+    if(onLoading) onLoading(true);
     console.log('fetching...')
     if(preselectedFilters.length === 0) {
       fetchAllFilters();
@@ -163,6 +166,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
           allPosts.push(...filterPosts);
         });
       })).then(() => {
+        if(onLoading) onLoading(false);
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: allPosts}});
       });
     }
@@ -171,7 +175,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
   /** Queries all the filters (to get all posts) if no filter is selected yet. */
   const fetchAllFilters = () => {
     const url = `${ state.BASE_URL }plant-category?page=1&count=100`;
-
+    if(onLoading) onLoading(true);
     axios.get(url)
       .then((response) => {
         setFiltersResponse(response.data);
@@ -182,13 +186,16 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
             if(plantItem.posts && plantItem.posts.length > 0) posts.push(...plantItem.posts);
           });
         });
-        console.log((response.data)) // TODO: check comments, likes, flags are received
 
+        if(onLoading) onLoading(false);
         // Orders the posts by timestamp.
         posts.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: posts}});
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        if(onLoading && e.message !== 'Network Error') onLoading(false);
+      });
   };
 
   /** Initializes the mapping between category name and ID from database if not done yet. */
@@ -199,8 +206,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = () => {
       Array(...filtersResponse).forEach((item, index) => {
         mappedIds[(item as CategoryData).name] = (item as CategoryData).id
       });
-
-      console.log(mappedIds);
 
       dispatch({
         type: AppValidActions.MAP_CATEGORIES,

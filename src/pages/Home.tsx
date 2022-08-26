@@ -3,6 +3,7 @@ import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 import noContent from "../assets/no-content-yet.png";
+import Loading from "../components/Loading";
 const NewPost = lazy(() => import('../components/NewPost'));
 const PublishedPost = lazy(() => import('../components/PublishedPost'));
 const Filters = lazy(() => import('../components/Filters'));
@@ -14,6 +15,7 @@ export interface IHomeProps {}
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const {state: {loggedIn, userData:{user}, homePosts, postsPerPage}, dispatch} = useContext(AppContext);
   const [currentPostsPage, setCurrentPostsPage] = useState(1);
+  const [loadingPosts, setLoadingPosts] = useState(false);
 
   /** Displays the pop up asking for log in. */
   const showLogIn = () => {
@@ -25,6 +27,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     setCurrentPostsPage(prevState => prevState + 1);
   };
 
+  /** Stops showing the loading component. */
+  const notifyLoading = (loading: boolean) => {
+    setLoadingPosts(loading);
+  };
+
   return (
     <main className="home">
       <div className='home-background'> </div>
@@ -33,7 +40,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         Welcome {user.charAt(0).toUpperCase() + user.substring(1)}!
       </h2>
 
-      <Suspense> <Filters /> </Suspense>
+      <Suspense> <Filters onLoading={notifyLoading} /> </Suspense>
 
       <div className='page-content-container'>
         <section className='publications-container'>
@@ -43,6 +50,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         <div className='section-divisor'> </div>
 
         <section className='publications-container'>
+          { loadingPosts? <Loading /> : '' }
           {
             homePosts.length > 0?
               <button className={`button-action load-more-button ${homePosts.length - (currentPostsPage * postsPerPage) <= 0? 'disabled-button' : ''}`}
