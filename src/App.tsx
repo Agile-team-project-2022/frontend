@@ -84,7 +84,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         })
         .catch((e) => {
           console.log(e);
-          dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
+          if(e.message !== 'Network Error') dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
         });
     };
 

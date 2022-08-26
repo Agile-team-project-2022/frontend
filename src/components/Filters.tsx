@@ -194,7 +194,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
       })
       .catch((e) => {
         console.log(e);
-        if(onLoading) onLoading(false);
+        if(onLoading && e.message !== 'Network Error') onLoading(false);
       });
   };
 
@@ -206,8 +206,6 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
       Array(...filtersResponse).forEach((item, index) => {
         mappedIds[(item as CategoryData).name] = (item as CategoryData).id
       });
-
-      console.log(mappedIds);
 
       dispatch({
         type: AppValidActions.MAP_CATEGORIES,

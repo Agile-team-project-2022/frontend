@@ -86,8 +86,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
         })
         .catch((e) => {
           console.log(e);
-          setLoadingData(false);
-          navigate(`/not-found`, {replace: true});
+          if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
         });
     };
 
@@ -151,11 +150,6 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
         />
       );
     }
-  };
-
-  /** Stops showing the loading component. */
-  const notifyLoading = (loading: boolean) => {
-    setLoadingData(loading);
   };
 
   return (

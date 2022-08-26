@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {Player} from "@lottiefiles/react-lottie-player";
 import animatedLoad from "../assets/loading.json";
 

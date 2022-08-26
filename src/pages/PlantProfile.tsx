@@ -104,8 +104,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
         })
         .catch((e) => {
           console.log(e);
-          notifyLoading(false);
-          navigate(`/not-found`, {replace: true});
+          if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
         });
     };
 
@@ -136,7 +135,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
         })
         .catch((e) => {
           console.log(e);
-          navigate(`/not-found`, {replace: true});
+          if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
         });
     };
 

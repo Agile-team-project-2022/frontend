@@ -92,7 +92,7 @@ const ExpandedList: React.FunctionComponent<IExpandedListProps> = ({title, type,
 
               <div className='modal-list-buttons'>
                 <button className='button-action' onClick={closeSection}> Close </button>
-                <button className='button-action'> Load more </button>
+                <button className='button-action disabled-button'> Load more </button>
               </div>
             </div>
           </Modal>
