@@ -36,10 +36,7 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
   const authUser = () => {
     console.log('authenticating....')
     const url = `${ BASE_URL }auth/login/success`;
-    const headers = {
-      "Access-Control-Allow-Credentials": 'true',
-      "Access-Control-Allow-Origin": 'true',
-      "SameSite": 'Secure'
+    const headers = { // TODO: check login
     };
 
     axios.defaults.withCredentials = true;

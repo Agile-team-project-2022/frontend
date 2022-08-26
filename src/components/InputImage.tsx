@@ -17,8 +17,8 @@ const InputImage: React.FunctionComponent<IInputImageProps> = ({onUploadImage, c
       let qualityThreshold = 90;
       let encodedFile = await resizeFile(file, qualityThreshold);
       // Adjusts the size of the resulting image to fit the constraints of the DB.
-      while((encodedFile as string).length > lengthThreshold && qualityThreshold >= 40) {
-        qualityThreshold -= 10;
+      while((encodedFile as string).length > lengthThreshold && qualityThreshold >= 20) {
+        qualityThreshold -= qualityThreshold < 40? 5 : 10;
         encodedFile = await resizeFile(file, qualityThreshold);
       }
 
