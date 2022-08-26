@@ -54,10 +54,9 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     }
   }, [post, userId, deviceType]);
 
-  /** Deletes the post if it meets the flags limit. */ // TODO: confirm the post flags are being received
+  /** Deletes the post if it meets the flags limit. */
   useEffect(() => {
-    console.log(post.flags)
-    if(post.flags && post.flags.length >= 3) deletePost();
+    if(post.postFlag && post.postFlag.length >= 3) deletePost();
     // eslint-disable-next-line
   }, [post]);
 

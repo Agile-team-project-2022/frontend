@@ -91,7 +91,7 @@ export interface PostData {
   id: number,
   title: string,
   content: string,
-  flags: {}[],
+  postFlag: {}[],
   published: boolean,
   imageFile: string,
   postlikes: {id: number, userId: number}[],
