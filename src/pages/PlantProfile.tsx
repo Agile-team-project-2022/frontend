@@ -20,6 +20,7 @@ import DataSection from "../components/DataSection";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import defaultPerson from "../assets/default-person.jpeg";
 import {calculateAgePlant, CheckEncodedImage} from "../helpers";
+import Loading from "../components/Loading";
 
 export interface IPlantProfileProps {}
 
@@ -42,6 +43,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   const [showGallery, setShowGallery] = useState(true);
   const [showData, setShowData] = useState(false);
   const [showPublications, setShowPublications] = useState(false);
+  const [loadingData, setLoadingData] = useState(false);
   const navigate = useNavigate();
 
   // TODO: use the correct data from endpoint.
@@ -59,6 +61,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
   useEffect(() => {
     const fetchPlant = () => {
       const url = `${ BASE_URL }plant/${ plantId }`;
+      notifyLoading(true);
       axios.get(url)
         .then((response) => {
           setPlantData(response.data);
@@ -67,7 +70,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             name: response.data.name,
             imageFile: response.data.imageFile,
             species: response.data.species,
-            followers: response.data.followers?.length || 0 // TODO: Send total followers
+            followers: response.data.followers?.length || 0
           });
 
           // Sets the calculated age and joined date.
@@ -97,9 +100,11 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
           let dates: (string | number)[]  = response.data.schedule.split(',');
           dates = dates.map((item: (string | number), index: number) => parseInt(item as string));
           setScheduleData(dates as number[]);
+          notifyLoading(false);
         })
         .catch((e) => {
           console.log(e);
+          notifyLoading(false);
           navigate(`/not-found`, {replace: true});
         });
     };
@@ -298,6 +303,11 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
       });
   };
 
+  /** Stops showing the loading component. */
+  const notifyLoading = (loading: boolean) => {
+    setLoadingData(loading);
+  };
+
   return (
     <main className="plant-profile-page">
       <ProfileHeader plantData={plantHeaderData} view={(plantData?.ownerId || 0) === userId? CollectionView.OWNER : CollectionView.OTHERS} />
@@ -356,6 +366,8 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             </div>
           </>
       }
+
+      { loadingData? <Loading className='full-page-loading' /> : '' }
     </main>
   );
 }

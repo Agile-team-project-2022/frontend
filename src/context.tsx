@@ -19,7 +19,8 @@ enum AppValidActions {
   CREATE_NEW_PLANT = 'CREATE_NEW_PLANT',
   DELETE_PLANT = 'DELETE_PLANT',
   DELETE_OWNER = 'DELETE_OWNER', // TODO: implement delete account in context.
-  UPDATE_USER_DATA = 'UPDATE_USER_DATA'
+  UPDATE_USER_DATA = 'UPDATE_USER_DATA',
+  UPDATE_USER_LOADING = 'UPDATE_USER_LOADING'
 }
 
 // Interfaces and Types definition.
@@ -35,6 +36,7 @@ interface AppState {
     brightness: number,
     grayscale: number
   },
+  loadingUser: boolean,
   loggedIn: boolean,
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
@@ -135,7 +137,7 @@ export interface CountData {
 type AppAction = LogInAction | LogOutAction | ChangeSettingsAction
                 | MapCategoryAction | SetUserDataAction |SetDeviceTypeAction
                 | UpdateOwnerPictureAction | UpdateHomePostsAction | UpdatePlantPictureAction
-                | CreateNewPlantAction | DeleteOwnerAction;
+                | CreateNewPlantAction | DeleteOwnerAction | UpdateUserLoadingAction;
 
 interface LogInAction {
   type: AppValidActions,
@@ -205,6 +207,11 @@ interface DeleteOwnerAction {
   type: AppValidActions
 }
 
+interface UpdateUserLoadingAction {
+  type: AppValidActions,
+  payload: {loading: boolean}
+}
+
 // Defines the default values to initialize the app.
 const appInitialState = {
   settings: {
@@ -213,6 +220,7 @@ const appInitialState = {
     brightness: 100,
     grayscale: 0
   },
+  loadingUser: false,
   loggedIn: true, // TODO set to false
   showLogIn: false,
   categoryIdMap: {},
@@ -365,6 +373,12 @@ const reducer = (state: AppState, action: AppAction) => {
     case AppValidActions.DELETE_OWNER:
       return {
         ...appInitialState
+      };
+
+    case AppValidActions.UPDATE_USER_LOADING:
+      return {
+        ...state,
+        loadingUser: (action as UpdateUserLoadingAction).payload.loading
       };
 
     default:

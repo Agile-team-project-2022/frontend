@@ -4,7 +4,7 @@ import appName from '../assets/app-name.svg';
 import settingsImg from '../assets/settings.png';
 import helpImg from '../assets/help.png';
 import animatedHeader from '../assets/header-1.json';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
 import {AppContext, AppValidActions} from "../context";
@@ -23,6 +23,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const [expandedFollowType, setExpandedFollowType] = useState(ListType.FOLLOWED_PLANTS);
   const [expandedFollowSection, setExpandedFollowSection] = useState(false);
   const [expandedSettingsSection, setExpandedSettingsSection] = useState(false);
+  const navigate = useNavigate();
 
   const expandMobileMenu = () => {
     setExpanded(prevState => !prevState);
@@ -70,6 +71,11 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     setExpandedSettingsSection(false);
   }
 
+  /** Navigates back to home page if clicked on the logo. */
+  const goHomePage = () => {
+    navigate(`/home`, {replace: false});
+  };
+
   return (
     <header className="app-header">
       <div className="app-header-background">
@@ -81,7 +87,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       </div>
 
       <div className="app-header-content">
-        <div className='logo-container'>
+        <div className='logo-container' onClick={goHomePage} >
           <img src={logo} className="logo" alt="InterPlant logo" />
         </div>
 

@@ -32,7 +32,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
     const fetchUserData = () => {
       const url = `${ state.BASE_URL }user/${ state.userData.userId }`;
-
+      dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: true}});
       axios.get(url)
         .then((response) => {
           // Prepares list of incoming and out friends.
@@ -80,8 +80,12 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           };
 
           dispatch({type: AppValidActions.SET_USER_DATA, payload: {userData: data}});
+          dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
+        });
     };
 
     fetchUserData();
@@ -96,8 +100,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     <BrowserRouter>
       <Header />
 
-      {/* TODO: Design a Loading component to render in the meanwhile. */}
-      <Suspense fallback={<span>Loading...</span>}>
+      <Suspense>
         { state.showLogIn? <Login/> : ''}
 
         <Routes>

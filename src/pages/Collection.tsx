@@ -9,13 +9,14 @@ import CollectionInteractions from "../components/CollectionInteractions";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {getExperience} from "../helpers";
+import Loading from "../components/Loading";
 
 export interface ICollectionProps {
   confirm? : boolean
 }
 
 const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
-  const {state: {deviceType, userData, BASE_URL}} = useContext(AppContext);
+  const {state: {deviceType, userData, BASE_URL, loadingUser}} = useContext(AppContext);
   const {ownerId, relationId} = useParams();
   const [view, setView] = useState(CollectionView.OWNER);
   const [othersData, setOthersData] = useState<UserData>();
@@ -24,6 +25,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
   const [showBadges, setShowBadges] = useState(true);
   const [showCollection, setShowCollection] = useState(false);
   const [showInteractions, setShowInteractions] = useState(false);
+  const [loadingData, setLoadingData] = useState(false);
   const navigate = useNavigate();
 
   // Determines the type of viewer.
@@ -36,7 +38,7 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
     /** Fetches the user data only for Others view. */
     const fetchUserData = () => {
       const url = `${ BASE_URL }user/${ ownerId }`;
-
+      setLoadingData(true);
       axios.get(url)
         .then((response) => {
           // Prepares list of incoming and out friends.
@@ -80,14 +82,16 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
           };
 
           setOthersData(data as UserData);
+          setLoadingData(false);
         })
         .catch((e) => {
           console.log(e);
+          setLoadingData(false);
           navigate(`/not-found`, {replace: true});
         });
     };
 
-    if(view === CollectionView.OTHERS && ownerId) fetchUserData();
+    if(view === CollectionView.OTHERS && ownerId && parseInt(ownerId) !== userData.userId) fetchUserData();
     // eslint-disable-next-line
   }, [ownerId, BASE_URL, view]);
 
@@ -149,6 +153,11 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
     }
   };
 
+  /** Stops showing the loading component. */
+  const notifyLoading = (loading: boolean) => {
+    setLoadingData(loading);
+  };
+
   return (
     <main className="collection-page">
       <CollectionHeader othersData={othersData}
@@ -204,6 +213,8 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
             />
           </>
       }
+
+      { loadingData || loadingUser? <Loading className='full-page-loading' /> : '' }
     </main>
   );
 }
