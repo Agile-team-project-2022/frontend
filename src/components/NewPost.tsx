@@ -23,10 +23,12 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   const [disableButton, setDisableButton] = useState(false);
   const [confirmSuccess, setConfirmSuccess] = useState(false);
 
+  /** Receives and saves the new uploaded image to use in the post. */
   const uploadNewImage = (encodedImg: string) => {
     if(CheckEncodedImage(encodedImg)) setImage(encodedImg);
   };
 
+  /** Assigns the author plant of the post. */
   const selectPlantProfile = (e: ChangeEvent<HTMLSelectElement>) => {
     const plantId = parseInt(e.target.selectedOptions[0].id);
     setPlantProfile(plantId);
@@ -36,6 +38,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
     setHighlightSelect(false);
   };
 
+  /** Updates the content of the post. */
   const updateTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
     setHighlightTitle(false);
@@ -46,6 +49,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
     setHighlightContent(false);
   };
 
+  /** Empties all the fields. */
   const discardPost = () => {
     setImage('');
     setTitle('');

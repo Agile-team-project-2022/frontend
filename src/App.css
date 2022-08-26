@@ -241,8 +241,7 @@ button, a {
   width: 1.3rem;
   height: 0.28rem;
   background: white;
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem;
+  border-radius: 0.2rem;
 }
 
 .add-button div:nth-child(1) {
