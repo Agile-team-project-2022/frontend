@@ -2,6 +2,7 @@ import React, {ReactNode} from 'react';
 import './Modal.css';
 import {createPortal} from "react-dom";
 
+
 export interface IModalProps {
   children: ReactNode,
   onClose: ((e: React.MouseEvent) => void) | (() => void),
