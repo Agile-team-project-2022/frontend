@@ -64,6 +64,7 @@
     border-top-right-radius: 0.1rem;
     border-bottom-right-radius: 0.1rem;
     background: rgba(0, 0 ,0, 0.6);
+    overflow: hidden;
 }
 
 .new-img-buttons button {

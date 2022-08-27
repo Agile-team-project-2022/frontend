@@ -95,7 +95,6 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         userId: userId,
         postId: post.id
       };
-
       axios.post(url, data)
         .then((response) => {
           setLikePostId(response.data.id);
@@ -110,7 +109,6 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
     } else {
       // Removes the Like.
       const url = `${ BASE_URL }postlike/${likePostId}`;
-
       axios.delete(url)
         .then((response) => {
           setLikePostId(-1);
@@ -152,14 +150,12 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
 
   /** In case of having inappropriate posts content, flags/reports it to be deleted. */
   const flagPost = () => {
-    // TODO: Decide what do to after being reported.
     const url = `${ BASE_URL }post-flag`;
     const data = {
       userId: userId,
       postId: post.id
     };
     setDisableButton(true);
-
     axios.post(url, data)
       .then((response) => {
         console.log('Content flagged successfully.');
@@ -175,7 +171,6 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
   const deletePost = () => {
     const url = `${ BASE_URL }post/${ post.id }`;
     setDisableButton(true);
-
     axios.delete(url)
       .then((response) => {
         console.log('Deleted post.');
@@ -190,7 +185,7 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
 
   /** Queries all the stored posts to show. */
   const fetchAllPosts = () => {
-    const url = `${ BASE_URL }post?page=1&count=100`; // TODO: use count and page parameters
+    const url = `${ BASE_URL }post?page=1&count=1000`; // TODO: use count and page parameters
     axios.get(url)
       .then((response) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});

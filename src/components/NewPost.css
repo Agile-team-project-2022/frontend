@@ -204,6 +204,10 @@
     transform: scale(0.7);
 }
 
+.hidden-select-profile {
+    display: none;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .post-container {

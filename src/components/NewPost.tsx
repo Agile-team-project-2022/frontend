@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext, useState} from 'react';
+import React, {ChangeEvent, useContext, useEffect, useState} from 'react';
 import './NewPost.css';
 import {AppContext, AppValidActions, CreatePostData} from "../context";
 import InputImage from "./InputImage";
@@ -6,9 +6,11 @@ import {CheckEncodedImage} from "../helpers";
 import axios from "axios";
 import {DeviceTypes} from "../hooks/useWindowSize";
 
-export interface IPostProps {}
+export interface INewPostProps {
+  plantId?: number
+}
 
-const NewPost: React.FunctionComponent<IPostProps> = () => {
+const NewPost: React.FunctionComponent<INewPostProps> = ({plantId}) => {
   const {state: {userData, BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
@@ -22,6 +24,11 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
   const [highlightContent, setHighlightContent] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [confirmSuccess, setConfirmSuccess] = useState(false);
+
+  /** Sets the profile to publish from as the plant id if the new post is located within a plant profile. */
+  useEffect(() => {
+    if(plantId) setPlantProfile(plantId);
+  }, [plantId]);
 
   /** Receives and saves the new uploaded image to use in the post. */
   const uploadNewImage = (encodedImg: string) => {
@@ -79,7 +86,6 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
       imageFile: image
     };
     setDisableButton(true);
-
     axios.post(url, data)
       .then((response) => {
         console.log(`Successfully created Post`);
@@ -97,7 +103,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
 
   /** Queries all the stored posts to show. */
   const fetchAllPosts = () => {
-    const url = `${ BASE_URL }post?page=1&count=100`; // TODO: use count and page parameters
+    const url = `${ BASE_URL }post?page=1&count=1000`; // TODO: use count and page parameters
     axios.get(url)
       .then((response) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
@@ -118,7 +124,7 @@ const NewPost: React.FunctionComponent<IPostProps> = () => {
       <div className='post-content'>
         <h2 className='section-title'>Write new post</h2>
 
-        <label className='post-select-profile'>
+        <label className={`${plantId? 'hidden-select-profile' : ''} post-select-profile`}>
           <span className={`${highlightSelect? 'invalid-post-select' : ''}`}>
             <label>{plantProfileName}</label>
             <div> </div>

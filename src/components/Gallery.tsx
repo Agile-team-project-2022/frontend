@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './Gallery.css';
 import {CheckEncodedImage} from '../helpers';
 import Modal from "./Modal";
@@ -9,18 +9,24 @@ import cancelImg from '../assets/cancel.png';
 import GalleryExpanded from "./GalleryExpanded";
 import InputImage from "./InputImage";
 import {CollectionView} from "./CollectionHeader";
+import {AppContext, AppValidActions} from "../context";
+import axios from "axios";
+import Loading from "./Loading";
 
 export interface IGalleryProps {
   imageFiles: string[],
   onClose: () => void,
-  view: CollectionView
+  view: CollectionView,
+  plantId: number
 }
 
-const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, view}) => {
+const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, view, plantId}) => {
+  const {state: {BASE_URL, userData: {userId}}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [image, setImage] = useState('');
   const [disableButton, setDisableButton] = useState(false);
+  const [loadingData, setLoadingData] = useState(false);
 
   /** Receives and saves the new uploaded image. */
   const uploadNewImage = (encodedImg: string) => {
@@ -43,10 +49,30 @@ const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, v
     setImage('');
   };
 
-  /** Saves the image.TODO */
+  /** Saves the image. */
   const saveImage = () => {
     setDisableButton(true);
-    setImage('');
+    setLoadingData(true);
+    const url = `${ BASE_URL }post`;
+    const data = {
+      authorId: userId,
+      plantId: plantId,
+      imageFile: image
+    };
+    axios.post(url, data)
+      .then((response) => {
+        console.log(`Successfully created image in gallery`);
+        dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
+        setDisableButton(false);
+        setLoadingData(false);
+        setImage('');
+      })
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+        setLoadingData(false);
+        setImage('');
+      });
   };
 
   /** Switches images. */
@@ -95,6 +121,8 @@ const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, v
                 :
                 ''
             }
+
+            { loadingData? <Loading className='load-new-image' /> : '' }
           </InputImage>
 
           {
