@@ -450,6 +450,11 @@ textarea::-webkit-resizer {
   );
 }
 
+.load-new-image {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.75);
+}
+
 .load-animation {
   width: 7rem;
   height: 7rem;

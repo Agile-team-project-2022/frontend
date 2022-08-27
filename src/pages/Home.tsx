@@ -4,6 +4,7 @@ import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 import noContent from "../assets/no-content-yet.png";
 import Loading from "../components/Loading";
+import PublishedImage from "../components/PublishedImage";
 const NewPost = lazy(() => import('../components/NewPost'));
 const PublishedPost = lazy(() => import('../components/PublishedPost'));
 const Filters = lazy(() => import('../components/Filters'));
@@ -67,7 +68,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               homePosts
                 .slice(Math.max(homePosts.length - (currentPostsPage * postsPerPage), 0), homePosts.length)
                 .map((item, index) => {
-                  return <PublishedPost post={item} key={`published-post-item-${item.id}`} />
+                  if(item.title && item.content) return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
+                  else return <PublishedImage post={item} key={`published-post-item-${item.id}`} />
                 })
             }
             { homePosts.length === 0? <div className='not-found-container'> <img src={noContent} alt='No content to show'/> </div> : '' }

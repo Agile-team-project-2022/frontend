@@ -78,7 +78,8 @@ export interface PlantData {
   location: string,
   createdAt: string,
   categoryId: 1,
-  posts: PostData[]
+  posts: PostData[],
+  gallery: string[]
 }
 
 // Applies for Friends, Followed plants, Requests to take care of, Requests for being friends.
@@ -228,7 +229,7 @@ const appInitialState = {
     updated: false,
     user: 'guest',
     name: '',
-    userId: 5, // TODO: use correct user id
+    userId: 1, // TODO: use correct user id
     email: '',
     imageFile: '',
     experience: 0,

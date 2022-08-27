@@ -10,10 +10,11 @@ import {useParams} from "react-router-dom";
 import {AppContext} from "../context";
 
 export interface IGalleryPreviewProps {
-  imageFiles: string[]
+  imageFiles: string[],
+  plantId: number
 }
 
-const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFiles}) => {
+const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFiles, plantId}) => {
   const {ownerId} = useParams();
   const {state: {userData: {userId}}} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -91,6 +92,7 @@ const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFil
           <Gallery imageFiles={imageFiles}
                    onClose={closeGallery}
                    view={parseInt(ownerId || '0') === userId? CollectionView.OWNER : CollectionView.OTHERS}
+                   plantId={plantId}
           />
           :
           ''

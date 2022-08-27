@@ -1,0 +1,11 @@
+.post-image-gallery-container {
+    width: 100%;
+    height: 11rem;
+    object-fit: cover;
+}
+
+.post-image-gallery-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
