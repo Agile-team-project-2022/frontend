@@ -25,9 +25,11 @@ const Weather: React.FunctionComponent<IWeatherProps> = ({latitude, longitude, s
 
   useEffect(() => {
     /** Fetches the weather data to openweathermap.org */
+    const instance = axios.create();
+    delete instance.defaults.headers.common['Authorization'];
     const getWeather = () => {
       const url = `https://api.openweathermap.org/data/2.5/weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
-      axios.get(url)
+      instance.get(url)
         .then((res) => {
           const sunrise = new Date(res.data.sys.sunrise * 1000);
           const sunset = new Date(res.data.sys.sunset * 1000);
