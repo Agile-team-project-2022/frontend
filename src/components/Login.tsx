@@ -49,11 +49,19 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   const [highlightRegisterPlanter, setHighlightRegisterPlanter] = useState(false);
   const [successLogin, setSuccessLogin] = useState(false);
   const [successRegister, setSuccessRegister] = useState(false);
+  const [failLogin, setFailLogin] = useState(false);
+  const [failRegister, setFailRegister] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
 
   /** Automatic login after creating an account. */
   useEffect(() => {
-    if(successRegister && validateLogin()) login();
+    if(successRegister
+      && loginData.email !== ''
+      && loginData.email.includes('@')
+      && loginData.password !== ''
+    ) {
+      login();
+    }
     // eslint-disable-next-line
   }, [loginData]);
 
@@ -132,7 +140,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
 
   /** Registers new user. */
   const createUser = () => {
-    console.log('authenticating new user....');
+    console.log('Authenticating new user....');
     setDisableButton(true);
     const url = `${ BASE_URL }user`;
     const data = {
@@ -148,14 +156,16 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         console.log('Successfully created user');
         setSuccessRegister(true);
         setDisableButton(false);
-        setLoginData({email: registerData.email, password: registerData.password});
-        login();
-        setTimeout(() => {
-          dispatch({type: AppValidActions.CLOSE_LOG_IN});
-        }, 3550);
+        setLoginData(prevState => {
+          return { ...prevState, email: registerData.email, password: registerData.password }
+        });
       })
       .catch((e) => {
         console.log(e);
+        setFailRegister(true);
+        setTimeout(() => {
+          setFailRegister(false);
+        }, 3550);
         setDisableButton(false);
       });
   };
@@ -180,11 +190,15 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
         }});
         setDisableButton(false);
         setTimeout(() => {
-          dispatch({type: AppValidActions.CLOSE_LOG_IN});
+          closeLogIn();
         }, 3550);
       })
       .catch((e) => {
         console.log(e);
+        setFailLogin(true);
+        setTimeout(() => {
+          setFailLogin(false);
+        }, 3550);
         setDisableButton(false);
       });
   };
@@ -195,6 +209,20 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
       <div className='success-login-container'>
         <div className="success-animation-container">
           <div className="success-animation">
+            <div> </div>
+            <div> </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  /** Shows the if an error occurred during login or registration. */
+  const confirmFailure = () => {
+    return (
+      <div className='success-login-container'>
+        <div className="failure-animation-container">
+          <div className="failure-animation">
             <div> </div>
             <div> </div>
           </div>
@@ -235,6 +263,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               Login
             </button>
             { successLogin? confirmSuccess() : '' }
+            { failLogin? confirmFailure() : '' }
           </div>
 
           <div className='login-page-container register-section'>
@@ -277,6 +306,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
               Create account
             </button>
             { successRegister? confirmSuccess() : '' }
+            { failRegister? confirmFailure() : '' }
           </div>
         </div>
 
