@@ -275,8 +275,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
                 Filter
                 <picture>
                   <source srcSet={searchImgWEBP} type="image/webp"/>
-                  <source srcSet={searchImg} type="image/png"/>
-                  <img src={searchImgWEBP} className="search-img" alt="Search." />
+                  <img src={searchImg} className="search-img" alt="Search." />
                 </picture>
               </div>
 

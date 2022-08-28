@@ -6,6 +6,7 @@ import noContent from "../assets/no-content-yet.png";
 import noContentWEBP from "../assets/no-content-yet.webp";
 import Loading from "../components/Loading";
 import PublishedImage from "../components/PublishedImage";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 const NewPost = lazy(() => import('../components/NewPost'));
 const PublishedPost = lazy(() => import('../components/PublishedPost'));
 const Filters = lazy(() => import('../components/Filters'));
@@ -76,11 +77,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             {
               homePosts.length === 0?
                 <div className='not-found-container'>
-                  <picture>
-                    <source srcSet={noContentWEBP} type="image/webp"/>
-                    <source srcSet={noContent} type="image/png"/>
-                    <img src={noContentWEBP} alt='No content to show'/>
-                  </picture>
+                  <LazyLoadImage srcSet={`${noContentWEBP}, ${noContent}`}
+                                 alt='No content to show'
+                                 effect='black-and-white'
+                                 height='100%'
+                                 width='100%'
+                  />
                 </div>
                 :
                 ''

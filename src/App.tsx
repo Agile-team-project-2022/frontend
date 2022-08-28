@@ -137,7 +137,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         </Routes>
       </Suspense>
 
-      <button className='arrow-button top-arrow' onClick={scrollTop} >
+      <button className='arrow-button top-arrow' onClick={scrollTop} aria-label='Scroll top' >
         <div> </div>
         <div> </div>
       </button>

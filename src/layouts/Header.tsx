@@ -127,20 +127,19 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         <button className='header-option-container settings-logo' onClick={expandSettings}>
           <picture>
             <source srcSet={settingsImgWEBP} type="image/webp"/>
-            <source srcSet={settingsImg} type="image/png"/>
-            <img src={settingsImgWEBP} alt="settings button" />
+            <img src={settingsImg} alt="settings button" />
           </picture>
         </button>
         <button className='header-option-container help-logo'>
           <picture>
             <source srcSet={helpImgWEBP} type="image/webp"/>
-            <source srcSet={helpImg} type="image/png"/>
-            <img src={helpImgWEBP} alt="help button" />
+            <img src={helpImg} alt="help button" />
           </picture>
         </button>
 
         <button className={`burger-icon ${expanded? 'selected-burger-icon' : ''}`}
                 onClick={expandMobileMenu}
+                aria-label='Expand menu'
         >
           <div> </div>
           <div> </div>
