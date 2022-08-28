@@ -37,6 +37,7 @@ interface AppState {
     grayscale: number
   },
   loadingUser: boolean,
+  token: string,
   loggedIn: boolean,
   showLogIn: boolean,
   categoryIdMap: {[name: string]: number},
@@ -142,7 +143,7 @@ type AppAction = LogInAction | LogOutAction | ChangeSettingsAction
 
 interface LogInAction {
   type: AppValidActions,
-  payload: {user: string, userId: number}
+  payload: {user: string, userId: number, token: string}
 }
 
 interface LogOutAction {
@@ -247,6 +248,7 @@ const appInitialState = {
     },
     createdAt: ''
   },
+  token: '',
   homePosts: [],
   postsPerPage: 10,
   deviceType: undefined,
@@ -258,13 +260,22 @@ const appInitialState = {
 const reducer = (state: AppState, action: AppAction) => {
   switch(action.type) {
     case AppValidActions.LOG_IN:
+      const data = {
+        userId: (action as LogInAction).payload.userId,
+        name: (action as LogInAction).payload.user,
+        token: (action as LogInAction).payload.token,
+        loggedIn: true
+      };
+      window.localStorage.setItem('InterPlantSessionData', JSON.stringify(data));
       return {
         ...state,
         userData: {
           ...state.userData,
           user: (action as LogInAction).payload.user,
-          name: (action as LogInAction).payload.user
+          name: (action as LogInAction).payload.user,
+          userId: (action as LogInAction).payload.userId
         },
+        token: (action as LogInAction).payload.token,
         loggedIn: true
       };
 

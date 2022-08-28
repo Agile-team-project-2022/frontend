@@ -32,20 +32,46 @@ const decorativeImages = [
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
   const {state: {BASE_URL}, dispatch} = useContext(AppContext);
 
-  /** Fetch the login data to check if the user is authorized/registered. */
-  const authUser = () => {
-    console.log('authenticating....')
-    const url = `${ BASE_URL }auth/login/success`;
-    const headers = { // TODO: check login
+  /** Registers new user. */
+  const createUser = () => {
+    console.log('authenticating new user....')
+    const url = `${ BASE_URL }user`;
+    const data = { // TODO: use correct data
+      name: 'user from frontend',
+      email: 'bla@bla.com',
+      password: '1234',
+      planter_type: 'floral',
+      imageFile: ''
     };
 
-    axios.defaults.withCredentials = true;
-    axios.get(url, {headers: headers})
+    axios.post(url, data)
       .then((response) => {
         console.log(response.data);
-        console.log('success')
+        console.log('Successfully created user');
       })
       .catch((e) => console.log(e));
+  };
+
+  /** Fetch the login data to check if the user is authorized/registered. */
+  const login = () => {
+    console.log('Authenticating user to login....')
+    const url = `${ BASE_URL }user/authenticate`;
+    const data = { // TODO: Use correct data
+      email: 'bla@bla.com',
+      password: '1234'
+    };
+
+    axios.post(url, data)
+      .then((response) => {
+        console.log('Successfully logged in user');
+        dispatch({type: AppValidActions.LOG_IN, payload: {
+          userId: response.data.id,
+          user: response.data.name,
+          token: response.data.token
+        }});
+      })
+      .catch((e) => console.log(e));
+
   };
 
   /** Cancels the log in attempt and closes the pop up window. */
@@ -60,7 +86,8 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
           <h2 className='section-title-modal'>Please Log In</h2>
 
           <div>
-            <button onClick={authUser} className='button-action'> Test Auth LogIn </button>
+            <button onClick={createUser} className='button-action'> Register </button>
+            <button onClick={login} className='button-action'> Login </button>
           </div>
         </div>
 

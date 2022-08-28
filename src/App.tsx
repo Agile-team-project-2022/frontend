@@ -19,8 +19,28 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   const {state, dispatch} = useContext(AppContext);
   const {deviceType} = useWindowSize();
 
+  /** Retrieves the login data if available. */
   useEffect(() => {
-    // Updates the context only if the device type changed.
+    // window.localStorage.removeItem('InterPlantSessionData') TODO: remove after completing login.
+    const data = window.localStorage.getItem('InterPlantSessionData');
+    if(data) {
+      const loginData = JSON.parse(data);
+      dispatch({type: AppValidActions.LOG_IN, payload: {
+        userId: loginData.userId,
+        user: loginData.name,
+        token: loginData.token
+      }});
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  /** Uses the login data when received. */
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
+  }, [state.token]);
+
+  /** Updates the context only if the device type changed. */
+  useEffect(() => {
     if(state.deviceType !== deviceType) {
       dispatch({type: AppValidActions.SET_DEVICE_TYPE, payload: {deviceType: deviceType || DeviceTypes.DESKTOP}});
     }
@@ -29,7 +49,9 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
   /** Gets and saves the user data only if it is not already saved. */
   useEffect(() => {
-    /** Fetches the user data and marks it as already 'updated' to avoid future unnecessary queries. */
+    /** Fetches the user data if logged in and marks it as already 'updated' to avoid future unnecessary queries. */
+    if(state.token === '') return;
+
     const fetchUserData = () => {
       const url = `${ state.BASE_URL }user/${ state.userData.userId }`;
       dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: true}});
@@ -90,7 +112,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
     fetchUserData();
     // eslint-disable-next-line
-  }, [state.updateFetchUser]);
+  }, [state.updateFetchUser, state.token]);
 
   const scrollTop = () => {
     window.scrollTo(0, 0);
