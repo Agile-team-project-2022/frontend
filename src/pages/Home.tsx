@@ -3,6 +3,7 @@ import './Home.css';
 import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 import noContent from "../assets/no-content-yet.png";
+import noContentWEBP from "../assets/no-content-yet.webp";
 import Loading from "../components/Loading";
 import PublishedImage from "../components/PublishedImage";
 const NewPost = lazy(() => import('../components/NewPost'));
@@ -72,7 +73,18 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                   else return <PublishedImage post={item} key={`published-post-item-${item.id}`} />
                 })
             }
-            { homePosts.length === 0? <div className='not-found-container'> <img src={noContent} alt='No content to show'/> </div> : '' }
+            {
+              homePosts.length === 0?
+                <div className='not-found-container'>
+                  <picture>
+                    <source srcSet={noContentWEBP} type="image/webp"/>
+                    <source srcSet={noContent} type="image/png"/>
+                    <img src={noContentWEBP} alt='No content to show'/>
+                  </picture>
+                </div>
+                :
+                ''
+            }
           </Suspense>
           <h2 className='section-title publications-section-title'>Publications</h2>
         </section>

@@ -20,7 +20,14 @@
     top: 0;
     left: 0;
     background: var(--color-gray-light);
-    background-image: url("../assets/geometric-background.jpeg");
+    background-image: -webkit-image-set(
+            url("../assets/geometric-background.avif") 1x,
+            url("../assets/geometric-background.jpeg") 1x
+    );
+    background-image: image-set(
+            url("../assets/geometric-background.avif") 1x,
+            url("../assets/geometric-background.jpeg") 1x
+    );
     background-size: cover;
     background-position: top center;
     height: 100vh;

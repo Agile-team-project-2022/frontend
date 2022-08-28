@@ -2,7 +2,9 @@ import React, {lazy, Suspense, useContext, useState} from 'react';
 import logo from '../assets/logo.svg';
 import appName from '../assets/app-name.svg';
 import settingsImg from '../assets/settings.png';
+import settingsImgWEBP from '../assets/settings.webp';
 import helpImg from '../assets/help.png';
+import helpImgWEBP from '../assets/help.webp';
 import animatedHeader from '../assets/header-1.json';
 import {Link, useNavigate} from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
@@ -123,10 +125,18 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         </div>
 
         <button className='header-option-container settings-logo' onClick={expandSettings}>
-          <img src={settingsImg} alt="settings button" />
+          <picture>
+            <source srcSet={settingsImgWEBP} type="image/webp"/>
+            <source srcSet={settingsImg} type="image/png"/>
+            <img src={settingsImgWEBP} alt="settings button" />
+          </picture>
         </button>
         <button className='header-option-container help-logo'>
-          <img src={helpImg} alt="help button" />
+          <picture>
+            <source srcSet={helpImgWEBP} type="image/webp"/>
+            <source srcSet={helpImg} type="image/png"/>
+            <img src={helpImgWEBP} alt="help button" />
+          </picture>
         </button>
 
         <button className={`burger-icon ${expanded? 'selected-burger-icon' : ''}`}
