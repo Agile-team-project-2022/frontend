@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {ChangeEvent, useContext, useState} from 'react';
 import './Login.css';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
@@ -31,6 +31,61 @@ const decorativeImages = [
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
   const {state: {BASE_URL}, dispatch} = useContext(AppContext);
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  });
+  const [highlightLoginEmail, setHighlightLoginEmail] = useState(false);
+  const [highlightLoginPassword, setHighlightLoginPassword] = useState(false);
+  const [registerData, setRegisterData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+  const [highlightRegisterName, setHighlightRegisterName] = useState(false);
+  const [highlightRegisterEmail, setHighlightRegisterEmail] = useState(false);
+  const [highlightRegisterPassword, setHighlightRegisterPassword] = useState(false);
+
+  /** Updates the typed values. */
+  const handleChangeLoginEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setLoginData(prevState => {
+      return {...prevState, email: e.target.value}
+    });
+
+    setHighlightLoginEmail(false);
+  };
+
+  const handleChangeLoginPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setLoginData(prevState => {
+      return {...prevState, password: e.target.value}
+    });
+
+    setHighlightLoginPassword(false);
+  };
+
+  const handleChangeRegisterName = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, name: e.target.value}
+    });
+
+    setHighlightRegisterName(false);
+  };
+
+  const handleChangeRegisterEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, email: e.target.value}
+    });
+
+    setHighlightRegisterEmail(false);
+  };
+
+  const handleChangeRegisterPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, password: e.target.value}
+    });
+
+    setHighlightRegisterPassword(false);
+  };
 
   /** Registers new user. */
   const createUser = () => {
@@ -83,11 +138,54 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     <Modal onClose={closeLogIn} className='login-modal' >
       <>
         <div className="login-container">
-          <h2 className='section-title-modal'>Please Log In</h2>
-
-          <div>
-            <button onClick={createUser} className='button-action'> Register </button>
+          <div className='login-page-container login-section'>
+            <h2 className='section-title-modal'>Login</h2>
+            <label>
+              <span>Email</span>
+              <input  className={`input-section ${highlightLoginEmail? 'invalid-input' : ''}`}
+                      type='text'
+                      value={loginData.email}
+                      onChange={(e) => handleChangeLoginEmail(e)}
+              />
+            </label>
+            <label>
+              <span>Password</span>
+              <input  className={`input-section ${highlightLoginPassword? 'invalid-input' : ''}`}
+                      type='text'
+                      value={loginData.password}
+                      onChange={(e) => handleChangeLoginPassword(e)}
+              />
+            </label>
             <button onClick={login} className='button-action'> Login </button>
+          </div>
+
+          <div className='login-page-container register-section'>
+            <h2 className='section-title-modal'>Register</h2>
+            <label>
+              <span>Name</span>
+              <input  className={`input-section ${highlightRegisterName? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.name}
+                      onChange={(e) => handleChangeRegisterName(e)}
+              />
+            </label>
+            <label>
+              <span>Email</span>
+              <input  className={`input-section ${highlightRegisterEmail? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.email}
+                      onChange={(e) => handleChangeRegisterEmail(e)}
+              />
+            </label>
+            <label>
+              <span>Password</span>
+              <input  className={`input-section ${highlightRegisterPassword? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.password}
+                      onChange={(e) => handleChangeRegisterPassword(e)}
+              />
+            </label>
+            <button onClick={createUser} className='button-action'> Create account </button>
           </div>
         </div>
 
