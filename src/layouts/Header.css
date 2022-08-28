@@ -173,6 +173,11 @@
     transition-duration: 0.2s;
 }
 
+.header-nav-link.disable-collection {
+    opacity: 60%;
+    pointer-events: none;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .app-header {

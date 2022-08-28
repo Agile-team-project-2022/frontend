@@ -8,7 +8,7 @@
 .login-container label {
     grid-area: input-label;
     width: 100%;
-    margin: 0.4rem 0 0 0;
+    margin: 0.3rem 0 0 0;
     font-size: 0.85rem;
 }
 
@@ -63,22 +63,39 @@
 
 .login-page-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     width: calc(100% - 2rem);
-    height: 17.6rem;
+    height: 21.6rem;
     padding: 1rem 1rem 0.5rem 1rem;
     box-shadow:
             0 0 0.8rem white,
             0 0 0.03rem var(--color-green-dark);
+    border-radius: 0.1rem;
 }
 
 .login-section {
     background: var(--color-gray-medium);
+    font-weight: 400;
+    text-shadow:
+            0 0 0.1rem var(--color-white-text),
+            0 0 1rem var(--color-white-soft-background);
 }
 
 .register-section {
     background: var(--color-green-lighter-header-medium-transparency);
+    color: white;
+    font-weight: 500;
+    text-shadow:
+            0 0 0.1rem var(--color-black-shadow),
+            0 0 1rem var(--color-black-medium-shadow);
+}
+
+.login-page-container input {
+    color: var(--color-black-text);
+    font-weight: 300;
+    text-shadow: none;
 }
 
 .login-page-container h2 {
@@ -92,8 +109,35 @@
 
 .login-container input {
     margin: 0.4rem 0;
+    cursor: text;
 }
 
+.success-login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white-soft-background);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation-name: fadeInFadeOut;
+    animation-duration: 3.5s;
+    opacity: 0;
+}
+
+.hint-input {
+    position: absolute;
+    right: 1rem;
+    margin-top: -0.3rem;
+    font-size: 0.65rem;
+}
+
+.login-page-container .input-section.invalid-input {
+    outline: 0.12rem solid var(--color-red-warning-shadow);
+    outline-offset: -0.3rem;
+}
 
 /* Tablet version. */
 @media all and (min-width: 768px) {
@@ -116,14 +160,14 @@
     }
 
     .login-modal .modal-content {
-        grid-template-columns: 35rem 9rem;
+        grid-template-columns: 34rem 10.8rem;
         width: fit-content;
     }
 
     .login-img-container {
-        grid-template-columns: 4.5rem 4.5rem;
-        grid-template-rows: repeat(5, 4.55rem);
-        width: 9rem;
+        grid-template-columns: 5.4rem 5.4rem;
+        grid-template-rows: repeat(5, 5.4rem);
+        width: 10.8rem;
     }
 
     .login-page-container {
@@ -139,13 +183,7 @@
     }
 
     .login-modal .modal-content {
-        grid-template-columns: auto 9rem;
+        grid-template-columns: 43rem 10.8rem;
         width: fit-content;
-    }
-
-    .login-img-container {
-        grid-template-columns: 4.5rem 4.5rem;
-        grid-template-rows: repeat(5, 4.5rem);
-        width: 9rem;
     }
 }

@@ -175,6 +175,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
 
   /** Queries all the filters (to get all posts) if no filter is selected yet. */
   const fetchAllFilters = () => {
+    if(!state.loggedIn) return [];
+
     const url = `${ state.BASE_URL }plant-category?page=1&count=100`;
     if(onLoading) onLoading(true);
     axios.get(url)
@@ -194,8 +196,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: posts}});
       })
       .catch((e) => {
-        console.log(e);
         if(onLoading && e.message !== 'Network Error') onLoading(false);
+        console.log(e);
       });
   };
 
@@ -217,17 +219,23 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
 
   /** Queries the selected filter to database. */
   const fetchFilter = async (id: number) => {
-    const url = `${ state.BASE_URL }plant-category/${id}`;
+    if(!state.loggedIn) return [];
 
-    const response = await axios.get(url)
-    const postsAsArr: PostData[][] = await
-      [response.data.plants
-        .map((item: any) => item.posts)][0]
-        .filter((item: any) => item.length > 0);
-    const posts: PostData[] = await ([] as PostData[]).concat(...postsAsArr.map((item) => item));
-    // Orders the posts by timestamp.
-    posts.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-    return posts;
+    try {
+      const url = `${ state.BASE_URL }plant-category/${id}`;
+      const response = await axios.get(url);
+      const postsAsArr: PostData[][] = await
+        [response.data.plants
+          .map((item: any) => item.posts)][0]
+          .filter((item: any) => item.length > 0);
+      const posts: PostData[] = await ([] as PostData[]).concat(...postsAsArr.map((item) => item));
+      // Orders the posts by timestamp.
+      posts.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+      return posts;
+    } catch(e: any) {
+      console.log(e);
+      return [];
+    }
   };
 
   /** Creates new filters. NOTE: By now, only used to initialize the 8 valid filters in the DB. */
