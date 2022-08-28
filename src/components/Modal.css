@@ -144,6 +144,15 @@
     min-width: 3.2rem;
 }
 
+.no-close-modal .modal-header {
+    cursor: default;
+    pointer-events: none;
+}
+
+.no-close-modal .modal-header > * {
+    display: none;
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .modal-container {

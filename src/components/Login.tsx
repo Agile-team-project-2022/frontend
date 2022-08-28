@@ -13,8 +13,11 @@ import loginImg7 from '../assets/login-img-7.jpg';
 import loginImg8 from '../assets/login-img-8.jpg';
 import loginImg9 from '../assets/login-img-9.jpg';
 import loginImg10 from '../assets/login-img-10.jpg';
+import {DeviceTypes} from "../hooks/useWindowSize";
 
-export interface ILoginProps {}
+export interface ILoginProps {
+  noClose?: boolean
+}
 
 const decorativeImages = [
   loginImg1,
@@ -29,8 +32,8 @@ const decorativeImages = [
   loginImg10
 ];
 
-const Login: React.FunctionComponent<ILoginProps> = () => {
-  const {state: {BASE_URL}, dispatch} = useContext(AppContext);
+const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
+  const {state: {BASE_URL, deviceType}, dispatch} = useContext(AppContext);
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
@@ -51,6 +54,8 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
   const [successRegister, setSuccessRegister] = useState(false);
   const [failLogin, setFailLogin] = useState(false);
   const [failRegister, setFailRegister] = useState(false);
+  const [collapseLogin, setCollapseLogin] = useState(true);
+  const [collapseRegister, setCollapseRegister] = useState(true);
   const [disableButton, setDisableButton] = useState(false);
 
   /** Automatic login after creating an account. */
@@ -183,15 +188,15 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
       .then((response) => {
         console.log('Successfully logged in user');
         setSuccessLogin(true);
-        dispatch({type: AppValidActions.LOG_IN, payload: {
-          userId: response.data.id,
-          user: response.data.name,
-          token: response.data.token
-        }});
         setDisableButton(false);
         setTimeout(() => {
+          dispatch({type: AppValidActions.LOG_IN, payload: {
+              userId: response.data.id,
+              user: response.data.name,
+              token: response.data.token
+          }});
           closeLogIn();
-        }, 3550);
+        }, 3500);
       })
       .catch((e) => {
         console.log(e);
@@ -236,12 +241,26 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
     dispatch({type: AppValidActions.CLOSE_LOG_IN});
   };
 
+  /** Expands the login section on mobiles. */
+  const expandLogin = () => {
+    setCollapseLogin(prevState => !prevState);
+  }
+
+  /** Expands the register section on mobiles. */
+  const expandRegister = () => {
+    setCollapseRegister(prevState => !prevState);
+  }
+
   return (
-    <Modal onClose={closeLogIn} className='login-modal' >
+    <Modal onClose={closeLogIn} className={`login-modal ${noClose? 'no-close-modal' : ''}`} >
       <>
         <div className="login-container">
-          <div className='login-page-container login-section'>
-            <h2 className='section-title-modal'>Login</h2>
+          <div className={`login-page-container login-section ${collapseLogin? 'collapsed-login' : ''}`}>
+            <h2 className='section-title-modal'
+                onClick={deviceType === DeviceTypes.MOBILE? expandLogin : () => {}}
+            >
+              Login
+            </h2>
             <label>
               <span>Email</span>
               <input  className={`input-section ${highlightLoginEmail? 'invalid-input' : ''}`}
@@ -266,8 +285,12 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
             { failLogin? confirmFailure() : '' }
           </div>
 
-          <div className='login-page-container register-section'>
-            <h2 className='section-title-modal'>Register</h2>
+          <div className={`login-page-container register-section ${collapseRegister? 'collapsed-login' : ''}`}>
+            <h2 className='section-title-modal'
+                onClick={deviceType === DeviceTypes.MOBILE? expandRegister : () => {}}
+            >
+              Register
+            </h2>
             <label>
               <span>Name</span>
               <input  className={`input-section ${highlightRegisterName? 'invalid-input' : ''}`}

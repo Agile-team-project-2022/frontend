@@ -122,7 +122,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <Header />
 
       <Suspense>
-        { state.showLogIn? <Login/> : ''}
+        { state.showLogIn || !state.loggedIn? <Login noClose={true} /> : ''}
 
         <Routes>
           <Route path="/" element={<Home />} />
