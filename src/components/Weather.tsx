@@ -7,7 +7,7 @@ import animatedPlant from "../assets/plant.json";
 import animatedCloud from "../assets/cloud.json";
 import animatedMoon from '../assets/moon.json';
 import animatedStars from '../assets/stars.json';
-import axios, {AxiosRequestHeaders} from "axios";
+import axios from "axios";
 
 export interface IWeatherProps {
   latitude?: number,
