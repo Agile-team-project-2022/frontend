@@ -21,7 +21,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
   /** Retrieves the login data if available. */
   useEffect(() => {
-    // window.localStorage.removeItem('InterPlantSessionData') TODO: remove after completing login.
     const data = window.localStorage.getItem('InterPlantSessionData');
     if(data) {
       const loginData = JSON.parse(data);
@@ -112,7 +111,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
     fetchUserData();
     // eslint-disable-next-line
-  }, [state.updateFetchUser, state.token]);
+  }, [state.updateFetchUser, state.token, state.loggedIn]);
 
   const scrollTop = () => {
     window.scrollTo(0, 0);

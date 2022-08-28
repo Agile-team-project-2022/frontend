@@ -223,14 +223,14 @@ const appInitialState = {
     grayscale: 0
   },
   loadingUser: false,
-  loggedIn: true, // TODO set to false
+  loggedIn: false,
   showLogIn: false,
   categoryIdMap: {},
   userData: {
     updated: false,
     user: 'guest',
     name: '',
-    userId: 1, // TODO: use correct user id
+    userId: 0,
     email: '',
     imageFile: '',
     experience: 0,
@@ -280,14 +280,17 @@ const reducer = (state: AppState, action: AppAction) => {
       };
 
     case AppValidActions.LOG_OUT:
+      window.localStorage.removeItem('InterPlantSessionData');
       return {
         ...state,
         userData: {
           ...state.userData,
           user: 'guest',
+          userId: 0,
           name: 'guest'
         },
-        loggedIn: false
+        loggedIn: false,
+        token: ''
       };
 
     case AppValidActions.CHANGE_SETTINGS:
@@ -383,6 +386,7 @@ const reducer = (state: AppState, action: AppAction) => {
       };
 
     case AppValidActions.DELETE_OWNER:
+      window.localStorage.removeItem('InterPlantSessionData');
       return {
         ...appInitialState
       };

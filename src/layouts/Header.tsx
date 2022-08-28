@@ -10,7 +10,6 @@ import {Link, useNavigate} from "react-router-dom";
 import {Player} from "@lottiefiles/react-lottie-player";
 import './Header.css';
 import {AppContext, AppValidActions} from "../context";
-import {googleLogout} from '@react-oauth/google';
 import {ListType} from "../components/ExpandedList";
 import Modal from "../components/Modal";
 import Settings from "../components/Settings";
@@ -40,7 +39,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   /** Handles log out action. */
   const logOut = () => {
     dispatch({type: AppValidActions.LOG_OUT});
-    googleLogout();
+    console.log('Successfully logged out');
     expandMobileMenu();
   };
 
@@ -103,15 +102,22 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               <span>Home</span>
             </Link>
 
-            <Link to={'collection'} className='header-nav-link' onClick={expandMobileMenu} >
+            <Link to={'collection'}
+                  className={`header-nav-link ${state.loggedIn? '' : 'disable-collection'}`}
+                  onClick={expandMobileMenu}
+            >
               <span>Collection</span>
             </Link>
 
-            <button className='header-nav-link mobile-menu-option' onClick={expandFollowedPlants} >
+            <button className={`header-nav-link mobile-menu-option ${state.loggedIn? '' : 'disable-collection'}`}
+                    onClick={expandFollowedPlants}
+            >
               Following plants
             </button>
 
-            <button className='header-nav-link mobile-menu-option' onClick={expandFriends} >
+            <button className={`header-nav-link mobile-menu-option ${state.loggedIn? '' : 'disable-collection'}`}
+                    onClick={expandFriends}
+            >
               Friends
             </button>
 

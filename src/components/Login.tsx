@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {ChangeEvent, useContext, useEffect, useState} from 'react';
 import './Login.css';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
@@ -29,49 +29,178 @@ const decorativeImages = [
   loginImg10
 ];
 
-const Login: React.FunctionComponent<ILoginProps> = (props) => {
+const Login: React.FunctionComponent<ILoginProps> = () => {
   const {state: {BASE_URL}, dispatch} = useContext(AppContext);
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  });
+  const [highlightLoginEmail, setHighlightLoginEmail] = useState(false);
+  const [highlightLoginPassword, setHighlightLoginPassword] = useState(false);
+  const [registerData, setRegisterData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    planter: ''
+  });
+  const [highlightRegisterName, setHighlightRegisterName] = useState(false);
+  const [highlightRegisterEmail, setHighlightRegisterEmail] = useState(false);
+  const [highlightRegisterPassword, setHighlightRegisterPassword] = useState(false);
+  const [highlightRegisterPlanter, setHighlightRegisterPlanter] = useState(false);
+  const [successLogin, setSuccessLogin] = useState(false);
+  const [successRegister, setSuccessRegister] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
+
+  /** Automatic login after creating an account. */
+  useEffect(() => {
+    if(successRegister && validateLogin()) login();
+    // eslint-disable-next-line
+  }, [loginData]);
+
+  /** Updates the typed values. */
+  const handleChangeLoginEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setLoginData(prevState => {
+      return {...prevState, email: e.target.value}
+    });
+
+    setHighlightLoginEmail(false);
+  };
+
+  const handleChangeLoginPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setLoginData(prevState => {
+      return {...prevState, password: e.target.value}
+    });
+
+    setHighlightLoginPassword(false);
+  };
+
+  const handleChangeRegisterName = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, name: e.target.value}
+    });
+
+    setHighlightRegisterName(false);
+  };
+
+  const handleChangeRegisterEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, email: e.target.value}
+    });
+
+    setHighlightRegisterEmail(false);
+  };
+
+  const handleChangeRegisterPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, password: e.target.value}
+    });
+
+    setHighlightRegisterPassword(false);
+  };
+
+  const handleChangeRegisterPlanter = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData(prevState => {
+      return {...prevState, planter: e.target.value}
+    });
+
+    setHighlightRegisterPlanter(false);
+  };
+
+  /** Indicates 'true' if the login should be disabled. */
+  const validateLogin = () => {
+    return loginData.email === '' || !loginData.email.includes('@') || loginData.password.length < 5;
+  };
+
+  /** Highlights the missing Login values. */
+  const showHintsLogin = () => {
+    loginData.email === '' || !loginData.email.includes('@')? setHighlightLoginEmail(true) : setHighlightLoginEmail(false);
+    loginData.password === '' || loginData.password.length < 5? setHighlightLoginPassword(true) : setHighlightLoginPassword(false);
+  };
+
+  /** Indicates 'true' if the login should be disabled. */
+  const validateRegister = () => {
+    return registerData.email === '' || !registerData.email.includes('@') || registerData.password.length < 5 || registerData.name === '' || registerData.planter === '';
+  };
+
+  /** Highlights the missing Login values. */
+  const showHintsRegister = () => {
+    registerData.email === '' || !registerData.email.includes('@')? setHighlightRegisterEmail(true) : setHighlightRegisterEmail(false);
+    registerData.password === '' || registerData.password.length < 5? setHighlightRegisterPassword(true) : setHighlightRegisterPassword(false);
+    registerData.name === ''? setHighlightRegisterName(true) : setHighlightRegisterName(false);
+    registerData.planter === ''? setHighlightRegisterPlanter(true) : setHighlightRegisterPlanter(false);
+  };
 
   /** Registers new user. */
   const createUser = () => {
-    console.log('authenticating new user....')
+    console.log('authenticating new user....');
+    setDisableButton(true);
     const url = `${ BASE_URL }user`;
-    const data = { // TODO: use correct data
-      name: 'user from frontend',
-      email: 'bla@bla.com',
-      password: '1234',
-      planter_type: 'floral',
+    const data = {
+      name: registerData.name,
+      email: registerData.email,
+      password: registerData.password,
+      planter_type: registerData.planter,
       imageFile: ''
     };
-
     axios.post(url, data)
       .then((response) => {
         console.log(response.data);
         console.log('Successfully created user');
+        setSuccessRegister(true);
+        setDisableButton(false);
+        setLoginData({email: registerData.email, password: registerData.password});
+        login();
+        setTimeout(() => {
+          dispatch({type: AppValidActions.CLOSE_LOG_IN});
+        }, 3550);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
   };
 
   /** Fetch the login data to check if the user is authorized/registered. */
   const login = () => {
-    console.log('Authenticating user to login....')
+    console.log('Authenticating user to login....');
+    setDisableButton(true);
     const url = `${ BASE_URL }user/authenticate`;
-    const data = { // TODO: Use correct data
-      email: 'bla@bla.com',
-      password: '1234'
+    const data = {
+      email: loginData.email,
+      password: loginData.password
     };
-
     axios.post(url, data)
       .then((response) => {
         console.log('Successfully logged in user');
+        setSuccessLogin(true);
         dispatch({type: AppValidActions.LOG_IN, payload: {
           userId: response.data.id,
           user: response.data.name,
           token: response.data.token
         }});
+        setDisableButton(false);
+        setTimeout(() => {
+          dispatch({type: AppValidActions.CLOSE_LOG_IN});
+        }, 3550);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setDisableButton(false);
+      });
+  };
 
+  /** Shows the confirmation of successful login or registration. */
+  const confirmSuccess = () => {
+    return (
+      <div className='success-login-container'>
+        <div className="success-animation-container">
+          <div className="success-animation">
+            <div> </div>
+            <div> </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   /** Cancels the log in attempt and closes the pop up window. */
@@ -83,11 +212,71 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     <Modal onClose={closeLogIn} className='login-modal' >
       <>
         <div className="login-container">
-          <h2 className='section-title-modal'>Please Log In</h2>
+          <div className='login-page-container login-section'>
+            <h2 className='section-title-modal'>Login</h2>
+            <label>
+              <span>Email</span>
+              <input  className={`input-section ${highlightLoginEmail? 'invalid-input' : ''}`}
+                      type='text'
+                      value={loginData.email}
+                      onChange={(e) => handleChangeLoginEmail(e)}
+              />
+              { highlightLoginEmail? <span className='hint-input'> Invalid email </span> : '' }
+            </label>
+            <label>
+              <span>Password</span>
+              <input  className={`input-section ${highlightLoginPassword? 'invalid-input' : ''}`}
+                      type='text'
+                      value={loginData.password}
+                      onChange={(e) => handleChangeLoginPassword(e)}
+              />
+            </label>
+            <button onClick={validateLogin()? showHintsLogin : login} className='button-action' disabled={disableButton} >
+              Login
+            </button>
+            { successLogin? confirmSuccess() : '' }
+          </div>
 
-          <div>
-            <button onClick={createUser} className='button-action'> Register </button>
-            <button onClick={login} className='button-action'> Login </button>
+          <div className='login-page-container register-section'>
+            <h2 className='section-title-modal'>Register</h2>
+            <label>
+              <span>Name</span>
+              <input  className={`input-section ${highlightRegisterName? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.name}
+                      onChange={(e) => handleChangeRegisterName(e)}
+              />
+            </label>
+            <label>
+              <span>Email</span>
+              <input  className={`input-section ${highlightRegisterEmail? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.email}
+                      onChange={(e) => handleChangeRegisterEmail(e)}
+              />
+              { highlightRegisterEmail? <span className='hint-input'> Invalid email </span> : '' }
+            </label>
+            <label>
+              <span>Password</span>
+              <input  className={`input-section ${highlightRegisterPassword? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.password}
+                      onChange={(e) => handleChangeRegisterPassword(e)}
+              />
+              { highlightRegisterPassword? <span className='hint-input'> Password too short </span> : '' }
+            </label>
+            <label>
+              <span>Planter type</span>
+              <input  className={`input-section ${highlightRegisterPlanter? 'invalid-input' : ''}`}
+                      type='text'
+                      value={registerData.planter}
+                      onChange={(e) => handleChangeRegisterPlanter(e)}
+              />
+            </label>
+            <button onClick={validateRegister()? showHintsRegister : createUser} className='button-action' disabled={disableButton} >
+              Create account
+            </button>
+            { successRegister? confirmSuccess() : '' }
           </div>
         </div>
 
