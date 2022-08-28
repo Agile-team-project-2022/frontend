@@ -3,6 +3,7 @@ import './Filters.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import searchImg from "../assets/search.png";
+import searchImgWEBP from "../assets/search.webp";
 import sunImg from '../assets/category-sun.jpg';
 import shadowImg from '../assets/category-shadow.jpeg';
 import flowerImg from '../assets/category-flower.jpg';
@@ -272,7 +273,11 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
             <>
               <div className='mobile-filters' onClick={expandFilters}>
                 Filter
-                <img src={searchImg} className="search-img" alt="Search." />
+                <picture>
+                  <source srcSet={searchImgWEBP} type="image/webp"/>
+                  <source srcSet={searchImg} type="image/png"/>
+                  <img src={searchImgWEBP} className="search-img" alt="Search." />
+                </picture>
               </div>
 
               {
