@@ -1,5 +1,6 @@
 import React, {lazy, Suspense, useContext, useEffect} from 'react';
 import './App.css';
+import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./layouts/Header";
 import {AppContext, AppValidActions} from "./context";

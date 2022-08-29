@@ -35,7 +35,7 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
     longitude: undefined
   });
   const [scheduleData, setScheduleData] = useState<number[]>([]);
-  const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0});
+  const [plantHeaderData, setPlantHeaderData] = useState<PlantHeaderData>({id: -1, name: '', imageFile: '', species: '', followers: 0, categoryId: 1});
   const [disableButton, setDisableButton] = useState(false);
   const [alreadyFollow, setAlreadyFollow] = useState(false);
   const [plantExtraInfo, setPlantExtraInfo] = useState({age: 0, joinDate: new Date()});
@@ -71,7 +71,8 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
             name: response.data.name,
             imageFile: response.data.imageFile,
             species: response.data.species,
-            followers: response.data.followers?.length || 0
+            followers: response.data.followers?.length || 0,
+            categoryId: response.data.plantsCategoryId
           });
 
           // Sets the calculated age and joined date.

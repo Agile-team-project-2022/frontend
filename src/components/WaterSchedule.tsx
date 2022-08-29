@@ -13,7 +13,6 @@ const WaterSchedule: React.FunctionComponent<IWaterScheduleProps> = ({selectedDa
 
   return (
     <DataSection title='Water schedule' onClickSection={() => {}}>
-      {/* TODO: Pass correct selected days. */}
       <Calendar onSelectDay={selectDay} selectedDates={selectedDates} />
     </DataSection>
   );
