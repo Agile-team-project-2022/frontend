@@ -63,7 +63,7 @@ const ChangeProfilePicture: React.FunctionComponent<IChangeProfilePictureProps> 
     const url = `${ BASE_URL }plant/${ id }`;
     const data = {
       ownerId: userData.userId,
-      plantsCategoryId: 1, // TODO: check category
+      plantsCategoryId: categoryId? categoryId : 1,
       imageFile: newImage,
     };
 

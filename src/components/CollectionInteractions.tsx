@@ -11,7 +11,6 @@ import {CheckEncodedImage} from "../helpers";
 import {useNavigate} from "react-router-dom";
 import {ListType} from "./ExpandedList";
 import axios from "axios";
-
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
 export interface ICollectionInteractionsProps {

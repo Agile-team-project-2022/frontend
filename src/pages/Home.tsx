@@ -5,10 +5,10 @@ import {ListType} from "../components/ExpandedList";
 import noContent from "../assets/no-content-yet.png";
 import noContentWEBP from "../assets/no-content-yet.webp";
 import Loading from "../components/Loading";
-import PublishedImage from "../components/PublishedImage";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 const NewPost = lazy(() => import('../components/NewPost'));
 const PublishedPost = lazy(() => import('../components/PublishedPost'));
+const PublishedImage = lazy(() => import('../components/PublishedImage'));
 const Filters = lazy(() => import('../components/Filters'));
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 

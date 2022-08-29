@@ -64,7 +64,6 @@ const GalleryPreview: React.FunctionComponent<IGalleryPreviewProps> = ({imageFil
                    key={`gallery-preview-item-${index}`}
                    onClick={() => selectImage(item)}
               >
-                {/* TODO: change index by an unique image ID. */}
                 <LazyLoadImage src={CheckEncodedImage(item)? item : defaultPlantImg} alt='Plant gallery item' />
               </div>
             );

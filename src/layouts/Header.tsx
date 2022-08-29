@@ -13,7 +13,6 @@ import {AppContext, AppValidActions} from "../context";
 import {ListType} from "../components/ExpandedList";
 import Modal from "../components/Modal";
 import Settings from "../components/Settings";
-
 const ExpandedList = lazy(() => import('../components/ExpandedList'));
 
 export interface IHeaderProps {}
@@ -26,6 +25,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const [expandedSettingsSection, setExpandedSettingsSection] = useState(false);
   const navigate = useNavigate();
 
+  /** Shows the menu options on mobiles. */
   const expandMobileMenu = () => {
     setExpanded(prevState => !prevState);
   };
