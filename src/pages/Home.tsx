@@ -75,7 +75,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 })
             }
             {
-              homePosts.length === 0?
+              homePosts.length === 0 && loggedIn?
                 <div className='not-found-container'>
                   <LazyLoadImage srcSet={`${noContentWEBP}, ${noContent}`}
                                  alt='No content to show'
