@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from 'react';
+import React, {ChangeEvent, useContext, useEffect, useState, Suspense} from 'react';
 import './Login.css';
 import Modal from "./Modal";
 import {AppContext, AppValidActions} from "../context";
@@ -13,23 +13,34 @@ import loginImg7 from '../assets/login-img-7.jpg';
 import loginImg8 from '../assets/login-img-8.jpg';
 import loginImg9 from '../assets/login-img-9.jpg';
 import loginImg10 from '../assets/login-img-10.jpg';
+import loginImg1AVIF from '../assets/login-img-1.avif';
+import loginImg2AVIF from '../assets/login-img-2.avif';
+import loginImg3AVIF from '../assets/login-img-3.avif';
+import loginImg4AVIF from '../assets/login-img-4.avif';
+import loginImg5AVIF from '../assets/login-img-5.avif';
+import loginImg6AVIF from '../assets/login-img-6.avif';
+import loginImg7AVIF from '../assets/login-img-7.avif';
+import loginImg8AVIF from '../assets/login-img-8.avif';
+import loginImg9AVIF from '../assets/login-img-9.avif';
+import loginImg10AVIF from '../assets/login-img-10.avif';
 import {DeviceTypes} from "../hooks/useWindowSize";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 export interface ILoginProps {
   noClose?: boolean
 }
 
 const decorativeImages = [
-  loginImg1,
-  loginImg2,
-  loginImg3,
-  loginImg4,
-  loginImg5,
-  loginImg6,
-  loginImg7,
-  loginImg8,
-  loginImg9,
-  loginImg10
+  [loginImg1, loginImg1AVIF],
+  [loginImg2, loginImg2AVIF],
+  [loginImg3, loginImg3AVIF],
+  [loginImg4, loginImg4AVIF],
+  [loginImg5, loginImg5AVIF],
+  [loginImg6, loginImg6AVIF],
+  [loginImg7, loginImg7AVIF],
+  [loginImg8, loginImg8AVIF],
+  [loginImg9, loginImg9AVIF],
+  [loginImg10, loginImg10AVIF]
 ];
 
 const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
@@ -335,9 +346,15 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
 
         <div className='login-img-container'>
           {
-            decorativeImages.map((image, index) => {
+            decorativeImages.map(([imageJPEG, imageAVIF], index) => {
               return (
-                <img src={image} key={`decorative-img-${index}`} alt='Decorative plant.'/>
+                <Suspense>
+                  <LazyLoadImage srcSet={`${imageAVIF}, ${imageJPEG}`}
+                                 key={`decorative-img-${index}`}
+                                 alt='Decorative plant.'
+                                 effect='black-and-white'
+                  />
+                </Suspense>
               );
             })
           }
