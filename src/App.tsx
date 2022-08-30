@@ -101,7 +101,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         })
         .catch((e) => {
           if(e.message !== 'Network Error') dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
-          else if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+          if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
           else console.log(e);
         });
     };

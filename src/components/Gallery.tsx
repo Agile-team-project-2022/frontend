@@ -21,7 +21,7 @@ export interface IGalleryProps {
 }
 
 const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, view, plantId}) => {
-  const {state: {BASE_URL, userData: {userId}}, dispatch} = useContext(AppContext);
+  const {state: {BASE_URL, userData: {userId}, homePosts}, dispatch} = useContext(AppContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [image, setImage] = useState('');
@@ -62,7 +62,7 @@ const Gallery: React.FunctionComponent<IGalleryProps> = ({imageFiles, onClose, v
     axios.post(url, data)
       .then((response) => {
         console.log(`Successfully created image in gallery`);
-        dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
+        dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: [...homePosts, response.data]}});
         setDisableButton(false);
         setLoadingData(false);
         setImage('');

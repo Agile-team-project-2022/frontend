@@ -96,19 +96,23 @@ const NewPost: React.FunctionComponent<INewPostProps> = ({plantId}) => {
         setDisableButton(false);
       })
       .catch((e) => {
-        console.log(e);
+        if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e.message);
         setDisableButton(false);
       });
   };
 
   /** Queries all the stored posts to show. */
   const fetchAllPosts = () => {
-    const url = `${ BASE_URL }post?page=1&count=1000`; // TODO: use count and page parameters
+    const url = `${ BASE_URL }post?page=1&count=10000`;
     axios.get(url)
       .then((response) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e.message);
+      });
   };
 
   /** Shows a confirmation animation when the post is successfully published. */

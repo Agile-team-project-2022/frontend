@@ -169,6 +169,14 @@
     outline-offset: -0.3rem;
 }
 
+.login-modal .loading {
+    align-items: center;
+    z-index: 0;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 7.5rem);
+}
+
 /* Tablet version. */
 @media all and (min-width: 768px) {
     .login-container {
@@ -234,6 +242,11 @@
 
     .login-page-container.collapsed-login .success-login-container {
         display: flex;
+    }
+
+    .login-modal .loading {
+        width: calc(100% - 10.5rem);
+        height: 100%;
     }
 }
 
