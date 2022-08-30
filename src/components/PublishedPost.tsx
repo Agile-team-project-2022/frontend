@@ -69,7 +69,10 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           setAuthorPlantData(response.data);
           setAuthorPlantDataOwnerID(response.data.ownerId);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+          else console.log(e);
+        });
     };
 
     fetchPlant();
@@ -117,7 +120,8 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
           setDisableButton(false);
         })
         .catch((e) => {
-          console.log(e);
+          if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+          else console.log(e);
           setDisableButton(false);
         });
     }
@@ -162,7 +166,8 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         setDisableButton(false);
       })
       .catch((e) => {
-        console.log(e);
+        if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e);
         setDisableButton(false);
       });
   };
@@ -178,19 +183,23 @@ const PublishedPost: React.FunctionComponent<IPublishedPostProps> = ({post}) => 
         fetchAllPosts();
       })
       .catch((e) => {
-        console.log(e);
+        if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e);
         setDisableButton(false);
       });
   };
 
   /** Queries all the stored posts to show. */
   const fetchAllPosts = () => {
-    const url = `${ BASE_URL }post?page=1&count=1000`; // TODO: use count and page parameters
+    const url = `${ BASE_URL }post?page=1&count=10000`;
     axios.get(url)
       .then((response) => {
         dispatch({type: AppValidActions.UPDATE_HOME_POSTS, payload: {homePosts: response.data}});
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e);
+      });
   };
 
   /** Redirects to plant profile. */

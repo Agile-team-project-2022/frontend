@@ -25,6 +25,7 @@ import loginImg9AVIF from '../assets/login-img-9.avif';
 import loginImg10AVIF from '../assets/login-img-10.avif';
 import {DeviceTypes} from "../hooks/useWindowSize";
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import Loading from "./Loading";
 
 export interface ILoginProps {
   noClose?: boolean
@@ -68,6 +69,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
   const [collapseLogin, setCollapseLogin] = useState(true);
   const [collapseRegister, setCollapseRegister] = useState(true);
   const [disableButton, setDisableButton] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   /** Automatic login after creating an account. */
   useEffect(() => {
@@ -157,6 +159,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
   /** Registers new user. */
   const createUser = () => {
     console.log('Authenticating new user....');
+    setIsLoading(true);
     setDisableButton(true);
     const url = `${ BASE_URL }user`;
     const data = {
@@ -178,6 +181,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
       })
       .catch((e) => {
         console.log(e);
+        setIsLoading(false);
         setFailRegister(true);
         setTimeout(() => {
           setFailRegister(false);
@@ -189,6 +193,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
   /** Fetch the login data to check if the user is authorized/registered. */
   const login = () => {
     console.log('Authenticating user to login....');
+    setIsLoading(true);
     setDisableButton(true);
     const url = `${ BASE_URL }user/authenticate`;
     const data = {
@@ -197,6 +202,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
     };
     axios.post(url, data)
       .then((response) => {
+        setIsLoading(false);
         console.log('Successfully logged in user');
         setSuccessLogin(true);
         setDisableButton(false);
@@ -211,6 +217,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
       })
       .catch((e) => {
         console.log(e);
+        setIsLoading(false);
         setFailLogin(true);
         setTimeout(() => {
           setFailLogin(false);
@@ -344,13 +351,14 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
           </div>
         </div>
 
+        { isLoading? <Loading /> : '' }
+
         <div className='login-img-container'>
           {
             decorativeImages.map(([imageJPEG, imageAVIF], index) => {
               return (
-                <Suspense>
+                <Suspense key={`decorative-img-${index}`}>
                   <LazyLoadImage srcSet={`${imageAVIF}, ${imageJPEG}`}
-                                 key={`decorative-img-${index}`}
                                  alt='Decorative plant.'
                                  effect='black-and-white'
                   />

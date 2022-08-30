@@ -1,3 +1,317 @@
+8d5b430, Susana Poveda, Tue Aug 30 11:53:35 2022, "Add loading to login. Auto request login again when session expires. Gallery images gathered in a single post. Comment cleaning"
+:100644 100644 a963935 eaa7a1b M	src/App.css
+:100644 100644 881a9b8 f46286d M	src/App.tsx
+:100644 100644 1c574ca 3413df6 M	src/components/Filters.tsx
+:100644 100644 3cfe515 a6fe702 M	src/components/Gallery.tsx
+:100644 100644 4db7518 2680310 M	src/components/Login.css
+:100644 100644 02e0d3d 1436933 M	src/components/Login.tsx
+:100644 100644 607672d 1c18e00 M	src/components/NewPost.tsx
+:100644 100644 9d14875 15b1f05 M	src/components/PublishedImage.css
+:100644 100644 8e07743 b0475ca M	src/components/PublishedImage.tsx
+:100644 100644 e73f8bb f63518c M	src/context.tsx
+:100644 100644 ffa39fc b9b7950 M	src/pages/Home.tsx
+
+c0dbeb9, Susana Poveda, Mon Aug 29 22:05:53 2022, "Fix login flow and handle expiration of token."
+:100644 100644 ce345aa 881a9b8 M	src/App.tsx
+:100644 100644 1c1b3a2 1c574ca M	src/components/Filters.tsx
+:100644 100644 7362b85 02e0d3d M	src/components/Login.tsx
+:100644 100644 ba32505 a9a665c M	src/components/PublishedPost.tsx
+:100644 100644 bfec316 e73f8bb M	src/context.tsx
+:100644 100644 23ff35e 7260dd5 M	src/pages/Collection.tsx
+:100644 100644 21d87de 4604e98 M	src/pages/PlantProfile.tsx
+
+299b9f4, susana3, Mon Aug 29 15:45:45 2022, "Merge pull request #78 from Agile-team-project-2022/feature-login"
+4fccd17, Susana Poveda, Mon Aug 29 15:43:40 2022, "Comments cleaning and fix minor style element in water schedules for desktop."
+:100644 100644 6b6d9d0 ce345aa M	src/App.tsx
+:100644 100644 5f77d1a 2fe3c3b M	src/components/ChangeProfilePicture.tsx
+:100644 100644 29759ef 069a64e M	src/components/CollectionCard.tsx
+:100644 100644 12f34b9 bd119aa M	src/components/CollectionInteractions.tsx
+:100644 100644 5a5cef8 26a80b8 M	src/components/DataSection.css
+:100644 100644 020d3f6 1c1b3a2 M	src/components/Filters.tsx
+:100644 100644 6d3ac5a 7a01b21 M	src/components/GalleryPreview.tsx
+:100644 100644 90f6a2f e28bbd6 M	src/components/ProfileHeader.tsx
+:100644 100644 70c4963 02c4f79 M	src/components/WaterSchedule.tsx
+:100644 100644 e228342 bfec316 M	src/context.tsx
+:100644 100644 6654ac4 905c95d M	src/layouts/Header.tsx
+:100644 100644 950f829 ffa39fc M	src/pages/Home.tsx
+:100644 100644 55d0b12 21d87de M	src/pages/PlantProfile.tsx
+
+12757b5, susana3, Sun Aug 28 20:24:11 2022, "Merge pull request #77 from Agile-team-project-2022/feature-login"
+3ddb91d, Susana Poveda, Sun Aug 28 20:22:43 2022, "Minor home fix."
+:100644 100644 bfbbe41 950f829 M	src/pages/Home.tsx
+
+ff5d15c, susana3, Sun Aug 28 20:07:46 2022, "Merge pull request #76 from Agile-team-project-2022/feature-login"
+3319b3c, Susana Poveda, Sun Aug 28 20:05:07 2022, "Fix login load."
+:000000 100644 0000000 e609f62 A	src/assets/login-img-1.avif
+:000000 100644 0000000 13b4a71 A	src/assets/login-img-10.avif
+:000000 100644 0000000 db9416a A	src/assets/login-img-2.avif
+:000000 100644 0000000 ab8d84c A	src/assets/login-img-3.avif
+:000000 100644 0000000 9636fae A	src/assets/login-img-4.avif
+:000000 100644 0000000 4a5bdd7 A	src/assets/login-img-5.avif
+:000000 100644 0000000 970431b A	src/assets/login-img-6.avif
+:000000 100644 0000000 4989391 A	src/assets/login-img-7.avif
+:000000 100644 0000000 c5a7703 A	src/assets/login-img-8.avif
+:000000 100644 0000000 efccbbb A	src/assets/login-img-9.avif
+:100644 100644 9299989 7362b85 M	src/components/Login.tsx
+
+095af9c, susana3, Sun Aug 28 14:57:15 2022, "Merge pull request #75 from Agile-team-project-2022/feature-login"
+2bc1b1a, Susana Poveda, Sun Aug 28 14:55:18 2022, "Enhanced login and register for all devices."
+:100644 100644 fd4fc61 6b6d9d0 M	src/App.tsx
+:100644 100644 ab55960 4db7518 M	src/components/Login.css
+:100644 100644 e651728 9299989 M	src/components/Login.tsx
+:100644 100644 491d76b c625b83 M	src/components/Modal.css
+
+b4c8b17, susana3, Sun Aug 28 14:05:05 2022, "Merge pull request #74 from Agile-team-project-2022/feature-login"
+f8e3705, Susana Poveda, Sun Aug 28 14:01:20 2022, "Minor fix weather."
+:100644 100644 42a1c68 6ab2b6c M	src/components/Weather.tsx
+
+41c6241, Susana Poveda, Sun Aug 28 13:57:59 2022, "Fix interfering authorization headers and weather data."
+:100644 100644 a349dd5 42a1c68 M	src/components/Weather.tsx
+
+bf07402, susana3, Sun Aug 28 13:23:57 2022, "Merge pull request #73 from Agile-team-project-2022/feature-login"
+ef0e615, Susana Poveda, Sun Aug 28 13:20:30 2022, "Fix flow of register/login."
+:100644 100644 86dd951 a963935 M	src/App.css
+:100644 100644 3a4bb0a e651728 M	src/components/Login.tsx
+
+5cf013d, susana3, Sun Aug 28 12:14:10 2022, "Merge pull request #72 from Agile-team-project-2022/feature-login"
+4cf03f8, Susana Poveda, Sun Aug 28 12:10:47 2022, "Login and register working."
+:100644 100644 3f7200d fd4fc61 M	src/App.tsx
+:100644 100644 7d8bffd 020d3f6 M	src/components/Filters.tsx
+:100644 100644 732339f ab55960 M	src/components/Login.css
+:100644 100644 932a65a 3a4bb0a M	src/components/Login.tsx
+:100644 100644 49932a8 e228342 M	src/context.tsx
+:100644 100644 de3197c be52310 M	src/layouts/Header.css
+:100644 100644 24ecb73 6654ac4 M	src/layouts/Header.tsx
+
+d6c1c64, Susana Poveda, Sat Aug 27 22:44:28 2022, "Register and login fields added."
+:100644 100644 ce991e4 732339f M	src/components/Login.css
+:100644 100644 10272c3 932a65a M	src/components/Login.tsx
+
+1e6a140, susana3, Sat Aug 27 21:34:23 2022, "Merge pull request #71 from Agile-team-project-2022/feature-login"
+ad666da, Susana Poveda, Sat Aug 27 21:32:07 2022, "Optimize LCP and use next gen formats."
+:100644 100644 e6c9cb2 3f7200d M	src/App.tsx
+:100644 100644 787e835 7d8bffd M	src/components/Filters.tsx
+:100644 100644 d873161 24ecb73 M	src/layouts/Header.tsx
+:100644 100644 4298721 6be9380 M	src/pages/Home.css
+:100644 100644 65eb474 bfbbe41 M	src/pages/Home.tsx
+
+1e5d8a0, susana3, Sat Aug 27 20:38:39 2022, "Merge pull request #70 from Agile-team-project-2022/feature-login"
+ce50d30, Susana Poveda, Sat Aug 27 20:36:35 2022, "Optimize performance.Â"
+:000000 100644 0000000 41719da A	src/assets/geometric-background.avif
+:000000 100644 0000000 32aaca5 A	src/assets/help.webp
+:000000 100644 0000000 672033e A	src/assets/no-content-yet.webp
+:000000 100644 0000000 e87442b A	src/assets/search.webp
+:000000 100644 0000000 54dc846 A	src/assets/settings.webp
+:100644 100644 650400a 5415ab5 M	src/components/Filters.css
+:100644 100644 8208a7a 787e835 M	src/components/Filters.tsx
+:100644 100644 ddd0094 d873161 M	src/layouts/Header.tsx
+:100644 100644 8387b59 4298721 M	src/pages/Home.css
+:100644 100644 682044b 65eb474 M	src/pages/Home.tsx
+
+c6520b5, susana3, Sat Aug 27 19:55:05 2022, "Merge pull request #69 from Agile-team-project-2022/feature-login"
+58627eb, Susana Poveda, Sat Aug 27 19:52:43 2022, "Login register, and login set up."
+:100644 100644 6ce60d5 e6c9cb2 M	src/App.tsx
+:100644 100644 257a2c3 10272c3 M	src/components/Login.tsx
+:100644 100644 e7661f3 49932a8 M	src/context.tsx
+:100644 100644 4e2005c 6ee3859 M	src/index.tsx
+
+e9c7cd2, susana3, Sat Aug 27 13:25:18 2022, "Merge pull request #68 from Agile-team-project-2022/feature-login"
+85c725c, Susana Poveda, Sat Aug 27 13:23:37 2022, "Connected gallery, remove select profile from plant profile new posts."
+:100644 100644 17305eb 86dd951 M	src/App.css
+:100644 100644 6690b0f 682b8d1 M	src/components/Gallery.css
+:100644 100644 eab4f6b 3cfe515 M	src/components/Gallery.tsx
+:100644 100644 3b9f7a3 9c0e4ee M	src/components/GalleryPreview.css
+:100644 100644 b8f9260 6d3ac5a M	src/components/GalleryPreview.tsx
+:100644 100644 67ede55 ee0e24d M	src/components/NewPost.css
+:100644 100644 a6410ac 607672d M	src/components/NewPost.tsx
+:000000 100644 0000000 9d14875 A	src/components/PublishedImage.css
+:000000 100644 0000000 8e07743 A	src/components/PublishedImage.tsx
+:100644 100644 b6f829a ba32505 M	src/components/PublishedPost.tsx
+:100644 100644 fcb64b2 e7661f3 M	src/context.tsx
+:100644 100644 bb92d5d 682044b M	src/pages/Home.tsx
+:100644 100644 7542b90 55d0b12 M	src/pages/PlantProfile.tsx
+
+d494949, susana3, Sat Aug 27 10:18:19 2022, "Merge pull request #67 from Agile-team-project-2022/feature-login"
+1c68397, Susana Poveda, Sat Aug 27 10:16:26 2022, "Check variable netlify"
+:100644 100644 a7ba32c a97e589 M	src/components/Modal.tsx
+
+45eea8f, susana3, Fri Aug 26 14:21:08 2022, "Merge pull request #66 from Agile-team-project-2022/feature-login"
+3c8541c, Susana Poveda, Fri Aug 26 14:16:01 2022, "Fix style mobile owner interactions."
+:100644 100644 7deb310 12f34b9 M	src/components/CollectionInteractions.tsx
+:100644 100644 6bef343 5a5cef8 M	src/components/DataSection.css
+
+c5f81ac, Susana Poveda, Fri Aug 26 13:52:14 2022, "Fix style mobile loading."
+:100644 100644 184a5b0 17305eb M	src/App.css
+
+b75c6ea, Susana Poveda, Fri Aug 26 13:50:17 2022, "Adjust constraints and resize of pictures."
+:100644 100644 4f4caa1 7be17ac M	src/components/InputImage.tsx
+:100644 100644 b7bd283 257a2c3 M	src/components/Login.tsx
+
+a580107, susana3, Fri Aug 26 12:19:00 2022, "Merge pull request #65 from Agile-team-project-2022/feature-collection"
+8a45fbe, Susana Poveda, Fri Aug 26 12:17:11 2022, "Handle loading when no network is available."
+:100644 100644 de2b48e 184a5b0 M	src/App.css
+:100644 100644 db9d143 6ce60d5 M	src/App.tsx
+:100644 100644 199e50f e60e4fe M	src/components/ExpandedList.tsx
+:100644 100644 d5807d2 8208a7a M	src/components/Filters.tsx
+:100644 100644 8fb1d7d 82f338d M	src/components/Loading.tsx
+:100644 100644 0333373 23ff35e M	src/pages/Collection.tsx
+:100644 100644 05897dd 7542b90 M	src/pages/PlantProfile.tsx
+
+273d637, Susana Poveda, Fri Aug 26 11:59:15 2022, "Loading component complete."
+:100644 100644 b09ad08 de2b48e M	src/App.css
+:100644 100644 bf1e7b4 db9d143 M	src/App.tsx
+:100644 100644 017cb5e d5807d2 M	src/components/Filters.tsx
+:100644 100644 132d199 5801ff2 M	src/components/GalleryExpanded.tsx
+:000000 100644 0000000 8fb1d7d A	src/components/Loading.tsx
+:100644 100644 95701be fcb64b2 M	src/context.tsx
+:100644 100644 704b295 ddd0094 M	src/layouts/Header.tsx
+:100644 100644 1caa5d4 0333373 M	src/pages/Collection.tsx
+:100644 100644 7a3adcc 8387b59 M	src/pages/Home.css
+:100644 100644 084ce76 bb92d5d M	src/pages/Home.tsx
+:100644 100644 fc8e062 05897dd M	src/pages/PlantProfile.tsx
+
+375385d, Susana Poveda, Fri Aug 26 10:57:33 2022, "Flagged posts automatic deletion after threshold."
+:000000 100644 0000000 b8f2935 A	src/assets/loading.json
+:100644 100644 ab06bcd b6f829a M	src/components/PublishedPost.tsx
+:100644 100644 beb25d6 95701be M	src/context.tsx
+
+71062c7, susana3, Thu Aug 25 22:54:04 2022, "Merge pull request #64 from Agile-team-project-2022/feature-collection"
+3657f2e, Susana Poveda, Thu Aug 25 22:50:37 2022, "Gallery arrows implemented to switch images."
+:100644 100644 bef1830 eab4f6b M	src/components/Gallery.tsx
+:100644 100644 06b6e40 25c9b5d M	src/components/GalleryExpanded.css
+:100644 100644 5c6ea91 132d199 M	src/components/GalleryExpanded.tsx
+:100644 100644 1b59e89 b8f9260 M	src/components/GalleryPreview.tsx
+:100644 100644 63108c6 621b3d9 M	src/components/ProfileHeader.css
+:100644 100644 2a65244 fc8e062 M	src/pages/PlantProfile.tsx
+
+58942d4, Susana Poveda, Thu Aug 25 21:55:41 2022, "Set example pictures for galleries.Â"
+:100644 100644 b7dc237 6690b0f M	src/components/Gallery.css
+:100644 100644 3088ddd 1b59e89 M	src/components/GalleryPreview.tsx
+:100644 100644 8c9440b 5355bfa M	src/components/Weather.css
+:100644 100644 7f263db 2a65244 M	src/pages/PlantProfile.tsx
+
+6432f3e, Susana Poveda, Thu Aug 25 21:18:59 2022, "Gallery upload new images logic set up."
+:100644 100644 0f2586a b09ad08 M	src/App.css
+:000000 100644 0000000 b7dc237 A	src/components/Gallery.css
+:000000 100644 0000000 bef1830 A	src/components/Gallery.tsx
+:100644 100644 39bc451 3088ddd M	src/components/GalleryPreview.tsx
+:100644 100644 a2c9d9a a6410ac M	src/components/NewPost.tsx
+
+76d6d15, Susana Poveda, Thu Aug 25 15:19:31 2022, "Connected delete followed plants / friends."
+:100644 100644 f6710f1 a16326b M	src/components/CollectionHeader.tsx
+:100644 100644 77a7437 7deb310 M	src/components/CollectionInteractions.tsx
+:100644 100644 ed49d18 017cb5e M	src/components/Filters.tsx
+:100644 100644 f211291 90f6a2f M	src/components/ProfileHeader.tsx
+:100644 100644 745395a 7f263db M	src/pages/PlantProfile.tsx
+
+bee12b3, Susana Poveda, Thu Aug 25 14:33:32 2022, "Prevent new post picture to collapse too much on mobiles."
+:100644 100644 8a27ad0 67ede55 M	src/components/NewPost.css
+:100644 100644 24e6a99 de3197c M	src/layouts/Header.css
+
+5bb07ab, Susana Poveda, Thu Aug 25 14:17:37 2022, "Set logic to handle flags."
+:100644 100644 755c26b 0f2586a M	src/App.css
+:100644 100644 d1f520b ed49d18 M	src/components/Filters.tsx
+:100644 100644 ed4a875 ab06bcd M	src/components/PublishedPost.tsx
+:100644 100644 1d165ff beb25d6 M	src/context.tsx
+:100644 100644 9de4671 084ce76 M	src/pages/Home.tsx
+
+d7423e6, Susana Poveda, Thu Aug 25 13:45:26 2022, "Load more posts home page implemented."
+:100644 100644 54a06d6 755c26b M	src/App.css
+:100644 100644 ef50d80 d1f520b M	src/components/Filters.tsx
+:100644 100644 6675564 1d165ff M	src/context.tsx
+:100644 100644 055b091 9de4671 M	src/pages/Home.tsx
+
+a0ec2ef, Susana Poveda, Thu Aug 25 13:14:14 2022, "Styled empty friend requests / friends in collection."
+:100644 100644 ac53faf 77a7437 M	src/components/CollectionInteractions.tsx
+:100644 100644 759184d 6bef343 M	src/components/DataSection.css
+
+cd2eb04, Susana Poveda, Thu Aug 25 12:30:24 2022, "Fix exit modal accidentally."
+:100644 100644 598c597 a7ba32c M	src/components/Modal.tsx
+
+378dad0, Susana Poveda, Thu Aug 25 12:22:28 2022, "Added confirmation to new profile created."
+:100644 100644 fbf1174 54a06d6 M	src/App.css
+:100644 100644 1b97337 7a65aae M	src/components/NewProfile.css
+:100644 100644 faa2fdc f5607f6 M	src/components/NewProfile.tsx
+
+0da3f7d, Susana Poveda, Thu Aug 25 11:45:06 2022, "Fix input location to accept negative numbers in a more user friendly way."
+:100644 100644 b713308 faa2fdc M	src/components/NewProfile.tsx
+:100644 100644 2879ac6 745395a M	src/pages/PlantProfile.tsx
+
+f807d0f, susana3, Wed Aug 24 15:25:01 2022, "Merge pull request #63 from Agile-team-project-2022/feature-collection"
+7a35d07, Susana Poveda, Wed Aug 24 14:25:00 2022, "Set confirmation alert when successfully published posts."
+:100644 100644 5c59c29 fbf1174 M	src/App.css
+:100644 100644 e991c19 ef50d80 M	src/components/Filters.tsx
+:100644 100644 6d8ba4f 598c597 M	src/components/Modal.tsx
+:100644 100644 9e2333a 8a27ad0 M	src/components/NewPost.css
+:100644 100644 f612dd5 a2c9d9a M	src/components/NewPost.tsx
+
+6d3dec2, susana3, Wed Aug 24 10:23:08 2022, "Merge pull request #62 from Agile-team-project-2022/feature-login"
+327f733, Susana Poveda, Wed Aug 24 10:19:22 2022, "Logos and name added for PWA."
+:100644 100644 fc44b0a 5cacc6f M	public/logo192.png
+:100644 100644 a4e47a6 fa92bfc M	public/logo512.png
+:100644 100644 080d6c7 9e305d3 M	public/manifest.json
+
+a0a7740, susana3, Wed Aug 24 10:09:25 2022, "Merge pull request #61 from Agile-team-project-2022/feature-login"
+dbee7a6, Susana Poveda, Wed Aug 24 10:05:45 2022, "Included packages for PWA."
+:100644 100644 488b211 09edbe2 M	package-lock.json
+:100644 100644 5336be9 26f56d3 M	package.json
+
+2053bf1, susana3, Wed Aug 24 10:01:15 2022, "Merge pull request #60 from Agile-team-project-2022/feature-login"
+f050fdc, Susana Poveda, Wed Aug 24 09:58:22 2022, "PWA files added."
+:100644 100644 1a15dcc 4e2005c M	src/index.tsx
+:000000 100644 0000000 652a8a4 A	src/service-worker.ts
+:000000 100644 0000000 efbf2ac A	src/serviceWorkerRegistration.ts
+
+6133dd4, susana3, Wed Aug 24 09:22:26 2022, "Merge pull request #59 from Agile-team-project-2022/feature-filters"
+2f6d9a9, Susana Poveda, Wed Aug 24 09:18:39 2022, "Filter posts complete."
+:100644 100644 b9d5774 bf1e7b4 M	src/App.tsx
+:100644 100644 bbe4695 e991c19 M	src/components/Filters.tsx
+
+680bbef, Susana Poveda, Tue Aug 23 20:43:33 2022, "Enable go to owner or plant profile from list modal."
+:100644 100644 fef5109 199e50f M	src/components/ExpandedList.tsx
+
+4b83471, Susana Poveda, Tue Aug 23 20:29:03 2022, "Fix data section style with large fontsize."
+:100644 100644 cb52e04 3308e73 M	src/components/CollectionInteractions.css
+:100644 100644 62cf646 759184d M	src/components/DataSection.css
+
+e0a9604, Susana Poveda, Tue Aug 23 13:59:30 2022, "Increased contrast of backgrounds and borders in settings."
+:100644 100644 0990a09 5c59c29 M	src/App.css
+:100644 100644 59a76f6 7a2bec7 M	src/components/CollectionHeader.css
+:100644 100644 5679bdb 6394f17 M	src/components/Comments.css
+:100644 100644 f4be9e0 491d76b M	src/components/Modal.css
+:100644 100644 f0469df 8d70876 M	src/components/PublishedPost.css
+:100644 100644 4d587af 3be8da6 M	src/components/Settings.css
+:100644 100644 4bfad0a 4431267 M	src/components/Settings.tsx
+
+932d157, susana3, Tue Aug 23 12:25:04 2022, "Merge pull request #58 from Agile-team-project-2022/feature-filters"
+44ea968, Susana Poveda, Tue Aug 23 12:23:35 2022, "Minor fix style settings."
+:100644 100644 f6391f7 4d587af M	src/components/Settings.css
+
+61d5843, susana3, Tue Aug 23 12:09:10 2022, "Merge pull request #57 from Agile-team-project-2022/feature-filters"
+393b5f2, Susana Poveda, Tue Aug 23 12:07:25 2022, "Complete settings feature."
+:000000 100644 0000000 a6a2d2a A	src/assets/flower.jpeg
+:000000 100644 0000000 d7626e3 A	src/assets/reset.png
+:100644 100644 39793c7 f6391f7 M	src/components/Settings.css
+:100644 100644 7391af5 4bfad0a M	src/components/Settings.tsx
+:100644 100644 c7ca81c 704b295 M	src/layouts/Header.tsx
+
+3a7ff62, Susana Poveda, Tue Aug 23 09:54:17 2022, "Contrast, brightness, color controls added to settings."
+:100644 100644 e043ac5 0990a09 M	src/App.css
+:100644 100644 b1410ef 7391af5 M	src/components/Settings.tsx
+:100644 100644 edb341c 6675564 M	src/context.tsx
+
+78795ea, Susana Poveda, Mon Aug 22 14:36:07 2022, "Fix controls header when font changes."
+:100644 100644 eaa7919 24e6a99 M	src/layouts/Header.css
+
+4bb89dc, Susana Poveda, Mon Aug 22 14:09:35 2022, "Fixed style of font change."
+:100644 100644 45574c3 9e2333a M	src/components/NewPost.css
+:100644 100644 529ca12 f0469df M	src/components/PublishedPost.css
+:100644 100644 bd94db6 5f58b4e M	src/pages/PlantProfile.css
+
+e21c571, Susana Poveda, Mon Aug 22 12:38:58 2022, "Added git logs CSV and Graph representation."
+:000000 100644 0000000 4a1a08c A	log-graph.txt
+:000000 100644 0000000 0790f6f A	log.csv
+
 d786805, susana3, Mon Aug 22 12:00:05 2022, "Merge pull request #56 from Agile-team-project-2022/feature-profile"
 c0c7216, Susana Poveda, Mon Aug 22 11:56:37 2022, "Calculation of current seasons completed."
 :000000 100644 0000000 652419f A	src/assets/fall.jpeg

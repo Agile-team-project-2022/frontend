@@ -105,14 +105,20 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
           notifyLoading(false);
         })
         .catch((e) => {
-          console.log(e);
-          if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
+          if(e.message.includes('Request failed with status code 401')) {
+            dispatch({type: AppValidActions.LOG_OUT});
+            if(!window.location.href.includes('/home')) {
+              navigate(`/home`, {replace: true});
+            }
+          }
+          else if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
+          else console.log(e);
         });
     };
 
     fetchPlant();
     // eslint-disable-next-line
-  }, [plants, homePosts]);
+  }, [plants, homePosts, plantId, ownerId]);
 
   /** Initializes with the correct plant followers data. */
   useEffect(() => {
@@ -136,14 +142,20 @@ const PlantProfile: React.FunctionComponent<IPlantProfileProps> = () => {
           setOwnerData(response.data);
         })
         .catch((e) => {
-          console.log(e);
-          if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
+          if(e.message.includes('Request failed with status code 401')) {
+            dispatch({type: AppValidActions.LOG_OUT});
+            if(!window.location.href.includes('/home')) {
+              navigate(`/home`, {replace: true});
+            }
+          }
+          else if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
+          else console.log(e);
         });
     };
 
     fetchOwner();
     // eslint-disable-next-line
-  }, []);
+  }, [ownerId]);
 
   /** Redirects to owner profile. */
   const goToOwner = () => {

@@ -176,7 +176,7 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
   const fetchAllFilters = () => {
     if(!state.loggedIn) return [];
 
-    const url = `${ state.BASE_URL }plant-category?page=1&count=100`;
+    const url = `${ state.BASE_URL }plant-category?page=1&count=10000`;
     if(onLoading) onLoading(true);
     axios.get(url)
       .then((response) => {
@@ -196,7 +196,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
       })
       .catch((e) => {
         if(onLoading && e.message !== 'Network Error') onLoading(false);
-        console.log(e);
+        if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e.message);
       });
   };
 

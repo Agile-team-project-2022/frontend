@@ -70,8 +70,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
               homePosts
                 .slice(Math.max(homePosts.length - (currentPostsPage * postsPerPage), 0), homePosts.length)
                 .map((item, index) => {
-                  if(item.title && item.content) return <PublishedPost post={item} key={`published-post-item-${item.id}`} />;
-                  else return <PublishedImage post={item} key={`published-post-item-${item.id}`} />
+                  if(item.title && item.content) {
+                    return <PublishedPost post={item} key={`published-post-item-${item.id}`}/>;
+                  } else {
+                    return <PublishedImage post={item} key={`published-post-image-item-${item.id}`}/>
+                  }
                 })
             }
             {

@@ -1,5 +1,6 @@
 import React, {useReducer} from "react";
 import {DeviceTypes} from "./hooks/useWindowSize";
+import axios from "axios";
 
 // ================================ Global app storage ================================ //
 
@@ -98,6 +99,7 @@ export interface PostData {
   postFlag: {}[],
   published: boolean,
   imageFile: string,
+  imagesArr?: string[],
   postlikes: {id: number, userId: number}[],
   comments: CommentData[],
   createdAt: string,
@@ -267,6 +269,7 @@ const reducer = (state: AppState, action: AppAction) => {
         loggedIn: true
       };
       window.localStorage.setItem('InterPlantSessionData', JSON.stringify(data));
+      axios.defaults.headers.common['Authorization'] = `Bearer ${(action as LogInAction).payload.token}`;
       return {
         ...state,
         userData: {
@@ -276,11 +279,13 @@ const reducer = (state: AppState, action: AppAction) => {
           userId: (action as LogInAction).payload.userId
         },
         token: (action as LogInAction).payload.token,
-        loggedIn: true
+        loggedIn: true,
+        updateFetchUser: !state.updateFetchUser
       };
 
     case AppValidActions.LOG_OUT:
       window.localStorage.removeItem('InterPlantSessionData');
+      delete axios.defaults.headers.common['Authorization'];
       return {
         ...state,
         userData: {
@@ -345,9 +350,82 @@ const reducer = (state: AppState, action: AppAction) => {
       };
 
     case AppValidActions.UPDATE_HOME_POSTS:
+      const posts: PostData[] = [];
+      let imgPosts: string[] = [];
+      let start = 0;
+      (action as UpdateHomePostsAction).payload.homePosts.forEach((post, index) => {
+        const startArrImages = (
+          !post.title
+          && index - 1 >= 0
+          && index + 1 < (action as UpdateHomePostsAction).payload.homePosts.length
+          && post.plantId === (action as UpdateHomePostsAction).payload.homePosts[index + 1].plantId
+          && post.plantId !== (action as UpdateHomePostsAction).payload.homePosts[index - 1].plantId
+        ) || (
+          !post.title
+          && (action as UpdateHomePostsAction).payload.homePosts[index - 1]
+          && (action as UpdateHomePostsAction).payload.homePosts[index - 1].title
+        ) || (
+          !post.title
+          && index === 0
+        ) || (
+          !post.title
+          && index - 1 >= 0
+          && post.plantId !== (action as UpdateHomePostsAction).payload.homePosts[index - 1].plantId
+        );
+        const middleArrImages = (
+          !post.title
+          && index + 1 < (action as UpdateHomePostsAction).payload.homePosts.length
+          && post.plantId === (action as UpdateHomePostsAction).payload.homePosts[index + 1].plantId
+        );
+        const endArrImages = (
+          !post.title
+          && start > 0
+          && index - 1 >= 0
+          && index + 1 < (action as UpdateHomePostsAction).payload.homePosts.length
+          && post.plantId !== (action as UpdateHomePostsAction).payload.homePosts[index + 1].plantId
+          && post.plantId === (action as UpdateHomePostsAction).payload.homePosts[index - 1].plantId
+        ) || (
+          !post.title
+          && (action as UpdateHomePostsAction).payload.homePosts[index + 1]
+          && (action as UpdateHomePostsAction).payload.homePosts[index + 1].title
+        ) || (
+          !post.title
+          && index + 1 === (action as UpdateHomePostsAction).payload.homePosts.length
+        );
+
+        if(startArrImages) {
+          start = index;
+          imgPosts = [];
+          imgPosts.push(post.imageFile);
+          if(
+            index + 1 === (action as UpdateHomePostsAction).payload.homePosts.length
+            || (action as UpdateHomePostsAction).payload.homePosts[index + 1].title
+            || (
+              index + 1 < (action as UpdateHomePostsAction).payload.homePosts.length
+              && post.plantId !== (action as UpdateHomePostsAction).payload.homePosts[index + 1].plantId
+            )
+          ) {
+            posts.push({...post, imagesArr: imgPosts.reverse()});
+            start = index;
+            imgPosts = [];
+          }
+        } else if(middleArrImages) {
+          imgPosts.push(post.imageFile);
+        } else if(endArrImages) {
+          imgPosts.push(post.imageFile);
+          posts.push(
+            {...(action as UpdateHomePostsAction).payload.homePosts[start], imagesArr: imgPosts.reverse()}
+          );
+          start = index;
+          imgPosts = [];
+        } else {
+          posts.push({...post, imagesArr: [post.imageFile]});
+        }
+      });
+
       return {
         ...state,
-        homePosts: (action as UpdateHomePostsAction).payload.homePosts
+        homePosts: posts
       };
 
     case AppValidActions.UPDATE_PLANT_PICTURE:
