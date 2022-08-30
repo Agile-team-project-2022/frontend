@@ -34,11 +34,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  /** Uses the login data when received. */
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
-  }, [state.token]);
-
   /** Updates the context only if the device type changed. */
   useEffect(() => {
     if(state.deviceType !== deviceType) {
@@ -105,8 +100,9 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
           dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
         })
         .catch((e) => {
-          console.log(e);
           if(e.message !== 'Network Error') dispatch({type: AppValidActions.UPDATE_USER_LOADING, payload: {loading: false}});
+          else if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+          else console.log(e);
         });
     };
 

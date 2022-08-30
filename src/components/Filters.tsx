@@ -196,7 +196,8 @@ const Filters: React.FunctionComponent<IFiltersProps> = ({onLoading}) => {
       })
       .catch((e) => {
         if(onLoading && e.message !== 'Network Error') onLoading(false);
-        console.log(e);
+        else if(e.message.includes('Request failed with status code 401')) dispatch({type: AppValidActions.LOG_OUT});
+        else console.log(e);
       });
   };
 

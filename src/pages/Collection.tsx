@@ -3,7 +3,7 @@ import './Collection.css';
 import CollectionHeader, {CollectionView} from "../components/CollectionHeader";
 import CollectionPlants from "../components/CollectionPlants";
 import Badges from "../components/Badges";
-import {AppContext, UserData} from "../context";
+import {AppContext, AppValidActions, UserData} from "../context";
 import {DeviceTypes} from "../hooks/useWindowSize";
 import CollectionInteractions from "../components/CollectionInteractions";
 import {useNavigate, useParams} from "react-router-dom";
@@ -16,7 +16,7 @@ export interface ICollectionProps {
 }
 
 const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
-  const {state: {deviceType, userData, BASE_URL, loadingUser}} = useContext(AppContext);
+  const {state: {deviceType, userData, BASE_URL, loadingUser}, dispatch} = useContext(AppContext);
   const {ownerId, relationId} = useParams();
   const [view, setView] = useState(CollectionView.OWNER);
   const [othersData, setOthersData] = useState<UserData>();
@@ -85,8 +85,14 @@ const Collection: React.FunctionComponent<ICollectionProps> = ({confirm}) => {
           setLoadingData(false);
         })
         .catch((e) => {
-          console.log(e);
-          if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
+          if(e.message.includes('Request failed with status code 401')) {
+            dispatch({type: AppValidActions.LOG_OUT});
+            if(!window.location.href.includes('/home')) {
+              navigate(`/home`, {replace: true});
+            }
+          }
+          else if(e.message !== 'Network Error') navigate(`/not-found`, {replace: true});
+          else console.log(e);
         });
     };
 

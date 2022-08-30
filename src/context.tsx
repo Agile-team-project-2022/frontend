@@ -1,5 +1,6 @@
 import React, {useReducer} from "react";
 import {DeviceTypes} from "./hooks/useWindowSize";
+import axios from "axios";
 
 // ================================ Global app storage ================================ //
 
@@ -267,6 +268,7 @@ const reducer = (state: AppState, action: AppAction) => {
         loggedIn: true
       };
       window.localStorage.setItem('InterPlantSessionData', JSON.stringify(data));
+      axios.defaults.headers.common['Authorization'] = `Bearer ${(action as LogInAction).payload.token}`;
       return {
         ...state,
         userData: {
@@ -276,11 +278,13 @@ const reducer = (state: AppState, action: AppAction) => {
           userId: (action as LogInAction).payload.userId
         },
         token: (action as LogInAction).payload.token,
-        loggedIn: true
+        loggedIn: true,
+        updateFetchUser: !state.updateFetchUser
       };
 
     case AppValidActions.LOG_OUT:
       window.localStorage.removeItem('InterPlantSessionData');
+      delete axios.defaults.headers.common['Authorization'];
       return {
         ...state,
         userData: {

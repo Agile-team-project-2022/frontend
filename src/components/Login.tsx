@@ -348,9 +348,8 @@ const Login: React.FunctionComponent<ILoginProps> = ({noClose}) => {
           {
             decorativeImages.map(([imageJPEG, imageAVIF], index) => {
               return (
-                <Suspense>
+                <Suspense key={`decorative-img-${index}`}>
                   <LazyLoadImage srcSet={`${imageAVIF}, ${imageJPEG}`}
-                                 key={`decorative-img-${index}`}
                                  alt='Decorative plant.'
                                  effect='black-and-white'
                   />
