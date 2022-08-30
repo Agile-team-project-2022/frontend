@@ -1,6 +1,389 @@
-*   d786805 - Mon, 22 Aug 2022 12:00:05 -0500 (hace 36 minutos) (HEAD -> main, origin/main)
+* 8d5b430 - Tue, 30 Aug 2022 11:53:35 -0500 (hace 47 segundos) (HEAD -> feature-collection)
+|  Add loading to login. Auto request login again when session expires. Gallery images gathered in a single post. Comment cleaning - Susana Poveda| 
+| :100644 100644 a963935 eaa7a1b M	src/App.css
+| :100644 100644 881a9b8 f46286d M	src/App.tsx
+| :100644 100644 1c574ca 3413df6 M	src/components/Filters.tsx
+| :100644 100644 3cfe515 a6fe702 M	src/components/Gallery.tsx
+| :100644 100644 4db7518 2680310 M	src/components/Login.css
+| :100644 100644 02e0d3d 1436933 M	src/components/Login.tsx
+| :100644 100644 607672d 1c18e00 M	src/components/NewPost.tsx
+| :100644 100644 9d14875 15b1f05 M	src/components/PublishedImage.css
+| :100644 100644 8e07743 b0475ca M	src/components/PublishedImage.tsx
+| :100644 100644 e73f8bb f63518c M	src/context.tsx
+| :100644 100644 ffa39fc b9b7950 M	src/pages/Home.tsx
+
+* c0dbeb9 - Mon, 29 Aug 2022 22:05:53 -0500 (hace 14 horas)
+|  Fix login flow and handle expiration of token. - Susana Poveda| 
+| :100644 100644 ce345aa 881a9b8 M	src/App.tsx
+| :100644 100644 1c1b3a2 1c574ca M	src/components/Filters.tsx
+| :100644 100644 7362b85 02e0d3d M	src/components/Login.tsx
+| :100644 100644 ba32505 a9a665c M	src/components/PublishedPost.tsx
+| :100644 100644 bfec316 e73f8bb M	src/context.tsx
+| :100644 100644 23ff35e 7260dd5 M	src/pages/Collection.tsx
+| :100644 100644 21d87de 4604e98 M	src/pages/PlantProfile.tsx
+
+*   299b9f4 - Mon, 29 Aug 2022 15:45:45 -0500 (hace 20 horas) (origin/main, main)
+|\   Merge pull request #78 from Agile-team-project-2022/feature-login - susana3
+| * 4fccd17 - Mon, 29 Aug 2022 15:43:40 -0500 (hace 20 horas)
+|/   Comments cleaning and fix minor style element in water schedules for desktop. - Susana Poveda|   
+|   :100644 100644 6b6d9d0 ce345aa M	src/App.tsx
+|   :100644 100644 5f77d1a 2fe3c3b M	src/components/ChangeProfilePicture.tsx
+|   :100644 100644 29759ef 069a64e M	src/components/CollectionCard.tsx
+|   :100644 100644 12f34b9 bd119aa M	src/components/CollectionInteractions.tsx
+|   :100644 100644 5a5cef8 26a80b8 M	src/components/DataSection.css
+|   :100644 100644 020d3f6 1c1b3a2 M	src/components/Filters.tsx
+|   :100644 100644 6d3ac5a 7a01b21 M	src/components/GalleryPreview.tsx
+|   :100644 100644 90f6a2f e28bbd6 M	src/components/ProfileHeader.tsx
+|   :100644 100644 70c4963 02c4f79 M	src/components/WaterSchedule.tsx
+|   :100644 100644 e228342 bfec316 M	src/context.tsx
+|   :100644 100644 6654ac4 905c95d M	src/layouts/Header.tsx
+|   :100644 100644 950f829 ffa39fc M	src/pages/Home.tsx
+|   :100644 100644 55d0b12 21d87de M	src/pages/PlantProfile.tsx
+
+*   12757b5 - Sun, 28 Aug 2022 20:24:11 -0500 (hace 2 d'ias)
+|\   Merge pull request #77 from Agile-team-project-2022/feature-login - susana3
+| * 3ddb91d - Sun, 28 Aug 2022 20:22:43 -0500 (hace 2 d'ias)
+|/   Minor home fix. - Susana Poveda|   
+|   :100644 100644 bfbbe41 950f829 M	src/pages/Home.tsx
+
+*   ff5d15c - Sun, 28 Aug 2022 20:07:46 -0500 (hace 2 d'ias)
+|\   Merge pull request #76 from Agile-team-project-2022/feature-login - susana3
+| * 3319b3c - Sun, 28 Aug 2022 20:05:07 -0500 (hace 2 d'ias)
+|/   Fix login load. - Susana Poveda|   
+|   :000000 100644 0000000 e609f62 A	src/assets/login-img-1.avif
+|   :000000 100644 0000000 13b4a71 A	src/assets/login-img-10.avif
+|   :000000 100644 0000000 db9416a A	src/assets/login-img-2.avif
+|   :000000 100644 0000000 ab8d84c A	src/assets/login-img-3.avif
+|   :000000 100644 0000000 9636fae A	src/assets/login-img-4.avif
+|   :000000 100644 0000000 4a5bdd7 A	src/assets/login-img-5.avif
+|   :000000 100644 0000000 970431b A	src/assets/login-img-6.avif
+|   :000000 100644 0000000 4989391 A	src/assets/login-img-7.avif
+|   :000000 100644 0000000 c5a7703 A	src/assets/login-img-8.avif
+|   :000000 100644 0000000 efccbbb A	src/assets/login-img-9.avif
+|   :100644 100644 9299989 7362b85 M	src/components/Login.tsx
+
+*   095af9c - Sun, 28 Aug 2022 14:57:15 -0500 (hace 2 d'ias)
+|\   Merge pull request #75 from Agile-team-project-2022/feature-login - susana3
+| * 2bc1b1a - Sun, 28 Aug 2022 14:55:18 -0500 (hace 2 d'ias)
+|/   Enhanced login and register for all devices. - Susana Poveda|   
+|   :100644 100644 fd4fc61 6b6d9d0 M	src/App.tsx
+|   :100644 100644 ab55960 4db7518 M	src/components/Login.css
+|   :100644 100644 e651728 9299989 M	src/components/Login.tsx
+|   :100644 100644 491d76b c625b83 M	src/components/Modal.css
+
+*   b4c8b17 - Sun, 28 Aug 2022 14:05:05 -0500 (hace 2 d'ias)
+|\   Merge pull request #74 from Agile-team-project-2022/feature-login - susana3
+| * f8e3705 - Sun, 28 Aug 2022 14:01:20 -0500 (hace 2 d'ias)
+| |  Minor fix weather. - Susana Poveda| | 
+| | :100644 100644 42a1c68 6ab2b6c M	src/components/Weather.tsx
+
+| * 41c6241 - Sun, 28 Aug 2022 13:57:59 -0500 (hace 2 d'ias)
+|/   Fix interfering authorization headers and weather data. - Susana Poveda|   
+|   :100644 100644 a349dd5 42a1c68 M	src/components/Weather.tsx
+
+*   bf07402 - Sun, 28 Aug 2022 13:23:57 -0500 (hace 2 d'ias)
+|\   Merge pull request #73 from Agile-team-project-2022/feature-login - susana3
+| * ef0e615 - Sun, 28 Aug 2022 13:20:30 -0500 (hace 2 d'ias)
+|/   Fix flow of register/login. - Susana Poveda|   
+|   :100644 100644 86dd951 a963935 M	src/App.css
+|   :100644 100644 3a4bb0a e651728 M	src/components/Login.tsx
+
+*   5cf013d - Sun, 28 Aug 2022 12:14:10 -0500 (hace 2 d'ias)
+|\   Merge pull request #72 from Agile-team-project-2022/feature-login - susana3
+| * 4cf03f8 - Sun, 28 Aug 2022 12:10:47 -0500 (hace 2 d'ias)
+| |  Login and register working. - Susana Poveda| | 
+| | :100644 100644 3f7200d fd4fc61 M	src/App.tsx
+| | :100644 100644 7d8bffd 020d3f6 M	src/components/Filters.tsx
+| | :100644 100644 732339f ab55960 M	src/components/Login.css
+| | :100644 100644 932a65a 3a4bb0a M	src/components/Login.tsx
+| | :100644 100644 49932a8 e228342 M	src/context.tsx
+| | :100644 100644 de3197c be52310 M	src/layouts/Header.css
+| | :100644 100644 24ecb73 6654ac4 M	src/layouts/Header.tsx
+
+| * d6c1c64 - Sat, 27 Aug 2022 22:44:28 -0500 (hace 3 d'ias)
+|/   Register and login fields added. - Susana Poveda|   
+|   :100644 100644 ce991e4 732339f M	src/components/Login.css
+|   :100644 100644 10272c3 932a65a M	src/components/Login.tsx
+
+*   1e6a140 - Sat, 27 Aug 2022 21:34:23 -0500 (hace 3 d'ias)
+|\   Merge pull request #71 from Agile-team-project-2022/feature-login - susana3
+| * ad666da - Sat, 27 Aug 2022 21:32:07 -0500 (hace 3 d'ias)
+|/   Optimize LCP and use next gen formats. - Susana Poveda|   
+|   :100644 100644 e6c9cb2 3f7200d M	src/App.tsx
+|   :100644 100644 787e835 7d8bffd M	src/components/Filters.tsx
+|   :100644 100644 d873161 24ecb73 M	src/layouts/Header.tsx
+|   :100644 100644 4298721 6be9380 M	src/pages/Home.css
+|   :100644 100644 65eb474 bfbbe41 M	src/pages/Home.tsx
+
+*   1e5d8a0 - Sat, 27 Aug 2022 20:38:39 -0500 (hace 3 d'ias)
+|\   Merge pull request #70 from Agile-team-project-2022/feature-login - susana3
+| * ce50d30 - Sat, 27 Aug 2022 20:36:35 -0500 (hace 3 d'ias)
+|/   Optimize performance.Â - Susana Poveda|   
+|   :000000 100644 0000000 41719da A	src/assets/geometric-background.avif
+|   :000000 100644 0000000 32aaca5 A	src/assets/help.webp
+|   :000000 100644 0000000 672033e A	src/assets/no-content-yet.webp
+|   :000000 100644 0000000 e87442b A	src/assets/search.webp
+|   :000000 100644 0000000 54dc846 A	src/assets/settings.webp
+|   :100644 100644 650400a 5415ab5 M	src/components/Filters.css
+|   :100644 100644 8208a7a 787e835 M	src/components/Filters.tsx
+|   :100644 100644 ddd0094 d873161 M	src/layouts/Header.tsx
+|   :100644 100644 8387b59 4298721 M	src/pages/Home.css
+|   :100644 100644 682044b 65eb474 M	src/pages/Home.tsx
+
+*   c6520b5 - Sat, 27 Aug 2022 19:55:05 -0500 (hace 3 d'ias)
+|\   Merge pull request #69 from Agile-team-project-2022/feature-login - susana3
+| * 58627eb - Sat, 27 Aug 2022 19:52:43 -0500 (hace 3 d'ias)
+|/   Login register, and login set up. - Susana Poveda|   
+|   :100644 100644 6ce60d5 e6c9cb2 M	src/App.tsx
+|   :100644 100644 257a2c3 10272c3 M	src/components/Login.tsx
+|   :100644 100644 e7661f3 49932a8 M	src/context.tsx
+|   :100644 100644 4e2005c 6ee3859 M	src/index.tsx
+
+*   e9c7cd2 - Sat, 27 Aug 2022 13:25:18 -0500 (hace 3 d'ias)
+|\   Merge pull request #68 from Agile-team-project-2022/feature-login - susana3
+| * 85c725c - Sat, 27 Aug 2022 13:23:37 -0500 (hace 3 d'ias)
+|/   Connected gallery, remove select profile from plant profile new posts. - Susana Poveda|   
+|   :100644 100644 17305eb 86dd951 M	src/App.css
+|   :100644 100644 6690b0f 682b8d1 M	src/components/Gallery.css
+|   :100644 100644 eab4f6b 3cfe515 M	src/components/Gallery.tsx
+|   :100644 100644 3b9f7a3 9c0e4ee M	src/components/GalleryPreview.css
+|   :100644 100644 b8f9260 6d3ac5a M	src/components/GalleryPreview.tsx
+|   :100644 100644 67ede55 ee0e24d M	src/components/NewPost.css
+|   :100644 100644 a6410ac 607672d M	src/components/NewPost.tsx
+|   :000000 100644 0000000 9d14875 A	src/components/PublishedImage.css
+|   :000000 100644 0000000 8e07743 A	src/components/PublishedImage.tsx
+|   :100644 100644 b6f829a ba32505 M	src/components/PublishedPost.tsx
+|   :100644 100644 fcb64b2 e7661f3 M	src/context.tsx
+|   :100644 100644 bb92d5d 682044b M	src/pages/Home.tsx
+|   :100644 100644 7542b90 55d0b12 M	src/pages/PlantProfile.tsx
+
+*   d494949 - Sat, 27 Aug 2022 10:18:19 -0500 (hace 3 d'ias)
+|\   Merge pull request #67 from Agile-team-project-2022/feature-login - susana3
+| * 1c68397 - Sat, 27 Aug 2022 10:16:26 -0500 (hace 3 d'ias)
+|/   Check variable netlify - Susana Poveda|   
+|   :100644 100644 a7ba32c a97e589 M	src/components/Modal.tsx
+
+*   45eea8f - Fri, 26 Aug 2022 14:21:08 -0500 (hace 4 d'ias)
+|\   Merge pull request #66 from Agile-team-project-2022/feature-login - susana3
+| * 3c8541c - Fri, 26 Aug 2022 14:16:01 -0500 (hace 4 d'ias)
+| |  Fix style mobile owner interactions. - Susana Poveda| | 
+| | :100644 100644 7deb310 12f34b9 M	src/components/CollectionInteractions.tsx
+| | :100644 100644 6bef343 5a5cef8 M	src/components/DataSection.css
+
+| * c5f81ac - Fri, 26 Aug 2022 13:52:14 -0500 (hace 4 d'ias)
+| |  Fix style mobile loading. - Susana Poveda| | 
+| | :100644 100644 184a5b0 17305eb M	src/App.css
+
+| * b75c6ea - Fri, 26 Aug 2022 13:50:17 -0500 (hace 4 d'ias)
+|/   Adjust constraints and resize of pictures. - Susana Poveda|   
+|   :100644 100644 4f4caa1 7be17ac M	src/components/InputImage.tsx
+|   :100644 100644 b7bd283 257a2c3 M	src/components/Login.tsx
+
+*   a580107 - Fri, 26 Aug 2022 12:19:00 -0500 (hace 4 d'ias)
+|\   Merge pull request #65 from Agile-team-project-2022/feature-collection - susana3
+| * 8a45fbe - Fri, 26 Aug 2022 12:17:11 -0500 (hace 4 d'ias) (origin/feature-collection)
+| |  Handle loading when no network is available. - Susana Poveda| | 
+| | :100644 100644 de2b48e 184a5b0 M	src/App.css
+| | :100644 100644 db9d143 6ce60d5 M	src/App.tsx
+| | :100644 100644 199e50f e60e4fe M	src/components/ExpandedList.tsx
+| | :100644 100644 d5807d2 8208a7a M	src/components/Filters.tsx
+| | :100644 100644 8fb1d7d 82f338d M	src/components/Loading.tsx
+| | :100644 100644 0333373 23ff35e M	src/pages/Collection.tsx
+| | :100644 100644 05897dd 7542b90 M	src/pages/PlantProfile.tsx
+
+| * 273d637 - Fri, 26 Aug 2022 11:59:15 -0500 (hace 4 d'ias)
+| |  Loading component complete. - Susana Poveda| | 
+| | :100644 100644 b09ad08 de2b48e M	src/App.css
+| | :100644 100644 bf1e7b4 db9d143 M	src/App.tsx
+| | :100644 100644 017cb5e d5807d2 M	src/components/Filters.tsx
+| | :100644 100644 132d199 5801ff2 M	src/components/GalleryExpanded.tsx
+| | :000000 100644 0000000 8fb1d7d A	src/components/Loading.tsx
+| | :100644 100644 95701be fcb64b2 M	src/context.tsx
+| | :100644 100644 704b295 ddd0094 M	src/layouts/Header.tsx
+| | :100644 100644 1caa5d4 0333373 M	src/pages/Collection.tsx
+| | :100644 100644 7a3adcc 8387b59 M	src/pages/Home.css
+| | :100644 100644 084ce76 bb92d5d M	src/pages/Home.tsx
+| | :100644 100644 fc8e062 05897dd M	src/pages/PlantProfile.tsx
+
+| * 375385d - Fri, 26 Aug 2022 10:57:33 -0500 (hace 4 d'ias)
+|/   Flagged posts automatic deletion after threshold. - Susana Poveda|   
+|   :000000 100644 0000000 b8f2935 A	src/assets/loading.json
+|   :100644 100644 ab06bcd b6f829a M	src/components/PublishedPost.tsx
+|   :100644 100644 beb25d6 95701be M	src/context.tsx
+
+*   71062c7 - Thu, 25 Aug 2022 22:54:04 -0500 (hace 5 d'ias)
+|\   Merge pull request #64 from Agile-team-project-2022/feature-collection - susana3
+| * 3657f2e - Thu, 25 Aug 2022 22:50:37 -0500 (hace 5 d'ias)
+| |  Gallery arrows implemented to switch images. - Susana Poveda| | 
+| | :100644 100644 bef1830 eab4f6b M	src/components/Gallery.tsx
+| | :100644 100644 06b6e40 25c9b5d M	src/components/GalleryExpanded.css
+| | :100644 100644 5c6ea91 132d199 M	src/components/GalleryExpanded.tsx
+| | :100644 100644 1b59e89 b8f9260 M	src/components/GalleryPreview.tsx
+| | :100644 100644 63108c6 621b3d9 M	src/components/ProfileHeader.css
+| | :100644 100644 2a65244 fc8e062 M	src/pages/PlantProfile.tsx
+
+| * 58942d4 - Thu, 25 Aug 2022 21:55:41 -0500 (hace 5 d'ias)
+| |  Set example pictures for galleries.Â - Susana Poveda| | 
+| | :100644 100644 b7dc237 6690b0f M	src/components/Gallery.css
+| | :100644 100644 3088ddd 1b59e89 M	src/components/GalleryPreview.tsx
+| | :100644 100644 8c9440b 5355bfa M	src/components/Weather.css
+| | :100644 100644 7f263db 2a65244 M	src/pages/PlantProfile.tsx
+
+| * 6432f3e - Thu, 25 Aug 2022 21:18:59 -0500 (hace 5 d'ias)
+| |  Gallery upload new images logic set up. - Susana Poveda| | 
+| | :100644 100644 0f2586a b09ad08 M	src/App.css
+| | :000000 100644 0000000 b7dc237 A	src/components/Gallery.css
+| | :000000 100644 0000000 bef1830 A	src/components/Gallery.tsx
+| | :100644 100644 39bc451 3088ddd M	src/components/GalleryPreview.tsx
+| | :100644 100644 a2c9d9a a6410ac M	src/components/NewPost.tsx
+
+| * 76d6d15 - Thu, 25 Aug 2022 15:19:31 -0500 (hace 5 d'ias)
+| |  Connected delete followed plants / friends. - Susana Poveda| | 
+| | :100644 100644 f6710f1 a16326b M	src/components/CollectionHeader.tsx
+| | :100644 100644 77a7437 7deb310 M	src/components/CollectionInteractions.tsx
+| | :100644 100644 ed49d18 017cb5e M	src/components/Filters.tsx
+| | :100644 100644 f211291 90f6a2f M	src/components/ProfileHeader.tsx
+| | :100644 100644 745395a 7f263db M	src/pages/PlantProfile.tsx
+
+| * bee12b3 - Thu, 25 Aug 2022 14:33:32 -0500 (hace 5 d'ias)
+| |  Prevent new post picture to collapse too much on mobiles. - Susana Poveda| | 
+| | :100644 100644 8a27ad0 67ede55 M	src/components/NewPost.css
+| | :100644 100644 24e6a99 de3197c M	src/layouts/Header.css
+
+| * 5bb07ab - Thu, 25 Aug 2022 14:17:37 -0500 (hace 5 d'ias)
+| |  Set logic to handle flags. - Susana Poveda| | 
+| | :100644 100644 755c26b 0f2586a M	src/App.css
+| | :100644 100644 d1f520b ed49d18 M	src/components/Filters.tsx
+| | :100644 100644 ed4a875 ab06bcd M	src/components/PublishedPost.tsx
+| | :100644 100644 1d165ff beb25d6 M	src/context.tsx
+| | :100644 100644 9de4671 084ce76 M	src/pages/Home.tsx
+
+| * d7423e6 - Thu, 25 Aug 2022 13:45:26 -0500 (hace 5 d'ias)
+| |  Load more posts home page implemented. - Susana Poveda| | 
+| | :100644 100644 54a06d6 755c26b M	src/App.css
+| | :100644 100644 ef50d80 d1f520b M	src/components/Filters.tsx
+| | :100644 100644 6675564 1d165ff M	src/context.tsx
+| | :100644 100644 055b091 9de4671 M	src/pages/Home.tsx
+
+| * a0ec2ef - Thu, 25 Aug 2022 13:14:14 -0500 (hace 5 d'ias)
+| |  Styled empty friend requests / friends in collection. - Susana Poveda| | 
+| | :100644 100644 ac53faf 77a7437 M	src/components/CollectionInteractions.tsx
+| | :100644 100644 759184d 6bef343 M	src/components/DataSection.css
+
+| * cd2eb04 - Thu, 25 Aug 2022 12:30:24 -0500 (hace 5 d'ias)
+| |  Fix exit modal accidentally. - Susana Poveda| | 
+| | :100644 100644 598c597 a7ba32c M	src/components/Modal.tsx
+
+| * 378dad0 - Thu, 25 Aug 2022 12:22:28 -0500 (hace 5 d'ias)
+| |  Added confirmation to new profile created. - Susana Poveda| | 
+| | :100644 100644 fbf1174 54a06d6 M	src/App.css
+| | :100644 100644 1b97337 7a65aae M	src/components/NewProfile.css
+| | :100644 100644 faa2fdc f5607f6 M	src/components/NewProfile.tsx
+
+| * 0da3f7d - Thu, 25 Aug 2022 11:45:06 -0500 (hace 5 d'ias)
+|/   Fix input location to accept negative numbers in a more user friendly way. - Susana Poveda|   
+|   :100644 100644 b713308 faa2fdc M	src/components/NewProfile.tsx
+|   :100644 100644 2879ac6 745395a M	src/pages/PlantProfile.tsx
+
+*   f807d0f - Wed, 24 Aug 2022 15:25:01 -0500 (hace 6 d'ias)
+|\   Merge pull request #63 from Agile-team-project-2022/feature-collection - susana3
+| * 7a35d07 - Wed, 24 Aug 2022 14:25:00 -0500 (hace 6 d'ias)
+|/   Set confirmation alert when successfully published posts. - Susana Poveda|   
+|   :100644 100644 5c59c29 fbf1174 M	src/App.css
+|   :100644 100644 e991c19 ef50d80 M	src/components/Filters.tsx
+|   :100644 100644 6d8ba4f 598c597 M	src/components/Modal.tsx
+|   :100644 100644 9e2333a 8a27ad0 M	src/components/NewPost.css
+|   :100644 100644 f612dd5 a2c9d9a M	src/components/NewPost.tsx
+
+*   6d3dec2 - Wed, 24 Aug 2022 10:23:08 -0500 (hace 6 d'ias)
+|\   Merge pull request #62 from Agile-team-project-2022/feature-login - susana3
+| * 327f733 - Wed, 24 Aug 2022 10:19:22 -0500 (hace 6 d'ias)
+|/   Logos and name added for PWA. - Susana Poveda|   
+|   :100644 100644 fc44b0a 5cacc6f M	public/logo192.png
+|   :100644 100644 a4e47a6 fa92bfc M	public/logo512.png
+|   :100644 100644 080d6c7 9e305d3 M	public/manifest.json
+
+*   a0a7740 - Wed, 24 Aug 2022 10:09:25 -0500 (hace 6 d'ias)
+|\   Merge pull request #61 from Agile-team-project-2022/feature-login - susana3
+| * dbee7a6 - Wed, 24 Aug 2022 10:05:45 -0500 (hace 6 d'ias)
+|/   Included packages for PWA. - Susana Poveda|   
+|   :100644 100644 488b211 09edbe2 M	package-lock.json
+|   :100644 100644 5336be9 26f56d3 M	package.json
+
+*   2053bf1 - Wed, 24 Aug 2022 10:01:15 -0500 (hace 6 d'ias)
+|\   Merge pull request #60 from Agile-team-project-2022/feature-login - susana3
+| * f050fdc - Wed, 24 Aug 2022 09:58:22 -0500 (hace 6 d'ias)
+|/   PWA files added. - Susana Poveda|   
+|   :100644 100644 1a15dcc 4e2005c M	src/index.tsx
+|   :000000 100644 0000000 652a8a4 A	src/service-worker.ts
+|   :000000 100644 0000000 efbf2ac A	src/serviceWorkerRegistration.ts
+
+*   6133dd4 - Wed, 24 Aug 2022 09:22:26 -0500 (hace 6 d'ias)
+|\   Merge pull request #59 from Agile-team-project-2022/feature-filters - susana3
+| * 2f6d9a9 - Wed, 24 Aug 2022 09:18:39 -0500 (hace 6 d'ias)
+| |  Filter posts complete. - Susana Poveda| | 
+| | :100644 100644 b9d5774 bf1e7b4 M	src/App.tsx
+| | :100644 100644 bbe4695 e991c19 M	src/components/Filters.tsx
+
+| * 680bbef - Tue, 23 Aug 2022 20:43:33 -0500 (hace 7 d'ias)
+| |  Enable go to owner or plant profile from list modal. - Susana Poveda| | 
+| | :100644 100644 fef5109 199e50f M	src/components/ExpandedList.tsx
+
+| * 4b83471 - Tue, 23 Aug 2022 20:29:03 -0500 (hace 7 d'ias)
+| |  Fix data section style with large fontsize. - Susana Poveda| | 
+| | :100644 100644 cb52e04 3308e73 M	src/components/CollectionInteractions.css
+| | :100644 100644 62cf646 759184d M	src/components/DataSection.css
+
+| * e0a9604 - Tue, 23 Aug 2022 13:59:30 -0500 (hace 7 d'ias)
+|/   Increased contrast of backgrounds and borders in settings. - Susana Poveda|   
+|   :100644 100644 0990a09 5c59c29 M	src/App.css
+|   :100644 100644 59a76f6 7a2bec7 M	src/components/CollectionHeader.css
+|   :100644 100644 5679bdb 6394f17 M	src/components/Comments.css
+|   :100644 100644 f4be9e0 491d76b M	src/components/Modal.css
+|   :100644 100644 f0469df 8d70876 M	src/components/PublishedPost.css
+|   :100644 100644 4d587af 3be8da6 M	src/components/Settings.css
+|   :100644 100644 4bfad0a 4431267 M	src/components/Settings.tsx
+
+*   932d157 - Tue, 23 Aug 2022 12:25:04 -0500 (hace 7 d'ias)
+|\   Merge pull request #58 from Agile-team-project-2022/feature-filters - susana3
+| * 44ea968 - Tue, 23 Aug 2022 12:23:35 -0500 (hace 7 d'ias)
+|/   Minor fix style settings. - Susana Poveda|   
+|   :100644 100644 f6391f7 4d587af M	src/components/Settings.css
+
+*   61d5843 - Tue, 23 Aug 2022 12:09:10 -0500 (hace 7 d'ias)
+|\   Merge pull request #57 from Agile-team-project-2022/feature-filters - susana3
+| * 393b5f2 - Tue, 23 Aug 2022 12:07:25 -0500 (hace 7 d'ias)
+| |  Complete settings feature. - Susana Poveda| | 
+| | :000000 100644 0000000 a6a2d2a A	src/assets/flower.jpeg
+| | :000000 100644 0000000 d7626e3 A	src/assets/reset.png
+| | :100644 100644 39793c7 f6391f7 M	src/components/Settings.css
+| | :100644 100644 7391af5 4bfad0a M	src/components/Settings.tsx
+| | :100644 100644 c7ca81c 704b295 M	src/layouts/Header.tsx
+
+| * 3a7ff62 - Tue, 23 Aug 2022 09:54:17 -0500 (hace 7 d'ias)
+| |  Contrast, brightness, color controls added to settings. - Susana Poveda| | 
+| | :100644 100644 e043ac5 0990a09 M	src/App.css
+| | :100644 100644 b1410ef 7391af5 M	src/components/Settings.tsx
+| | :100644 100644 edb341c 6675564 M	src/context.tsx
+
+| * 78795ea - Mon, 22 Aug 2022 14:36:07 -0500 (hace 8 d'ias)
+| |  Fix controls header when font changes. - Susana Poveda| | 
+| | :100644 100644 eaa7919 24e6a99 M	src/layouts/Header.css
+
+| * 4bb89dc - Mon, 22 Aug 2022 14:09:35 -0500 (hace 8 d'ias)
+|/   Fixed style of font change. - Susana Poveda|   
+|   :100644 100644 45574c3 9e2333a M	src/components/NewPost.css
+|   :100644 100644 529ca12 f0469df M	src/components/PublishedPost.css
+|   :100644 100644 bd94db6 5f58b4e M	src/pages/PlantProfile.css
+
+* e21c571 - Mon, 22 Aug 2022 12:38:58 -0500 (hace 8 d'ias)
+|  Added git logs CSV and Graph representation. - Susana Poveda| 
+| :000000 100644 0000000 4a1a08c A	log-graph.txt
+| :000000 100644 0000000 0790f6f A	log.csv
+
+*   d786805 - Mon, 22 Aug 2022 12:00:05 -0500 (hace 8 d'ias)
 |\   Merge pull request #56 from Agile-team-project-2022/feature-profile - susana3
-| * c0c7216 - Mon, 22 Aug 2022 11:56:37 -0500 (hace 40 minutos)
+| * c0c7216 - Mon, 22 Aug 2022 11:56:37 -0500 (hace 8 d'ias)
 |/   Calculation of current seasons completed. - Susana Poveda|   
 |   :000000 100644 0000000 652419f A	src/assets/fall.jpeg
 |   :000000 100644 0000000 d297584 A	src/assets/no-season.jpeg
@@ -12,16 +395,16 @@
 |   :100644 100644 9636e4c a349dd5 M	src/components/Weather.tsx
 |   :100644 100644 943f7f7 2879ac6 M	src/pages/PlantProfile.tsx
 
-*   fb57ceb - Mon, 22 Aug 2022 10:28:37 -0500 (hace 2 horas)
+*   fb57ceb - Mon, 22 Aug 2022 10:28:37 -0500 (hace 8 d'ias)
 |\   Merge pull request #55 from Agile-team-project-2022/feature-profile - susana3
-| * 45908ef - Mon, 22 Aug 2022 10:24:29 -0500 (hace 2 horas)
+| * 45908ef - Mon, 22 Aug 2022 10:24:29 -0500 (hace 8 d'ias)
 | |  Completed weather data. - Susana Poveda| | 
 | | :100644 100644 695b52a b713308 M	src/components/NewProfile.tsx
 | | :100644 100644 12b1349 0065566 M	src/components/Weather.css
 | | :100644 100644 5438107 9636e4c M	src/components/Weather.tsx
 | | :100644 100644 778c3b3 943f7f7 M	src/pages/PlantProfile.tsx
 
-| * 0ecb228 - Sun, 21 Aug 2022 22:23:28 -0500 (hace 14 horas)
+| * 0ecb228 - Sun, 21 Aug 2022 22:23:28 -0500 (hace 9 d'ias)
 | |  Live time and weather set up. - Susana Poveda| | 
 | | :000000 100644 0000000 cd4edc5 A	src/assets/moon.json
 | | :100644 100644 4c0d687 b3fae6c M	src/assets/plant.json
@@ -31,39 +414,39 @@
 | | :100644 100644 191926f 5438107 M	src/components/Weather.tsx
 | | :100644 100644 5d3fdbf 778c3b3 M	src/pages/PlantProfile.tsx
 
-| * fc2fda2 - Sun, 21 Aug 2022 15:45:40 -0500 (hace 21 horas)
+| * fc2fda2 - Sun, 21 Aug 2022 15:45:40 -0500 (hace 9 d'ias)
 | |  Added age and joining date for plant profiles. - Susana Poveda| | 
 | | :100644 100644 da3b501 bd94db6 M	src/pages/PlantProfile.css
 
-| * adab1e8 - Sun, 21 Aug 2022 15:35:31 -0500 (hace 21 horas)
+| * adab1e8 - Sun, 21 Aug 2022 15:35:31 -0500 (hace 9 d'ias)
 | |  Calculate plant age completed. - Susana Poveda| | 
 | | :100644 100644 b364bdc 29759ef M	src/components/CollectionCard.tsx
 | | :100644 100644 5cf1227 edb341c M	src/context.tsx
 | | :100644 100644 c65a1a9 b3fabe6 M	src/helpers.tsx
 | | :100644 100644 70f48f2 5d3fdbf M	src/pages/PlantProfile.tsx
 
-| * 39911f4 - Sun, 21 Aug 2022 14:36:35 -0500 (hace 22 horas)
+| * 39911f4 - Sun, 21 Aug 2022 14:36:35 -0500 (hace 9 d'ias)
 |/   Fix style thumbnails followed plants and friends. - Susana Poveda|   
 |   :100644 100644 56efc37 62cf646 M	src/components/DataSection.css
 |   :100644 100644 f65569b f4be9e0 M	src/components/Modal.css
 
-*   32776bd - Sun, 21 Aug 2022 14:16:35 -0500 (hace 22 horas)
+*   32776bd - Sun, 21 Aug 2022 14:16:35 -0500 (hace 9 d'ias)
 |\   Merge pull request #54 from Agile-team-project-2022/feature-collection - susana3
-| * 1646eb5 - Sun, 21 Aug 2022 14:13:23 -0500 (hace 22 horas) (origin/feature-collection, feature-collection)
+| * 1646eb5 - Sun, 21 Aug 2022 14:13:23 -0500 (hace 9 d'ias)
 | |  Block multiple friend request before accepting. - Susana Poveda| | 
 | | :100644 100644 1f17eab f6710f1 M	src/components/CollectionHeader.tsx
 | | :100644 100644 8677862 cb52e04 M	src/components/CollectionInteractions.css
 | | :100644 100644 5993886 ac53faf M	src/components/CollectionInteractions.tsx
 | | :100644 100644 36520bb 1caa5d4 M	src/pages/Collection.tsx
 
-| * e88d2a2 - Sun, 21 Aug 2022 13:40:57 -0500 (hace 23 horas)
+| * e88d2a2 - Sun, 21 Aug 2022 13:40:57 -0500 (hace 9 d'ias)
 | |  Fix accept friends function. Limit displayed friends. - Susana Poveda| | 
 | | :100644 100644 49f829c 1f17eab M	src/components/CollectionHeader.tsx
 | | :100644 100644 7542b4f 5993886 M	src/components/CollectionInteractions.tsx
 | | :100644 100644 4451a1b 5cf1227 M	src/context.tsx
 | | :100644 100644 0ee1b5b 36520bb M	src/pages/Collection.tsx
 
-| * 14967cc - Sun, 21 Aug 2022 13:18:21 -0500 (hace 23 horas)
+| * 14967cc - Sun, 21 Aug 2022 13:18:21 -0500 (hace 9 d'ias)
 | |  Enable accept friends mobile and desktop. - Susana Poveda| | 
 | | :100644 100644 bfa7cef b9d5774 M	src/App.tsx
 | | :100644 100644 b292388 49f829c M	src/components/CollectionHeader.tsx
@@ -71,7 +454,7 @@
 | | :100644 100644 1a6219f 4451a1b M	src/context.tsx
 | | :100644 100644 bc641be 0ee1b5b M	src/pages/Collection.tsx
 
-| * f966d45 - Sun, 21 Aug 2022 11:56:58 -0500 (hace 25 horas)
+| * f966d45 - Sun, 21 Aug 2022 11:56:58 -0500 (hace 9 d'ias)
 | |  Animations added when loading. - Susana Poveda| | 
 | | :100644 100644 2112f88 e043ac5 M	src/App.css
 | | :100644 100644 ac3d691 5febefd M	src/components/CollectionCard.css
@@ -86,7 +469,7 @@
 | | :100644 100644 192dce7 da3b501 M	src/pages/PlantProfile.css
 | | :100644 100644 284d83c 70f48f2 M	src/pages/PlantProfile.tsx
 
-| * 1c7065a - Sun, 21 Aug 2022 10:44:37 -0500 (hace 26 horas)
+| * 1c7065a - Sun, 21 Aug 2022 10:44:37 -0500 (hace 9 d'ias)
 |/   User feedback: Implement font size change. - Susana Poveda|   
 |   :100644 100644 9829db4 2112f88 M	src/App.css
 |   :000000 100644 0000000 39793c7 A	src/components/Settings.css
@@ -94,9 +477,9 @@
 |   :100644 100644 794917c 1a6219f M	src/context.tsx
 |   :100644 100644 dce7de8 c7ca81c M	src/layouts/Header.tsx
 
-*   b090f01 - Sat, 20 Aug 2022 16:15:02 -0500 (hace 2 días)
+*   b090f01 - Sat, 20 Aug 2022 16:15:02 -0500 (hace 10 d'ias)
 |\   Merge pull request #53 from Agile-team-project-2022/feature-collection - susana3
-| * fa7ed3f - Sat, 20 Aug 2022 16:12:55 -0500 (hace 2 días)
+| * fa7ed3f - Sat, 20 Aug 2022 16:12:55 -0500 (hace 10 d'ias)
 | |  Complete calculate badges. - Susana Poveda| | 
 | | :100644 100644 09c3852 9829db4 M	src/App.css
 | | :000000 100644 0000000 08a24d3 A	src/assets/badge-1.jpeg
@@ -110,7 +493,7 @@
 | | :100644 100644 2eb9735 1b63f1e M	src/pages/Collection.css
 | | :100644 100644 de39458 bc641be M	src/pages/Collection.tsx
 
-| * ca3df46 - Sat, 20 Aug 2022 14:42:51 -0500 (hace 2 días)
+| * ca3df46 - Sat, 20 Aug 2022 14:42:51 -0500 (hace 10 d'ias)
 |/   Basic badges calculation added. - Susana Poveda|   
 |   :100644 100644 45ae932 5fb8756 M	src/components/Badges.tsx
 |   :100644 100644 121ad91 b292388 M	src/components/CollectionHeader.tsx
@@ -118,9 +501,9 @@
 |   :100644 100644 191f3d0 054819c M	src/helpers.tsx
 |   :100644 100644 09bcb02 de39458 M	src/pages/Collection.tsx
 
-*   a1f24fa - Sat, 20 Aug 2022 12:53:59 -0500 (hace 2 días)
+*   a1f24fa - Sat, 20 Aug 2022 12:53:59 -0500 (hace 10 d'ias)
 |\   Merge pull request #52 from Agile-team-project-2022/feature-profile - susana3
-| * d1e4399 - Sat, 20 Aug 2022 12:48:56 -0500 (hace 2 días)
+| * d1e4399 - Sat, 20 Aug 2022 12:48:56 -0500 (hace 10 d'ias)
 | |  Enabled auto update posts when plant is deleted. - Susana Poveda| | 
 | | :100644 100644 04d4951 09c3852 M	src/App.css
 | | :100644 100644 e03ce13 bfa7cef M	src/App.tsx
@@ -131,44 +514,44 @@
 | | :100644 100644 6bf31ed 395d50a M	src/context.tsx
 | | :100644 100644 1a0305e 055b091 M	src/pages/Home.tsx
 
-| * 60cdef8 - Sat, 20 Aug 2022 12:20:49 -0500 (hace 2 días)
+| * 60cdef8 - Sat, 20 Aug 2022 12:20:49 -0500 (hace 10 d'ias)
 | |  Added delete buttons to posts. - Susana Poveda| | 
 | | :100644 100644 bf87265 bb819aa M	src/components/Comments.tsx
 | | :100644 100644 cb25852 e4f0896 M	src/components/PublishedPost.css
 | | :100644 100644 5dcfe7e ed4a875 M	src/components/PublishedPost.tsx
 
-| * 82503a3 - Sat, 20 Aug 2022 12:10:09 -0500 (hace 2 días)
+| * 82503a3 - Sat, 20 Aug 2022 12:10:09 -0500 (hace 10 d'ias)
 | |  Added correct delete image comments. - Susana Poveda| | 
 | | :000000 100644 0000000 775d158 A	src/assets/delete.png
 | | :100644 100644 13c2830 2806ff4 M	src/components/Comments.css
 | | :100644 100644 3f1e636 bf87265 M	src/components/Comments.tsx
 
-| * f8b6c49 - Sat, 20 Aug 2022 11:24:08 -0500 (hace 2 días)
+| * f8b6c49 - Sat, 20 Aug 2022 11:24:08 -0500 (hace 10 d'ias)
 | |  User feedback: Delete comments enabled. - Susana Poveda| | 
 | | :100644 100644 de61907 13c2830 M	src/components/Comments.css
 | | :100644 100644 3efa246 3f1e636 M	src/components/Comments.tsx
 | | :100644 100644 61d27dd 5dcfe7e M	src/components/PublishedPost.tsx
 
-| * 2766e21 - Sat, 20 Aug 2022 10:16:40 -0500 (hace 2 días)
+| * 2766e21 - Sat, 20 Aug 2022 10:16:40 -0500 (hace 10 d'ias)
 | |  User feedback: Delete posts implemented. - Susana Poveda| | 
 | | :100644 100644 5b396cb 61d27dd M	src/components/PublishedPost.tsx
 
-| * de882e1 - Sat, 20 Aug 2022 09:59:23 -0500 (hace 2 días)
+| * de882e1 - Sat, 20 Aug 2022 09:59:23 -0500 (hace 10 d'ias)
 |/   User feedback: Multiple like click solved. - Susana Poveda|   
 |   :100644 100644 e646ec5 5b396cb M	src/components/PublishedPost.tsx
 
-*   494e59e - Fri, 19 Aug 2022 21:28:57 -0500 (hace 3 días)
+*   494e59e - Fri, 19 Aug 2022 21:28:57 -0500 (hace 11 d'ias)
 |\   Merge pull request #51 from Agile-team-project-2022/feature-profile - susana3
-| * 5e070c8 - Fri, 19 Aug 2022 21:24:01 -0500 (hace 3 días)
+| * 5e070c8 - Fri, 19 Aug 2022 21:24:01 -0500 (hace 11 d'ias)
 | |  User feedback: Multiple click on comments solved. - Susana Poveda| | 
 | | :100644 100644 222c703 3efa246 M	src/components/Comments.tsx
 
-| * ce6e6e7 - Fri, 19 Aug 2022 21:21:32 -0500 (hace 3 días)
+| * ce6e6e7 - Fri, 19 Aug 2022 21:21:32 -0500 (hace 11 d'ias)
 | |  User feedback: Corrected multiple clicks on posts solved. - Susana Poveda| | 
 | | :100644 100644 88abf77 4f4caa1 M	src/components/InputImage.tsx
 | | :100644 100644 9dd045e f612dd5 M	src/components/NewPost.tsx
 
-| * 2cf2492 - Fri, 19 Aug 2022 20:59:13 -0500 (hace 3 días)
+| * 2cf2492 - Fri, 19 Aug 2022 20:59:13 -0500 (hace 11 d'ias)
 | |  Allow redirect to plant profile on click post author. - Susana Poveda| | 
 | | :100644 100644 31d9454 8677862 M	src/components/CollectionInteractions.css
 | | :100644 100644 fa2bec6 56efc37 M	src/components/DataSection.css
@@ -177,26 +560,26 @@
 | | :100644 100644 ec1a487 192dce7 M	src/pages/PlantProfile.css
 | | :100644 100644 d949fa2 284d83c M	src/pages/PlantProfile.tsx
 
-* | de97bf2 - Fri, 19 Aug 2022 15:55:14 -0500 (hace 3 días)
+* | de97bf2 - Fri, 19 Aug 2022 15:55:14 -0500 (hace 11 d'ias)
 |\|  Merge pull request #50 from Agile-team-project-2022/feature-profile - susana3
-| * 601227a - Fri, 19 Aug 2022 15:52:50 -0500 (hace 3 días)
+| * 601227a - Fri, 19 Aug 2022 15:52:50 -0500 (hace 11 d'ias)
 | |  Enabled calculate experience. - Susana Poveda| | 
 | | :100644 100644 9cb36cc e03ce13 M	src/App.tsx
 | | :100644 100644 7bdf1f5 fef5109 M	src/components/ExpandedList.tsx
 | | :100644 100644 d36c8e5 191f3d0 M	src/helpers.tsx
 | | :100644 100644 b5575b0 09bcb02 M	src/pages/Collection.tsx
 
-| * db85e26 - Fri, 19 Aug 2022 15:20:27 -0500 (hace 3 días)
+| * db85e26 - Fri, 19 Aug 2022 15:20:27 -0500 (hace 11 d'ias)
 | |  Following plants enabled. - Susana Poveda| | 
 | | :100644 100644 4e8389d fa9728b M	src/components/ProfileHeader.tsx
 | | :100644 100644 219f491 d949fa2 M	src/pages/PlantProfile.tsx
 
-| * f60f247 - Fri, 19 Aug 2022 14:40:27 -0500 (hace 3 días)
+| * f60f247 - Fri, 19 Aug 2022 14:40:27 -0500 (hace 11 d'ias)
 | |  Auto detect already friends in others profiles. - Susana Poveda| | 
 | | :100644 100644 14e889d c084b0e M	src/components/CollectionHeader.tsx
 | | :100644 100644 fb46338 d6fd4f0 M	src/components/CollectionInteractions.tsx
 
-| * c2fb725 - Fri, 19 Aug 2022 14:30:08 -0500 (hace 3 días)
+| * c2fb725 - Fri, 19 Aug 2022 14:30:08 -0500 (hace 11 d'ias)
 | |  Access followed plants from collection. - Susana Poveda| | 
 | | :100644 100644 3154d7d 2829b86 M	src/components/CollectionHeader.css
 | | :100644 100644 b8f4a23 14e889d M	src/components/CollectionHeader.tsx
@@ -207,13 +590,13 @@
 | | :100644 100644 9d4e6cd b5575b0 M	src/pages/Collection.tsx
 | | :100644 100644 aa96f8f 63d883e M	src/pages/Home.css
 
-| * 4de9db5 - Fri, 19 Aug 2022 12:53:12 -0500 (hace 3 días)
+| * 4de9db5 - Fri, 19 Aug 2022 12:53:12 -0500 (hace 11 d'ias)
 |/   User feedback: Exit modal on click background implemented. - Susana Poveda|   
 |   :100644 100644 e3a509c 6d8ba4f M	src/components/Modal.tsx
 
-*   907a6f9 - Fri, 19 Aug 2022 12:20:48 -0500 (hace 3 días)
+*   907a6f9 - Fri, 19 Aug 2022 12:20:48 -0500 (hace 11 d'ias)
 |\   Merge pull request #49 from Agile-team-project-2022/feature-profile - susana3
-| * 3ebf012 - Fri, 19 Aug 2022 12:18:29 -0500 (hace 3 días)
+| * 3ebf012 - Fri, 19 Aug 2022 12:18:29 -0500 (hace 11 d'ias)
 | |  Separate pending and accepted friends. - Susana Poveda| | 
 | | :100644 100644 e3915ec 9cb36cc M	src/App.tsx
 | | :100644 100644 17a6cd7 cba52d9 M	src/components/CollectionInteractions.css
@@ -221,18 +604,18 @@
 | | :100644 100644 6bf31ed 6725ec5 M	src/context.tsx
 | | :100644 100644 64929f5 9d4e6cd M	src/pages/Collection.tsx
 
-| * 00a6960 - Fri, 19 Aug 2022 11:37:06 -0500 (hace 3 días)
+| * 00a6960 - Fri, 19 Aug 2022 11:37:06 -0500 (hace 11 d'ias)
 | |  Enabled follow friends. - Susana Poveda| | 
 | | :100644 100644 46618f2 b8f4a23 M	src/components/CollectionHeader.tsx
 | | :100644 100644 15e2051 64929f5 M	src/pages/Collection.tsx
 
-| * f62c25a - Fri, 19 Aug 2022 11:19:11 -0500 (hace 3 días)
+| * f62c25a - Fri, 19 Aug 2022 11:19:11 -0500 (hace 11 d'ias)
 | |  Enabled delete owner account. - Susana Poveda| | 
 | | :100644 100644 00c3833 3154d7d M	src/components/CollectionHeader.css
 | | :100644 100644 1de5ed9 46618f2 M	src/components/CollectionHeader.tsx
 | | :100644 100644 0dafaf8 6bf31ed M	src/context.tsx
 
-| * ec346cd - Fri, 19 Aug 2022 11:06:59 -0500 (hace 3 días)
+| * ec346cd - Fri, 19 Aug 2022 11:06:59 -0500 (hace 11 d'ias)
 | |  Enabled delete plant profile. - Susana Poveda| | 
 | | :100644 100644 bfdb5d5 04d4951 M	src/App.css
 | | :100644 100644 74c252d e3915ec M	src/App.tsx
@@ -240,7 +623,7 @@
 | | :100644 100644 e44b0f8 15e2051 M	src/pages/Collection.tsx
 | | :100644 100644 18e223a 219f491 M	src/pages/PlantProfile.tsx
 
-| * 122faec - Fri, 19 Aug 2022 10:35:44 -0500 (hace 3 días)
+| * 122faec - Fri, 19 Aug 2022 10:35:44 -0500 (hace 11 d'ias)
 | |  Separate collection view from owner and others. - Susana Poveda| | 
 | | :100644 100644 ef199c0 74c252d M	src/App.tsx
 | | :100644 100644 92094a4 1de5ed9 M	src/components/CollectionHeader.tsx
@@ -251,7 +634,7 @@
 | | :100644 100644 3493f8d e44b0f8 M	src/pages/Collection.tsx
 | | :100644 100644 cd19f3d 18e223a M	src/pages/PlantProfile.tsx
 
-| * ed3ffde - Fri, 19 Aug 2022 09:39:03 -0500 (hace 3 días)
+| * ed3ffde - Fri, 19 Aug 2022 09:39:03 -0500 (hace 11 d'ias)
 | |  Removed pending plant requests and currently taking care for plants in collection. - Susana Poveda| | 
 | | :100644 100644 a0532c1 ef199c0 M	src/App.tsx
 | | :100644 100644 a5d514a b364bdc M	src/components/CollectionCard.tsx
@@ -265,38 +648,38 @@
 | | :100644 100644 79b4d96 3493f8d M	src/pages/Collection.tsx
 | | :100644 100644 e153eb2 cd19f3d M	src/pages/PlantProfile.tsx
 
-| * 6dd9b4a - Thu, 18 Aug 2022 12:19:43 -0500 (hace 4 días)
+| * 6dd9b4a - Thu, 18 Aug 2022 12:19:43 -0500 (hace 12 d'ias)
 | |  Display basic owner data in plant profile. - Susana Poveda| | 
 | | :100644 100644 78a70d0 28e70b8 M	src/context.tsx
 | | :100644 100644 750949c ec1a487 M	src/pages/PlantProfile.css
 | | :100644 100644 4232dd5 e153eb2 M	src/pages/PlantProfile.tsx
 
-| * ae22749 - Thu, 18 Aug 2022 11:55:59 -0500 (hace 4 días)
+| * ae22749 - Thu, 18 Aug 2022 11:55:59 -0500 (hace 12 d'ias)
 | |  Connected water schedule data profile. - Susana Poveda| | 
 | | :100644 100644 cf70101 fa3be54 M	src/components/WaterSchedule.css
 | | :100644 100644 59faa8c 70c4963 M	src/components/WaterSchedule.tsx
 | | :100644 100644 4eb0eca 4232dd5 M	src/pages/PlantProfile.tsx
 
-| * 02a92fb - Thu, 18 Aug 2022 11:43:01 -0500 (hace 4 días)
+| * 02a92fb - Thu, 18 Aug 2022 11:43:01 -0500 (hace 12 d'ias)
 |/   Auto update collection list on create new plant. - Susana Poveda|   
 |   :100644 100644 933ad3a a0532c1 M	src/App.tsx
 |   :100644 100644 09e48a1 41a17cc M	src/components/NewProfile.tsx
 |   :100644 100644 e78a9c6 78a70d0 M	src/context.tsx
 
-*   3a59103 - Thu, 18 Aug 2022 11:23:24 -0500 (hace 4 días)
+*   3a59103 - Thu, 18 Aug 2022 11:23:24 -0500 (hace 12 d'ias)
 |\   Merge pull request #48 from Agile-team-project-2022/feature-profile - susana3
-| * 7326a3d - Wed, 17 Aug 2022 21:40:11 -0500 (hace 5 días)
+| * 7326a3d - Wed, 17 Aug 2022 21:40:11 -0500 (hace 13 d'ias)
 | |  Enabled receive stored coordinated in plants profiles. - Susana Poveda| | 
 | | :100644 100644 4ce8aca 3e7d2cf M	src/components/Location.tsx
 | | :100644 100644 169ee33 09e48a1 M	src/components/NewProfile.tsx
 | | :100644 100644 f511ae6 4eb0eca M	src/pages/PlantProfile.tsx
 
-| * af3d0e4 - Wed, 17 Aug 2022 21:26:45 -0500 (hace 5 días)
+| * af3d0e4 - Wed, 17 Aug 2022 21:26:45 -0500 (hace 13 d'ias)
 | |  Enabled location mark in plant created profile. - Susana Poveda| | 
 | | :100644 100644 2c771f2 4ce8aca M	src/components/Location.tsx
 | | :100644 100644 646990e f511ae6 M	src/pages/PlantProfile.tsx
 
-| * 40b72ba - Wed, 17 Aug 2022 21:06:22 -0500 (hace 5 días)
+| * 40b72ba - Wed, 17 Aug 2022 21:06:22 -0500 (hace 13 d'ias)
 | |  Select category included in create new plant.Â Validations set and functionality connected to backend. - Susana Poveda| | 
 | | :100644 100644 d3d8c2f bfdb5d5 M	src/App.css
 | | :100644 100644 60654d4 54dced5 M	src/components/CollectionPlants.tsx
@@ -304,12 +687,12 @@
 | | :100644 100644 11833a7 5b2b562 M	src/components/NewProfile.css
 | | :100644 100644 8fea8db 169ee33 M	src/components/NewProfile.tsx
 
-| * 7ad0385 - Wed, 17 Aug 2022 15:36:37 -0500 (hace 5 días)
+| * 7ad0385 - Wed, 17 Aug 2022 15:36:37 -0500 (hace 13 d'ias)
 | |  Set select initial plant profile. - Susana Poveda| | 
 | | :100644 100644 7b6e59a 11833a7 M	src/components/NewProfile.css
 | | :100644 100644 2692526 8fea8db M	src/components/NewProfile.tsx
 
-| * 7fc8ab6 - Wed, 17 Aug 2022 15:00:29 -0500 (hace 5 días)
+| * 7fc8ab6 - Wed, 17 Aug 2022 15:00:29 -0500 (hace 13 d'ias)
 | |  Location feature added for new plant profiles. - Susana Poveda| | 
 | | :100644 100644 56a0598 488b211 M	package-lock.json
 | | :100644 100644 2ac783f 5336be9 M	package.json
@@ -317,7 +700,7 @@
 | | :100644 100644 d4d9b8b 2692526 M	src/components/NewProfile.tsx
 | | :100644 100644 84c9f00 4f63bea M	src/helpers.tsx
 
-| * 1e7b77b - Wed, 17 Aug 2022 12:05:12 -0500 (hace 5 días)
+| * 1e7b77b - Wed, 17 Aug 2022 12:05:12 -0500 (hace 13 d'ias)
 | |  Water schedule in new profile set up. - Susana Poveda| | 
 | | :100644 100644 04a425d d3d8c2f M	src/App.css
 | | :000000 100644 0000000 ac12255 A	src/components/Calendar.tsx
@@ -327,7 +710,7 @@
 | | :100644 100644 cca8a3f cf70101 M	src/components/WaterSchedule.css
 | | :100644 100644 5a17353 59faa8c M	src/components/WaterSchedule.tsx
 
-| * 77f7c44 - Tue, 16 Aug 2022 13:42:27 -0500 (hace 6 días)
+| * 77f7c44 - Tue, 16 Aug 2022 13:42:27 -0500 (hace 2 semanas)
 |/   Handle not found adjusted. - Susana Poveda|   
 |   :100644 100644 40357c1 933ad3a M	src/App.tsx
 |   :000000 100644 0000000 b59478b A	src/assets/not-found-page.jpeg
@@ -338,15 +721,15 @@
 |   :000000 100644 0000000 c82ed8d A	src/components/NotFound.tsx
 |   :100644 100644 ad409c4 646990e M	src/pages/PlantProfile.tsx
 
-*   2098148 - Mon, 15 Aug 2022 14:49:03 -0500 (hace 7 días)
+*   2098148 - Mon, 15 Aug 2022 14:49:03 -0500 (hace 2 semanas)
 |\   Merge pull request #47 from Agile-team-project-2022/feature-profile - susana3
-| * 026333b - Mon, 15 Aug 2022 14:45:34 -0500 (hace 7 días)
+| * 026333b - Mon, 15 Aug 2022 14:45:34 -0500 (hace 2 semanas)
 |/   Fix save plant profile picture. - Susana Poveda|   
 |   :100644 100644 2e05487 5f77d1a M	src/components/ChangeProfilePicture.tsx
 
-*   9c2e45e - Mon, 15 Aug 2022 14:37:26 -0500 (hace 7 días)
+*   9c2e45e - Mon, 15 Aug 2022 14:37:26 -0500 (hace 2 semanas)
 |\   Merge pull request #46 from Agile-team-project-2022/feature-profile - susana3
-| * ba57152 - Mon, 15 Aug 2022 14:35:34 -0500 (hace 7 días)
+| * ba57152 - Mon, 15 Aug 2022 14:35:34 -0500 (hace 2 semanas)
 | |  Completed assets for data plant profile. - Susana Poveda| | 
 | | :100644 100644 4cf330e 04a425d M	src/App.css
 | | :100644 000000 f285a4a 0000000 D	src/assets/plant-1.json
@@ -364,7 +747,7 @@
 | | :100644 100644 7126734 191926f M	src/components/Weather.tsx
 | | :100644 100644 b7b00b9 e78a9c6 M	src/context.tsx
 
-| * eca9bd8 - Mon, 15 Aug 2022 13:00:04 -0500 (hace 7 días)
+| * eca9bd8 - Mon, 15 Aug 2022 13:00:04 -0500 (hace 2 semanas)
 |/   Enable preview followed plants and friends from mobile menu. Empty content default adjusted. - Susana Poveda|   
 |   :100644 100644 8768e11 4cf330e M	src/App.css
 |   :100644 100644 18397bf a5d514a M	src/components/CollectionCard.tsx
@@ -375,9 +758,9 @@
 |   :100644 100644 7ed00f4 1a0305e M	src/pages/Home.tsx
 |   :100644 100644 6b6495c ad409c4 M	src/pages/PlantProfile.tsx
 
-*   c654d5d - Mon, 15 Aug 2022 11:17:16 -0500 (hace 7 días)
+*   c654d5d - Mon, 15 Aug 2022 11:17:16 -0500 (hace 2 semanas)
 |\   Merge pull request #45 from Agile-team-project-2022/feature-profile - susana3
-| * b43ff13 - Mon, 15 Aug 2022 11:15:39 -0500 (hace 7 días)
+| * b43ff13 - Mon, 15 Aug 2022 11:15:39 -0500 (hace 2 semanas)
 |/   Fix styles and assets. - Susana Poveda|   
 |   :000000 100644 0000000 a5c7ce3 A	src/assets/background-1.jpg
 |   :000000 100644 0000000 ef8c8b1 A	src/assets/cloud.json
@@ -394,9 +777,9 @@
 |   :100644 100644 353249b ba6edcc M	src/components/ProfileHeader.tsx
 |   :100644 100644 e78a9c6 b7b00b9 M	src/context.tsx
 
-*   553febd - Mon, 15 Aug 2022 09:16:06 -0500 (hace 7 días)
+*   553febd - Mon, 15 Aug 2022 09:16:06 -0500 (hace 2 semanas)
 |\   Merge pull request #44 from Agile-team-project-2022/feature-profile - susana3
-| * 7ebb4b9 - Mon, 15 Aug 2022 09:14:39 -0500 (hace 7 días)
+| * 7ebb4b9 - Mon, 15 Aug 2022 09:14:39 -0500 (hace 2 semanas)
 | |  Plant profile data sections completed views. - Susana Poveda| | 
 | | :100644 100644 26fe386 8768e11 M	src/App.css
 | | :000000 100644 0000000 11ab5f0 A	src/components/Location.css
@@ -412,14 +795,14 @@
 | | :100644 100644 7c831d0 750949c M	src/pages/PlantProfile.css
 | | :100644 100644 ed0a52d 6b6495c M	src/pages/PlantProfile.tsx
 
-| * 65d28a3 - Sun, 14 Aug 2022 21:54:22 -0500 (hace 8 días)
+| * 65d28a3 - Sun, 14 Aug 2022 21:54:22 -0500 (hace 2 semanas)
 | |  Set up live weather. - Susana Poveda| | 
 | | :100644 100644 f606564 126390e M	src/components/DataSection.css
 | | :000000 100644 0000000 acc0dc2 A	src/components/Weather.css
 | | :000000 100644 0000000 f935208 A	src/components/Weather.tsx
 | | :100644 100644 eddf5cf ed0a52d M	src/pages/PlantProfile.tsx
 
-| * 22c61b0 - Sun, 14 Aug 2022 21:06:48 -0500 (hace 8 días)
+| * 22c61b0 - Sun, 14 Aug 2022 21:06:48 -0500 (hace 2 semanas)
 | |  Mobile view set up profile plant. - Susana Poveda| | 
 | | :100644 100644 fbe056a 26fe386 M	src/App.css
 | | :100644 100644 98cdc87 f606564 M	src/components/DataSection.css
@@ -431,32 +814,32 @@
 | | :100644 100644 728bb30 7c831d0 M	src/pages/PlantProfile.css
 | | :100644 100644 88b2bb3 eddf5cf M	src/pages/PlantProfile.tsx
 
-| * 7fe29f7 - Sun, 14 Aug 2022 15:04:02 -0500 (hace 8 días)
+| * 7fe29f7 - Sun, 14 Aug 2022 15:04:02 -0500 (hace 2 semanas)
 | |  Profile plant set mobile. - Susana Poveda| | 
 | | :100644 100644 8a22cd5 fb2d991 M	src/components/WaterSchedule.css
 | | :100644 100644 86b0213 728bb30 M	src/pages/PlantProfile.css
 | | :100644 100644 e40010d 88b2bb3 M	src/pages/PlantProfile.tsx
 
-| * 77577e1 - Sun, 14 Aug 2022 14:15:22 -0500 (hace 8 días)
+| * 77577e1 - Sun, 14 Aug 2022 14:15:22 -0500 (hace 2 semanas)
 |/   Configured to use local server, and schedule style desktop complete. - Susana Poveda|   
 |   :100644 100644 7d7f0b6 8a22cd5 M	src/components/WaterSchedule.css
 |   :100644 100644 f062a8d 5a17353 M	src/components/WaterSchedule.tsx
 |   :100644 100644 e78a9c6 cea5500 M	src/context.tsx
 |   :100644 100644 3756be5 84c9f00 M	src/helpers.tsx
 
-*   0926f97 - Sun, 14 Aug 2022 10:03:19 -0500 (hace 8 días)
+*   0926f97 - Sun, 14 Aug 2022 10:03:19 -0500 (hace 2 semanas)
 |\   Merge pull request #43 from Agile-team-project-2022/feature-profile - susana3
-| * e1bba9e - Sun, 14 Aug 2022 10:01:41 -0500 (hace 8 días)
+| * e1bba9e - Sun, 14 Aug 2022 10:01:41 -0500 (hace 2 semanas)
 |/   Adjust user for tests - Susana Poveda|   
 |   :100644 100644 cd87009 e78a9c6 M	src/context.tsx
 
-*   9707a1f - Sun, 14 Aug 2022 09:53:52 -0500 (hace 8 días)
+*   9707a1f - Sun, 14 Aug 2022 09:53:52 -0500 (hace 2 semanas)
 |\   Merge pull request #42 from Agile-team-project-2022/feature-profile - susana3
-| * e185427 - Sun, 14 Aug 2022 09:51:42 -0500 (hace 8 días)
+| * e185427 - Sun, 14 Aug 2022 09:51:42 -0500 (hace 2 semanas)
 | |  Connected to deployed backend. - Susana Poveda| | 
 | | :100644 100644 cea5500 cd87009 M	src/context.tsx
 
-| * 89dafbc - Sat, 13 Aug 2022 22:03:22 -0500 (hace 9 días)
+| * 89dafbc - Sat, 13 Aug 2022 22:03:22 -0500 (hace 2 semanas)
 | |  Water schedule set up. - Susana Poveda| | 
 | | :100644 100644 a4600bb 56a0598 M	package-lock.json
 | | :100644 100644 f963025 2ac783f M	package.json
@@ -465,34 +848,34 @@
 | | :100644 100644 457e7c5 86b0213 M	src/pages/PlantProfile.css
 | | :100644 100644 cdc749e e40010d M	src/pages/PlantProfile.tsx
 
-| * c46e473 - Sat, 13 Aug 2022 21:20:20 -0500 (hace 9 días)
+| * c46e473 - Sat, 13 Aug 2022 21:20:20 -0500 (hace 2 semanas)
 |/   Expand images from gallery preview enabled. - Susana Poveda|   
 |   :100644 100644 70f9af6 24b61ba M	src/components/GalleryPreview.css
 |   :100644 100644 83d2076 39bc451 M	src/components/GalleryPreview.tsx
 
-*   d4b4b1f - Sat, 13 Aug 2022 14:00:52 -0500 (hace 9 días)
+*   d4b4b1f - Sat, 13 Aug 2022 14:00:52 -0500 (hace 2 semanas)
 |\   Merge pull request #41 from Agile-team-project-2022/feature-profile - susana3
-| * d74a5fc - Sat, 13 Aug 2022 13:58:32 -0500 (hace 9 días)
+| * d74a5fc - Sat, 13 Aug 2022 13:58:32 -0500 (hace 2 semanas)
 |/   Minor style fix post in firefox. - Susana Poveda|   
 |   :100644 100644 bb0d9d7 46a24f3 M	src/components/PublishedPost.css
 
-*   ebaeb49 - Sat, 13 Aug 2022 13:24:32 -0500 (hace 9 días)
+*   ebaeb49 - Sat, 13 Aug 2022 13:24:32 -0500 (hace 2 semanas)
 |\   Merge pull request #40 from Agile-team-project-2022/feature-profile - susana3
-| * dd81d82 - Sat, 13 Aug 2022 13:18:28 -0500 (hace 9 días)
+| * dd81d82 - Sat, 13 Aug 2022 13:18:28 -0500 (hace 2 semanas)
 | |  Added signature to posts. - Susana Poveda| | 
 | | :100644 100644 43b7a9d 222c703 M	src/components/Comments.tsx
 | | :100644 100644 0dc2cff bb0d9d7 M	src/components/PublishedPost.css
 | | :100644 100644 325edf4 54c276a M	src/components/PublishedPost.tsx
 
-| * 36b93f4 - Sat, 13 Aug 2022 12:26:33 -0500 (hace 9 días)
+| * 36b93f4 - Sat, 13 Aug 2022 12:26:33 -0500 (hace 2 semanas)
 |/   Minor style fixes. - Susana Poveda|   
 |   :100644 100644 92a5585 b3a723f M	src/components/Filters.css
 |   :100644 100644 89fac89 70f9af6 M	src/components/GalleryPreview.css
 |   :100644 100644 e86a786 83d2076 M	src/components/GalleryPreview.tsx
 
-*   728d1bf - Sat, 13 Aug 2022 11:58:23 -0500 (hace 9 días)
+*   728d1bf - Sat, 13 Aug 2022 11:58:23 -0500 (hace 2 semanas)
 |\   Merge pull request #39 from Agile-team-project-2022/feature-profile - susana3
-| * 69c7e73 - Sat, 13 Aug 2022 11:56:54 -0500 (hace 9 días)
+| * 69c7e73 - Sat, 13 Aug 2022 11:56:54 -0500 (hace 2 semanas)
 | |  Set up gallery preview in plant profiles. - Susana Poveda| | 
 | | :100644 100644 f25b36c 18397bf M	src/components/CollectionCard.tsx
 | | :100644 100644 e5ae6d0 98cdc87 M	src/components/DataSection.css
@@ -501,7 +884,7 @@
 | | :100644 100644 8803dca 457e7c5 M	src/pages/PlantProfile.css
 | | :100644 100644 5603871 cdc749e M	src/pages/PlantProfile.tsx
 
-| * a79a439 - Sat, 13 Aug 2022 11:22:15 -0500 (hace 9 días)
+| * a79a439 - Sat, 13 Aug 2022 11:22:15 -0500 (hace 2 semanas)
 | |  Fix update profile picture for plant and enabled posting from different profiles. - Susana Poveda| | 
 | | :100644 100644 8d6054e 03c7937 M	src/components/ChangeProfilePicture.tsx
 | | :000000 100644 0000000 e69de29 A	src/components/GalleryPreview.css
@@ -511,9 +894,9 @@
 | | :100644 100644 3842e1c cea5500 M	src/context.tsx
 | | :100644 100644 ccb529d 5603871 M	src/pages/PlantProfile.tsx
 
-* | dab5072 - Sat, 13 Aug 2022 09:55:46 -0500 (hace 9 días)
+* | dab5072 - Sat, 13 Aug 2022 09:55:46 -0500 (hace 2 semanas)
 |\|  Merge pull request #38 from Agile-team-project-2022/feature-profile - susana3
-| * 0117606 - Sat, 13 Aug 2022 09:53:54 -0500 (hace 9 días)
+| * 0117606 - Sat, 13 Aug 2022 09:53:54 -0500 (hace 2 semanas)
 | |  Completed plant header and basic page layout. Posts for plant included. - Susana Poveda| | 
 | | :100644 100644 7f1bc83 fbe056a M	src/App.css
 | | :100644 100644 a4f3581 8d6054e M	src/components/ChangeProfilePicture.tsx
@@ -526,7 +909,7 @@
 | | :100644 100644 eba2269 8803dca M	src/pages/PlantProfile.css
 | | :100644 100644 559e3f6 ccb529d M	src/pages/PlantProfile.tsx
 
-| * 15aac01 - Fri, 12 Aug 2022 13:04:23 -0500 (hace 10 días)
+| * 15aac01 - Fri, 12 Aug 2022 13:04:23 -0500 (hace 3 semanas)
 | |  Enabled change plant profile picture. - Susana Poveda| | 
 | | :100644 100644 26edff5 a4f3581 M	src/components/ChangeProfilePicture.tsx
 | | :100644 100644 d5e099d f25b36c M	src/components/CollectionCard.tsx
@@ -539,7 +922,7 @@
 | | :100644 100644 e69de29 eba2269 M	src/pages/PlantProfile.css
 | | :100644 100644 e34bdb6 559e3f6 M	src/pages/PlantProfile.tsx
 
-| * ddc2c1b - Fri, 12 Aug 2022 12:00:33 -0500 (hace 10 días)
+| * ddc2c1b - Fri, 12 Aug 2022 12:00:33 -0500 (hace 3 semanas)
 |/   Initialized routing for plant profile. - Susana Poveda|   
 |   :100644 100644 fcf716e 7f1bc83 M	src/App.css
 |   :100644 100644 ada616e 40357c1 M	src/App.tsx
@@ -551,9 +934,9 @@
 |   :000000 100644 0000000 e69de29 A	src/pages/PlantProfile.css
 |   :000000 100644 0000000 e34bdb6 A	src/pages/PlantProfile.tsx
 
-*   5c86069 - Fri, 12 Aug 2022 09:48:34 -0500 (hace 10 días)
+*   5c86069 - Fri, 12 Aug 2022 09:48:34 -0500 (hace 3 semanas)
 |\   Merge pull request #37 from Agile-team-project-2022/feature-collection - susana3
-| * aa97bec - Fri, 12 Aug 2022 09:46:06 -0500 (hace 10 días)
+| * aa97bec - Fri, 12 Aug 2022 09:46:06 -0500 (hace 3 semanas)
 | |  Fixed Posts styles, responsive and for firefox - Susana Poveda| | 
 | | :100644 100644 9c1ccca d6b6f9d M	public/index.html
 | | :100644 100644 1ee9010 fcf716e M	src/App.css
@@ -565,35 +948,35 @@
 | | :100644 100644 403e948 beb89c6 M	src/pages/Collection.css
 | | :100644 100644 da31ba2 c91cf9f M	src/pages/Home.css
 
-| * c31441d - Thu, 11 Aug 2022 15:00:13 -0500 (hace 11 días)
+| * c31441d - Thu, 11 Aug 2022 15:00:13 -0500 (hace 3 semanas)
 |/   Fixed update posts at home page as they are created. - Susana Poveda|   
 |   :100644 100644 2fb0ed4 14eb480 M	src/components/NewPost.tsx
 
-*   042f6af - Thu, 11 Aug 2022 14:49:24 -0500 (hace 11 días)
+*   042f6af - Thu, 11 Aug 2022 14:49:24 -0500 (hace 3 semanas)
 |\   Merge pull request #36 from Agile-team-project-2022/feature-collection - susana3
-| * 79d9e70 - Thu, 11 Aug 2022 14:47:11 -0500 (hace 11 días)
+| * 79d9e70 - Thu, 11 Aug 2022 14:47:11 -0500 (hace 3 semanas)
 |/   Resized uploaded images. - Susana Poveda|   
 |   :100644 100644 b6c7c38 a4600bb M	package-lock.json
 |   :100644 100644 fcab591 f963025 M	package.json
 |   :100644 100644 42aaf27 88abf77 M	src/components/InputImage.tsx
 |   :100644 100644 d09521b 7ed00f4 M	src/pages/Home.tsx
 
-*   d2d9baf - Thu, 11 Aug 2022 09:38:19 -0500 (hace 11 días)
+*   d2d9baf - Thu, 11 Aug 2022 09:38:19 -0500 (hace 3 semanas)
 |\   Merge pull request #35 from Agile-team-project-2022/feature-collection - susana3
-| * 7026c14 - Thu, 11 Aug 2022 09:35:20 -0500 (hace 11 días)
+| * 7026c14 - Thu, 11 Aug 2022 09:35:20 -0500 (hace 3 semanas)
 | |  Style adjust comments. - Susana Poveda| | 
 | | :100644 100644 8256df1 d126bbc M	src/components/Comments.css
 
-| * 633c909 - Thu, 11 Aug 2022 08:51:30 -0500 (hace 11 días)
+| * 633c909 - Thu, 11 Aug 2022 08:51:30 -0500 (hace 3 semanas)
 | |  Responsive published Post complete. - Susana Poveda| | 
 | | :100644 100644 32b99e3 6057b99 M	src/components/PublishedPost.css
 
-| * 3269ca4 - Thu, 11 Aug 2022 08:30:12 -0500 (hace 11 días)
+| * 3269ca4 - Thu, 11 Aug 2022 08:30:12 -0500 (hace 3 semanas)
 | |  Responsive nuew Posts complete. - Susana Poveda| | 
 | | :100644 100644 db3b199 9c94f07 M	src/components/NewPost.css
 | | :100644 100644 b678a3f 2fb0ed4 M	src/components/NewPost.tsx
 
-| * cd2b049 - Wed, 10 Aug 2022 21:37:14 -0500 (hace 12 días)
+| * cd2b049 - Wed, 10 Aug 2022 21:37:14 -0500 (hace 3 semanas)
 | |  Style adjusted new post responsive. - Susana Poveda| | 
 | | :100644 100644 dc4fa5f 1ee9010 M	src/App.css
 | | :100644 100644 4a0046e 92a5585 M	src/components/Filters.css
@@ -607,7 +990,7 @@
 | | :100644 100644 b9fb15c da31ba2 M	src/pages/Home.css
 | | :100644 100644 6278324 d09521b M	src/pages/Home.tsx
 
-| * e50063a - Wed, 10 Aug 2022 20:18:52 -0500 (hace 12 días)
+| * e50063a - Wed, 10 Aug 2022 20:18:52 -0500 (hace 3 semanas)
 | |  Create comments from Posts complete and working with backend. Auto update on new comments enabled. - Susana Poveda| | 
 | | :100644 100644 7675290 dc4fa5f M	src/App.css
 | | :100644 100644 ca21490 8256df1 M	src/components/Comments.css
@@ -616,12 +999,12 @@
 | | :100644 100644 15cf5bf 92108fd M	src/components/PublishedPost.tsx
 | | :100644 100644 c304d95 ded3e8d M	src/context.tsx
 
-| * e733d9f - Wed, 10 Aug 2022 14:18:27 -0500 (hace 12 días)
+| * e733d9f - Wed, 10 Aug 2022 14:18:27 -0500 (hace 3 semanas)
 | |  Comments style adjust. - Susana Poveda| | 
 | | :100644 100644 0c4e139 ca21490 M	src/components/Comments.css
 | | :100644 100644 2a93255 958d095 M	src/components/Comments.tsx
 
-| * bb9c005 - Wed, 10 Aug 2022 13:31:34 -0500 (hace 12 días)
+| * bb9c005 - Wed, 10 Aug 2022 13:31:34 -0500 (hace 3 semanas)
 | |  Posts comments expand and collapse set up. - Susana Poveda| | 
 | | :000000 100644 0000000 0c4e139 A	src/components/Comments.css
 | | :000000 100644 0000000 2a93255 A	src/components/Comments.tsx
@@ -629,13 +1012,13 @@
 | | :100644 100644 2939c2c 15cf5bf M	src/components/PublishedPost.tsx
 | | :100644 100644 89dbff7 c304d95 M	src/context.tsx
 
-| * 092f4c3 - Wed, 10 Aug 2022 12:38:45 -0500 (hace 12 días)
+| * 092f4c3 - Wed, 10 Aug 2022 12:38:45 -0500 (hace 3 semanas)
 | |  Post Likes feature implemented with validation to prevent multiple likes. - Susana Poveda| | 
 | | :100644 100644 e9c4d88 9070a8a M	src/components/NewPost.tsx
 | | :100644 100644 1be8a6c 2939c2c M	src/components/PublishedPost.tsx
 | | :100644 100644 8e632ca 89dbff7 M	src/context.tsx
 
-| * 50968f4 - Wed, 10 Aug 2022 11:20:58 -0500 (hace 12 días)
+| * 50968f4 - Wed, 10 Aug 2022 11:20:58 -0500 (hace 3 semanas)
 | |  Enabled user hints for new posts. - Susana Poveda| | 
 | | :100644 100644 2cd7c48 7675290 M	src/App.css
 | | :100644 100644 005690e c6623ec M	src/components/NewPost.css
@@ -646,12 +1029,12 @@
 | | :100644 100644 0029397 b9fb15c M	src/pages/Home.css
 | | :100644 100644 231d77f 6278324 M	src/pages/Home.tsx
 
-| * 06f21f3 - Tue, 9 Aug 2022 22:37:36 -0500 (hace 13 días)
+| * 06f21f3 - Tue, 9 Aug 2022 22:37:36 -0500 (hace 3 semanas)
 | |  Enabled read more in published posts. - Susana Poveda| | 
 | | :100644 100644 27cf0ad cdffe42 M	src/components/PublishedPost.css
 | | :100644 100644 5332956 10ca0d8 M	src/components/PublishedPost.tsx
 
-| * 9545ee8 - Tue, 9 Aug 2022 22:09:58 -0500 (hace 13 días)
+| * 9545ee8 - Tue, 9 Aug 2022 22:09:58 -0500 (hace 3 semanas)
 | |  Published posts complete and working with backend. - Susana Poveda| | 
 | | :000000 100644 0000000 40fbe2d A	src/assets/close.png
 | | :000000 100644 0000000 794de7d A	src/assets/default-person.jpeg
@@ -667,7 +1050,7 @@
 | | :100644 100644 bcb97cd f6ea61e M	src/pages/Collection.tsx
 | | :100644 100644 1331d9a 231d77f M	src/pages/Home.tsx
 
-| * 34bc866 - Tue, 9 Aug 2022 14:09:04 -0500 (hace 13 días)
+| * 34bc866 - Tue, 9 Aug 2022 14:09:04 -0500 (hace 3 semanas)
 | |  Connected posts with backend and linked to context. - Susana Poveda| | 
 | | :100644 100644 d3ccc39 2cd7c48 M	src/App.css
 | | :100644 100644 005690e 005690e R100	src/components/Post.css	src/components/NewPost.css
@@ -678,7 +1061,7 @@
 | | :100644 100644 4fabe7c fb6e5ed M	src/context.tsx
 | | :100644 100644 cad6e5d 1331d9a M	src/pages/Home.tsx
 
-| * df58726 - Tue, 9 Aug 2022 12:52:18 -0500 (hace 13 días)
+| * df58726 - Tue, 9 Aug 2022 12:52:18 -0500 (hace 3 semanas)
 | |  Enabled encoding of images in Posts. Completed Posts style for desktop. - Susana Poveda| | 
 | | :100644 100644 2b3303a d537da3 M	src/components/InputImage.css
 | | :100644 100644 9df605d 42aaf27 M	src/components/InputImage.tsx
@@ -686,7 +1069,7 @@
 | | :100644 100644 30ca4ed db57c1b M	src/components/Post.tsx
 | | :100644 100644 b1d54ba 4fabe7c M	src/context.tsx
 
-| * 8d2bfb9 - Tue, 9 Aug 2022 12:16:39 -0500 (hace 13 días)
+| * 8d2bfb9 - Tue, 9 Aug 2022 12:16:39 -0500 (hace 3 semanas)
 |/   Adapted Posts component - unpublished. - Susana Poveda|   
 |   :100644 100644 10b285e d3ccc39 M	src/App.css
 |   :000000 100644 0000000 03bad40 A	src/assets/resize.png
@@ -697,30 +1080,30 @@
 |   :100644 100644 c24b025 45d13da R097	src/components/Posts.tsx	src/components/Posts2.tsx
 |   :100644 100644 dbca1e8 cad6e5d M	src/pages/Home.tsx
 
-*   397ae9b - Mon, 8 Aug 2022 23:46:10 +0400 (hace 2 semanas)
+*   397ae9b - Mon, 8 Aug 2022 23:46:10 +0400 (hace 3 semanas)
 |\   Merge pull request #34 from Agile-team-project-2022/feature-post - Gold-D-Mo128
-| * ddbee16 - Mon, 8 Aug 2022 23:44:01 +0400 (hace 2 semanas)
+| * ddbee16 - Mon, 8 Aug 2022 23:44:01 +0400 (hace 3 semanas)
 | |  post and posting 0.1 - Gold-D-Mo128| | 
 | | :100644 100644 550964e 84ad11b M	src/pages/Home.tsx
 
-| * 71b7bfe - Mon, 8 Aug 2022 23:23:55 +0400 (hace 2 semanas)
+| * 71b7bfe - Mon, 8 Aug 2022 23:23:55 +0400 (hace 3 semanas)
 | |  the post and posting feature design --done - Gold-D-Mo128| | 
 | | :100644 100644 74389e9 e3969b6 M	src/components/Posts.css
 | | :100644 100644 6adec4d c24b025 M	src/components/Posts.tsx
 | | :000000 100644 0000000 b150265 A	src/components/Publications.css
 | | :100644 100644 3876110 550964e M	src/pages/Home.tsx
 
-* |   7bc0d06 - Mon, 8 Aug 2022 13:45:21 -0500 (hace 2 semanas)
+* |   7bc0d06 - Mon, 8 Aug 2022 13:45:21 -0500 (hace 3 semanas)
 |\ \   Merge pull request #33 from Agile-team-project-2022/feature-collection - susana3
-| * | 4d99086 - Mon, 8 Aug 2022 13:42:48 -0500 (hace 2 semanas)
+| * | 4d99086 - Mon, 8 Aug 2022 13:42:48 -0500 (hace 3 semanas)
 |/ /   Check valid image on expanded picture view. - Susana Poveda| |   
 | |   :100644 100644 c6531e7 b07a6f3 M	src/components/GalleryExpanded.css
 | |   :100644 100644 24e86d0 7b9d472 M	src/components/GalleryExpanded.tsx
 | |   :100644 100644 4fabe7c b1d54ba M	src/context.tsx
 
-* |   785a8c4 - Mon, 8 Aug 2022 13:30:39 -0500 (hace 2 semanas)
+* |   785a8c4 - Mon, 8 Aug 2022 13:30:39 -0500 (hace 3 semanas)
 |\ \   Merge pull request #32 from Agile-team-project-2022/feature-collection - susana3
-| * | 2f4ff89 - Mon, 8 Aug 2022 13:26:07 -0500 (hace 2 semanas)
+| * | 2f4ff89 - Mon, 8 Aug 2022 13:26:07 -0500 (hace 3 semanas)
 |/ /   Enabled view expanded profile picture by others. - Susana Poveda| |   
 | |   :100644 100644 9ad6781 00c3833 M	src/components/CollectionHeader.css
 | |   :100644 100644 414c88e f991206 M	src/components/CollectionHeader.tsx
@@ -728,17 +1111,17 @@
 | |   :000000 100644 0000000 24e86d0 A	src/components/GalleryExpanded.tsx
 | |   :100644 100644 f6ea61e bcb97cd M	src/pages/Collection.tsx
 
-* |   143d423 - Mon, 8 Aug 2022 11:36:15 -0500 (hace 2 semanas)
+* |   143d423 - Mon, 8 Aug 2022 11:36:15 -0500 (hace 3 semanas)
 |\ \   Merge pull request #31 from Agile-team-project-2022/feature-collection - susana3
-| * | 91215db - Mon, 8 Aug 2022 11:28:43 -0500 (hace 2 semanas)
+| * | 91215db - Mon, 8 Aug 2022 11:28:43 -0500 (hace 3 semanas)
 |/ /   Change profile picture responsive design complete. - Susana Poveda| |   
 | |   :100644 100644 7d3d122 65ca1de M	src/components/ChangeProfilePicture.css
 | |   :100644 100644 78b9c9a 421b612 M	src/components/ChangeProfilePicture.tsx
 | |   :100644 100644 268f5f1 03e5f3d M	src/components/Modal.css
 
-* |   775f9db - Mon, 8 Aug 2022 10:47:19 -0500 (hace 2 semanas)
+* |   775f9db - Mon, 8 Aug 2022 10:47:19 -0500 (hace 3 semanas)
 |\ \   Merge pull request #30 from Agile-team-project-2022/feature-collection - susana3
-| * | 75ead0c - Mon, 8 Aug 2022 10:41:53 -0500 (hace 2 semanas)
+| * | 75ead0c - Mon, 8 Aug 2022 10:41:53 -0500 (hace 3 semanas)
 | | |  Change profile picture desktop style complete. - Susana Poveda| | | 
 | | | :000000 100644 0000000 34e5acb A	src/assets/cancel.png
 | | | :000000 100644 0000000 9306700 A	src/assets/save.png
@@ -746,7 +1129,7 @@
 | | | :100644 100644 6f5d78c 78b9c9a M	src/components/ChangeProfilePicture.tsx
 | | | :100644 100644 9f5ce10 268f5f1 M	src/components/Modal.css
 
-| * | e633d11 - Sun, 7 Aug 2022 23:02:08 -0500 (hace 2 semanas)
+| * | e633d11 - Sun, 7 Aug 2022 23:02:08 -0500 (hace 3 semanas)
 | | |  Style adjusted change profile pictures. - Susana Poveda| | | 
 | | | :100644 100644 17dad05 6f5d78c M	src/components/ChangeProfilePicture.tsx
 | | | :100644 100644 a74fb04 9ad6781 M	src/components/CollectionHeader.css
@@ -755,7 +1138,7 @@
 | | | :100644 100644 65f8a92 4fabe7c M	src/context.tsx
 | | | :000000 100644 0000000 5f9cf8c A	src/helpers.tsx
 
-| * | 6e74929 - Sun, 7 Aug 2022 20:28:59 -0500 (hace 2 semanas)
+| * | 6e74929 - Sun, 7 Aug 2022 20:28:59 -0500 (hace 3 semanas)
 | | |  Update images for collections enabled. - Susana Poveda| | | 
 | | | :100644 100644 15e5920 10b285e M	src/App.css
 | | | :100644 100644 ac8abdd ada616e M	src/App.tsx
@@ -767,7 +1150,7 @@
 | | | :100644 100644 00de0ce 65f8a92 M	src/context.tsx
 | | | :100644 100644 65c4432 e04bc96 M	src/pages/Home.tsx
 
-| * | 9ad59c6 - Sun, 7 Aug 2022 15:02:19 -0500 (hace 2 semanas)
+| * | 9ad59c6 - Sun, 7 Aug 2022 15:02:19 -0500 (hace 3 semanas)
 |/ /   Encoding of pictures added and change profile functionality set up. - Susana Poveda| |   
 | |   :000000 100644 0000000 4a134eb A	src/components/ChangeProfilePicture.css
 | |   :000000 100644 0000000 f1db8e6 A	src/components/ChangeProfilePicture.tsx
@@ -782,14 +1165,14 @@
 | |   :100644 100644 bcb97cd f6ea61e M	src/pages/Collection.tsx
 | |   :100644 100644 e04bc96 65c4432 M	src/pages/Home.tsx
 
-* |   c445403 - Sun, 7 Aug 2022 12:15:00 -0500 (hace 2 semanas)
+* |   c445403 - Sun, 7 Aug 2022 12:15:00 -0500 (hace 3 semanas)
 |\ \   Merge pull request #29 from Agile-team-project-2022/feature-collection - susana3
-| * | 879edad - Sun, 7 Aug 2022 12:12:45 -0500 (hace 2 semanas)
+| * | 879edad - Sun, 7 Aug 2022 12:12:45 -0500 (hace 3 semanas)
 | | |  Adjusted data structures and connected follow plants endpoint. - Susana Poveda| | | 
 | | | :100644 100644 f94cb1e f231346 M	src/components/ExpandedList.tsx
 | | | :100644 100644 18c8986 b2b0146 M	src/context.tsx
 
-| * | fad3599 - Sun, 7 Aug 2022 11:46:12 -0500 (hace 2 semanas)
+| * | fad3599 - Sun, 7 Aug 2022 11:46:12 -0500 (hace 3 semanas)
 | | |  Structure and interfaces updated to connect endpoints. - Susana Poveda| | | 
 | | | :100644 100644 d1e3446 ac8abdd M	src/App.tsx
 | | | :100644 100644 9eff65b 3a46889 M	src/components/CollectionCard.tsx
@@ -802,7 +1185,7 @@
 | | | :100644 100644 a9830ee bcb97cd M	src/pages/Collection.tsx
 | | | :100644 100644 3876110 e04bc96 M	src/pages/Home.tsx
 
-| * | e5429a9 - Sat, 6 Aug 2022 15:02:22 -0500 (hace 2 semanas)
+| * | e5429a9 - Sat, 6 Aug 2022 15:02:22 -0500 (hace 3 semanas)
 | | |  Complete interactions style. - Susana Poveda| | | 
 | | | :100644 100644 d62327a 5da97fa M	src/components/CollectionInteractions.tsx
 | | | :100644 100644 80cc134 6de8942 M	src/components/CollectionPlants.css
@@ -811,7 +1194,7 @@
 | | | :100644 100644 5cc256d 403e948 M	src/pages/Collection.css
 | | | :100644 100644 1105976 a9830ee M	src/pages/Collection.tsx
 
-| * | cc9154e - Sat, 6 Aug 2022 11:12:18 -0500 (hace 2 semanas)
+| * | cc9154e - Sat, 6 Aug 2022 11:12:18 -0500 (hace 3 semanas)
 | | |  Interactions sections set up for all devices. - Susana Poveda| | | 
 | | | :100644 100644 24cbb60 15e5920 M	src/App.css
 | | | :100644 100644 7a15e9b 17a6cd7 M	src/components/CollectionInteractions.css
@@ -820,42 +1203,42 @@
 | | | :100644 100644 627153d 5cc256d M	src/pages/Collection.css
 | | | :100644 100644 81ffae7 1105976 M	src/pages/Collection.tsx
 
-| * | 9e9965d - Fri, 5 Aug 2022 16:58:55 -0500 (hace 2 semanas)
+| * | 9e9965d - Fri, 5 Aug 2022 16:58:55 -0500 (hace 4 semanas)
 |/ /   Interactions section set up for collections page. - Susana Poveda| |   
 | |   :000000 100644 0000000 7a15e9b A	src/components/CollectionInteractions.css
 | |   :000000 100644 0000000 9ed3d8d A	src/components/CollectionInteractions.tsx
 | |   :100644 100644 582a4a1 627153d M	src/pages/Collection.css
 | |   :100644 100644 0ede5bb 81ffae7 M	src/pages/Collection.tsx
 
-* |   2a7968b - Fri, 5 Aug 2022 15:27:36 -0500 (hace 2 semanas)
+* |   2a7968b - Fri, 5 Aug 2022 15:27:36 -0500 (hace 4 semanas)
 |\ \   Merge pull request #28 from Agile-team-project-2022/feature-collection - susana3
-| * \   1d72def - Fri, 5 Aug 2022 15:26:48 -0500 (hace 2 semanas)
+| * \   1d72def - Fri, 5 Aug 2022 15:26:48 -0500 (hace 4 semanas)
 | |\ \   Merge branch 'main' into feature-collection - susana3
 | |/ /  
 |/| |   
-* | |   c7c52c9 - Thu, 4 Aug 2022 17:20:03 -0500 (hace 3 semanas)
+* | |   c7c52c9 - Thu, 4 Aug 2022 17:20:03 -0500 (hace 4 semanas)
 |\ \ \   Merge pull request #27 from Agile-team-project-2022/feature-collection - susana3
-* \ \ \   73e4c0f - Thu, 4 Aug 2022 13:38:21 -0500 (hace 3 semanas)
+* \ \ \   73e4c0f - Thu, 4 Aug 2022 13:38:21 -0500 (hace 4 semanas)
 |\ \ \ \   Merge pull request #26 from Agile-team-project-2022/feature-friends - susana3
-| * | | | 62c1f3b - Thu, 4 Aug 2022 13:34:44 -0500 (hace 3 semanas)
+| * | | | 62c1f3b - Thu, 4 Aug 2022 13:34:44 -0500 (hace 4 semanas)
 |/ / / /   Connected plant followed feature and follower user property from backend. - Susana Poveda| | | |   
 | | | |   :100644 100644 0b8ab8b a5a679d M	src/components/ExpandedList.tsx
 | | | |   :100644 100644 fcd8a6b f8c9681 M	src/context.tsx
 
-* | | |   1855b8c - Thu, 4 Aug 2022 12:40:32 -0500 (hace 3 semanas)
+* | | |   1855b8c - Thu, 4 Aug 2022 12:40:32 -0500 (hace 4 semanas)
 |\ \ \ \   Merge pull request #25 from Agile-team-project-2022/feature-login - susana3
-| * | | | 1929294 - Thu, 4 Aug 2022 12:38:25 -0500 (hace 3 semanas) (origin/feature-login, feature-login)
+| * | | | 1929294 - Thu, 4 Aug 2022 12:38:25 -0500 (hace 4 semanas)
 | | | | |  Minor fix warnings solved login page. - Susana Poveda| | | | | 
 | | | | | :100644 100644 d914bb3 d3d1131 M	src/components/Login.tsx
 
-| * | | | 51e99ec - Thu, 4 Aug 2022 12:35:38 -0500 (hace 3 semanas)
+| * | | | 51e99ec - Thu, 4 Aug 2022 12:35:38 -0500 (hace 4 semanas)
 |/ / / /   Removed input login fields and set initial state as logged in. - Susana Poveda| | | |   
 | | | |   :100644 100644 d4a7e3f d914bb3 M	src/components/Login.tsx
 | | | |   :100644 100644 a10b9fd fcd8a6b M	src/context.tsx
 
-* | | |   8001a32 - Thu, 4 Aug 2022 11:30:28 -0500 (hace 3 semanas)
+* | | |   8001a32 - Thu, 4 Aug 2022 11:30:28 -0500 (hace 4 semanas)
 |\ \ \ \   Merge pull request #24 from Agile-team-project-2022/feature-collection - susana3
-| | | * | 3762f6b - Fri, 5 Aug 2022 15:07:32 -0500 (hace 2 semanas)
+| | | * | 3762f6b - Fri, 5 Aug 2022 15:07:32 -0500 (hace 4 semanas)
 | | |/ /   Collection of plants grid view complete. - Susana Poveda| | | |   
 | | | |   :100644 100644 a0af00c 24cbb60 M	src/App.css
 | | | |   :100644 100644 050fa65 45ae932 M	src/components/Badges.tsx
@@ -867,7 +1250,7 @@
 | | | |   :100644 100644 3a7398b 03e1aac M	src/context.tsx
 | | | |   :100644 100644 8b646f1 0ede5bb M	src/pages/Collection.tsx
 
-| | * / 5cd13a1 - Thu, 4 Aug 2022 17:16:20 -0500 (hace 3 semanas)
+| | * / 5cd13a1 - Thu, 4 Aug 2022 17:16:20 -0500 (hace 4 semanas)
 | |/ /   Badges set up from frontend. Responsive design adjusted for collections. - Susana Poveda| | |   
 | | |   :100644 100644 242c37c 050fa65 M	src/components/Badges.tsx
 | | |   :100644 100644 16adea1 a74fb04 M	src/components/CollectionHeader.css
@@ -877,19 +1260,19 @@
 | | |   :100644 100644 39ef84d 582a4a1 M	src/pages/Collection.css
 | | |   :100644 100644 90b7615 8b646f1 M	src/pages/Collection.tsx
 
-| * | 729757e - Thu, 4 Aug 2022 11:28:35 -0500 (hace 3 semanas)
+| * | 729757e - Thu, 4 Aug 2022 11:28:35 -0500 (hace 4 semanas)
 | | |  Minor fix for eslint warning - Susana Poveda| | | 
 | | | :100644 100644 d8080a3 c2347be M	src/components/Filters.tsx
 
-| * | cb6f413 - Thu, 4 Aug 2022 11:26:25 -0500 (hace 3 semanas)
+| * | cb6f413 - Thu, 4 Aug 2022 11:26:25 -0500 (hace 4 semanas)
 |/ /   set deployment base url - Susana Poveda| |   
 | |   :100644 100644 a9388c9 d8080a3 M	src/components/Filters.tsx
 | |   :100644 100644 5fd3ae8 d4a7e3f M	src/components/Login.tsx
 | |   :100644 100644 0939cb7 a10b9fd M	src/context.tsx
 
-* |   7fe71a0 - Thu, 4 Aug 2022 08:52:08 -0500 (hace 3 semanas)
+* |   7fe71a0 - Thu, 4 Aug 2022 08:52:08 -0500 (hace 4 semanas)
 |\ \   Merge pull request #23 from Agile-team-project-2022/feature-collection - susana3
-| * | 3bfa712 - Thu, 4 Aug 2022 08:48:38 -0500 (hace 3 semanas)
+| * | 3bfa712 - Thu, 4 Aug 2022 08:48:38 -0500 (hace 4 semanas)
 | | |  Collection grid corrected - Susana Poveda| | | 
 | | | :100644 100644 ba57675 4a4fb79 M	src/components/CollectionHeader.tsx
 | | | :100644 100644 a773af6 97a6df6 M	src/components/CollectionPlants.css
@@ -897,7 +1280,7 @@
 | | | :100644 100644 fd8f916 39ef84d M	src/pages/Collection.css
 | | | :100644 100644 95196d1 90b7615 M	src/pages/Collection.tsx
 
-| * | d6beb77 - Wed, 3 Aug 2022 17:26:07 -0500 (hace 3 semanas)
+| * | d6beb77 - Wed, 3 Aug 2022 17:26:07 -0500 (hace 4 semanas)
 | | |  Collection sections mobile set up - Susana Poveda| | | 
 | | | :100644 100644 457e71a a0af00c M	src/App.css
 | | | :100644 100644 c911980 16adea1 M	src/components/CollectionHeader.css
@@ -906,7 +1289,7 @@
 | | | :100644 100644 71c8882 fd8f916 M	src/pages/Collection.css
 | | | :100644 100644 c961e27 95196d1 M	src/pages/Collection.tsx
 
-| * | 80dec9e - Wed, 3 Aug 2022 15:25:12 -0500 (hace 3 semanas)
+| * | 80dec9e - Wed, 3 Aug 2022 15:25:12 -0500 (hace 4 semanas)
 | | |  Header collection view from others and owner set with responsive design - Susana Poveda| | | 
 | | | :100644 100644 665c5a6 c911980 M	src/components/CollectionHeader.css
 | | | :100644 100644 9e0b864 ba57675 M	src/components/CollectionHeader.tsx
@@ -914,7 +1297,7 @@
 | | | :100644 100644 bd04435 b67229b M	src/hooks/useWindowSize.tsx
 | | | :100644 100644 0ddb8b6 c961e27 M	src/pages/Collection.tsx
 
-| * | 669dcc3 - Wed, 3 Aug 2022 12:43:50 -0500 (hace 3 semanas)
+| * | 669dcc3 - Wed, 3 Aug 2022 12:43:50 -0500 (hace 4 semanas)
 | | |  Context modified to access device sizes. - Susana Poveda| | | 
 | | | :100644 100644 078c3cc b6c7c38 M	package-lock.json
 | | | :100644 100644 1fa026b fcab591 M	package.json
@@ -928,14 +1311,14 @@
 | | | :100644 100644 342b9f5 bd04435 M	src/hooks/useWindowSize.tsx
 | | | :100644 100644 ce3b2c5 71c8882 M	src/pages/Collection.css
 
-| * | 8dadbfe - Tue, 2 Aug 2022 15:01:48 -0500 (hace 3 semanas)
+| * | 8dadbfe - Tue, 2 Aug 2022 15:01:48 -0500 (hace 4 semanas)
 | | |  Collection style adjust desktop. - Susana Poveda| | | 
 | | | :100644 100644 d65ccaf 457e71a M	src/App.css
 | | | :100644 100644 ff3b064 b8d9795 M	src/components/CollectionHeader.css
 | | | :100644 100644 e0eaa8b c684a8b M	src/components/CollectionHeader.tsx
 | | | :100644 100644 1259aca ce3b2c5 M	src/pages/Collection.css
 
-| * | 71803f6 - Mon, 1 Aug 2022 21:14:18 -0500 (hace 3 semanas)
+| * | 71803f6 - Mon, 1 Aug 2022 21:14:18 -0500 (hace 4 semanas)
 | | |  Style desktop adjusted Collection header - Susana Poveda| | | 
 | | | :100644 100644 985cd7e 385282f M	src/assets/example-people-1.jpeg
 | | | :100644 100644 74369f9 242c37c M	src/components/Badges.tsx
@@ -945,7 +1328,7 @@
 | | | :100644 100644 ac181cd 1259aca M	src/pages/Collection.css
 | | | :100644 100644 417896e 0ddb8b6 M	src/pages/Collection.tsx
 
-| * | 909abd9 - Mon, 1 Aug 2022 14:44:17 -0500 (hace 3 semanas)
+| * | 909abd9 - Mon, 1 Aug 2022 14:44:17 -0500 (hace 4 semanas)
 | | |  Badges component setup - Susana Poveda| | | 
 | | | :100644 100644 0a125e8 d65ccaf M	src/App.css
 | | | :100644 100644 d977322 3407595 M	src/App.tsx
@@ -953,7 +1336,7 @@
 | | | :100644 100644 f0763d0 2cc48fe M	src/components/DataSection.css
 | | | :100644 100644 7764878 80959ac M	src/components/DataSection.tsx
 
-| * | 09987e0 - Mon, 1 Aug 2022 14:04:33 -0500 (hace 3 semanas)
+| * | 09987e0 - Mon, 1 Aug 2022 14:04:33 -0500 (hace 4 semanas)
 | | |  Initialized Collection page and its components. - Susana Poveda| | | 
 | | | :100644 100644 d583933 0a125e8 M	src/App.css
 | | | :000000 100644 0000000 4713358 A	src/components/Badges.tsx
@@ -967,17 +1350,17 @@
 | | | :100644 100644 e69de29 ac181cd M	src/pages/Collection.css
 | | | :100644 100644 2e3914b 417896e M	src/pages/Collection.tsx
 
-* | |   82745b9 - Mon, 1 Aug 2022 21:21:29 +0400 (hace 3 semanas)
+* | |   82745b9 - Mon, 1 Aug 2022 21:21:29 +0400 (hace 4 semanas)
 |\ \ \   Merge pull request #22 from Agile-team-project-2022/feature-post - Gold-D-Mo128
 | |/ /  
 |/| /   
 | |/    
-| * 3f0daf5 - Mon, 1 Aug 2022 21:18:44 +0400 (hace 3 semanas)
+| * 3f0daf5 - Mon, 1 Aug 2022 21:18:44 +0400 (hace 4 semanas)
 | |  posting feature v0.0.3 - Gold-D-Mo128| | 
 | | :100644 100644 cbf233e 74389e9 M	src/components/Posts.css
 | | :100644 100644 3ff1803 6adec4d M	src/components/Posts.tsx
 
-| * 52a5489 - Mon, 1 Aug 2022 21:08:55 +0400 (hace 3 semanas)
+| * 52a5489 - Mon, 1 Aug 2022 21:08:55 +0400 (hace 4 semanas)
 | |  posting feature v0.0.2 - Gold-D-Mo128| | 
 | | :100755 100755 b92d6e7 b92d6e7 R100	posts-assets/comment.png	src/assets/comment.png
 | | :100755 100755 51414b7 51414b7 R100	posts-assets/like-empty.png	src/assets/like-empty.png
@@ -985,13 +1368,13 @@
 | | :100755 100755 8fae146 8fae146 R100	posts-assets/lotus-8.jpeg	src/assets/lotus-8.jpeg
 | | :100755 100755 abcdaf6 abcdaf6 R100	posts-assets/report.png	src/assets/report.png
 
-| * edec1e9 - Mon, 1 Aug 2022 21:04:49 +0400 (hace 3 semanas)
+| * edec1e9 - Mon, 1 Aug 2022 21:04:49 +0400 (hace 4 semanas)
 | |  posting feature v0.0.1 - Gold-D-Mo128| | 
 | | :100644 100644 49ed90a 3ff1803 M	src/components/Posts.tsx
 | | :100644 000000 8cec2e9 0000000 D	src/components/Publications.tsx
 | | :100644 000000 cb419a2 0000000 D	src/components/iPost.tsx
 
-| * 810e798 - Mon, 1 Aug 2022 20:37:26 +0400 (hace 3 semanas)
+| * 810e798 - Mon, 1 Aug 2022 20:37:26 +0400 (hace 4 semanas)
 |/   posting feature - Gold-D-Mo128|   
 |   :000000 100755 0000000 b92d6e7 A	posts-assets/comment.png
 |   :000000 100755 0000000 51414b7 A	posts-assets/like-empty.png
@@ -1004,51 +1387,51 @@
 |   :000000 100644 0000000 cb419a2 A	src/components/iPost.tsx
 |   :100644 100644 c40bddf 3876110 M	src/pages/Home.tsx
 
-*   7073b88 - Mon, 1 Aug 2022 10:41:48 -0500 (hace 3 semanas) (feature-filters)
+*   7073b88 - Mon, 1 Aug 2022 10:41:48 -0500 (hace 4 semanas)
 |\   Merge pull request #20 from Agile-team-project-2022/feature-filters - susana3
-| * 55aa6c3 - Mon, 1 Aug 2022 10:39:53 -0500 (hace 3 semanas) (origin/feature-filters)
+| * 55aa6c3 - Mon, 1 Aug 2022 10:39:53 -0500 (hace 4 semanas)
 |/   Fix for deploy - Susana Poveda|   
 |   :100644 100644 6a7a2ea 2440a26 M	src/components/Filters.tsx
 
-*   466adb0 - Mon, 1 Aug 2022 10:29:04 -0500 (hace 3 semanas)
+*   466adb0 - Mon, 1 Aug 2022 10:29:04 -0500 (hace 4 semanas)
 |\   Merge pull request #19 from Agile-team-project-2022/feature-filters - susana3
-| * 9f8b643 - Mon, 1 Aug 2022 10:27:34 -0500 (hace 3 semanas)
+| * 9f8b643 - Mon, 1 Aug 2022 10:27:34 -0500 (hace 4 semanas)
 |/   Initialization of DB category IDs set. - Susana Poveda|   
 |   :100644 100644 6207bff 6a7a2ea M	src/components/Filters.tsx
 |   :100644 100644 3aa0be6 873eedc M	src/context.tsx
 
-*   c248fda - Sun, 31 Jul 2022 21:32:54 -0500 (hace 3 semanas)
+*   c248fda - Sun, 31 Jul 2022 21:32:54 -0500 (hace 4 semanas)
 |\   Merge pull request #18 from Agile-team-project-2022/feature-login - susana3
-| * fe0dd46 - Sun, 31 Jul 2022 21:30:32 -0500 (hace 3 semanas)
+| * fe0dd46 - Sun, 31 Jul 2022 21:30:32 -0500 (hace 4 semanas)
 | |  Fix #3 env deploy - Susana Poveda| | 
 | | :100644 100644 b10d73a 1d4a19c M	.gitignore
 | | :100644 100644 3503395 1fa026b M	package.json
 
-* | 77e8838 - Sun, 31 Jul 2022 21:18:38 -0500 (hace 3 semanas)
+* | 77e8838 - Sun, 31 Jul 2022 21:18:38 -0500 (hace 4 semanas)
 |\|  Merge pull request #17 from Agile-team-project-2022/feature-login - susana3
-| * aab42b3 - Sun, 31 Jul 2022 21:16:47 -0500 (hace 3 semanas)
+| * aab42b3 - Sun, 31 Jul 2022 21:16:47 -0500 (hace 4 semanas)
 |/   Fix env #2 - Susana Poveda|   
 |   :100644 100644 13dcd48 d583933 M	src/App.css
 
-*   230b46e - Sun, 31 Jul 2022 21:05:44 -0500 (hace 3 semanas)
+*   230b46e - Sun, 31 Jul 2022 21:05:44 -0500 (hace 4 semanas)
 |\   Merge pull request #16 from Agile-team-project-2022/feature-login - susana3
-| * f5408fc - Sun, 31 Jul 2022 21:03:11 -0500 (hace 3 semanas)
+| * f5408fc - Sun, 31 Jul 2022 21:03:11 -0500 (hace 4 semanas)
 | |  Fix build deploy - Susana Poveda| | 
 | | :100644 100644 2f05564 3503395 M	package.json
 
-| * d81108f - Sun, 31 Jul 2022 20:54:37 -0500 (hace 3 semanas)
+| * d81108f - Sun, 31 Jul 2022 20:54:37 -0500 (hace 4 semanas)
 |/   Created dev/prod environments - Susana Poveda|   
 |   :100644 100644 1d4a19c b10d73a M	.gitignore
 |   :100644 100644 81ca7a8 078c3cc M	package-lock.json
 |   :100644 100644 5d60697 2f05564 M	package.json
 
-*   0f78f15 - Sun, 31 Jul 2022 15:33:20 -0500 (hace 3 semanas)
+*   0f78f15 - Sun, 31 Jul 2022 15:33:20 -0500 (hace 4 semanas)
 |\   Merge pull request #15 from Agile-team-project-2022/feature-login - susana3
-| * b05c253 - Sun, 31 Jul 2022 15:26:10 -0500 (hace 3 semanas)
+| * b05c253 - Sun, 31 Jul 2022 15:26:10 -0500 (hace 4 semanas)
 | |  Fix mobile tap behaviour. - Susana Poveda| | 
 | | :100644 100644 4bde9c0 13dcd48 M	src/App.css
 
-| * f64ff78 - Sun, 31 Jul 2022 15:20:24 -0500 (hace 3 semanas)
+| * f64ff78 - Sun, 31 Jul 2022 15:20:24 -0500 (hace 4 semanas)
 | |  Images for login added. - Susana Poveda| | 
 | | :100644 100644 da5ea93 b0f7c61 M	src/assets/login-img-1.jpg
 | | :100644 100644 b0f7c61 da5ea93 M	src/assets/login-img-10.jpg
@@ -1062,7 +1445,7 @@
 | | :100644 100644 52bbb1c 1a70127 M	src/assets/login-img-9.jpg
 | | :100644 100644 81e7d61 5fd3ae8 M	src/components/Login.tsx
 
-| * fb46564 - Sun, 31 Jul 2022 15:12:29 -0500 (hace 3 semanas)
+| * fb46564 - Sun, 31 Jul 2022 15:12:29 -0500 (hace 4 semanas)
 | |  Images added - Susana Poveda| | 
 | | :000000 100644 0000000 2948f0c A	src/assets/category-aquatic.jpg
 | | :000000 100644 0000000 497f9d4 A	src/assets/category-evergreen.jpeg
@@ -1094,7 +1477,7 @@
 | | :100644 100644 6b5b899 6207bff M	src/components/Filters.tsx
 | | :100644 100644 4a21e0a 81e7d61 M	src/components/Login.tsx
 
-| * 7382da3 - Sun, 31 Jul 2022 13:35:48 -0500 (hace 3 semanas)
+| * 7382da3 - Sun, 31 Jul 2022 13:35:48 -0500 (hace 4 semanas)
 |/   Responsive design adapted Login. - Susana Poveda|   
 |   :100644 100644 26c2539 4bde9c0 M	src/App.css
 |   :100644 100644 1485bbe 4f295d3 M	src/components/Login.css
@@ -1104,28 +1487,28 @@
 |   :100644 100644 ad8454f 0029397 M	src/pages/Home.css
 |   :100644 100644 5842d89 c40bddf M	src/pages/Home.tsx
 
-*   f08c6d7 - Sat, 30 Jul 2022 21:58:43 -0500 (hace 3 semanas)
+*   f08c6d7 - Sat, 30 Jul 2022 21:58:43 -0500 (hace 4 semanas)
 |\   Merge pull request #14 from Agile-team-project-2022/feature-friends - susana3
-| * 36e4a0e - Sat, 30 Jul 2022 21:55:42 -0500 (hace 3 semanas)
+| * 36e4a0e - Sat, 30 Jul 2022 21:55:42 -0500 (hace 4 semanas)
 |/   Button to scroll up added. - Susana Poveda|   
 |   :100644 100644 d2242ba 26c2539 M	src/App.css
 |   :100644 100644 57916c9 d977322 M	src/App.tsx
 
-*   032067d - Sat, 30 Jul 2022 20:58:03 -0500 (hace 3 semanas)
+*   032067d - Sat, 30 Jul 2022 20:58:03 -0500 (hace 4 semanas)
 |\   Merge pull request #13 from Agile-team-project-2022/feature-friends - susana3
-| * e56f9c1 - Sat, 30 Jul 2022 20:56:29 -0500 (hace 3 semanas)
+| * e56f9c1 - Sat, 30 Jul 2022 20:56:29 -0500 (hace 4 semanas)
 |/   Friends and Followed plants unified file. - Susana Poveda|   
 |   :100644 100644 81d638c 8048bb5 R053	src/components/FollowedPlants.tsx	src/components/ExpandedList.tsx
 |   :100644 100644 edd8dfb 2f9dc16 M	src/layouts/Header.tsx
 |   :100644 100644 13b262e 5842d89 M	src/pages/Home.tsx
 
-*   066f621 - Sat, 30 Jul 2022 20:20:00 -0500 (hace 3 semanas)
+*   066f621 - Sat, 30 Jul 2022 20:20:00 -0500 (hace 4 semanas)
 |\   Merge pull request #12 from Agile-team-project-2022/feature-filters - susana3
-| * 6532f46 - Sat, 30 Jul 2022 20:16:29 -0500 (hace 3 semanas)
+| * 6532f46 - Sat, 30 Jul 2022 20:16:29 -0500 (hace 4 semanas)
 | |  Fetch single category basic functionality set. - Susana Poveda| | 
 | | :100644 100644 90ee0d5 6b5b899 M	src/components/Filters.tsx
 
-| * 49e34d9 - Sat, 30 Jul 2022 13:10:17 -0500 (hace 3 semanas)
+| * 49e34d9 - Sat, 30 Jul 2022 13:10:17 -0500 (hace 4 semanas)
 |/   Created basic categories and sync with database. - Susana Poveda|   
 |   :100644 100644 613b639 d2242ba M	src/App.css
 |   :100644 100644 39f1afe 4a0046e M	src/components/Filters.css
@@ -1135,9 +1518,9 @@
 |   :100644 100644 bc12a32 eaa7919 M	src/layouts/Header.css
 |   :100644 100644 d8c21e7 ad8454f M	src/pages/Home.css
 
-*   948269b - Sat, 30 Jul 2022 10:36:30 -0500 (hace 3 semanas)
+*   948269b - Sat, 30 Jul 2022 10:36:30 -0500 (hace 4 semanas)
 |\   Merge pull request #11 from Agile-team-project-2022/feature-followed-plants - susana3
-| * 5221496 - Sat, 30 Jul 2022 10:33:36 -0500 (hace 3 semanas)
+| * 5221496 - Sat, 30 Jul 2022 10:33:36 -0500 (hace 4 semanas)
 | |  Followed plants view complete - Susana Poveda| | 
 | | :100644 100644 a9bc6ed 39f1afe M	src/components/Filters.css
 | | :100644 100644 1b84ed4 8bfb8c9 M	src/components/Filters.tsx
@@ -1145,39 +1528,39 @@
 | | :100644 100644 5bbaa5d 81d638c M	src/components/FollowedPlants.tsx
 | | :100644 100644 d429b27 5bcc5d4 M	src/components/Modal.css
 
-| * 6edbb45 - Sat, 30 Jul 2022 10:14:26 -0500 (hace 3 semanas)
+| * 6edbb45 - Sat, 30 Jul 2022 10:14:26 -0500 (hace 4 semanas)
 |/   Style adjusted - Susana Poveda|   
 |   :100644 100644 00fdd4e 1b84ed4 M	src/components/Filters.tsx
 |   :100644 100644 f51ea0e 477e191 M	src/components/FollowedPlants.css
 
-*   fa93619 - Fri, 29 Jul 2022 21:37:35 -0500 (hace 3 semanas)
+*   fa93619 - Fri, 29 Jul 2022 21:37:35 -0500 (hace 5 semanas)
 |\   Merge pull request #10 from Agile-team-project-2022/feature-filters - susana3
-| * 8f51e7f - Fri, 29 Jul 2022 21:35:37 -0500 (hace 3 semanas)
+| * 8f51e7f - Fri, 29 Jul 2022 21:35:37 -0500 (hace 5 semanas)
 |/   Set shared styles - Susana Poveda|   
 |   :100644 100644 d2a113a 613b639 M	src/App.css
 |   :100644 100644 4752dac a9bc6ed M	src/components/Filters.css
 |   :100644 100644 3e8831a 00fdd4e M	src/components/Filters.tsx
 |   :100644 100644 cc29036 f51ea0e M	src/components/FollowedPlants.css
 
-*   0b19241 - Fri, 29 Jul 2022 21:25:49 -0500 (hace 3 semanas)
+*   0b19241 - Fri, 29 Jul 2022 21:25:49 -0500 (hace 5 semanas)
 |\   Merge pull request #9 from Agile-team-project-2022/feature-filters - susana3
-| * c80be6e - Fri, 29 Jul 2022 19:53:47 -0500 (hace 3 semanas)
+| * c80be6e - Fri, 29 Jul 2022 19:53:47 -0500 (hace 5 semanas)
 | |  Connect endpoint in progress for filters component. - Susana Poveda| | 
 | | :100644 100644 7f0766a 4752dac M	src/components/Filters.css
 | | :100644 100644 857a8f4 3e8831a M	src/components/Filters.tsx
 | | :100644 100644 3814a61 3aa0be6 M	src/context.tsx
 
-* |   c0e232e - Fri, 29 Jul 2022 21:19:02 -0500 (hace 3 semanas)
+* |   c0e232e - Fri, 29 Jul 2022 21:19:02 -0500 (hace 5 semanas)
 |\ \   Merge pull request #8 from Agile-team-project-2022/feature-followed-plants - susana3
-| * | ff801eb - Fri, 29 Jul 2022 21:17:34 -0500 (hace 3 semanas)
+| * | ff801eb - Fri, 29 Jul 2022 21:17:34 -0500 (hace 5 semanas)
 | | |  Minor fix followed plants view - Susana Poveda| | | 
 | | | :100644 100644 e701fdb 5bbaa5d M	src/components/FollowedPlants.tsx
 
-* | | 6dcd10b - Fri, 29 Jul 2022 21:17:07 -0500 (hace 3 semanas)
+* | | 6dcd10b - Fri, 29 Jul 2022 21:17:07 -0500 (hace 5 semanas)
 |\| |  Merge pull request #7 from Agile-team-project-2022/feature-followed-plants - susana3
 | |/  
 |/|   
-| * ab32aaa - Fri, 29 Jul 2022 21:11:17 -0500 (hace 3 semanas)
+| * ab32aaa - Fri, 29 Jul 2022 21:11:17 -0500 (hace 5 semanas)
 |/   Followed plants component basic setup - Susana Poveda|   
 |   :000000 100644 0000000 cc29036 A	src/components/FollowedPlants.css
 |   :000000 100644 0000000 e701fdb A	src/components/FollowedPlants.tsx
@@ -1185,9 +1568,9 @@
 |   :100644 100644 3814a61 3aa0be6 M	src/context.tsx
 |   :100644 100644 8fe621e 13b262e M	src/pages/Home.tsx
 
-*   3d2361f - Fri, 29 Jul 2022 14:39:49 -0500 (hace 3 semanas)
+*   3d2361f - Fri, 29 Jul 2022 14:39:49 -0500 (hace 5 semanas)
 |\   Merge pull request #6 from Agile-team-project-2022/feature-filters - susana3
-| * 6863cae - Fri, 29 Jul 2022 09:51:54 -0500 (hace 3 semanas)
+| * 6863cae - Fri, 29 Jul 2022 09:51:54 -0500 (hace 5 semanas)
 | |  Correction mobile style and assets for filters. - Susana Poveda| | 
 | | :100644 100644 3d8b36a 1d4a19c M	.gitignore
 | | :100644 100644 5d6b1e3 5b335b8 M	package-lock.json
@@ -1198,9 +1581,9 @@
 | | :100644 100644 e4b4209 7f0766a M	src/components/Filters.css
 | | :100644 100644 0815e35 857a8f4 M	src/components/Filters.tsx
 
-* |   1c5f26a - Fri, 29 Jul 2022 14:34:49 -0500 (hace 3 semanas)
+* |   1c5f26a - Fri, 29 Jul 2022 14:34:49 -0500 (hace 5 semanas)
 |\ \   Merge pull request #5 from Agile-team-project-2022/feature-login - susana3
-| * | c530d94 - Fri, 29 Jul 2022 14:21:51 -0500 (hace 3 semanas)
+| * | c530d94 - Fri, 29 Jul 2022 14:21:51 -0500 (hace 5 semanas)
 | | |  Login connected to Google login account. Logout implemented. - Susana Poveda| | | 
 | | | :100644 100644 c65511a c5a9978 M	package-lock.json
 | | | :100644 100644 bd0363d cb9372d M	package.json
@@ -1209,15 +1592,15 @@
 | | | :100644 100644 5c3bdcb 1a15dcc M	src/index.tsx
 | | | :100644 100644 37104a8 edd8dfb M	src/layouts/Header.tsx
 
-* | | acbbca8 - Fri, 29 Jul 2022 14:27:14 -0500 (hace 3 semanas)
+* | | acbbca8 - Fri, 29 Jul 2022 14:27:14 -0500 (hace 5 semanas)
 |\| |  Merge pull request #4 from Agile-team-project-2022/feature-login - susana3
-| * | 4c690b8 - Fri, 29 Jul 2022 12:52:47 -0500 (hace 3 semanas)
+| * | 4c690b8 - Fri, 29 Jul 2022 12:52:47 -0500 (hace 5 semanas)
 | | |  Test deployment feature - Susana Poveda| | | 
 | | | :100644 100644 0ec0556 2fd2e03 M	src/components/Login.css
 | | | :100644 100644 0366f22 689c871 M	src/components/Login.tsx
 | | | :100644 100644 3c1feea 37104a8 M	src/layouts/Header.tsx
 
-| * | 30d5ecd - Fri, 29 Jul 2022 12:49:43 -0500 (hace 3 semanas)
+| * | 30d5ecd - Fri, 29 Jul 2022 12:49:43 -0500 (hace 5 semanas)
 |/ /   Basic Login functionality set - Susana Poveda| |   
 | |   :100644 100644 5d6b1e3 c65511a M	package-lock.json
 | |   :100644 100644 306c531 bd0363d M	package.json
@@ -1230,36 +1613,36 @@
 | |   :100644 000000 e69de29 0000000 D	src/pages/Login.css
 | |   :100644 000000 c49ec2c 0000000 D	src/pages/Login.tsx
 
-* | e1edc2d - Thu, 28 Jul 2022 13:59:05 -0500 (hace 4 semanas)
+* | e1edc2d - Thu, 28 Jul 2022 13:59:05 -0500 (hace 5 semanas)
 |\|  Merge pull request #3 from Agile-team-project-2022/feature-filters - susana3
-| * 7a9b739 - Thu, 28 Jul 2022 13:56:25 -0500 (hace 4 semanas)
+| * 7a9b739 - Thu, 28 Jul 2022 13:56:25 -0500 (hace 5 semanas)
 | |  Router file added - Susana Poveda| | 
 | | :000000 100644 0000000 f824337 A	public/_redirects
 
-| * 564d7c3 - Thu, 28 Jul 2022 13:51:05 -0500 (hace 4 semanas)
+| * 564d7c3 - Thu, 28 Jul 2022 13:51:05 -0500 (hace 5 semanas)
 | |  Fix firefox style - Susana Poveda| | 
 | | :100644 100644 f0c5e60 bc12a32 M	src/layouts/Header.css
 
-* | 8cd25b3 - Wed, 27 Jul 2022 15:06:47 -0500 (hace 4 semanas)
+* | 8cd25b3 - Wed, 27 Jul 2022 15:06:47 -0500 (hace 5 semanas)
 |\|  Merge pull request #2 from Agile-team-project-2022/feature-filters - susana3
-| * c895851 - Wed, 27 Jul 2022 15:02:21 -0500 (hace 4 semanas)
+| * c895851 - Wed, 27 Jul 2022 15:02:21 -0500 (hace 5 semanas)
 | |  Filters buttons enabled functionality and style set. - Susana Poveda| | 
 | | :100644 100644 a64ec84 e4b4209 M	src/components/Filters.css
 | | :100644 100644 909608a 0815e35 M	src/components/Filters.tsx
 
-| * 2080eba - Wed, 27 Jul 2022 14:00:18 -0500 (hace 4 semanas)
+| * 2080eba - Wed, 27 Jul 2022 14:00:18 -0500 (hace 5 semanas)
 | |  Re-structure filters. - Susana Poveda| | 
 | | :100644 100644 2a1d944 a64ec84 M	src/components/Filters.css
 | | :100644 100644 2488d98 909608a M	src/components/Filters.tsx
 
-| * 063e3d1 - Wed, 27 Jul 2022 13:42:01 -0500 (hace 4 semanas)
+| * 063e3d1 - Wed, 27 Jul 2022 13:42:01 -0500 (hace 5 semanas)
 | |  Filters and modal integrated for mobile view. - Susana Poveda| | 
 | | :100644 100644 2d06dcb 2a1d944 M	src/components/Filters.css
 | | :100644 100644 878377b 2488d98 M	src/components/Filters.tsx
 | | :100644 100644 0ba3383 2aeeaf4 M	src/components/Modal.css
 | | :100644 100644 30d8efb fdcd094 M	src/components/Modal.tsx
 
-| * a337bdd - Wed, 27 Jul 2022 13:01:04 -0500 (hace 4 semanas)
+| * a337bdd - Wed, 27 Jul 2022 13:01:04 -0500 (hace 5 semanas)
 | |  Modal set up. - Susana Poveda| | 
 | | :100644 100644 7d73d70 9c1ccca M	public/index.html
 | | :100644 100644 d5db7cd d2a113a M	src/App.css
@@ -1269,26 +1652,26 @@
 | | :000000 100644 0000000 30d8efb A	src/components/Modal.tsx
 | | :000000 100644 0000000 342b9f5 A	src/hooks/useWindowSize.tsx
 
-| * 1faf7b4 - Wed, 27 Jul 2022 10:55:27 -0500 (hace 4 semanas)
+| * 1faf7b4 - Wed, 27 Jul 2022 10:55:27 -0500 (hace 5 semanas)
 | |  Optimized loading applied to filters component. - Susana Poveda| | 
 | | :100644 100644 f1f2979 5d6b1e3 M	package-lock.json
 | | :100644 100644 20bfa60 306c531 M	package.json
 | | :100644 100644 4744e52 e1139b1 M	src/components/Filters.css
 | | :100644 100644 620268c e75b6c3 M	src/components/Filters.tsx
 
-* | 9dea34e - Wed, 27 Jul 2022 09:44:26 -0500 (hace 4 semanas)
+* | 9dea34e - Wed, 27 Jul 2022 09:44:26 -0500 (hace 5 semanas)
 |\|  Merge pull request #1 from Agile-team-project-2022/feature-filters - susana3
-| * 0108845 - Wed, 27 Jul 2022 09:31:41 -0500 (hace 4 semanas)
+| * 0108845 - Wed, 27 Jul 2022 09:31:41 -0500 (hace 5 semanas)
 |/   Select filter functionality set. - Susana Poveda|   
 |   :100644 100644 5296267 620268c M	src/components/Filters.tsx
 
-* 917fd7f - Mon, 25 Jul 2022 15:02:15 -0500 (hace 4 semanas)
+* 917fd7f - Mon, 25 Jul 2022 15:02:15 -0500 (hace 5 semanas)
 |  Favicon added. - Susana Poveda| 
 | :100644 100644 a11777c d82dd11 M	public/favicon.ico
 
-*   f84ed6f - Mon, 25 Jul 2022 14:31:44 -0500 (hace 4 semanas)
+*   f84ed6f - Mon, 25 Jul 2022 14:31:44 -0500 (hace 5 semanas)
 |\   Merge branch 'feature-filters' Integrated Basic filters feature. - Susana Poveda
-| * 75a44db - Mon, 25 Jul 2022 14:14:57 -0500 (hace 4 semanas)
+| * 75a44db - Mon, 25 Jul 2022 14:14:57 -0500 (hace 5 semanas)
 |/   Basic filters functionality added - Mobile and desktop versions. - Susana Poveda|   
 |   :100644 100644 d114e08 d5db7cd M	src/App.css
 |   :000000 100644 0000000 4744e52 A	src/components/Filters.css
@@ -1298,17 +1681,17 @@
 |   :100644 100644 07ab187 d8c21e7 M	src/pages/Home.css
 |   :100644 100644 0406f65 499b99b M	src/pages/Home.tsx
 
-* b51c001 - Mon, 25 Jul 2022 10:39:48 -0500 (hace 4 semanas)
+* b51c001 - Mon, 25 Jul 2022 10:39:48 -0500 (hace 5 semanas)
 |  Home layout write new post section added. - Susana Poveda| 
 | :100644 100644 2fd00a1 d966425 M	src/layouts/Header.tsx
 | :100644 100644 9dd9253 07ab187 M	src/pages/Home.css
 | :100644 100644 acd13e8 0406f65 M	src/pages/Home.tsx
 
-* f8a1a6f - Mon, 25 Jul 2022 10:19:41 -0500 (hace 4 semanas)
+* f8a1a6f - Mon, 25 Jul 2022 10:19:41 -0500 (hace 5 semanas)
 |  Minor fix mobile view home - Susana Poveda| 
 | :100644 100644 31ffbaf 9dd9253 M	src/pages/Home.css
 
-* 177c07e - Sat, 23 Jul 2022 13:21:06 -0500 (hace 4 semanas)
+* 177c07e - Sat, 23 Jul 2022 13:21:06 -0500 (hace 5 semanas)
 |  Layout Home page defined. - Susana Poveda| 
 | :100644 100644 a8e8530 d114e08 M	src/App.css
 | :000000 100644 0000000 f100d98 A	src/assets/geometric-background.jpeg
@@ -1316,7 +1699,7 @@
 | :100644 100644 e69de29 31ffbaf M	src/pages/Home.css
 | :100644 100644 4c5ce7a acd13e8 M	src/pages/Home.tsx
 
-* f7acee4 - Sat, 23 Jul 2022 10:48:54 -0500 (hace 4 semanas)
+* f7acee4 - Sat, 23 Jul 2022 10:48:54 -0500 (hace 5 semanas)
 |  Folder architecture set. Tablet responsive design initialized. - Susana Poveda| 
 | :100644 100644 1b8e155 a8e8530 M	src/App.css
 | :100644 100644 9761795 e5f561e M	src/App.tsx
@@ -1329,7 +1712,7 @@
 | :000000 100644 0000000 e69de29 A	src/pages/Login.css
 | :000000 100644 0000000 c49ec2c A	src/pages/Login.tsx
 
-* 32a818d - Fri, 22 Jul 2022 15:48:13 -0500 (hace 4 semanas)
+* 32a818d - Fri, 22 Jul 2022 15:48:13 -0500 (hace 6 semanas)
 |  Header responsive layout implemented - Mobile/Desktop. - Susana Poveda| 
 | :100644 100644 7c39643 f1f2979 M	package-lock.json
 | :100644 100644 c1178ae 20bfa60 M	package.json
@@ -1338,7 +1721,7 @@
 | :100644 100644 9f73c7a 6628a7a M	src/Header.css
 | :100644 100644 c9f628d 19bb8d2 M	src/Header.tsx
 
-* eab944f - Fri, 22 Jul 2022 12:41:04 -0500 (hace 4 semanas)
+* eab944f - Fri, 22 Jul 2022 12:41:04 -0500 (hace 6 semanas)
 |  Animated header background added - Susana Poveda| 
 | :100644 100644 9ec35b6 7c39643 M	package-lock.json
 | :100644 100644 02a99ad c1178ae M	package.json
@@ -1347,7 +1730,7 @@
 | :100644 100644 f5d4c6e c9f628d M	src/Header.tsx
 | :000000 100644 0000000 0316cc0 A	src/assets/header-1.json
 
-* 4dabaa5 - Fri, 22 Jul 2022 11:46:29 -0500 (hace 4 semanas)
+* 4dabaa5 - Fri, 22 Jul 2022 11:46:29 -0500 (hace 6 semanas)
 |  Header desktop defined - Susana Poveda| 
 | :100644 100644 b726c4a c52bba6 M	src/App.css
 | :100644 100644 8ef2a61 8310842 M	src/App.tsx
@@ -1357,7 +1740,7 @@
 | :000000 100644 0000000 d17b876 A	src/assets/help.png
 | :000000 100644 0000000 1b62161 A	src/assets/settings.png
 
-* fb73354 - Fri, 22 Jul 2022 11:09:13 -0500 (hace 4 semanas)
+* fb73354 - Fri, 22 Jul 2022 11:09:13 -0500 (hace 6 semanas)
 |  Routing set up - Susana Poveda| 
 | :100644 100644 0e3e494 9ec35b6 M	package-lock.json
 | :100644 100644 52cdc2d 02a99ad M	package.json
@@ -1371,14 +1754,14 @@
 | :100644 100644 1062770 df041f3 M	src/context.tsx
 | :100644 100644 025344c 5c3bdcb M	src/index.tsx
 
-| * 61a6427 - Thu, 21 Jul 2022 15:53:34 -0500 (hace 5 semanas) (refs/stash)
+| * 61a6427 - Thu, 21 Jul 2022 15:53:34 -0500 (hace 6 semanas) (refs/stash)
 |/|  WIP on main: c4526ed Context set up - git stash
-| * 9c281dc - Thu, 21 Jul 2022 15:53:34 -0500 (hace 5 semanas)
+| * 9c281dc - Thu, 21 Jul 2022 15:53:34 -0500 (hace 6 semanas)
 |/   index on main: c4526ed Context set up - git stash|   
 |   :000000 100644 0000000 e69de29 A	src/Header.css
 |   :000000 100644 0000000 e69de29 A	src/Header.tsx
 
-* c4526ed - Thu, 21 Jul 2022 14:09:16 -0500 (hace 5 semanas)
+* c4526ed - Thu, 21 Jul 2022 14:09:16 -0500 (hace 6 semanas)
 |  Context set up - Susana Poveda| 
 | :100644 100644 4d29575 3d8b36a M	.gitignore
 | :100644 100644 aa069f2 7d73d70 M	public/index.html
@@ -1388,7 +1771,7 @@
 | :100644 100644 032464f 025344c M	src/index.tsx
 | :100644 000000 9dfc1c0 0000000 D	src/logo.svg
 
-* def568a - Mon, 18 Jul 2022 11:32:02 -0500 (hace 5 semanas)
+* def568a - Mon, 18 Jul 2022 11:32:02 -0500 (hace 6 semanas)
    Initialize project using Create React App - Susana Poveda  
   :000000 100644 0000000 4d29575 A	.gitignore
   :000000 100644 0000000 b87cb00 A	README.md
